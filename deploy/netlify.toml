@@ -1,0 +1,48 @@
+# Optional: use this file ONLY if you host on Netlify instead of Vercel.
+# Put it in the repository root as netlify.toml (next to the folder you deploy).
+
+[build]
+  publish = "dist"
+  command = ""
+
+# --- the four non-negotiables: HSTS, anti-clickjacking, nosniff, referrer ---
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Strict-Transport-Security = "max-age=63072000; includeSubDomains; preload"
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
+    Cross-Origin-Opener-Policy = "same-origin"
+    Content-Security-Policy = "default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; font-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/404.html"
+  [headers.values]
+    X-Robots-Tag = "noindex"
+    Cache-Control = "no-store"
+
+# --- pretty URLs: the export is folder/index.html, links end in a slash ---
+[[redirects]]
+  from = "/blog"
+  to = "/blog/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/guide"
+  to = "/guide/"
+  status = 301
+  force = true
+
+# a real 404 status + the theme-matched page (not Netlify's default)
+[[redirects]]
+  from = "/*"
+  to = "/404.html"
+  status = 404

@@ -1,0 +1,32 @@
+# ম্যাথ একাডেমি / Math Academy — Darshana, Chuadanga
+
+> Bengali-first information about offline mathematics batches for SSC and classes 6–10 in Darshana, Chuadanga, Bangladesh. Teacher: প্রান্ত রায় (Pranto Roy), who also teaches at Darshana Ideal School. Founded 2022.
+
+## Facts
+- Academy: ম্যাথ একাডেমি (Math Academy)
+- Teacher: প্রান্ত রায় (Pranto Roy) — BSc & MSc in Mathematics; ১০+ years of classroom experience
+- School affiliation: দর্শনা আইডিয়াল স্কুল — https://www.darsanaidealschool.com/
+- Location: Darshana, Chuadanga, Bangladesh — https://maps.app.goo.gl/UyNxwUBw3sjnmGE29
+- Founded: 2022
+- Phone / WhatsApp: +880 1641-045-469 — https://wa.me/8801641045469
+- Facebook: https://www.facebook.com/pranto.rai.37
+- Teaching mode: offline batches; classes 6–10 and SSC; HSC is not offered
+- Maximum capacity: ১৫ students per batch. The current seat count, schedule, and fee can change; confirm directly before visiting or enrolling.
+- Current programme data: ১২ classes and ৪ mock tests per month; monthly fee range ৳১,৫০০ – ৳২,২০০. These are data-driven values and are not a guarantee of availability.
+- Method: picture → reasoning → practice; the site does not promise a particular score or exam result.
+- Library: currently one temporary test PDF titled “English Dialogue Format”; its contents are not a math formula sheet.
+- Contact workflow: WhatsApp is an information request only; the website does not reserve a seat or accept online payment.
+
+## Pages
+- https://mathacademydarsana.vercel.app/ — homepage (about, method, teacher, batches, library, results, contact)
+- https://mathacademydarsana.vercel.app/blog/ — blog index (10 posts, Bengali, with FAQ)
+- https://mathacademydarsana.vercel.app/blog/gonit-valo-kore-podar-upay/ — কীভাবে গণিত ভালো করে পড়া যায়: ৭টি অভ্যাস, উদাহরণসহ
+- https://mathacademydarsana.vercel.app/blog/ssc-goniter-sob-sutro/ — SSC গণিতের সব সূত্র একসাথে — ১৭ অধ্যায়ের মানচিত্র ও ২০২৭ প্রস্তুতি
+- https://mathacademydarsana.vercel.app/blog/goniter-voy-katanor-7-obhyas/ — গণিতের ভয় কাটানোর ৭টি অভ্যাস — শিক্ষার্থী ও অভিভাবকের জন্য
+- https://mathacademydarsana.vercel.app/blog/gonite-durobolota-katanor-upay/ — গণিতে দুর্বলতা কাটানোর উপায়: ফাঁকটা কোথায়, আগে তা খুঁজুন
+- https://mathacademydarsana.vercel.app/blog/gonit-practice-sera-upay/ — গণিত প্র্যাকটিসের নিয়ম: উদাহরণ ও ৭ দিনের রুটিন
+- https://mathacademydarsana.vercel.app/blog/darshanay-math-academy-keno/ — দর্শনায় ম্যাথ একাডেমি: অভিভাবকের ৬ প্রশ্নের উত্তর
+- https://mathacademydarsana.vercel.app/blog/ssc-gonit-kon-odhyay-age/ — SSC গণিতের কোন অধ্যায় আগে পড়ব? ২০২৭ গাইড
+- https://mathacademydarsana.vercel.app/blog/gonite-durbal-shishu-30-diner-rutin/ — গণিতে দুর্বল শিক্ষার্থীর ৩০ দিনের রুটিন
+- https://mathacademydarsana.vercel.app/blog/ashtom-shrenir-gonit-vit/ — অষ্টম শ্রেণির গণিত: নবম-দশমের আগে যে ভিত্তিগুলো মজবুত করবেন
+- https://mathacademydarsana.vercel.app/blog/jessore-board-ssc-gonit-prashna/ — যশোর বোর্ড SSC গণিত: ২০২৭ প্রশ্নের ধরন ও প্রস্তুতি

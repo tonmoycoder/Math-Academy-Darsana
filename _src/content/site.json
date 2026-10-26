@@ -1,0 +1,97 @@
+{
+  "brand": {
+    "name_bn": "ম্যাথ একাডেমি",
+    "name_en": "MATH ACADEMY",
+    "tagline_bn": "ম্যাথ একাডেমি · দর্শনা"
+  },
+  "contact": {
+    "phone_display": "০১৬৪১-০৪৫৪৬৯",
+    "phone_raw": "+8801641045469",
+    "whatsapp": "8801641045469",
+    "facebook": "pranto.rai.37",
+    "facebook_url": "https://www.facebook.com/pranto.rai.37",
+    "map_short": "UyNxwUBw3sjnmGE29",
+    "map_url": "https://maps.app.goo.gl/UyNxwUBw3sjnmGE29",
+    "school_name": "দর্শনা আইডিয়াল স্কুল",
+    "school_url": "https://www.darsanaidealschool.com/",
+    "locality_bn": "দর্শনা, চুয়াডাঙ্গা"
+  },
+  "capacity": {
+    "per_batch": 15,
+    "note": "সর্বোচ্চ শিক্ষার্থী প্রতি ব্যাচে — ব্যাচ বাড়ালে এখানেই বদলান"
+  },
+  "next_batch": {
+    "label_bn": "নভেম্বর",
+    "after_bn": "ফেব্রুয়ারি"
+  },
+  "batches": [
+    {
+      "id": "vitti",
+      "name_bn": "ভিত্তি ব্যাচ",
+      "code": "CLASS 6–7 · FOUNDATION",
+      "classes_bn": "ক্লাস ৬–৭",
+      "days_bn": "শনি · সোম · বুধ",
+      "time_bn": "বিকাল ৪:৩০ – ৫:৩০",
+      "fee": 500,
+      "filled": 12,
+      "hot": true,
+      "wa_text": "আসসালামু আলাইকুম, ভিত্তি ব্যাচ (ক্লাস ৬–৭)-এর বর্তমান আসন, সময় ও ফি জানতে চাই।",
+      "active": true
+    },
+    {
+      "id": "progress",
+      "name_bn": "প্রগ্রেস ব্যাচ",
+      "code": "CLASS 8–9 · PROGRESS",
+      "classes_bn": "ক্লাস ৮–৯",
+      "days_bn": "রবি · মঙ্গল · বৃহস্পতি",
+      "time_bn": "সন্ধ্যা ৬:৩০ – ৮:০০",
+      "fee": 1000,
+      "filled": 12,
+      "hot": true,
+      "wa_text": "আসসালামু আলাইকুম, প্রগ্রেস ব্যাচ (ক্লাস ৮–৯)-এর বর্তমান আসন, সময় ও ফি জানতে চাই।",
+      "active": true
+    },
+    {
+      "id": "ssc",
+      "name_bn": "SSC ২০২৭ ব্যাচ",
+      "code": "SSC 2027 · TARGET",
+      "classes_bn": "ক্লাস ১০ (SSC)",
+      "days_bn": "শুক্র · শনি",
+      "time_bn": "সকাল ৯:০০ – ১১:৩০",
+      "fee": 1200,
+      "filled": 15,
+      "hot": true,
+      "wa_text": "আসসালামু আলাইকুম, SSC ২০২৭ ব্যাচের বর্তমান আসন, সময় ও ফি জানতে চাই (ক্লাস ১০)।",
+      "active": true
+    }
+  ],
+  "programme": {
+    "classes_bn": "ক্লাস ৬–১০",
+    "exam": "SSC",
+    "mock_per_month": 4,
+    "classes_per_month": 12,
+    "sibling_discount_pct": 10
+  },
+  "pricing": {
+    "currency_bn": "৳",
+    "note_bn": "ব্যাচভেদে মাসিক ফি আলাদা; চলতি ফি নিচের টেবিলে দেখুন"
+  },
+  "team": {
+    "teacher_bn": "প্রান্ত রায়",
+    "teacher_title_bn": "প্রতিষ্ঠাতা ও শিক্ষক",
+    "experience_years": 10,
+    "founded_year": 2022,
+    "degree_bn": "গণিতে অনার্স ও মাস্টার্স",
+    "developer_bn": "তানভীর ইসলাম তন্ময়",
+    "developer_url": "https://www.facebook.com/tanverislamtonmoyofficial"
+  },
+  "site": {
+    "host": "https://mathacademydarsana.vercel.app",
+    "locale": "bn-BD",
+    "sound_on_load": true
+  },
+  "notice": {
+    "active": true,
+    "text_bn": "📢 নতুন ব্যাচে সীমিত আসনে ভর্তি চলছে! আগামী ১লা নভেম্বর থেকে ক্লাস শুরু।"
+  }
+}

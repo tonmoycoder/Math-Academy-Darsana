@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="bn-BD">
+<head>
+<meta charset="utf-8">
+<style>
+__FONT_CSS__
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1200px;height:630px;overflow:hidden}
+body{
+  background:var(--paper);color:var(--ink);font-family:'Noto Sans Bengali',sans-serif;
+  --paper:#FDFBF7; --ink:#0A0A0A; --red:#D42C24; --teal:#0E4B43; --mint:#8DE3D0;
+  position:relative;
+}
+.grid{
+  position:absolute;inset:0;
+  background-image:linear-gradient(to right,rgba(10,10,10,.06) 1px,transparent 1px),
+                   linear-gradient(to bottom,rgba(10,10,10,.06) 1px,transparent 1px);
+  background-size:38px 38px;
+}
+.frame{position:absolute;inset:26px;border:2px solid var(--ink)}
+.wrap{position:absolute;inset:26px;padding:34px 40px;display:flex;gap:34px}
+.left{flex:1 1 auto;display:flex;flex-direction:column;justify-content:space-between}
+.right{width:404px;flex:0 0 404px;display:flex;align-items:center}
+
+.brand{display:flex;align-items:center;gap:14px}
+.brand img{width:62px;height:62px;border-radius:50%}
+.brand b{display:block;font-family:'Archivo',sans-serif;font-weight:800;font-size:27px;letter-spacing:.04em;line-height:1}
+.brand span{display:block;font-family:'Noto Sans Bengali',sans-serif;font-size:16px;color:#4A4F4D;margin-top:4px}
+
+h1{font-family:'Noto Sans Bengali',sans-serif;font-weight:700;font-size:66px;line-height:1.16;letter-spacing:-.01em}
+h1 em{font-style:normal;color:var(--red);position:relative}
+.meta{font-family:'Noto Sans Bengali',sans-serif;font-weight:700;font-size:19px;color:var(--teal);margin-top:14px}
+.chips{display:flex;gap:10px;margin-top:18px}
+.chip{font-family:'Noto Sans Bengali',sans-serif;font-size:16px;font-weight:600;padding:9px 14px;border:2px solid var(--ink)}
+.chip--red{background:var(--red);color:#fff;border-color:var(--red);box-shadow:4px 4px 0 var(--ink)}
+.chip--ink{background:var(--ink);color:var(--paper)}
+.chip--flat{background:#fff}
+.foot{display:flex;align-items:end;justify-content:space-between;gap:20px}
+.wa small{display:block;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.16em;color:#5A5E5C;margin-bottom:2px}
+.wa b{display:block;font-family:'Noto Sans Bengali',sans-serif;font-weight:700;font-size:31px;letter-spacing:.02em;margin-top:2px}
+
+.photo{position:relative;width:100%;height:472px;border:3px solid var(--ink);background:#fff;box-shadow:10px 10px 0 var(--red)}
+.photo img{width:100%;height:100%;object-fit:cover;object-position:center 18%}
+.stamp{
+  position:absolute;right:56px;bottom:60px;transform:rotate(-6deg);
+  border:2.5px solid var(--red);color:var(--red);padding:7px 14px;
+  font-family:'JetBrains Mono',monospace;font-weight:700;font-size:17px;letter-spacing:.16em;background:var(--paper);
+}
+.strip{position:absolute;left:26px;right:26px;bottom:26px;height:12px;
+  background:repeating-linear-gradient(90deg,var(--red) 0 22px,transparent 22px 44px)}
+</style>
+</head>
+<body>
+  <div class="grid"></div>
+  <div class="frame"></div>
+  <div class="wrap">
+    <div class="left">
+      <div class="brand">
+        <img src="__MARK__" alt="">
+        <div>
+          <b>MATH ACADEMY</b>
+          <span>ম্যাথ একাডেমি · দর্শনা, চুয়াডাঙ্গা</span>
+        </div>
+      </div>
+
+      <div>
+        <h1>গণিত মুখস্থ নয় —<br>এটা <em>যুক্তির</em> ভাষা</h1>
+        <div class="meta">SSC · ক্লাস ৬–১০ — দর্শনা, চুয়াডাঙ্গা</div>
+        <div class="chips">
+          <span class="chip chip--red">সর্বোচ্চ __CAP__ জন/ব্যাচ</span>
+          <span class="chip chip--ink">অফলাইন গণিত ব্যাচ</span>
+          <span class="chip chip--flat">দর্শনা, চুয়াডাঙ্গা</span>
+        </div>
+      </div>
+
+      <div class="foot">
+        <div class="wa">
+          <small>// WHATSAPP</small>
+          <b>০১৬৪১-০৪৫৪৬৯</b>
+        </div>
+      </div>
+    </div>
+
+    <div class="right">
+      <div class="photo"><img src="__PHOTO__" alt="প্রান্ত রায়"></div>
+    </div>
+  </div>
+  <div class="stamp">EST. __FOUNDED_YEAR__ · DARSHANA</div>
+  <div class="strip"></div>
+</body>
+</html>

@@ -1,0 +1,9 @@
+.env
+.env.local
+.neon
+.vercel
+dist/api
+node_modules/
+scratch/
+.config/
+

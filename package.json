@@ -1,0 +1,28 @@
+{
+  "name": "math-academy",
+  "version": "10.3.0",
+  "private": true,
+  "description": "ম্যাথ একাডেমি দর্শনা — static site + one Vercel Function backed by Neon Postgres",
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/pull-content.mjs && python3 _src/build.py --publish --skip-pull",
+    "content:pull": "node scripts/pull-content.mjs",
+    "db:push": "node db/seed.mjs",
+    "test:api": "node tests/api.test.mjs",
+    "dev:api": "node tests/dev-server.mjs",
+    "db:migrate": "node db/migrate.mjs",
+    "neon:up": "bash scripts/neon-bootstrap.sh",
+    "dev": "node scripts/preview-server.mjs",
+    "preview": "node scripts/preview-server.mjs"
+  },
+  "dependencies": {
+    "@neon/config": "^1.9.4",
+    "@neondatabase/serverless": "^1.2.0"
+  },
+  "engines": {
+    "node": "20.x"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.0"
+  }
+}

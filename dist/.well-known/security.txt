@@ -1,0 +1,7 @@
+# Security policy — ম্যাথ একাডেমি (Math Academy), Darshana
+Contact: https://www.facebook.com/pranto.rai.37
+Contact: tel:+8801641045469
+Expires: 2027-10-01T00:00:00.000Z
+Preferred-Languages: bn, en
+Canonical: https://mathacademydarsana.vercel.app/.well-known/security.txt
+Policy: https://mathacademydarsana.vercel.app/#privacy

@@ -1,0 +1,8 @@
+# Cloudflare Pages / Netlify only (Vercel reads vercel.json).
+# The export is a folder-per-route with trailing slashes; host-level redirects
+# rewrite trailingSlash automatically, so only the extensionless forms need help.
+/blog            /blog/            301
+/guide           /guide/           301
+
+# Serve the theme-matched 404 page with a real 404 status.
+/*               /404.html         404

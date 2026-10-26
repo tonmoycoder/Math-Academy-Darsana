@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="bn-BD">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>অ্যাডমিন প্যানেল | ম্যাথ একাডেমি দর্শনা</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#0A0A0A">
+<link rel="icon" type="image/png" href="/assets/favicon.png">
+<link rel="stylesheet" href="/assets/fonts.css">
+<style>:root{--paper:#F6F3EC;--paper-2:#ECE7DC;--ink:#0A0A0A;--teal:#0F3832;--red:#C82014;--mint:#1DD1A1;--brass:#C9A227;--coral:#FF6B4A;--line:2px solid var(--ink);--shadow:4px 4px 0 var(--ink);--shadow-sm:2px 2px 0 var(--ink);--shadow-lg:8px 8px 0 var(--ink);--sans:"Hind Siliguri",system-ui,sans-serif;--mono:"JetBrains Mono",monospace}*{box-sizing:border-box;margin:0;padding:0}body{background:var(--paper);color:var(--ink);font-family:var(--sans);min-height:100vh;display:flex;flex-direction:column;line-height:1.5}.mono{font-family:var(--mono)}.a-header{background:var(--ink);color:var(--paper);border-bottom:var(--line);padding:14px clamp(16px,3vw,32px);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;position:sticky;top:0;z-index:100}.a-brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit}.a-brand img{width:36px;height:36px;border-radius:4px;border:1px solid rgba(255,255,255,.2)}.a-brand h1{font-size:18px;font-weight:700;letter-spacing:-.01em}.a-brand span{font-size:11px;color:#fff9;display:block;letter-spacing:.05em}.a-hud{display:flex;align-items:center;gap:12px;font-size:12px}.badge-db{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;background:#ffffff14;border:1px solid rgba(255,255,255,.2);border-radius:2px}.dot{width:8px;height:8px;border-radius:50%;background:#888}.dot.up{background:var(--mint);box-shadow:0 0 6px var(--mint)}.dot.down{background:var(--red)}.a-main{max-width:1160px;width:100%;margin:0 auto;padding:clamp(20px,3.5vw,40px) clamp(16px,2.5vw,24px);flex:1}.card{background:var(--paper-2);border:var(--line);box-shadow:var(--shadow);padding:clamp(20px,3vw,32px);margin-bottom:28px}.card__title{font-size:20px;font-weight:700;display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;padding-bottom:10px;border-bottom:var(--line)}.card__subtitle{font-size:13px;color:#555;font-weight:400}#loginSection{max-width:480px;margin:50px auto}.field{margin-bottom:16px}.field label{display:block;font-size:13px;font-weight:700;margin-bottom:6px}.field input,.field select,.field textarea{width:100%;padding:10px 14px;border:var(--line);background:#fff;font-family:inherit;font-size:14.5px;color:var(--ink);outline:none;border-radius:0}.field textarea{resize:vertical;min-height:64px}.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--red);box-shadow:var(--shadow-sm)}.field small{display:block;margin-top:5px;font-size:12px;color:#666}.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 20px;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;border:var(--line);box-shadow:var(--shadow-sm);text-decoration:none;transition:transform .08s ease,box-shadow .08s ease}.btn:hover{transform:translate(-1px,-1px);box-shadow:var(--shadow)}.btn:active{transform:translate(1px,1px);box-shadow:none}.btn--red{background:var(--red);color:#fff}.btn--ink{background:var(--ink);color:#fff}.btn--outline{background:#fff;color:var(--ink)}.btn--sm{padding:6px 14px;font-size:12.5px}.btn--block{width:100%}.batch-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px;margin-bottom:32px}.bcard{background:#fff;border:var(--line);box-shadow:var(--shadow);padding:22px;display:flex;flex-direction:column;justify-content:space-between;position:relative}.bcard.is-inactive{opacity:.65;background:#fbfbfb}.bcard__header{margin-bottom:14px;padding-bottom:12px;border-bottom:1px dashed #ccc}.bcard__code{font-size:11px;font-weight:700;letter-spacing:.08em;color:var(--teal)}.bcard__name{font-size:18px;font-weight:700;color:var(--ink);margin:3px 0}.bcard__classes{font-size:13px;color:#666}.stepper{display:flex;align-items:center;gap:8px;margin:8px 0}.stepper input{width:70px;text-align:center;padding:8px;font-family:var(--mono);font-size:18px;font-weight:700;border:var(--line)}.step-btn{width:38px;height:38px;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;background:var(--paper-2);border:var(--line);cursor:pointer;box-shadow:var(--shadow-sm)}.step-btn:hover{background:#fff}.meter{height:10px;background:#ddd;border:1px solid var(--ink);border-radius:2px;overflow:hidden;margin:8px 0}.meter__fill{height:100%;background:var(--red);transition:width .2s}#toast{position:fixed;bottom:24px;right:24px;background:var(--ink);color:#fff;border:var(--line);padding:14px 22px;box-shadow:var(--shadow);font-size:14px;font-weight:700;display:none;z-index:9999}#toast.show{display:flex;align-items:center;gap:10px}#toast.ok{border-color:var(--mint);color:#fff}#toast.err{border-color:var(--red);background:#300}.toggles{display:flex;gap:18px;margin:12px 0;font-size:13px;font-weight:700;flex-wrap:wrap}.toggles label{display:flex;align-items:center;gap:6px;cursor:pointer}.badge-hot{display:inline-block;padding:2px 8px;background:var(--red);color:#fff;font-size:11px;font-weight:700;border-radius:2px;margin-left:6px}.fields-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}.a-foot{text-align:center;padding:24px;font-size:12px;color:#666;border-top:1px dashed #ccc}
+</style>
+</head>
+<body>
+
+<header class="a-header">
+  <a href="/admin/" class="a-brand">
+    <img src="/assets/favicon.png" alt="ম্যাথ একাডেমি">
+    <div>
+      <h1>ম্যাথ একাডেমি // অ্যাডমিন কন্ট্রোল</h1>
+      <span class="mono">NEON DATABASE BACKEND · DARSHANA</span>
+    </div>
+  </a>
+  <div class="a-hud">
+    <div class="badge-db mono" id="dbStatus">
+      <span class="dot" id="dbDot"></span>
+      <span id="dbText">কানেকশন চেক হচ্ছে...</span>
+    </div>
+    <a href="/" target="_blank" class="btn btn--outline btn--sm" title="নতুন ট্যাবে হোমপেজ দেখুন">ওয়েবসাইট দেখুন ↗</a>
+    <button class="btn btn--red btn--sm" id="logoutBtn" style="display:none" onclick="logout()">লগআউট</button>
+  </div>
+</header>
+
+<main class="a-main">
+  <!-- 1. LOGIN SECTION -->
+  <section id="loginSection" class="card">
+    <div class="card__title">
+      <span>অ্যাডমিন লগইন</span>
+      <span class="card__subtitle mono">// SECURE ACCESS</span>
+    </div>
+    <p style="font-size:14px;color:#444;margin-bottom:18px">
+      ওয়েবসাইটের সকল তথ্য, ব্যাচ ফি, ক্লাসের দিন, আসন সংখ্যা এবং নোটিশ পরিবর্তন করতে আপনার অ্যাডমিন পাসওয়ার্ড দিন:
+    </p>
+    <form id="loginForm">
+      <div class="field">
+        <label for="adminPassword">অ্যাডমিন পাসওয়ার্ড (Admin Password)</label>
+        <input type="password" id="adminPassword" placeholder="আপনার পাসওয়ার্ড দিন (যেমন: pranto2026)" required autocomplete="current-password">
+        <small>.env ফাইলের ADMIN_PASSWORD দিয়ে লগইন করুন (ডিফল্ট: <b>pranto2026</b>)</small>
+      </div>
+      <button type="submit" class="btn btn--ink btn--block">লগইন করুন</button>
+    </form>
+  </section>
+
+  <!-- 2. DASHBOARD SECTION (Visible after auth) -->
+  <div id="dashboardSection" style="display:none">
+    
+    <!-- Top summary bar -->
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;margin-bottom:24px">
+      <div>
+        <h2 style="font-size:24px;font-weight:700">ব্যাচ ও আসন ব্যবস্থাপনা</h2>
+        <p style="font-size:14px;color:#555">এখানে যে তথ্যই সেভ করবেন, তা সরাসরি Neon Postgres ডাটাবেজে সংরক্ষিত হবে এবং ওয়েবসাইটে মুহূর্তেই লাইভ আপডেট হবে।</p>
+      </div>
+      <div style="display:flex;gap:10px">
+        <button class="btn btn--outline btn--sm" onclick="loadContent()">🔄 ডাটা রিফ্রেশ</button>
+        <a href="/" target="_blank" class="btn btn--red btn--sm">লাইভ ওয়েবসাইট ↗</a>
+      </div>
+    </div>
+
+    <!-- Batches Cards Grid -->
+    <div class="batch-grid" id="batchesList">
+      <!-- Injected via JS -->
+    </div>
+
+    <!-- Live Notice Banner Card -->
+    <div class="card">
+      <div class="card__title">
+        <span>ওয়েবসাইট জরুরি নোটিশ ও ঘোষণা ব্যানার</span>
+        <span class="card__subtitle mono">// LIVE ANNOUNCEMENT</span>
+      </div>
+      <p style="font-size:13.5px;color:#555;margin-bottom:14px">
+        ওয়েবসাইটের একদম উপরে লাল-কালো হাইলাইট করা লাইভ নোটিশ বার দেখাতে এটি চালু করুন:
+      </p>
+      <form id="noticeForm">
+        <div class="toggles" style="margin-bottom:14px">
+          <label>
+            <input type="checkbox" id="noticeActive">
+            <b>ওয়েবসাইটে নোটিশ ব্যানার প্রদর্শন চালু রাখুন (Show on Website)</b>
+          </label>
+        </div>
+        <div class="field">
+          <label for="noticeText">নোটিশ বার্তা (বাংলায়)</label>
+          <input type="text" id="noticeText" placeholder="যেমন: নতুন ব্যাচে সীমিত আসনে ভর্তি চলছে! আগামী ১লা নভেম্বর থেকে ক্লাস শুরু।">
+        </div>
+        <div style="text-align:right">
+          <button type="submit" class="btn btn--ink">নোটিশ সংরক্ষণ করুন</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Next Batch & Admission Settings Card -->
+    <div class="card">
+      <div class="card__title">
+        <span>ভর্তি সেশন ও পরবর্তী ব্যাচের তথ্য</span>
+        <span class="card__subtitle mono">// INTAKE & SCHEDULE</span>
+      </div>
+      <form id="nextBatchForm">
+        <div class="fields-grid">
+          <div class="field">
+            <label for="nextBatchLabel">পরবর্তী ব্যাচের মাস</label>
+            <input type="text" id="nextBatchLabel" placeholder="যেমন: নভেম্বর">
+          </div>
+          <div class="field">
+            <label for="nextBatchDate">ভর্তি/শুরুর পূর্ণ তারিখ</label>
+            <input type="text" id="nextBatchDate" placeholder="যেমন: ১লা নভেম্বর">
+          </div>
+          <div class="field">
+            <label for="nextBatchAfter">পরের ইনটেক মাস</label>
+            <input type="text" id="nextBatchAfter" placeholder="যেমন: ফেব্রুয়ারি">
+          </div>
+          <div class="field">
+            <label for="nextBatchStartAt">কাউন্টডাউন টার্গেট তারিখ (ISO/তারিখ)</label>
+            <input type="text" id="nextBatchStartAt" placeholder="2026-11-01T16:30:00+06:00">
+          </div>
+        </div>
+        <div style="margin-top:10px;text-align:right">
+          <button type="submit" class="btn btn--ink">ভর্তি তথ্য সংরক্ষণ করুন</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Programme Details Card -->
+    <div class="card">
+      <div class="card__title">
+        <span>অ্যাকাডেমিক কর্মসূচি ও ক্লাস সংখ্যা</span>
+        <span class="card__subtitle mono">// PROGRAMME STATS</span>
+      </div>
+      <form id="programmeForm">
+        <div class="fields-grid">
+          <div class="field">
+            <label for="classesPerMonth">মাসে মোট ক্লাস সংখ্যা</label>
+            <input type="number" id="classesPerMonth" min="1" max="30">
+          </div>
+          <div class="field">
+            <label for="mockPerMonth">মাসে মোট মক টেস্ট সংখ্যা</label>
+            <input type="number" id="mockPerMonth" min="1" max="10">
+          </div>
+          <div class="field">
+            <label for="siblingDiscount">সহোদর ভাইবোন ছাড় (%)</label>
+            <input type="number" id="siblingDiscount" min="0" max="50">
+          </div>
+        </div>
+        <div style="margin-top:10px;text-align:right">
+          <button type="submit" class="btn btn--ink">কর্মসূচি তথ্য সংরক্ষণ করুন</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Contact & Helpline Card -->
+    <div class="card">
+      <div class="card__title">
+        <span>যোগাযোগ ও হেল্পলাইন নম্বর</span>
+        <span class="card__subtitle mono">// CONTACT & HELPLINE</span>
+      </div>
+      <form id="contactForm">
+        <div class="fields-grid">
+          <div class="field">
+            <label for="phoneDisplay">প্রদর্শিত মোবাইল নম্বর</label>
+            <input type="text" id="phoneDisplay" placeholder="০১৬৪১-০৪৫৪৬৯">
+          </div>
+          <div class="field">
+            <label for="phoneRaw">ডায়াল ফরম্যাট (+880...)</label>
+            <input type="text" id="phoneRaw" placeholder="+8801641045469">
+          </div>
+          <div class="field">
+            <label for="whatsappNum">হোয়াটসঅ্যাপ নম্বর (৮৮০...)</label>
+            <input type="text" id="whatsappNum" placeholder="8801641045469">
+          </div>
+        </div>
+        <div style="margin-top:10px;text-align:right">
+          <button type="submit" class="btn btn--ink">যোগাযোগ তথ্য সংরক্ষণ করুন</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Blog & Articles Management Card -->
+    <div class="card" id="blogCard">
+      <div class="card__title" style="display:flex;justify-content:space-between;align-items:center">
+        <div>
+          <span>ব্লগ ও আর্টিকেল পাবলিশিং ও সম্পাদনা</span>
+          <span class="card__subtitle mono">// BLOG & ARTICLE CMS</span>
+        </div>
+        <button type="button" class="btn btn--red btn--sm" onclick="openNewPostModal()">+ নতুন ব্লগ লিখুন</button>
+      </div>
+      <p style="font-size:13.5px;color:#555;margin-bottom:16px">
+        ওয়েবসাইটে প্রকাশিত ব্লগের তালিকা নিচে দেওয়া হলো। আপনি বিদ্যমান যেকোনো ব্লগ এডিট করতে পারবেন অথবা নতুন আর্টিকেল লিখে পাবলিশ করতে পারবেন।
+      </p>
+
+      <div style="overflow-x:auto;margin-bottom:16px">
+        <table class="blog-table" style="width:100%;border-collapse:collapse;font-size:13px;border:var(--line)">
+          <thead>
+            <tr style="background:var(--paper-2);border-bottom:var(--line);text-align:left">
+              <th style="padding:10px;font-family:var(--mono);font-size:11px;width:140px">ট্যাগ ও সময়</th>
+              <th style="padding:10px">শিরোনাম ও বিবরণ</th>
+              <th style="padding:10px;text-align:right;width:160px">অ্যাকশন</th>
+            </tr>
+          </thead>
+          <tbody id="blogPostsTableBody">
+            <tr><td colspan="3" style="padding:16px;text-align:center;color:#777">ব্লগ পোস্ট লোড হচ্ছে...</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Blog Editor Modal / Panel (Hidden by default) -->
+      <div id="blogEditorModal" style="display:none;padding:20px;border:var(--line);background:var(--paper-2);box-shadow:var(--shadow-sm);margin-top:16px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;border-bottom:1px dashed #bbb;padding-bottom:10px">
+          <h3 id="blogEditorHeading" style="font-size:17px;font-weight:700">নতুন ব্লগ লিখুন</h3>
+          <button type="button" class="btn btn--outline btn--sm" onclick="closeBlogEditor()">✕ বন্ধ করুন</button>
+        </div>
+        <form id="blogPostForm">
+          <input type="hidden" id="postIsNew" value="1">
+          <div class="fields-grid">
+            <div class="field">
+              <label for="postSlug">স্লাগ / URL Slug (ইংরেজি, হাইফেনযুক্ত) *</label>
+              <input type="text" id="postSlug" placeholder="ssc-gonit-2027-tips" required pattern="[a-z0-9\-]+">
+              <small>যেমন: ssc-gonit-2027-tips (পাতার লিংক: /blog/ssc-gonit-2027-tips/)</small>
+            </div>
+            <div class="field">
+              <label for="postTag">ট্যাগ / ক্যাটাগরি *</label>
+              <input type="text" id="postTag" placeholder="যেমন: এসএসসি ২০২৭" required>
+            </div>
+            <div class="field">
+              <label for="postMins">পড়ার সময় (মিনিট) *</label>
+              <input type="number" id="postMins" placeholder="6" min="1" max="60" required>
+            </div>
+            <div class="field">
+              <label for="postDate">তারিখ (YYYY-MM-DD)</label>
+              <input type="text" id="postDate" placeholder="2026-10-27">
+            </div>
+          </div>
+
+          <div class="field" style="margin-top:12px">
+            <label for="postTitle">ব্লগের টাইটেল / Title (SEO & কার্ডের শিরোনাম) *</label>
+            <input type="text" id="postTitle" placeholder="এসএসসি ২০২৭ সাধারণ গণিত..." required>
+          </div>
+
+          <div class="field" style="margin-top:12px">
+            <label for="postH1">ব্লগ পাতার মূল হেডিং (H1) *</label>
+            <input type="text" id="postH1" placeholder="পাতার বড় হেডিং..." required>
+          </div>
+
+          <div class="field" style="margin-top:12px">
+            <label for="postDesc">মেটা ডেসক্রিপশন (SEO Description, ১৫০-১৬০ অক্ষর) *</label>
+            <textarea id="postDesc" rows="2" placeholder="সারসংক্ষেপ লিখুন..." required></textarea>
+          </div>
+
+          <div class="field" style="margin-top:12px">
+            <label for="postKeyword">টার্গেট কি-ওয়ার্ড (কমা দিয়ে পৃথক করুন)</label>
+            <input type="text" id="postKeyword" placeholder="যেমন: এসএসসি গণিত ২০২৭, যশোর বোর্ড, গণিত প্রস্তুতি">
+          </div>
+
+          <div class="field" style="margin-top:12px">
+            <label for="postBody">ব্লগ কনটেন্ট (Markdown / প্যারাগ্রাফ) *</label>
+            <textarea id="postBody" rows="12" placeholder="এখানে বিস্তারিত ব্লগের লেখা লিখুন (## হেডিং, প্যারাগ্রাফ, তালিকা ইত্যাদি)..." required style="font-family:inherit;line-height:1.6"></textarea>
+          </div>
+
+          <div style="margin-top:16px;padding:12px;border:1px dashed #bbb;background:#fff">
+            <h4 style="font-size:14px;font-weight:700;margin-bottom:8px">সাধারণ জিজ্ঞাসা (FAQ - ৩টি প্রশ্ন ও উত্তর)</h4>
+            <div class="fields-grid" style="margin-bottom:8px">
+              <div class="field">
+                <label>প্রশ্ন ১</label>
+                <input type="text" id="faqQ1" placeholder="প্রশ্ন...">
+              </div>
+              <div class="field">
+                <label>উত্তর ১</label>
+                <input type="text" id="faqA1" placeholder="উত্তর...">
+              </div>
+            </div>
+            <div class="fields-grid" style="margin-bottom:8px">
+              <div class="field">
+                <label>প্রশ্ন ২</label>
+                <input type="text" id="faqQ2" placeholder="প্রশ্ন...">
+              </div>
+              <div class="field">
+                <label>উত্তর ২</label>
+                <input type="text" id="faqA2" placeholder="উত্তর...">
+              </div>
+            </div>
+            <div class="fields-grid">
+              <div class="field">
+                <label>প্রশ্ন ৩</label>
+                <input type="text" id="faqQ3" placeholder="প্রশ্ন...">
+              </div>
+              <div class="field">
+                <label>উত্তর ৩</label>
+                <input type="text" id="faqA3" placeholder="উত্তর...">
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top:16px;display:flex;justify-content:flex-end;gap:10px">
+            <button type="button" class="btn btn--outline" onclick="closeBlogEditor()">বাতিল</button>
+            <button type="submit" class="btn btn--ink">ব্লগ সংরক্ষণ ও পাবলিশ করুন</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<div id="toast"></div>
+
+<footer class="a-foot mono">
+  ম্যাথ একাডেমি দর্শনা · অ্যাডমিন ড্যাশবোর্ড v10.4 · NEON SERVERLESS POSTGRES
+</footer>
+
+<script>let currentData=null;function getToken(){return sessionStorage.getItem("ma_admin_token")||""}function showToast(e,o){const n=document.getElementById("toast");n.textContent=e,n.className="show "+(o?"err":"ok"),clearTimeout(n._timer),n._timer=setTimeout(()=>{n.className=""},3500)}async function checkHealth(){const e=document.getElementById("dbDot"),o=document.getElementById("dbText");try{const t=await(await fetch("/api/content?health=1&t="+Date.now())).json();t.ok&&t.db==="up"?(e.className="dot up",o.textContent="NEON DB \u09B8\u099A\u09B2 ("+t.ms+"ms)"):(e.className="dot down",o.textContent="NEON DB \u09A1\u09BE\u0989\u09A8")}catch{e.className="dot down",o.textContent="API \u0985\u09AB\u09B2\u09BE\u0987\u09A8"}}async function loadContent(){try{const e=await fetch("/api/content?all=1&t="+Date.now());if(!e.ok)throw new Error("\u09A1\u09BE\u099F\u09BE \u09B2\u09CB\u09A1 \u0995\u09B0\u09BE \u09AF\u09BE\u09AF\u09BC\u09A8\u09BF (HTTP "+e.status+")");currentData=await e.json(),renderBatches(currentData.batches||[]),renderSettings(currentData.settings||{}),renderBlogPosts(currentData.posts||[])}catch(e){showToast("\u09A1\u09BE\u099F\u09BE \u09B2\u09CB\u09A1 \u0995\u09B0\u09BE \u09AF\u09BE\u09AF\u09BC\u09A8\u09BF: "+e.message,!0)}}function renderBatches(e){const o=document.getElementById("batchesList");o.innerHTML="";const n=currentData?.capacity||15;e.forEach(t=>{const a=Number(t.filled)||0,l=Math.max(0,n-a),i=Math.round(a/n*100),c=t.active!==!1,d=document.createElement("div");d.className="bcard"+(c?"":" is-inactive"),d.id="batch_"+t.id,d.innerHTML=`
+      <div>
+        <div class="bcard__header">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <span class="bcard__code mono">${t.code||t.id.toUpperCase()}</span>
+            ${t.hot?'<span class="badge-hot">\u09B8\u09AC\u099A\u09C7\u09AF\u09BC\u09C7 \u099A\u09BE\u09B9\u09BF\u09A6\u09BE</span>':""}
+          </div>
+          <div class="field" style="margin:6px 0">
+            <label style="font-size:11px;color:#555">\u09AC\u09BE\u0982\u09B2\u09BE\u09AF\u09BC \u09A8\u09BE\u09AE</label>
+            <input type="text" id="name_${t.id}" value="${t.name_bn||""}" style="font-weight:700;font-size:16px;padding:6px 10px">
+          </div>
+          <div class="field" style="margin:6px 0">
+            <label style="font-size:11px;color:#555">\u09B6\u09CD\u09B0\u09C7\u09A3\u09BF (\u09AF\u09C7\u09AE\u09A8: \u0995\u09CD\u09B2\u09BE\u09B8 \u09EC\u2013\u09ED)</label>
+            <input type="text" id="classes_${t.id}" value="${t.classes_bn||""}" style="padding:6px 10px">
+          </div>
+        </div>
+
+        <div style="margin:14px 0">
+          <label style="font-size:13px;font-weight:700">\u09AD\u09B0\u09CD\u09A4\u09BF \u0986\u09B8\u09A8 \u09B8\u0982\u0996\u09CD\u09AF\u09BE (\u09B8\u09B0\u09CD\u09AC\u09CB\u099A\u09CD\u099A ${n} \u099C\u09A8)</label>
+          <div class="stepper">
+            <button type="button" class="step-btn" onclick="stepSeat('${t.id}', -1)">\u2212</button>
+            <input type="number" id="fill_${t.id}" min="0" max="${n}" value="${a}" onchange="updateMeter('${t.id}')">
+            <button type="button" class="step-btn" onclick="stepSeat('${t.id}', 1)">+</button>
+            <span style="font-size:13px;color:#555" id="seatStat_${t.id}">
+              <b>${a}</b> \u09AD\u09B0\u09CD\u09A4\u09BF \xB7 <b>${l}</b> \u0996\u09BE\u09B2\u09BF
+            </span>
+          </div>
+          <div class="meter">
+            <div class="meter__fill" id="meter_${t.id}" style="width:${i}%"></div>
+          </div>
+        </div>
+
+        <div class="field" style="margin-top:14px">
+          <label for="fee_${t.id}">\u09AE\u09BE\u09B8\u09BF\u0995 \u09AB\u09BF (\u099F\u09BE\u0995\u09BE\u09AF\u09BC)</label>
+          <input type="number" id="fee_${t.id}" value="${t.fee}" min="100" step="50" style="font-weight:700;font-size:16px">
+        </div>
+
+        <div class="field">
+          <label for="days_${t.id}">\u09B8\u09AA\u09CD\u09A4\u09BE\u09B9\u09C7\u09B0 \u09A6\u09BF\u09A8\u09B8\u09AE\u09C2\u09B9</label>
+          <input type="text" id="days_${t.id}" value="${t.days_bn||""}" placeholder="\u09AF\u09C7\u09AE\u09A8: \u09B6\u09A8\u09BF \xB7 \u09B8\u09CB\u09AE \xB7 \u09AC\u09C1\u09A7">
+        </div>
+
+        <div class="field">
+          <label for="time_${t.id}">\u0995\u09CD\u09B2\u09BE\u09B8\u09C7\u09B0 \u09B8\u09AE\u09AF\u09BC\u09B8\u09C2\u099A\u09BF</label>
+          <input type="text" id="time_${t.id}" value="${t.time_bn||""}" placeholder="\u09AF\u09C7\u09AE\u09A8: \u09AC\u09BF\u0995\u09BE\u09B2 \u09EA:\u09E9\u09E6 \u2013 \u09EB:\u09E9\u09E6">
+        </div>
+
+        <div class="field">
+          <label for="wa_${t.id}">WhatsApp \u0985\u09A8\u09C1\u09B8\u09A8\u09CD\u09A7\u09BE\u09A8 \u09AC\u09BE\u09B0\u09CD\u09A4\u09BE</label>
+          <textarea id="wa_${t.id}" rows="2" style="font-size:12.5px">${t.wa_text||""}</textarea>
+        </div>
+
+        <div class="toggles">
+          <label><input type="checkbox" id="hot_${t.id}" ${t.hot?"checked":""}> \u0986\u09B8\u09A8 \u09B8\u09C0\u09AE\u09BF\u09A4 / \u09B9\u099F \u09AC\u09CD\u09AF\u09BE\u099A</label>
+          <label><input type="checkbox" id="act_${t.id}" ${c?"checked":""} onchange="toggleCardVisual('${t.id}')"> \u0993\u09AF\u09BC\u09C7\u09AC\u09B8\u09BE\u0987\u099F\u09C7 \u09B8\u0995\u09CD\u09B0\u09BF\u09AF\u09BC (Active)</label>
+        </div>
+      </div>
+
+      <div style="margin-top:18px;padding-top:14px;border-top:1px dashed #ccc">
+        <button class="btn btn--ink btn--block" onclick="saveBatch('${t.id}')">
+          \u2713 ${t.name_bn||t.id} \u09A4\u09A5\u09CD\u09AF \u09B8\u0982\u09B0\u0995\u09CD\u09B7\u09A3 \u0995\u09B0\u09C1\u09A8
+        </button>
+      </div>
+    `,o.appendChild(d)})}function toggleCardVisual(e){const o=document.getElementById("act_"+e).checked,n=document.getElementById("batch_"+e);o?n.classList.remove("is-inactive"):n.classList.add("is-inactive")}function stepSeat(e,o){const n=document.getElementById("fill_"+e),t=currentData?.capacity||15;let a=Number(n.value)+o;a<0&&(a=0),a>t&&(a=t),n.value=a,updateMeter(e)}function updateMeter(e){const o=document.getElementById("fill_"+e),n=currentData?.capacity||15,t=Math.min(n,Math.max(0,Number(o.value)||0));o.value=t;const a=Math.max(0,n-t),l=Math.round(t/n*100);document.getElementById("meter_"+e).style.width=l+"%",document.getElementById("seatStat_"+e).innerHTML=`<b>${t}</b> \u09AD\u09B0\u09CD\u09A4\u09BF \xB7 <b>${a}</b> \u0996\u09BE\u09B2\u09BF`}function renderSettings(e){e.notice&&(document.getElementById("noticeActive").checked=!!e.notice.active,document.getElementById("noticeText").value=e.notice.text_bn||""),e.next_batch&&(document.getElementById("nextBatchLabel").value=e.next_batch.label_bn||"",document.getElementById("nextBatchDate").value=e.next_batch.date_bn||"",document.getElementById("nextBatchAfter").value=e.next_batch.after_bn||"",document.getElementById("nextBatchStartAt").value=e.next_batch.start_at||""),e.programme&&(document.getElementById("classesPerMonth").value=e.programme.classes_per_month||12,document.getElementById("mockPerMonth").value=e.programme.mock_per_month||4,document.getElementById("siblingDiscount").value=e.programme.sibling_discount_pct||10),e.contact&&(document.getElementById("phoneDisplay").value=e.contact.phone_display||"",document.getElementById("phoneRaw").value=e.contact.phone_raw||"",document.getElementById("whatsappNum").value=e.contact.whatsapp||"")}async function saveBatch(e){const o=getToken();if(!o){showToast("\u09AA\u09BE\u09B8\u0993\u09AF\u09BC\u09BE\u09B0\u09CD\u09A1 \u09AA\u09CD\u09B0\u09AF\u09BC\u09CB\u099C\u09A8! \u0986\u09AC\u09BE\u09B0 \u09B2\u0997\u0987\u09A8 \u0995\u09B0\u09C1\u09A8\u0964",!0);return}const n=document.getElementById("name_"+e).value.trim(),t=document.getElementById("classes_"+e).value.trim(),a=Number(document.getElementById("fill_"+e).value),l=Number(document.getElementById("fee_"+e).value),i=document.getElementById("days_"+e).value.trim(),c=document.getElementById("time_"+e).value.trim(),d=document.getElementById("wa_"+e).value.trim(),u=document.getElementById("hot_"+e).checked,m=document.getElementById("act_"+e).checked;try{const s=await fetch("/api/content",{method:"POST",headers:{"Content-Type":"application/json",Authorization:"Bearer "+o},body:JSON.stringify({batch:{id:e,patch:{name_bn:n,classes_bn:t,filled:a,fee:l,days_bn:i,time_bn:c,wa_text:d,hot:u,active:m}}})}),r=await s.json();s.ok&&r.ok?(showToast("\u2713 "+(n||e)+" \u09B8\u09AB\u09B2\u09AD\u09BE\u09AC\u09C7 \u09B8\u0982\u09B0\u0995\u09CD\u09B7\u09BF\u09A4 \u09B9\u09AF\u09BC\u09C7\u099B\u09C7! \u0993\u09AF\u09BC\u09C7\u09AC\u09B8\u09BE\u0987\u099F\u09C7 \u09B2\u09BE\u0987\u09AD \u09A6\u09C7\u0996\u09A4\u09C7 \u09AA\u09BE\u09B0\u09C7\u09A8\u0964"),loadContent()):showToast("\u0986\u09AA\u09A1\u09C7\u099F \u09AC\u09CD\u09AF\u09B0\u09CD\u09A5: "+(r.error||"\u0985\u09A8\u09A8\u09C1\u09AE\u09CB\u09A6\u09BF\u09A4"),!0)}catch(s){showToast("\u09B8\u09BE\u09B0\u09CD\u09AD\u09BE\u09B0 \u09AF\u09CB\u0997\u09BE\u09AF\u09CB\u0997\u09C7 \u09A4\u09CD\u09B0\u09C1\u099F\u09BF: "+s.message,!0)}}document.getElementById("noticeForm").addEventListener("submit",async function(e){e.preventDefault();const o=getToken();if(!o){showToast("\u09AA\u09BE\u09B8\u0993\u09AF\u09BC\u09BE\u09B0\u09CD\u09A1 \u09AA\u09CD\u09B0\u09AF\u09BC\u09CB\u099C\u09A8!",!0);return}const n={active:document.getElementById("noticeActive").checked,text_bn:document.getElementById("noticeText").value.trim()};try{(await fetch("/api/content",{method:"POST",headers:{"Content-Type":"application/json",Authorization:"Bearer "+o},body:JSON.stringify({setting:{key:"notice",value:n}})})).ok?showToast("\u2713 \u09A8\u09CB\u099F\u09BF\u09B6 \u09AC\u09CD\u09AF\u09BE\u09A8\u09BE\u09B0 \u09B8\u09AB\u09B2\u09AD\u09BE\u09AC\u09C7 \u09B8\u0982\u09B0\u0995\u09CD\u09B7\u09BF\u09A4 \u09B9\u09AF\u09BC\u09C7\u099B\u09C7!"):showToast("\u09A8\u09CB\u099F\u09BF\u09B6 \u09B8\u0982\u09B0\u0995\u09CD\u09B7\u09A3 \u09AC\u09CD\u09AF\u09B0\u09CD\u09A5!",!0)}catch(t){showToast("\u09B8\u09BE\u09B0\u09CD\u09AD\u09BE\u09B0 \u09AF\u09CB\u0997\u09BE\u09AF\u09CB\u0997\u09C7 \u09A4\u09CD\u09B0\u09C1\u099F\u09BF: "+t.message,!0)}}),document.getElementById("nextBatchForm").addEventListener("submit",async function(e){e.preventDefault();const o=getToken();if(!o){showToast("\u09AA\u09BE\u09B8\u0993\u09AF\u09BC\u09BE\u09B0\u09CD\u09A1 \u09AA\u09CD\u09B0\u09AF\u09BC\u09CB\u099C\u09A8!",!0);return}const n={label_bn:document.getElementById("nextBatchLabel").value.trim(),date_bn:document.getElementById("nextBatchDate").value.trim(),after_bn:document.getElementById("nextBatchAfter").value.trim(),start_at:document.getElementById("nextBatchStartAt").value.trim()};try{(await fetch("/api/content",{method:"POST",headers:{"Content-Type":"application/json",Authorization:"Bearer "+o},body:JSON.stringify({setting:{key:"next_batch",value:n}})})).ok?showToast("\u2713 \u09AD\u09B0\u09CD\u09A4\u09BF \u0993 \u0987\u09A8\u099F\u09C7\u0995 \u09A4\u09A5\u09CD\u09AF \u09B8\u0982\u09B0\u0995\u09CD\u09B7\u09BF\u09A4 \u09B9\u09AF\u09BC\u09C7\u099B\u09C7!"):showToast("\u09B8\u09C7\u099F\u09BF\u0982\u09B8 \u09B8\u0982\u09B0\u0995\u09CD\u09B7\u09A3 \u09AC\u09CD\u09AF\u09B0\u09CD\u09A5!",!0)}catch(t){showToast("\u09B8\u09BE\u09B0\u09CD\u09AD\u09BE\u09B0 \u09AF\u09CB\u0997\u09BE\u09AF\u09CB\u0997\u09C7 \u09A4\u09CD\u09B0\u09C1\u099F\u09BF: "+t.message,!0)}}),document.getElementById("programmeForm").addEventListener("submit",async function(e){e.preventDefault();const o=getToken();if(!o){showToast("\u09AA\u09BE\u09B8\u0993\u09AF\u09BC\u09BE\u09B0\u09CD\u09A1 \u09AA\u09CD\u09B0\u09AF\u09BC\u09CB\u099C\u09A8!",!0);return}const n={classes_bn:currentData?.settings?.programme?.classes_bn||"\u0995\u09CD\u09B2\u09BE\u09B8 \u09EC\u2013\u09E7\u09E6",exam:currentData?.settings?.programme?.exam||"SSC",classes_per_month:Number(document.getElementById("classesPerMonth").value)||12,mock_per_month:Number(document.getElementById("mockPerMonth").value)||4,sibling_discount_pct:Number(document.getElementById("siblingDiscount").value)||10};try{(await fetch("/api/content",{method:"POST",headers:{"Content-Type":"application/json",Authorization:"Bearer "+o},body:JSON.stringify({setting:{key:"programme",value:n}})})).ok?showToast("\u2713 \u0985\u09CD\u09AF\u09BE\u0995\u09BE\u09A1\u09C7\u09AE\u09BF\u0995 \u0995\u09B0\u09CD\u09AE\u09B8\u09C2\u099A\u09BF \u09A4\u09A5\u09CD\u09AF \u09B8\u0982\u09B0\u0995\u09CD\u09B7\u09BF\u09A4 \u09B9\u09AF\u09BC\u09C7\u099B\u09C7!"):showToast("\u0995\u09B0\u09CD\u09AE\u09B8\u09C2\u099A\u09BF \u09B8\u0982\u09B0\u0995\u09CD\u09B7\u09A3 \u09AC\u09CD\u09AF\u09B0\u09CD\u09A5!",!0)}catch(t){showToast("\u09B8\u09BE\u09B0\u09CD\u09AD\u09BE\u09B0 \u09AF\u09CB\u0997\u09BE\u09AF\u09CB\u0997\u09C7 \u09A4\u09CD\u09B0\u09C1\u099F\u09BF: "+t.message,!0)}}),document.getElementById("contactForm").addEventListener("submit",async function(e){e.preventDefault();const o=getToken();if(!o){showToast("\u09AA\u09BE\u09B8\u0993\u09AF\u09BC\u09BE\u09B0\u09CD\u09A1 \u09AA\u09CD\u09B0\u09AF\u09BC\u09CB\u099C\u09A8!",!0);return}const n={...currentData?.settings?.contact||{},phone_display:document.getElementById("phoneDisplay").value.trim(),phone_raw:document.getElementById("phoneRaw").value.trim(),whatsapp:document.getElementById("whatsappNum").value.trim()};try{(await fetch("/api/content",{method:"POST",headers:{"Content-Type":"application/json",Authorization:"Bearer "+o},body:JSON.stringify({setting:{key:"contact",value:n}})})).ok?showToast("\u2713 \u09AF\u09CB\u0997\u09BE\u09AF\u09CB\u0997 \u09A8\u09AE\u09CD\u09AC\u09B0\u09B8\u09AE\u09C2\u09B9 \u09B8\u0982\u09B0\u0995\u09CD\u09B7\u09BF\u09A4 \u09B9\u09AF\u09BC\u09C7\u099B\u09C7!"):showToast("\u09AF\u09CB\u0997\u09BE\u09AF\u09CB\u0997 \u09A4\u09A5\u09CD\u09AF \u09B8\u0982\u09B0\u0995\u09CD\u09B7\u09A3 \u09AC\u09CD\u09AF\u09B0\u09CD\u09A5!",!0)}catch(t){showToast("\u09B8\u09BE\u09B0\u09CD\u09AD\u09BE\u09B0 \u09AF\u09CB\u0997\u09BE\u09AF\u09CB\u0997\u09C7 \u09A4\u09CD\u09B0\u09C1\u099F\u09BF: "+t.message,!0)}});function renderBlogPosts(e){const o=document.getElementById("blogPostsTableBody");if(o){if(!e||!e.length){o.innerHTML='<tr><td colspan="3" style="padding:16px;text-align:center;color:#777">\u0995\u09CB\u09A8\u09CB \u09AC\u09CD\u09B2\u0997 \u09AA\u09CB\u09B8\u09CD\u099F \u09AA\u09BE\u0993\u09AF\u09BC\u09BE \u09AF\u09BE\u09AF\u09BC\u09A8\u09BF\u0964</td></tr>';return}o.innerHTML=e.map(n=>`
+    <tr style="border-bottom:1px solid #e5e5e5">
+      <td style="padding:12px 10px;vertical-align:top">
+        <span class="mono" style="font-size:11px;font-weight:700;background:var(--paper-2);padding:2px 6px;border:1px solid #ccc;display:inline-block">${escapeHtml(n.tag||"\u09B8\u09BE\u09A7\u09BE\u09B0\u09A3")}</span>
+        <div class="mono" style="font-size:11px;color:#777;margin-top:4px">${n.mins||6} \u09AE\u09BF\u09A8\u09BF\u099F \xB7 ${escapeHtml(n.date||"")}</div>
+      </td>
+      <td style="padding:12px 10px;vertical-align:top">
+        <div style="font-weight:700;font-size:14px;color:var(--ink)">${escapeHtml(n.title||"")}</div>
+        <div class="mono" style="font-size:11.5px;color:#008080;margin:2px 0">/blog/${escapeHtml(n.slug)}/</div>
+        <div style="font-size:12px;color:#666;line-height:1.4">${escapeHtml(n.desc||"")}</div>
+      </td>
+      <td style="padding:12px 10px;vertical-align:top;text-align:right;white-space:nowrap">
+        <button type="button" class="btn btn--outline btn--sm" onclick="editBlogPost('${escapeHtml(n.slug)}')">\u098F\u09A1\u09BF\u099F \u270E</button>
+        <a href="/blog/${escapeHtml(n.slug)}/" target="_blank" class="btn btn--outline btn--sm" style="margin-left:4px" title="\u09A8\u09A4\u09C1\u09A8 \u099F\u09CD\u09AF\u09BE\u09AC\u09C7 \u09A6\u09C7\u0996\u09C1\u09A8">\u09A6\u09C7\u0996\u09C1\u09A8 \u2197</a>
+      </td>
+    </tr>
+  `).join("")}}function escapeHtml(e){return e?String(e).replace(/[&<>"']/g,o=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[o]):""}function openNewPostModal(){document.getElementById("postIsNew").value="1",document.getElementById("blogEditorHeading").textContent="\u09A8\u09A4\u09C1\u09A8 \u09AC\u09CD\u09B2\u0997 \u09B2\u09BF\u0996\u09C1\u09A8",document.getElementById("postSlug").value="",document.getElementById("postSlug").readOnly=!1,document.getElementById("postTag").value="\u098F\u09B8\u098F\u09B8\u09B8\u09BF \u09E8\u09E6\u09E8\u09ED",document.getElementById("postMins").value="\u09EC",document.getElementById("postDate").value=new Date().toISOString().slice(0,10),document.getElementById("postTitle").value="",document.getElementById("postH1").value="",document.getElementById("postDesc").value="",document.getElementById("postKeyword").value="",document.getElementById("postBody").value="",document.getElementById("faqQ1").value="",document.getElementById("faqA1").value="",document.getElementById("faqQ2").value="",document.getElementById("faqA2").value="",document.getElementById("faqQ3").value="",document.getElementById("faqA3").value="";const e=document.getElementById("blogEditorModal");e.style.display="block",e.scrollIntoView({behavior:"smooth",block:"start"})}function editBlogPost(e){const n=(currentData?.posts||[]).find(l=>l.slug===e);if(!n){showToast("\u09AC\u09CD\u09B2\u0997\u099F\u09BF \u0996\u09C1\u0981\u099C\u09C7 \u09AA\u09BE\u0993\u09AF\u09BC\u09BE \u09AF\u09BE\u09AF\u09BC\u09A8\u09BF!",!0);return}document.getElementById("postIsNew").value="0",document.getElementById("blogEditorHeading").textContent="\u09AC\u09CD\u09B2\u0997 \u09B8\u09AE\u09CD\u09AA\u09BE\u09A6\u09A8\u09BE: "+(n.title||n.slug),document.getElementById("postSlug").value=n.slug,document.getElementById("postSlug").readOnly=!0,document.getElementById("postTag").value=n.tag||"",document.getElementById("postMins").value=n.mins||6,document.getElementById("postDate").value=n.date||new Date().toISOString().slice(0,10),document.getElementById("postTitle").value=n.title||"",document.getElementById("postH1").value=n.h1||n.title||"",document.getElementById("postDesc").value=n.desc||"",document.getElementById("postKeyword").value=n.keyword||"",document.getElementById("postBody").value=n.body||"";const t=Array.isArray(n.faq)?n.faq:[];document.getElementById("faqQ1").value=t[0]?.q||"",document.getElementById("faqA1").value=t[0]?.a||"",document.getElementById("faqQ2").value=t[1]?.q||"",document.getElementById("faqA2").value=t[1]?.a||"",document.getElementById("faqQ3").value=t[2]?.q||"",document.getElementById("faqA3").value=t[2]?.a||"";const a=document.getElementById("blogEditorModal");a.style.display="block",a.scrollIntoView({behavior:"smooth",block:"start"})}function closeBlogEditor(){document.getElementById("blogEditorModal").style.display="none"}document.getElementById("blogPostForm").addEventListener("submit",async function(e){e.preventDefault();const o=getToken();if(!o){showToast("\u09AA\u09BE\u09B8\u0993\u09AF\u09BC\u09BE\u09B0\u09CD\u09A1 \u09AA\u09CD\u09B0\u09AF\u09BC\u09CB\u099C\u09A8!",!0);return}const n=[],t=document.getElementById("faqQ1").value.trim(),a=document.getElementById("faqA1").value.trim();t&&a&&n.push({q:t,a});const l=document.getElementById("faqQ2").value.trim(),i=document.getElementById("faqA2").value.trim();l&&i&&n.push({q:l,a:i});const c=document.getElementById("faqQ3").value.trim(),d=document.getElementById("faqA3").value.trim();c&&d&&n.push({q:c,a:d});const u={slug:document.getElementById("postSlug").value.trim().toLowerCase(),tag:document.getElementById("postTag").value.trim(),mins:Number(document.getElementById("postMins").value)||6,date:document.getElementById("postDate").value.trim()||new Date().toISOString().slice(0,10),title:document.getElementById("postTitle").value.trim(),h1:document.getElementById("postH1").value.trim(),desc:document.getElementById("postDesc").value.trim(),keyword:document.getElementById("postKeyword").value.trim(),body:document.getElementById("postBody").value.trim(),faq:n};try{const m=await fetch("/api/content",{method:"POST",headers:{"Content-Type":"application/json",Authorization:"Bearer "+o},body:JSON.stringify({blog_post:u})}),s=await m.json();m.ok&&s.ok?(showToast("\u2713 \u09AC\u09CD\u09B2\u0997 \u09AA\u09CB\u09B8\u09CD\u099F \u09B8\u09AB\u09B2\u09AD\u09BE\u09AC\u09C7 \u09B8\u0982\u09B0\u0995\u09CD\u09B7\u09BF\u09A4 \u0993 \u0986\u09AA\u09A1\u09C7\u099F \u09B9\u09AF\u09BC\u09C7\u099B\u09C7!"),closeBlogEditor(),await loadContent()):showToast("\u09AC\u09CD\u09B2\u0997 \u09B8\u0982\u09B0\u0995\u09CD\u09B7\u09A3\u09C7 \u09A4\u09CD\u09B0\u09C1\u099F\u09BF: "+(s.error||"\u0985\u099C\u09BE\u09A8\u09BE \u09B8\u09AE\u09B8\u09CD\u09AF\u09BE"),!0)}catch(m){showToast("\u09B8\u09BE\u09B0\u09CD\u09AD\u09BE\u09B0 \u09AF\u09CB\u0997\u09BE\u09AF\u09CB\u0997\u09C7 \u09A4\u09CD\u09B0\u09C1\u099F\u09BF: "+m.message,!0)}}),document.getElementById("loginForm").addEventListener("submit",async function(e){e.preventDefault();const o=document.getElementById("adminPassword").value.trim();if(o)try{if((await fetch("/api/content",{method:"POST",headers:{"Content-Type":"application/json",Authorization:"Bearer "+o},body:JSON.stringify({})})).status===401){showToast("\u09AD\u09C1\u09B2 \u09AA\u09BE\u09B8\u0993\u09AF\u09BC\u09BE\u09B0\u09CD\u09A1! \u09B8\u09A0\u09BF\u0995 \u09AA\u09BE\u09B8\u0993\u09AF\u09BC\u09BE\u09B0\u09CD\u09A1 \u09A6\u09BF\u09A8\u0964",!0);return}sessionStorage.setItem("ma_admin_token",o),initDashboard(),showToast("\u2713 \u09B8\u09AB\u09B2\u09AD\u09BE\u09AC\u09C7 \u0985\u09CD\u09AF\u09BE\u09A1\u09AE\u09BF\u09A8 \u09B9\u09BF\u09B8\u09C7\u09AC\u09C7 \u09B2\u0997\u0987\u09A8 \u0995\u09B0\u09C7\u099B\u09C7\u09A8!")}catch(n){showToast("\u0995\u09BE\u09A8\u09C7\u0995\u09B6\u09A8 \u098F\u09B0\u09B0: "+n.message,!0)}});function initDashboard(){document.getElementById("loginSection").style.display="none",document.getElementById("dashboardSection").style.display="block",document.getElementById("logoutBtn").style.display="inline-flex",loadContent()}function logout(){sessionStorage.removeItem("ma_admin_token"),document.getElementById("loginSection").style.display="block",document.getElementById("dashboardSection").style.display="none",document.getElementById("logoutBtn").style.display="none",document.getElementById("adminPassword").value=""}checkHealth(),getToken()&&initDashboard();
+</script>
+
+</body>
+</html>

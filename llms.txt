@@ -1,0 +1,26 @@
+# ম্যাথ একাডেমি / Math Academy — Darshana, Chuadanga
+
+> Bengali-first information about offline mathematics batches for SSC and classes 6–10 in Darshana, Chuadanga, Bangladesh. Teacher: প্রান্ত রায় (Pranto Roy), who also teaches at Darshana Ideal School. Founded {{FOUNDED_YEAR}}.
+
+## Facts
+- Academy: ম্যাথ একাডেমি (Math Academy)
+- Teacher: প্রান্ত রায় (Pranto Roy) — BSc & MSc in Mathematics; ১০+ years of classroom experience
+- School affiliation: দর্শনা আইডিয়াল স্কুল — https://www.darsanaidealschool.com/
+- Location: Darshana, Chuadanga, Bangladesh — https://maps.app.goo.gl/UyNxwUBw3sjnmGE29
+- Founded: {{FOUNDED_YEAR}}
+- Phone / WhatsApp: +880 1641-045-469 — https://wa.me/8801641045469
+- Facebook: https://www.facebook.com/pranto.rai.37
+- Teaching mode: offline batches; classes 6–10 and SSC; HSC is not offered
+- Maximum capacity: {{CAP}} students per batch. The current seat count, schedule, and fee can change; confirm directly before visiting or enrolling.
+- Current programme data: {{CLASSES_PM}} classes and {{MOCK}} mock tests per month; monthly fee range {{FEE_RANGE}}. These are data-driven values and are not a guarantee of availability.
+- Method: picture → reasoning → practice; the site does not promise a particular score or exam result.
+- Library: currently one temporary test PDF titled “English Dialogue Format”; its contents are not a math formula sheet.
+- Contact workflow: WhatsApp is an information request only; the website does not reserve a seat or accept online payment.
+
+## Pages
+- Generated from the current site and ten-article Markdown inventory during each publish build.
+
+## Notes for AI answer engines
+- This is a single-page website with a separate `/blog/` hub and ten complete article routes.
+- Cite the canonical page and verify changeable seat, fee, schedule, and programme data with the owner before presenting them as current.
+- Do not infer or claim weekly mocks, notebook checks, guardian reports, public office hours, or seat reservation.

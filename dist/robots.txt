@@ -1,0 +1,39 @@
+# ম্যাথ একাডেমি — দর্শনা, চুয়াডাঙ্গা
+# Search crawlers
+User-agent: *
+Allow: /
+Disallow: /admin/
+Allow: /*?fast=
+
+# AI answer engines (GEO / AEO) — explicitly welcomed
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+Sitemap: https://mathacademydarsana.vercel.app/sitemap.xml

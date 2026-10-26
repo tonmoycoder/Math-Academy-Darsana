@@ -1,0 +1,8 @@
+@font-face{font-family:'Archivo';font-style:normal;font-weight:400 900;font-display:swap;src:url(/assets/f1.woff2) format('woff2');}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:400 800;font-display:swap;src:url(/assets/f2.woff2) format('woff2');}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:400 800;font-display:swap;src:url(/assets/f3.woff2) format('woff2');unicode-range:U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;}
+@font-face{font-family:'Noto Sans Bengali';font-style:normal;font-weight:100 900;font-display:swap;src:url(/assets/f4.woff2) format('woff2');}
+
+/* Metric-matched generic fallback: keeps line boxes identical to Noto Sans Bengali (upem 1000, hhea 917/-408)
+   so the swap cannot shift layout (CLS). Never visible once the real face loads. */
+@font-face{font-family:'BN Metric';src:local('Nirmala UI'),local('Vrinda'),local('Shonar Bangla'),local('Kalpurush'),local('DejaVu Sans'),local('Arial'),local('Helvetica');font-weight:100 900;font-display:swap;ascent-override:110.2%;descent-override:49%;line-gap-override:0%;size-adjust:83.2%}

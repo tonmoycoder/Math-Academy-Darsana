@@ -1,0 +1,25 @@
+{
+  "id": "/",
+  "name": "ম্যাথ একাডেমি, দর্শনা",
+  "short_name": "ম্যাথ একাডেমি",
+  "description": "দর্শনার ম্যাথ একাডেমি — SSC ও ক্লাস ৬–১০ গণিতের ছোট ব্যাচ, শিক্ষক প্রান্ত রায়।",
+  "lang": "bn-BD",
+  "dir": "ltr",
+  "start_url": "/?utm_source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#FDFBF7",
+  "theme_color": "#0A0A0A",
+  "categories": ["education"],
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-192-maskable.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "/icon-512-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "ব্যাচের তথ্য জানুন", "short_name": "ব্যাচ তথ্য", "url": "/#book", "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }] },
+    { "name": "ব্যাচ ও ফি", "short_name": "ব্যাচ", "url": "/#batches", "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }] }
+  ]
+}

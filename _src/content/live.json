@@ -1,0 +1,62 @@
+{
+  "generatedAt": "2026-10-26T20:48:10.262Z",
+  "dbUpdatedAt": "2026-10-26T20:23:18.344Z",
+  "capacity": 15,
+  "foundedYear": 2022,
+  "nextBatch": {
+    "after_bn": "ফেব্রুয়ারি",
+    "label_bn": "নভেম্বর"
+  },
+  "pricing": {
+    "note_bn": "ব্যাচভেদে মাসিক ফি আলাদা; চলতি ফি নিচের টেবিলে দেখুন",
+    "currency_bn": "৳"
+  },
+  "programme": {
+    "exam": "SSC",
+    "classes_bn": "ক্লাস ৬–১০",
+    "mock_per_month": 4,
+    "classes_per_month": 12,
+    "sibling_discount_pct": 10
+  },
+  "batches": [
+    {
+      "id": "vitti",
+      "name_bn": "ভিত্তি ব্যাচ",
+      "code": "CLASS 6–7 · FOUNDATION",
+      "classes_bn": "ক্লাস ৬–৭",
+      "days_bn": "শনি · সোম · বুধ",
+      "time_bn": "বিকাল ৪:৩০ – ৬:০০",
+      "fee": 1500,
+      "filled": 15,
+      "hot": false,
+      "wa_text": "আসসালামু আলাইকুম, ভিত্তি ব্যাচ (ক্লাস ৬–৭)-এর বর্তমান আসন, সময় ও ফি জানতে চাই।",
+      "sort_order": 0
+    },
+    {
+      "id": "progress",
+      "name_bn": "প্রগ্রেস ব্যাচ",
+      "code": "CLASS 8–9 · PROGRESS",
+      "classes_bn": "ক্লাস ৮–৯",
+      "days_bn": "রবি · মঙ্গল · বৃহস্পতি",
+      "time_bn": "সন্ধ্যা ৬:৩০ – ৮:০০",
+      "fee": 1800,
+      "filled": 15,
+      "hot": false,
+      "wa_text": "আসসালামু আলাইকুম, প্রগ্রেস ব্যাচ (ক্লাস ৮–৯)-এর বর্তমান আসন, সময় ও ফি জানতে চাই।",
+      "sort_order": 1
+    },
+    {
+      "id": "ssc",
+      "name_bn": "SSC ২০২৭ ব্যাচ",
+      "code": "SSC 2027 · TARGET",
+      "classes_bn": "ক্লাস ১০ (SSC)",
+      "days_bn": "শুক্র · শনি",
+      "time_bn": "সকাল ৯:০০ – ১১:৩০",
+      "fee": 2200,
+      "filled": 15,
+      "hot": true,
+      "wa_text": "আসসালামু আলাইকুম, SSC ২০২৭ ব্যাচের বর্তমান আসন, সময় ও ফি জানতে চাই (ক্লাস ১০)।",
+      "sort_order": 2
+    }
+  ]
+}
