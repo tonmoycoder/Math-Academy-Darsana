@@ -20,7 +20,7 @@
     "@neondatabase/serverless": "^1.2.0"
   },
   "engines": {
-    "node": "20.x"
+    "node": "24.x"
   },
   "devDependencies": {
     "esbuild": "^0.25.0"
