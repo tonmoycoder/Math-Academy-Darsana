@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-10-26T20:48:10.262Z",
-  "dbUpdatedAt": "2026-10-26T20:23:18.344Z",
+  "generatedAt": "2026-10-27T20:20:43.010Z",
+  "dbUpdatedAt": "2026-10-26T21:10:27.025Z",
   "capacity": 15,
   "foundedYear": 2022,
   "nextBatch": {
@@ -15,9 +15,67 @@
     "exam": "SSC",
     "classes_bn": "ক্লাস ৬–১০",
     "mock_per_month": 4,
-    "classes_per_month": 12,
+    "classes_per_month": 16,
     "sibling_discount_pct": 10
   },
+  "library": {
+    "section_kicker": "SEC 06 // রিসোর্স ও ডাউনলোড লাইব্রেরি",
+    "section_title": "গণিত ও স্টাডি রিসোর্স লাইব্রেরি",
+    "section_lead": "SSC ও ক্লাস ৬–১০ গণিতের গুরুত্বপূর্ণ হ্যান্ডনোট, অধ্যায়ভিত্তিক সূত্র, সাজেশন ও অনুশীলনী শিট সরাসরি ডাউনলোড করুন।",
+    "items": [
+      {
+        "id": "english-dialogue",
+        "title": "English Dialogue Format (পূর্ণাঙ্গ গাইড)",
+        "desc": "ইংরেজি dialogue লেখার format ও নমুনা অনুশীলনের পূর্ণাঙ্গ রেফারেন্স PDF।",
+        "tag": "সবচেয়ে জনপ্রিয়",
+        "tag_color": "red",
+        "category": "english",
+        "code": "ENGLISH-DIALOGUE · PDF",
+        "meta_info": "PDF · ৫ পৃষ্ঠা",
+        "download_label": "PDF ডাউনলোড",
+        "drive_url": "",
+        "local_file": "english-dialogue-format.pdf",
+        "file_size": "১১০ KB"
+      }
+    ]
+  },
+  "hall_of_fame": [
+    {
+      "id": "fame-1",
+      "badge_text": "A+\nSSC",
+      "badge_color": "teal",
+      "name": "সোহানুর রহমান",
+      "meta": "GPA 5.00 · দর্শনা"
+    },
+    {
+      "id": "fame-2",
+      "badge_text": "A+\nSSC",
+      "badge_color": "red",
+      "name": "সাদিয়া আফরিন",
+      "meta": "GPA 5.00 · ক্লাস টেস্ট ১ম"
+    },
+    {
+      "id": "fame-3",
+      "badge_text": "৯৯\nMOCK",
+      "badge_color": "brass",
+      "name": "তাহমিদ হাসান",
+      "meta": "মক সিরিজ চ্যাম্পিয়ন"
+    },
+    {
+      "id": "fame-4",
+      "badge_text": "A+\nSSC",
+      "badge_color": "teal",
+      "name": "ফারহানা ইয়াসমিন",
+      "meta": "GPA 5.00 · চুয়াডাঙ্গা"
+    },
+    {
+      "id": "fame-5",
+      "badge_text": "TOP\n10",
+      "badge_color": "red",
+      "name": "মেহরাব হোসেন",
+      "meta": "ক্লাস ৯ · গণিত অলিম্পিয়াড"
+    }
+  ],
   "batches": [
     {
       "id": "vitti",
@@ -25,10 +83,10 @@
       "code": "CLASS 6–7 · FOUNDATION",
       "classes_bn": "ক্লাস ৬–৭",
       "days_bn": "শনি · সোম · বুধ",
-      "time_bn": "বিকাল ৪:৩০ – ৬:০০",
-      "fee": 1500,
-      "filled": 15,
-      "hot": false,
+      "time_bn": "বিকাল ৪:৩০ – ৫:৩০",
+      "fee": 500,
+      "filled": 12,
+      "hot": true,
       "wa_text": "আসসালামু আলাইকুম, ভিত্তি ব্যাচ (ক্লাস ৬–৭)-এর বর্তমান আসন, সময় ও ফি জানতে চাই।",
       "sort_order": 0
     },
@@ -39,9 +97,9 @@
       "classes_bn": "ক্লাস ৮–৯",
       "days_bn": "রবি · মঙ্গল · বৃহস্পতি",
       "time_bn": "সন্ধ্যা ৬:৩০ – ৮:০০",
-      "fee": 1800,
-      "filled": 15,
-      "hot": false,
+      "fee": 1000,
+      "filled": 12,
+      "hot": true,
       "wa_text": "আসসালামু আলাইকুম, প্রগ্রেস ব্যাচ (ক্লাস ৮–৯)-এর বর্তমান আসন, সময় ও ফি জানতে চাই।",
       "sort_order": 1
     },
@@ -52,8 +110,8 @@
       "classes_bn": "ক্লাস ১০ (SSC)",
       "days_bn": "শুক্র · শনি",
       "time_bn": "সকাল ৯:০০ – ১১:৩০",
-      "fee": 2200,
-      "filled": 15,
+      "fee": 1200,
+      "filled": 10,
       "hot": true,
       "wa_text": "আসসালামু আলাইকুম, SSC ২০২৭ ব্যাচের বর্তমান আসন, সময় ও ফি জানতে চাই (ক্লাস ১০)।",
       "sort_order": 2

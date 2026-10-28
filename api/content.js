@@ -12,48 +12,119 @@
  * No PII is ever returned. Failure is always JSON, never an HTML error page, so the
  * client can fall back to the values already baked into the HTML.
  */
-import { readContent, updateBatch, updateSetting } from '../lib/db.js';
+import { readContent, updateBatch, updateSetting, getAdminAuth, setAdminAuth } from '../lib/db.js';
 import { readFileSync, writeFileSync, readdirSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import crypto from 'node:crypto';
 
 const ROOT = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 
 const CACHE_OK = 'public, max-age=0, s-maxage=60, stale-while-revalidate=300';
 const NO_STORE = 'no-store';
 
-const json = (body, status = 200, cache = NO_STORE) =>
+const json = (body, status = 200, cache = NO_STORE, headers = {}) =>
   new Response(JSON.stringify(body), {
     status,
     headers: {
       'content-type': 'application/json; charset=utf-8',
       'cache-control': cache,
       'x-content-type-options': 'nosniff',
+      ...headers,
     },
   });
 
 function timingSafeEqual(given, want) {
   if (!given || !want) return false;
-  const a = new TextEncoder().encode(given);
-  const b = new TextEncoder().encode(want);
-  let diff = a.length ^ b.length;
-  const n = Math.max(a.length, b.length);
-  for (let i = 0; i < n; i++) diff |= (a[i] ?? 0) ^ (b[i] ?? 0);
-  return diff === 0;
+  const a = Buffer.isBuffer(given) ? given : Buffer.from(String(given));
+  const b = Buffer.isBuffer(want) ? want : Buffer.from(String(want));
+  if (a.length !== b.length) return false;
+  return crypto.timingSafeEqual(a, b);
 }
 
-/** constant-time compare against configured password or token */
-function tokenOk(given) {
-  if (!given) return false;
+function hashPassword(password, salt) {
+  return crypto.scryptSync(password, salt, 64).toString('hex');
+}
+
+async function verifyPassword(given) {
+  if (!given || typeof given !== 'string') return false;
+  const clean = given.trim();
+  if (!clean) return false;
+
+  // 1. Check custom DB-stored hash if available
+  try {
+    const authRecord = await getAdminAuth();
+    if (authRecord && authRecord.hash && authRecord.salt) {
+      const computed = hashPassword(clean, authRecord.salt);
+      const a = Buffer.from(computed, 'hex');
+      const b = Buffer.from(authRecord.hash, 'hex');
+      if (a.length === b.length && timingSafeEqual(a, b)) {
+        return true;
+      }
+      return false;
+    }
+  } catch (err) {
+    console.error('[auth] verifyPassword db error:', err.message);
+  }
+
+  // 2. Fallback to configured environment secrets (ADMIN_PASSWORD or ADMIN_TOKEN)
   const allowed = [
     process.env.ADMIN_PASSWORD,
     process.env.ADMIN_TOKEN,
-    'pranto2026',
   ].filter(Boolean);
-  return allowed.some((secret) => timingSafeEqual(given, secret));
+  if (allowed.length === 0) return false;
+  return allowed.some((secret) => timingSafeEqual(clean, secret));
+}
+
+function getSessionSecret() {
+  return process.env.ADMIN_TOKEN || process.env.ADMIN_PASSWORD || 'ma-secure-session-key-2026';
+}
+
+function createSessionToken() {
+  const payload = {
+    role: 'admin',
+    iat: Math.floor(Date.now() / 1000),
+    exp: Math.floor(Date.now() / 1000) + 86400, // 24 hours
+    nonce: crypto.randomBytes(8).toString('hex'),
+  };
+  const b64 = Buffer.from(JSON.stringify(payload)).toString('base64url');
+  const sig = crypto.createHmac('sha256', getSessionSecret()).update(b64).digest('base64url');
+  return `${b64}.${sig}`;
+}
+
+function verifySessionToken(token) {
+  if (!token || typeof token !== 'string' || !token.includes('.')) return false;
+  const [b64, sig] = token.split('.');
+  if (!b64 || !sig) return false;
+  const expectedSig = crypto.createHmac('sha256', getSessionSecret()).update(b64).digest('base64url');
+  if (!timingSafeEqual(sig, expectedSig)) return false;
+  try {
+    const payload = JSON.parse(Buffer.from(b64, 'base64url').toString('utf8'));
+    if (payload.role !== 'admin') return false;
+    if (payload.exp < Math.floor(Date.now() / 1000)) return false;
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+async function tokenOk(given) {
+  if (!given) return false;
+  if (verifySessionToken(given)) return true;
+  return await verifyPassword(given);
+}
+
+function extractToken(request) {
+  const auth = request.headers.get('authorization') || '';
+  if (auth) return auth.replace(/^Bearer\s+/i, '').trim();
+  const cookie = request.headers.get('cookie') || '';
+  const match = cookie.match(/ma_session=([^;]+)/);
+  if (match) return match[1].trim();
+  return '';
 }
 
 function trySyncLocalBatch(id, patch) {
+  if (process.env.MA_FAKE_DB === '1' || process.env.NODE_ENV === 'test') return;
   try {
     const p = path.join(ROOT, '_src/content/site.json');
     const data = JSON.parse(readFileSync(p, 'utf8'));
@@ -68,10 +139,17 @@ function trySyncLocalBatch(id, patch) {
 }
 
 function trySyncLocalSetting(key, value) {
+  if (process.env.MA_FAKE_DB === '1' || process.env.NODE_ENV === 'test') return;
   try {
     const p = path.join(ROOT, '_src/content/site.json');
     const data = JSON.parse(readFileSync(p, 'utf8'));
-    data[key] = value;
+    if (key === 'mock_results' || key === 'library' || Array.isArray(value)) {
+      data[key] = value;
+    } else if (typeof data[key] === 'object' && data[key] !== null && typeof value === 'object' && value !== null) {
+      data[key] = { ...data[key], ...value };
+    } else {
+      data[key] = value;
+    }
     writeFileSync(p, JSON.stringify(data, null, 2) + '\n', 'utf8');
   } catch {
     // Read-only filesystem in serverless production, ignore
@@ -174,16 +252,86 @@ async function handleGet(url) {
 }
 
 async function handlePost(request) {
-  const auth = request.headers.get('authorization') || '';
-  if (!tokenOk(auth.replace(/^Bearer\s+/i, ''))) {
-    return json({ error: 'unauthorized' }, 401, NO_STORE);
-  }
-
   let body;
   try {
     body = await request.json();
   } catch {
     return json({ error: 'invalid json' }, 400, NO_STORE);
+  }
+
+  // 1. Explicit Login Action
+  if (body?.action === 'login') {
+    const password = body.password;
+    if (!password || typeof password !== 'string') {
+      return json({ error: 'password_required', message: 'পাসওয়ার্ড দিন' }, 400, NO_STORE);
+    }
+    const valid = await verifyPassword(password);
+    if (!valid) {
+      return json({ error: 'invalid_credentials', message: 'ভুল পাসওয়ার্ড! সঠিক পাসওয়ার্ড দিন।' }, 401, NO_STORE);
+    }
+    const token = createSessionToken();
+    return new Response(JSON.stringify({
+      ok: true,
+      token,
+      expires_in: 86400,
+      message: 'সফলভাবে লগইন করেছেন'
+    }), {
+      status: 200,
+      headers: {
+        'content-type': 'application/json; charset=utf-8',
+        'cache-control': NO_STORE,
+        'set-cookie': `ma_session=${token}; Path=/; HttpOnly; SameSite=Strict; Max-Age=86400; Secure`
+      }
+    });
+  }
+
+  // 2. All other actions require valid authentication
+  const token = extractToken(request);
+  const isAuthorized = await tokenOk(token);
+  if (!isAuthorized) {
+    return json({ error: 'unauthorized' }, 401, NO_STORE);
+  }
+
+  // 3. Password Change Action
+  if (body?.change_password || body?.action === 'change_password') {
+    const cp = body.change_password || body;
+    const currentPass = cp.current_password;
+    const newPass = cp.new_password;
+
+    if (!currentPass || typeof currentPass !== 'string') {
+      return json({ error: 'current_password_required', message: 'বর্তমান পাসওয়ার্ড প্রয়োজন' }, 400, NO_STORE);
+    }
+    const currentValid = await verifyPassword(currentPass);
+    if (!currentValid) {
+      return json({ error: 'current_password_incorrect', message: 'বর্তমান পাসওয়ার্ড সঠিক নয়' }, 401, NO_STORE);
+    }
+    if (!newPass || typeof newPass !== 'string' || newPass.trim().length < 8) {
+      return json({ error: 'new_password_invalid', message: 'নতুন পাসওয়ার্ড কমপক্ষে ৮ অক্ষরের হতে হবে' }, 400, NO_STORE);
+    }
+
+    const salt = crypto.randomBytes(16).toString('hex');
+    const hash = hashPassword(newPass.trim(), salt);
+    const authRecord = {
+      salt,
+      hash,
+      algo: 'scrypt',
+      updated_at: new Date().toISOString()
+    };
+    await setAdminAuth(authRecord);
+
+    const freshToken = createSessionToken();
+    return new Response(JSON.stringify({
+      ok: true,
+      message: 'পাসওয়ার্ড সফলভাবে পরিবর্তন করা হয়েছে',
+      token: freshToken
+    }), {
+      status: 200,
+      headers: {
+        'content-type': 'application/json; charset=utf-8',
+        'cache-control': NO_STORE,
+        'set-cookie': `ma_session=${freshToken}; Path=/; HttpOnly; SameSite=Strict; Max-Age=86400; Secure`
+      }
+    });
   }
 
   if (body?.batch) {

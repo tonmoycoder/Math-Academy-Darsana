@@ -227,6 +227,7 @@
 
     <div class="footer__bottom">
       <span>© <span id="year">২০২৬</span> MATH ACADEMY · সর্বস্বত্ব সংরক্ষিত</span>
+      <button type="button" class="link-u" id="privacyBtn" style="color:#d8d6cf;background:none;border:none;cursor:pointer;font-family:inherit;font-size:12px;padding:0" aria-haspopup="dialog">গোপনীয়তা ও ডেটা সুরক্ষা নীতি</button>
       <a class="ssl" href="__SITE__/.well-known/security.txt" target="_blank" rel="noopener" title="HTTPS · TLS · HSTS — নিরাপত্তা নীতি">
         <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-lock"/></svg>
         <span><b>HTTPS · SSL সুরক্ষিত</b><small>TLS · HSTS · সিকিউর কানেকশন</small></span>
@@ -235,6 +236,38 @@
     </div>
   </div>
 </footer>
+
+<!-- Privacy Policy Modal (Option 1: 100% Zero-Tracking & Transparency) -->
+<dialog id="privacyModal" class="pmodal" aria-labelledby="privTitle">
+  <div class="pmodal__head">
+    <div>
+      <span class="kicker kicker--red" style="font-size:11px">স্বচ্ছতা ও সুরক্ষা</span>
+      <h3 id="privTitle" style="font-size:20px;font-weight:700;margin-top:4px;color:var(--ink)">গোপনীয়তা ও ডেটা সুরক্ষা নীতি</h3>
+    </div>
+    <button type="button" id="closePrivacyBtn" aria-label="বন্ধ করুন" class="btn btn--outline btn--sm" style="padding:4px 10px;font-size:16px">✕</button>
+  </div>
+  <div class="pmodal__body">
+    <p>ম্যাথ একাডেমি দর্শনা শিক্ষার্থীদের গোপনীয়তা এবং ব্যবহারকারীদের ডেটা সুরক্ষায় সম্পূর্ণ প্রতিশ্রুতিবদ্ধ। আমাদের ওয়েবসাইট সম্পূর্ণ বিজ্ঞাপনমুক্ত এবং ব্যবহারকারী-বান্ধব।</p>
+    
+    <h4>১. সম্পূর্ণ জিরো-ট্র্যাকিং নীতি (Zero Tracking Cookies)</h4>
+    <p>সাধারণ দর্শকদের ব্রাউজিংয়ে আমরা কোনো থার্ড-পার্টি ট্র্যাকিং কুকি, ক্রস-সাইট ট্র্যাকার বা বাণিজ্যিক অ্যানালিটিক্স স্ক্রিপ্ট ব্যবহার করি না। আপনার ব্রাউজিং কার্যকলাপ কোনো বিজ্ঞাপনী সংস্থার কাছে বিক্রি বা শেয়ার করা হয় না।</p>
+
+    <h4>২. সার্চ কনসোল ও ইনডেক্সিং (Google & Bing)</h4>
+    <p>ওয়েবসাইটটি সার্চ ইঞ্জিনে খুঁজে পাওয়ার জন্য আমরা স্ট্যান্ডার্ড সার্চ কনসোল ও সাইটম্যাপ ব্যবহার করি, যা কোনো ব্যক্তিগত ট্র্যাকিং বা ব্যবহারকারীর ডিভাইসে অতিরিক্ত মেমোরি খরচ করে না। এটি শতভাগ হালকা ও দ্রুতগতির ব্রাউজিং নিশ্চিত করে।</p>
+
+    <h4>৩. মক টেস্ট ফলাফল ও শিক্ষার্থীর তথ্য</h4>
+    <p>ফলাফল পোর্টালে প্রদর্শিত রোল নম্বর ও মূল্যায়ন কেবল শিক্ষার্থীদের একাডেমিক অগ্রগতি মূল্যায়নের সুবিধার্থে সংরক্ষিত। প্রাতিষ্ঠানিক অনুমোদন সাপেক্ষে এবং শিক্ষার্থীদের মেধার স্বীকৃতি স্বরূপ এগুলো প্রদর্শিত হয়।</p>
+
+    <h4>৪. এনক্রিপ্টেড ও সুরক্ষিত সংযোগ</h4>
+    <p>সম্পূর্ণ ওয়েবসাইটটি অত্যাধুনিক TLS/SSL এনক্রিপশন ও HSTS নিরাপত্তা প্রটোকলের অধীনে পরিচালিত। কোনো বহিরাগত অননুমোদিত ব্যক্তি ওয়েবসাইটের তথ্য বিকৃত করতে পারে না।</p>
+
+    <h4>৫. যোগাযোগ ও জিজ্ঞাসা</h4>
+    <p>যেকোনো তথ্য যাচাই বা ব্যাচ সংক্রান্ত অনুসন্ধানের জন্য সরাসরি আমাদের শিক্ষক প্রান্ত রায়-এর সাথে WhatsApp বা সরাসরি ফোনে যোগাযোগ করতে পারেন।</p>
+  </div>
+  <div class="pmodal__foot">
+    <button type="button" class="btn btn--ink" id="confirmPrivacyBtn">বুঝেছি</button>
+  </div>
+</dialog>
 
 <!-- sticky mobile CTA -->
 <div class="sticky-cta" id="stickyCta">

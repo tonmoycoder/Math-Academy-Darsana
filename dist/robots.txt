@@ -3,6 +3,7 @@
 User-agent: *
 Allow: /
 Disallow: /admin/
+Disallow: /api/
 Allow: /*?fast=
 
 # AI answer engines (GEO / AEO) — explicitly welcomed

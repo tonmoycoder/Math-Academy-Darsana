@@ -44,8 +44,8 @@
     <form id="loginForm">
       <div class="field">
         <label for="adminPassword">অ্যাডমিন পাসওয়ার্ড (Admin Password)</label>
-        <input type="password" id="adminPassword" placeholder="আপনার পাসওয়ার্ড দিন (যেমন: pranto2026)" required autocomplete="current-password">
-        <small>.env ফাইলের ADMIN_PASSWORD দিয়ে লগইন করুন (ডিফল্ট: <b>pranto2026</b>)</small>
+        <input type="password" id="adminPassword" placeholder="আপনার অ্যাডমিন পাসওয়ার্ড লিখুন" required autocomplete="current-password">
+        <small>ওয়েবসাইট পরিচালনার জন্য অনুমোদিত অ্যাডমিন পাসওয়ার্ড প্রদান করুন।</small>
       </div>
       <button type="submit" class="btn btn--ink btn--block">লগইন করুন</button>
     </form>
@@ -182,6 +182,271 @@
       </form>
     </div>
 
+    <!-- Download Library & PDF Resources Management Card -->
+    <div class="card" id="libraryCard">
+      <div class="card__title" style="display:flex;justify-content:space-between;align-items:center">
+        <div>
+          <span>ডাউনলোড লাইব্রেরি ও PDF রিসোর্স ব্যবস্থাপনা</span>
+          <span class="card__subtitle mono">// RESOURCE LIBRARY & PDF CMS</span>
+        </div>
+        <button type="button" class="btn btn--red btn--sm" onclick="openNewPdfModal()">+ নতুন PDF যুক্ত করুন</button>
+      </div>
+      <p style="font-size:13.5px;color:#555;margin-bottom:16px">
+        ওয়েবসাইটের ডাউনলোড লাইব্রেরিতে শিক্ষার্থীদের জন্য গণিত হ্যান্ডনোট, সাজেশন ও মডেল টেস্টের PDF আপলোড/লিঙ্ক যুক্ত করুন। যেকোনো Google Drive লিংক পেস্ট করলে স্বয়ংক্রিয়ভাবে ডিরেক্ট ডাউনলোড লিংক তৈরি হবে।
+      </p>
+
+      <div style="overflow-x:auto;margin-bottom:16px">
+        <table class="blog-table" style="width:100%;border-collapse:collapse;font-size:13px;border:var(--line)">
+          <thead>
+            <tr style="background:var(--paper-2);border-bottom:var(--line);text-align:left">
+              <th style="padding:10px;font-family:var(--mono);font-size:11px;width:140px">ট্যাগ ও কোড</th>
+              <th style="padding:10px">শিরোনাম ও বিবরণ</th>
+              <th style="padding:10px;width:240px">ফাইল / ড্রাইভ লিঙ্ক</th>
+              <th style="padding:10px;text-align:right;width:160px">অ্যাকশন</th>
+            </tr>
+          </thead>
+          <tbody id="libraryPdfsTableBody">
+            <tr><td colspan="4" style="padding:16px;text-align:center;color:#777">রিসোর্স লোড হচ্ছে...</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- PDF Editor Modal / Panel (Hidden by default) -->
+      <div id="pdfEditorModal" style="display:none;padding:20px;border:var(--line);background:var(--paper-2);box-shadow:var(--shadow-sm);margin-top:16px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;border-bottom:1px dashed #bbb;padding-bottom:10px">
+          <h3 id="pdfEditorHeading" style="font-size:17px;font-weight:700">নতুন PDF রিসোর্স যুক্ত করুন</h3>
+          <button type="button" class="btn btn--outline btn--sm" onclick="closePdfEditor()">✕ বন্ধ করুন</button>
+        </div>
+        <form id="pdfResourceForm">
+          <input type="hidden" id="pdfIsNew" value="1">
+          <input type="hidden" id="pdfId" value="">
+          <div class="fields-grid">
+            <div class="field">
+              <label for="pdfTitle">PDF শিরোনাম (Title) *</label>
+              <input type="text" id="pdfTitle" placeholder="যেমন: SSC ২০২৭ গণিত পূর্ণাঙ্গ সূত্র ও হ্যান্ডনোট" required>
+            </div>
+            <div class="field">
+              <label for="pdfTag">ট্যাগ (Tag) *</label>
+              <input type="text" id="pdfTag" placeholder="যেমন: সবচেয়ে জনপ্রিয় / SSC ২০২৭ / হ্যান্ডনোট" required>
+            </div>
+            <div class="field">
+              <label for="pdfTagColor">ট্যাগ কালার (Badge Color)</label>
+              <select id="pdfTagColor">
+                <option value="red">লাল হাইলাইট (Red Accent)</option>
+                <option value="brass">গোল্ডেন / স্ট্যান্ডার্ড (Brass)</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="pdfCode">কোড / ক্যাটাগরি লেবেল</label>
+              <input type="text" id="pdfCode" placeholder="যেমন: MATH-SSC · PDF">
+            </div>
+          </div>
+          <div class="field" style="margin-top:12px">
+            <label for="pdfDesc">সংক্ষিপ্ত বিবরণ (Description)</label>
+            <textarea id="pdfDesc" rows="2" placeholder="যেমন: অধ্যায়ভিত্তিক বীজগণিত, জ্যামিতি ও ত্রিকোণমিতির সকল প্রয়োজনীয় সূত্রের নির্ভুল সংকলন।"></textarea>
+          </div>
+          <div class="field" style="margin-top:12px">
+            <label for="pdfDriveUrl">Google Drive লিংক বা সরাসরি ডাউনলোড URL *</label>
+            <input type="url" id="pdfDriveUrl" placeholder="https://drive.google.com/file/d/1A2B3C4D5E.../view?usp=sharing">
+            <small style="color:var(--teal)">💡 গুগল ড্রাইভের শেয়ার করা লিঙ্ক পেস্ট করলেই ওয়েবসাইটে বোতামে চাপ দিলে সরাসরি (Direct Download) শুরু হবে।</small>
+          </div>
+          <div class="fields-grid" style="margin-top:12px">
+            <div class="field">
+              <label for="pdfMetaInfo">সাইজ ও পৃষ্ঠা তথ্য (Meta Info)</label>
+              <input type="text" id="pdfMetaInfo" placeholder="যেমন: PDF · ৫ পৃষ্ঠা (১১০ KB)">
+            </div>
+            <div class="field">
+              <label for="pdfFilename">ডাউনলোড ফাইলনেম (ঐচ্ছিক)</label>
+              <input type="text" id="pdfFilename" placeholder="যেমন: ssc-math-formula-2027.pdf">
+            </div>
+          </div>
+          <div style="display:flex;justify-content:flex-end;gap:10px;margin-top:16px">
+            <button type="button" class="btn btn--outline" onclick="closePdfEditor()">বাতিল</button>
+            <button type="submit" class="btn btn--ink">সংরক্ষণ করুন</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Mock Test & Student Results Management Card -->
+    <div class="card" id="resultsCard">
+      <div class="card__title" style="display:flex;justify-content:space-between;align-items:center">
+        <div>
+          <span>মক টেস্ট ফলাফল ও শিক্ষার্থী মূল্যায়ন ব্যবস্থাপনা</span>
+          <span class="card__subtitle mono">// MOCK TEST & STUDENT RESULTS CMS</span>
+        </div>
+        <button type="button" class="btn btn--red btn--sm" onclick="openNewResultModal()">+ নতুন ফলাফল যুক্ত করুন</button>
+      </div>
+      <p style="font-size:13.5px;color:#555;margin-bottom:16px">
+        ওয়েবসাইটের SEC 07 ফলাফল যাচাই পোর্টালে শিক্ষার্থীদের মক টেস্ট ও পরীক্ষার মূল্যায়ন ফলাফল (রোল নম্বর, বিষয়ভিত্তিক নম্বর, মেধাক্রম, পার্সেন্টাইল ও মন্তব্য) যুক্ত ও সম্পাদনা করুন।
+      </p>
+
+      <div style="overflow-x:auto;margin-bottom:16px">
+        <table class="blog-table" style="width:100%;border-collapse:collapse;font-size:13px;border:var(--line)">
+          <thead>
+            <tr style="background:var(--paper-2);border-bottom:var(--line);text-align:left">
+              <th style="padding:10px;font-family:var(--mono);font-size:11px;width:120px">রোল নম্বর</th>
+              <th style="padding:10px;width:180px">নাম ও ব্যাচ</th>
+              <th style="padding:10px;width:140px">পরীক্ষা ও নম্বর</th>
+              <th style="padding:10px;width:130px">র‌্যাঙ্ক ও পার্সেন্টাইল</th>
+              <th style="padding:10px;width:180px">বিষয়ভিত্তিক স্কোর</th>
+              <th style="padding:10px">প্রশিক্ষকের মন্তব্য</th>
+              <th style="padding:10px;text-align:right;width:150px">অ্যাকশন</th>
+            </tr>
+          </thead>
+          <tbody id="mockResultsTableBody">
+            <tr><td colspan="7" style="padding:16px;text-align:center;color:#777">ফলাফল লোড হচ্ছে...</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Result Editor Modal / Panel (Hidden by default) -->
+      <div id="resultEditorModal" style="display:none;padding:20px;border:var(--line);background:var(--paper-2);box-shadow:var(--shadow-sm);margin-top:16px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;border-bottom:1px dashed #bbb;padding-bottom:10px">
+          <h3 id="resultEditorHeading" style="font-size:17px;font-weight:700">শিক্ষার্থীর ফলাফল যুক্ত করুন</h3>
+          <button type="button" class="btn btn--outline btn--sm" onclick="closeResultEditor()">✕ বন্ধ করুন</button>
+        </div>
+        <form id="studentResultForm">
+          <input type="hidden" id="resIsNew" value="1">
+          <input type="hidden" id="resOriginalRoll" value="">
+          <div class="fields-grid">
+            <div class="field">
+              <label for="resRoll">রোল নম্বর (যেমন: MA-2026-084) *</label>
+              <input type="text" id="resRoll" placeholder="MA-2026-084" required pattern="[A-Za-z0-9\-_]+" style="text-transform:uppercase">
+              <small>শিক্ষার্থী এই রোল টাইপ করে ওয়েবসাইটে ফলাফল দেখতে পাবে</small>
+            </div>
+            <div class="field">
+              <label for="resStudentName">শিক্ষার্থীর পূর্ণ নাম *</label>
+              <input type="text" id="resStudentName" placeholder="যেমন: তানভীর আহমেদ" required>
+            </div>
+            <div class="field">
+              <label for="resBatchName">ব্যাচের নাম *</label>
+              <input type="text" id="resBatchName" placeholder="যেমন: SSC ২০২৭ ব্যাচ" required>
+            </div>
+            <div class="field">
+              <label for="resTestTitle">পরীক্ষার নাম *</label>
+              <input type="text" id="resTestTitle" placeholder="যেমন: মক টেস্ট-০৪" required>
+            </div>
+          </div>
+
+          <div class="fields-grid" style="margin-top:12px">
+            <div class="field">
+              <label for="resTotalMarks">প্রাপ্ত নম্বর / মোট নম্বর *</label>
+              <input type="text" id="resTotalMarks" placeholder="যেমন: ৯৬ / ১০০" required>
+            </div>
+            <div class="field">
+              <label for="resRankText">মেধাক্রম (Rank) *</label>
+              <input type="text" id="resRankText" placeholder="যেমন: ১ম" required>
+            </div>
+            <div class="field">
+              <label for="resPctText">পার্সেন্টাইল (Percentile) *</label>
+              <input type="text" id="resPctText" placeholder="যেমন: ৯৯.২%" required>
+            </div>
+          </div>
+
+          <div style="margin-top:14px;padding:12px;background:#fff;border:1px dashed #ccc">
+            <h4 style="font-size:13px;font-weight:700;margin-bottom:8px">বিষয়ভিত্তিক অগ্রগতি স্কোর (০ থেকে ১০০ এর মধ্যে)</h4>
+            <div class="fields-grid">
+              <div class="field">
+                <label for="resBarAlgebra">বীজগণিত স্কোর (০–১০০)</label>
+                <input type="number" id="resBarAlgebra" min="0" max="100" placeholder="94" required>
+              </div>
+              <div class="field">
+                <label for="resBarGeometry">জ্যামিতি স্কোর (০–১০০)</label>
+                <input type="number" id="resBarGeometry" min="0" max="100" placeholder="88" required>
+              </div>
+              <div class="field">
+                <label for="resBarTrig">ত্রিকোণমিতি স্কোর (০–১০০)</label>
+                <input type="number" id="resBarTrig" min="0" max="100" placeholder="96" required>
+              </div>
+            </div>
+          </div>
+
+          <div class="field" style="margin-top:12px">
+            <label for="resTrainerNote">প্রশিক্ষকের মূল্যায়ন ও পরামর্শ (Trainer Note)</label>
+            <textarea id="resTrainerNote" rows="2" placeholder="যেমন: বীজগণিত ও ত্রিকোণমিতিতে দারুণ দক্ষতা। জ্যামিতির উপপাদ্য প্রমাণে চিত্র আরও নিখুঁত করার পরামর্শ।"></textarea>
+          </div>
+
+          <div style="display:flex;justify-content:flex-end;gap:10px;margin-top:16px">
+            <button type="button" class="btn btn--outline" onclick="closeResultEditor()">বাতিল</button>
+            <button type="submit" class="btn btn--ink">ফলাফল সংরক্ষণ করুন</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Hall of Fame Management Card -->
+    <div class="card" id="fameCard">
+      <div class="card__title" style="display:flex;justify-content:space-between;align-items:center">
+        <div>
+          <span>কৃতী শিক্ষার্থী ও সাফল্য ব্যবস্থাপনা</span>
+          <span class="card__subtitle mono">// HALL OF FAME CMS</span>
+        </div>
+        <button type="button" class="btn btn--red btn--sm" onclick="openNewFameModal()">+ নতুন কৃতী শিক্ষার্থী যুক্ত করুন</button>
+      </div>
+      <p style="font-size:13.5px;color:#555;margin-bottom:16px">
+        ওয়েবসাইটের SEC 07 ফলাফল সেকশনের নিচে চলমান "HALL OF FAME // কৃতী শিক্ষার্থী" মারকিতে প্রদর্শিত শিক্ষার্থীদের নাম, অর্জন, ব্যাজ ও মেধা স্মারক সম্পাদনা, সংযোজন ও অপসারণ করুন।
+      </p>
+
+      <div style="overflow-x:auto;margin-bottom:16px">
+        <table class="blog-table" style="width:100%;border-collapse:collapse;font-size:13px;border:var(--line)">
+          <thead>
+            <tr style="background:var(--paper-2);border-bottom:var(--line);text-align:left">
+              <th style="padding:10px;font-family:var(--mono);font-size:11px;width:90px">ব্যাজ প্রিভিউ</th>
+              <th style="padding:10px;width:120px">ব্যাজ টেক্সট</th>
+              <th style="padding:10px;width:120px">রঙ/থিম</th>
+              <th style="padding:10px;width:180px">শিক্ষার্থীর নাম</th>
+              <th style="padding:10px">অর্জন ও বিবরণ</th>
+              <th style="padding:10px;text-align:right;width:140px">অ্যাকশন</th>
+            </tr>
+          </thead>
+          <tbody id="fameTableBody">
+            <tr><td colspan="6" style="padding:16px;text-align:center;color:#777">কৃতী শিক্ষার্থী তালিকা লোড হচ্ছে...</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Fame Editor Modal / Panel (Hidden by default) -->
+      <div id="fameEditorModal" style="display:none;padding:20px;border:var(--line);background:var(--paper-2);box-shadow:var(--shadow-sm);margin-top:16px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;border-bottom:1px dashed #bbb;padding-bottom:10px">
+          <h3 id="fameEditorHeading" style="font-size:17px;font-weight:700">কৃতী শিক্ষার্থী তথ্য যুক্ত করুন</h3>
+          <button type="button" class="btn btn--outline btn--sm" onclick="closeFameEditor()">✕ বন্ধ করুন</button>
+        </div>
+        <form id="fameStudentForm">
+          <input type="hidden" id="fameIsNew" value="1">
+          <input type="hidden" id="fameId" value="">
+          <div class="fields-grid">
+            <div class="field">
+              <label for="fameStudentName">শিক্ষার্থীর নাম *</label>
+              <input type="text" id="fameStudentName" placeholder="যেমন: সোহানুর রহমান" required>
+            </div>
+            <div class="field">
+              <label for="fameMeta">অর্জন ও বিবরণ *</label>
+              <input type="text" id="fameMeta" placeholder="যেমন: GPA 5.00 · দর্শনা" required>
+            </div>
+            <div class="field">
+              <label for="fameBadgeText">ব্যাজ টেক্সট (২ লাইনে দিতে পারেন) *</label>
+              <input type="text" id="fameBadgeText" placeholder="A+\nSSC অথবা ৯৯\nMOCK" required>
+              <small>লাইন ব্রেকের জন্য \n ব্যবহার করতে পারেন (যেমন: A+\nSSC)</small>
+            </div>
+            <div class="field">
+              <label for="fameBadgeColor">ব্যাজের রঙ ও ধরন</label>
+              <select id="fameBadgeColor" style="padding:8px 10px;border:var(--line);font-family:inherit">
+                <option value="teal">টিল / সবুজ (সাধারণ A+)</option>
+                <option value="red">ভার্মিলিয়ন লাল (বিশেষ অর্জন / TOP 10)</option>
+                <option value="brass">সোনালী / ব্রাস (মক সিরিজ চ্যাম্পিয়ন / ৯৯)</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="display:flex;justify-content:flex-end;gap:10px;margin-top:16px">
+            <button type="button" class="btn btn--outline" onclick="closeFameEditor()">বাতিল</button>
+            <button type="submit" class="btn btn--ink">সংরক্ষণ করুন</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
     <!-- Blog & Articles Management Card -->
     <div class="card" id="blogCard">
       <div class="card__title" style="display:flex;justify-content:space-between;align-items:center">
@@ -305,6 +570,37 @@
       </div>
     </div>
 
+    <!-- Admin Security & Password Change Card -->
+    <div class="card" id="securityCard">
+      <div class="card__title">
+        <span>অ্যাডমিন পাসওয়ার্ড পরিবর্তন ও নিরাপত্তা</span>
+        <span class="card__subtitle mono">// ADMIN SECURITY & AUTH</span>
+      </div>
+      <p style="font-size:13.5px;color:#555;margin-bottom:14px">
+        অ্যাডমিন প্যানেলে প্রবেশের গোপন পাসওয়ার্ড এখান থেকে নিরাপদে পরিবর্তন করতে পারবেন। পাসওয়ার্ডটি ক্রিপ্টোগ্রাফিক সল্টসহ scrypt হ্যাশ আকারে ডাটাবেজে সংরক্ষিত হয়।
+      </p>
+      <form id="changePasswordForm">
+        <div class="fields-grid">
+          <div class="field">
+            <label for="currentPassword">বর্তমান পাসওয়ার্ড *</label>
+            <input type="password" id="currentPassword" placeholder="বর্তমান পাসওয়ার্ড দিন" required autocomplete="current-password">
+          </div>
+          <div class="field">
+            <label for="newPassword">নতুন পাসওয়ার্ড (কমপক্ষে ৮ অক্ষর) *</label>
+            <input type="password" id="newPassword" placeholder="নতুন পাসওয়ার্ড" minlength="8" required autocomplete="new-password">
+            <small>কমপক্ষে ৮ অক্ষরের শক্তিশালী পাসওয়ার্ড দিন।</small>
+          </div>
+          <div class="field">
+            <label for="confirmNewPassword">নতুন পাসওয়ার্ড নিশ্চিতকরণ *</label>
+            <input type="password" id="confirmNewPassword" placeholder="নতুন পাসওয়ার্ড পুনরায় লিখুন" minlength="8" required autocomplete="new-password">
+          </div>
+        </div>
+        <div style="margin-top:14px;text-align:right">
+          <button type="submit" class="btn btn--ink">পাসওয়ার্ড পরিবর্তন ও সংরক্ষণ করুন</button>
+        </div>
+      </form>
+    </div>
+
   </div>
 </main>
 
@@ -314,86 +610,162 @@
   ম্যাথ একাডেমি দর্শনা · অ্যাডমিন ড্যাশবোর্ড v10.4 · NEON SERVERLESS POSTGRES
 </footer>
 
-<script>let currentData=null;function getToken(){return sessionStorage.getItem("ma_admin_token")||""}function showToast(e,o){const n=document.getElementById("toast");n.textContent=e,n.className="show "+(o?"err":"ok"),clearTimeout(n._timer),n._timer=setTimeout(()=>{n.className=""},3500)}async function checkHealth(){const e=document.getElementById("dbDot"),o=document.getElementById("dbText");try{const t=await(await fetch("/api/content?health=1&t="+Date.now())).json();t.ok&&t.db==="up"?(e.className="dot up",o.textContent="NEON DB \u09B8\u099A\u09B2 ("+t.ms+"ms)"):(e.className="dot down",o.textContent="NEON DB \u09A1\u09BE\u0989\u09A8")}catch{e.className="dot down",o.textContent="API \u0985\u09AB\u09B2\u09BE\u0987\u09A8"}}async function loadContent(){try{const e=await fetch("/api/content?all=1&t="+Date.now());if(!e.ok)throw new Error("\u09A1\u09BE\u099F\u09BE \u09B2\u09CB\u09A1 \u0995\u09B0\u09BE \u09AF\u09BE\u09AF\u09BC\u09A8\u09BF (HTTP "+e.status+")");currentData=await e.json(),renderBatches(currentData.batches||[]),renderSettings(currentData.settings||{}),renderBlogPosts(currentData.posts||[])}catch(e){showToast("\u09A1\u09BE\u099F\u09BE \u09B2\u09CB\u09A1 \u0995\u09B0\u09BE \u09AF\u09BE\u09AF\u09BC\u09A8\u09BF: "+e.message,!0)}}function renderBatches(e){const o=document.getElementById("batchesList");o.innerHTML="";const n=currentData?.capacity||15;e.forEach(t=>{const a=Number(t.filled)||0,l=Math.max(0,n-a),i=Math.round(a/n*100),c=t.active!==!1,d=document.createElement("div");d.className="bcard"+(c?"":" is-inactive"),d.id="batch_"+t.id,d.innerHTML=`
+<script>let currentData=null;function getToken(){return sessionStorage.getItem("ma_admin_token")||""}function showToast(n,o){const t=document.getElementById("toast");t.textContent=n,t.className="show "+(o?"err":"ok"),clearTimeout(t._timer),t._timer=setTimeout(()=>{t.className=""},3500)}async function checkHealth(){const n=document.getElementById("dbDot"),o=document.getElementById("dbText");try{const e=await(await fetch("/api/content?health=1&t="+Date.now())).json();e.ok&&e.db==="up"?(n.className="dot up",o.textContent="NEON DB \u09B8\u099A\u09B2 ("+e.ms+"ms)"):(n.className="dot down",o.textContent="NEON DB \u09A1\u09BE\u0989\u09A8")}catch{n.className="dot down",o.textContent="API \u0985\u09AB\u09B2\u09BE\u0987\u09A8"}}async function loadContent(){try{const n=await fetch("/api/content?all=1&t="+Date.now());if(!n.ok)throw new Error("\u09A1\u09BE\u099F\u09BE \u09B2\u09CB\u09A1 \u0995\u09B0\u09BE \u09AF\u09BE\u09AF\u09BC\u09A8\u09BF (HTTP "+n.status+")");currentData=await n.json(),renderBatches(currentData.batches||[]),renderSettings(currentData.settings||{}),renderBlogPosts(currentData.posts||[])}catch(n){showToast("\u09A1\u09BE\u099F\u09BE \u09B2\u09CB\u09A1 \u0995\u09B0\u09BE \u09AF\u09BE\u09AF\u09BC\u09A8\u09BF: "+n.message,!0)}}function renderBatches(n){const o=document.getElementById("batchesList");o.innerHTML="";const t=currentData?.capacity||15;n.forEach(e=>{const a=Number(e.filled)||0,l=Math.max(0,t-a),d=Math.round(a/t*100),s=e.active!==!1,r=document.createElement("div");r.className="bcard"+(s?"":" is-inactive"),r.id="batch_"+e.id,r.innerHTML=`
       <div>
         <div class="bcard__header">
           <div style="display:flex;justify-content:space-between;align-items:center">
-            <span class="bcard__code mono">${t.code||t.id.toUpperCase()}</span>
-            ${t.hot?'<span class="badge-hot">\u09B8\u09AC\u099A\u09C7\u09AF\u09BC\u09C7 \u099A\u09BE\u09B9\u09BF\u09A6\u09BE</span>':""}
+            <span class="bcard__code mono">${e.code||e.id.toUpperCase()}</span>
+            ${e.hot?'<span class="badge-hot">\u09B8\u09AC\u099A\u09C7\u09AF\u09BC\u09C7 \u099A\u09BE\u09B9\u09BF\u09A6\u09BE</span>':""}
           </div>
           <div class="field" style="margin:6px 0">
             <label style="font-size:11px;color:#555">\u09AC\u09BE\u0982\u09B2\u09BE\u09AF\u09BC \u09A8\u09BE\u09AE</label>
-            <input type="text" id="name_${t.id}" value="${t.name_bn||""}" style="font-weight:700;font-size:16px;padding:6px 10px">
+            <input type="text" id="name_${e.id}" value="${e.name_bn||""}" style="font-weight:700;font-size:16px;padding:6px 10px">
           </div>
           <div class="field" style="margin:6px 0">
             <label style="font-size:11px;color:#555">\u09B6\u09CD\u09B0\u09C7\u09A3\u09BF (\u09AF\u09C7\u09AE\u09A8: \u0995\u09CD\u09B2\u09BE\u09B8 \u09EC\u2013\u09ED)</label>
-            <input type="text" id="classes_${t.id}" value="${t.classes_bn||""}" style="padding:6px 10px">
+            <input type="text" id="classes_${e.id}" value="${e.classes_bn||""}" style="padding:6px 10px">
           </div>
         </div>
 
         <div style="margin:14px 0">
-          <label style="font-size:13px;font-weight:700">\u09AD\u09B0\u09CD\u09A4\u09BF \u0986\u09B8\u09A8 \u09B8\u0982\u0996\u09CD\u09AF\u09BE (\u09B8\u09B0\u09CD\u09AC\u09CB\u099A\u09CD\u099A ${n} \u099C\u09A8)</label>
+          <label style="font-size:13px;font-weight:700">\u09AD\u09B0\u09CD\u09A4\u09BF \u0986\u09B8\u09A8 \u09B8\u0982\u0996\u09CD\u09AF\u09BE (\u09B8\u09B0\u09CD\u09AC\u09CB\u099A\u09CD\u099A ${t} \u099C\u09A8)</label>
           <div class="stepper">
-            <button type="button" class="step-btn" onclick="stepSeat('${t.id}', -1)">\u2212</button>
-            <input type="number" id="fill_${t.id}" min="0" max="${n}" value="${a}" onchange="updateMeter('${t.id}')">
-            <button type="button" class="step-btn" onclick="stepSeat('${t.id}', 1)">+</button>
-            <span style="font-size:13px;color:#555" id="seatStat_${t.id}">
+            <button type="button" class="step-btn" onclick="stepSeat('${e.id}', -1)">\u2212</button>
+            <input type="number" id="fill_${e.id}" min="0" max="${t}" value="${a}" onchange="updateMeter('${e.id}')">
+            <button type="button" class="step-btn" onclick="stepSeat('${e.id}', 1)">+</button>
+            <span style="font-size:13px;color:#555" id="seatStat_${e.id}">
               <b>${a}</b> \u09AD\u09B0\u09CD\u09A4\u09BF \xB7 <b>${l}</b> \u0996\u09BE\u09B2\u09BF
             </span>
           </div>
           <div class="meter">
-            <div class="meter__fill" id="meter_${t.id}" style="width:${i}%"></div>
+            <div class="meter__fill" id="meter_${e.id}" style="width:${d}%"></div>
           </div>
         </div>
 
         <div class="field" style="margin-top:14px">
-          <label for="fee_${t.id}">\u09AE\u09BE\u09B8\u09BF\u0995 \u09AB\u09BF (\u099F\u09BE\u0995\u09BE\u09AF\u09BC)</label>
-          <input type="number" id="fee_${t.id}" value="${t.fee}" min="100" step="50" style="font-weight:700;font-size:16px">
+          <label for="fee_${e.id}">\u09AE\u09BE\u09B8\u09BF\u0995 \u09AB\u09BF (\u099F\u09BE\u0995\u09BE\u09AF\u09BC)</label>
+          <input type="number" id="fee_${e.id}" value="${e.fee}" min="100" step="50" style="font-weight:700;font-size:16px">
         </div>
 
         <div class="field">
-          <label for="days_${t.id}">\u09B8\u09AA\u09CD\u09A4\u09BE\u09B9\u09C7\u09B0 \u09A6\u09BF\u09A8\u09B8\u09AE\u09C2\u09B9</label>
-          <input type="text" id="days_${t.id}" value="${t.days_bn||""}" placeholder="\u09AF\u09C7\u09AE\u09A8: \u09B6\u09A8\u09BF \xB7 \u09B8\u09CB\u09AE \xB7 \u09AC\u09C1\u09A7">
+          <label for="days_${e.id}">\u09B8\u09AA\u09CD\u09A4\u09BE\u09B9\u09C7\u09B0 \u09A6\u09BF\u09A8\u09B8\u09AE\u09C2\u09B9</label>
+          <input type="text" id="days_${e.id}" value="${e.days_bn||""}" placeholder="\u09AF\u09C7\u09AE\u09A8: \u09B6\u09A8\u09BF \xB7 \u09B8\u09CB\u09AE \xB7 \u09AC\u09C1\u09A7">
         </div>
 
         <div class="field">
-          <label for="time_${t.id}">\u0995\u09CD\u09B2\u09BE\u09B8\u09C7\u09B0 \u09B8\u09AE\u09AF\u09BC\u09B8\u09C2\u099A\u09BF</label>
-          <input type="text" id="time_${t.id}" value="${t.time_bn||""}" placeholder="\u09AF\u09C7\u09AE\u09A8: \u09AC\u09BF\u0995\u09BE\u09B2 \u09EA:\u09E9\u09E6 \u2013 \u09EB:\u09E9\u09E6">
+          <label for="time_${e.id}">\u0995\u09CD\u09B2\u09BE\u09B8\u09C7\u09B0 \u09B8\u09AE\u09AF\u09BC\u09B8\u09C2\u099A\u09BF</label>
+          <input type="text" id="time_${e.id}" value="${e.time_bn||""}" placeholder="\u09AF\u09C7\u09AE\u09A8: \u09AC\u09BF\u0995\u09BE\u09B2 \u09EA:\u09E9\u09E6 \u2013 \u09EB:\u09E9\u09E6">
         </div>
 
         <div class="field">
-          <label for="wa_${t.id}">WhatsApp \u0985\u09A8\u09C1\u09B8\u09A8\u09CD\u09A7\u09BE\u09A8 \u09AC\u09BE\u09B0\u09CD\u09A4\u09BE</label>
-          <textarea id="wa_${t.id}" rows="2" style="font-size:12.5px">${t.wa_text||""}</textarea>
+          <label for="wa_${e.id}">WhatsApp \u0985\u09A8\u09C1\u09B8\u09A8\u09CD\u09A7\u09BE\u09A8 \u09AC\u09BE\u09B0\u09CD\u09A4\u09BE</label>
+          <textarea id="wa_${e.id}" rows="2" style="font-size:12.5px">${e.wa_text||""}</textarea>
         </div>
 
         <div class="toggles">
-          <label><input type="checkbox" id="hot_${t.id}" ${t.hot?"checked":""}> \u0986\u09B8\u09A8 \u09B8\u09C0\u09AE\u09BF\u09A4 / \u09B9\u099F \u09AC\u09CD\u09AF\u09BE\u099A</label>
-          <label><input type="checkbox" id="act_${t.id}" ${c?"checked":""} onchange="toggleCardVisual('${t.id}')"> \u0993\u09AF\u09BC\u09C7\u09AC\u09B8\u09BE\u0987\u099F\u09C7 \u09B8\u0995\u09CD\u09B0\u09BF\u09AF\u09BC (Active)</label>
+          <label><input type="checkbox" id="hot_${e.id}" ${e.hot?"checked":""}> \u0986\u09B8\u09A8 \u09B8\u09C0\u09AE\u09BF\u09A4 / \u09B9\u099F \u09AC\u09CD\u09AF\u09BE\u099A</label>
+          <label><input type="checkbox" id="act_${e.id}" ${s?"checked":""} onchange="toggleCardVisual('${e.id}')"> \u0993\u09AF\u09BC\u09C7\u09AC\u09B8\u09BE\u0987\u099F\u09C7 \u09B8\u0995\u09CD\u09B0\u09BF\u09AF\u09BC (Active)</label>
         </div>
       </div>
 
       <div style="margin-top:18px;padding-top:14px;border-top:1px dashed #ccc">
-        <button class="btn btn--ink btn--block" onclick="saveBatch('${t.id}')">
-          \u2713 ${t.name_bn||t.id} \u09A4\u09A5\u09CD\u09AF \u09B8\u0982\u09B0\u0995\u09CD\u09B7\u09A3 \u0995\u09B0\u09C1\u09A8
+        <button class="btn btn--ink btn--block" onclick="saveBatch('${e.id}')">
+          \u2713 ${e.name_bn||e.id} \u09A4\u09A5\u09CD\u09AF \u09B8\u0982\u09B0\u0995\u09CD\u09B7\u09A3 \u0995\u09B0\u09C1\u09A8
         </button>
       </div>
-    `,o.appendChild(d)})}function toggleCardVisual(e){const o=document.getElementById("act_"+e).checked,n=document.getElementById("batch_"+e);o?n.classList.remove("is-inactive"):n.classList.add("is-inactive")}function stepSeat(e,o){const n=document.getElementById("fill_"+e),t=currentData?.capacity||15;let a=Number(n.value)+o;a<0&&(a=0),a>t&&(a=t),n.value=a,updateMeter(e)}function updateMeter(e){const o=document.getElementById("fill_"+e),n=currentData?.capacity||15,t=Math.min(n,Math.max(0,Number(o.value)||0));o.value=t;const a=Math.max(0,n-t),l=Math.round(t/n*100);document.getElementById("meter_"+e).style.width=l+"%",document.getElementById("seatStat_"+e).innerHTML=`<b>${t}</b> \u09AD\u09B0\u09CD\u09A4\u09BF \xB7 <b>${a}</b> \u0996\u09BE\u09B2\u09BF`}function renderSettings(e){e.notice&&(document.getElementById("noticeActive").checked=!!e.notice.active,document.getElementById("noticeText").value=e.notice.text_bn||""),e.next_batch&&(document.getElementById("nextBatchLabel").value=e.next_batch.label_bn||"",document.getElementById("nextBatchDate").value=e.next_batch.date_bn||"",document.getElementById("nextBatchAfter").value=e.next_batch.after_bn||"",document.getElementById("nextBatchStartAt").value=e.next_batch.start_at||""),e.programme&&(document.getElementById("classesPerMonth").value=e.programme.classes_per_month||12,document.getElementById("mockPerMonth").value=e.programme.mock_per_month||4,document.getElementById("siblingDiscount").value=e.programme.sibling_discount_pct||10),e.contact&&(document.getElementById("phoneDisplay").value=e.contact.phone_display||"",document.getElementById("phoneRaw").value=e.contact.phone_raw||"",document.getElementById("whatsappNum").value=e.contact.whatsapp||"")}async function saveBatch(e){const o=getToken();if(!o){showToast("\u09AA\u09BE\u09B8\u0993\u09AF\u09BC\u09BE\u09B0\u09CD\u09A1 \u09AA\u09CD\u09B0\u09AF\u09BC\u09CB\u099C\u09A8! \u0986\u09AC\u09BE\u09B0 \u09B2\u0997\u0987\u09A8 \u0995\u09B0\u09C1\u09A8\u0964",!0);return}const n=document.getElementById("name_"+e).value.trim(),t=document.getElementById("classes_"+e).value.trim(),a=Number(document.getElementById("fill_"+e).value),l=Number(document.getElementById("fee_"+e).value),i=document.getElementById("days_"+e).value.trim(),c=document.getElementById("time_"+e).value.trim(),d=document.getElementById("wa_"+e).value.trim(),u=document.getElementById("hot_"+e).checked,m=document.getElementById("act_"+e).checked;try{const s=await fetch("/api/content",{method:"POST",headers:{"Content-Type":"application/json",Authorization:"Bearer "+o},body:JSON.stringify({batch:{id:e,patch:{name_bn:n,classes_bn:t,filled:a,fee:l,days_bn:i,time_bn:c,wa_text:d,hot:u,active:m}}})}),r=await s.json();s.ok&&r.ok?(showToast("\u2713 "+(n||e)+" \u09B8\u09AB\u09B2\u09AD\u09BE\u09AC\u09C7 \u09B8\u0982\u09B0\u0995\u09CD\u09B7\u09BF\u09A4 \u09B9\u09AF\u09BC\u09C7\u099B\u09C7! \u0993\u09AF\u09BC\u09C7\u09AC\u09B8\u09BE\u0987\u099F\u09C7 \u09B2\u09BE\u0987\u09AD \u09A6\u09C7\u0996\u09A4\u09C7 \u09AA\u09BE\u09B0\u09C7\u09A8\u0964"),loadContent()):showToast("\u0986\u09AA\u09A1\u09C7\u099F \u09AC\u09CD\u09AF\u09B0\u09CD\u09A5: "+(r.error||"\u0985\u09A8\u09A8\u09C1\u09AE\u09CB\u09A6\u09BF\u09A4"),!0)}catch(s){showToast("\u09B8\u09BE\u09B0\u09CD\u09AD\u09BE\u09B0 \u09AF\u09CB\u0997\u09BE\u09AF\u09CB\u0997\u09C7 \u09A4\u09CD\u09B0\u09C1\u099F\u09BF: "+s.message,!0)}}document.getElementById("noticeForm").addEventListener("submit",async function(e){e.preventDefault();const o=getToken();if(!o){showToast("\u09AA\u09BE\u09B8\u0993\u09AF\u09BC\u09BE\u09B0\u09CD\u09A1 \u09AA\u09CD\u09B0\u09AF\u09BC\u09CB\u099C\u09A8!",!0);return}const n={active:document.getElementById("noticeActive").checked,text_bn:document.getElementById("noticeText").value.trim()};try{(await fetch("/api/content",{method:"POST",headers:{"Content-Type":"application/json",Authorization:"Bearer "+o},body:JSON.stringify({setting:{key:"notice",value:n}})})).ok?showToast("\u2713 \u09A8\u09CB\u099F\u09BF\u09B6 \u09AC\u09CD\u09AF\u09BE\u09A8\u09BE\u09B0 \u09B8\u09AB\u09B2\u09AD\u09BE\u09AC\u09C7 \u09B8\u0982\u09B0\u0995\u09CD\u09B7\u09BF\u09A4 \u09B9\u09AF\u09BC\u09C7\u099B\u09C7!"):showToast("\u09A8\u09CB\u099F\u09BF\u09B6 \u09B8\u0982\u09B0\u0995\u09CD\u09B7\u09A3 \u09AC\u09CD\u09AF\u09B0\u09CD\u09A5!",!0)}catch(t){showToast("\u09B8\u09BE\u09B0\u09CD\u09AD\u09BE\u09B0 \u09AF\u09CB\u0997\u09BE\u09AF\u09CB\u0997\u09C7 \u09A4\u09CD\u09B0\u09C1\u099F\u09BF: "+t.message,!0)}}),document.getElementById("nextBatchForm").addEventListener("submit",async function(e){e.preventDefault();const o=getToken();if(!o){showToast("\u09AA\u09BE\u09B8\u0993\u09AF\u09BC\u09BE\u09B0\u09CD\u09A1 \u09AA\u09CD\u09B0\u09AF\u09BC\u09CB\u099C\u09A8!",!0);return}const n={label_bn:document.getElementById("nextBatchLabel").value.trim(),date_bn:document.getElementById("nextBatchDate").value.trim(),after_bn:document.getElementById("nextBatchAfter").value.trim(),start_at:document.getElementById("nextBatchStartAt").value.trim()};try{(await fetch("/api/content",{method:"POST",headers:{"Content-Type":"application/json",Authorization:"Bearer "+o},body:JSON.stringify({setting:{key:"next_batch",value:n}})})).ok?showToast("\u2713 \u09AD\u09B0\u09CD\u09A4\u09BF \u0993 \u0987\u09A8\u099F\u09C7\u0995 \u09A4\u09A5\u09CD\u09AF \u09B8\u0982\u09B0\u0995\u09CD\u09B7\u09BF\u09A4 \u09B9\u09AF\u09BC\u09C7\u099B\u09C7!"):showToast("\u09B8\u09C7\u099F\u09BF\u0982\u09B8 \u09B8\u0982\u09B0\u0995\u09CD\u09B7\u09A3 \u09AC\u09CD\u09AF\u09B0\u09CD\u09A5!",!0)}catch(t){showToast("\u09B8\u09BE\u09B0\u09CD\u09AD\u09BE\u09B0 \u09AF\u09CB\u0997\u09BE\u09AF\u09CB\u0997\u09C7 \u09A4\u09CD\u09B0\u09C1\u099F\u09BF: "+t.message,!0)}}),document.getElementById("programmeForm").addEventListener("submit",async function(e){e.preventDefault();const o=getToken();if(!o){showToast("\u09AA\u09BE\u09B8\u0993\u09AF\u09BC\u09BE\u09B0\u09CD\u09A1 \u09AA\u09CD\u09B0\u09AF\u09BC\u09CB\u099C\u09A8!",!0);return}const n={classes_bn:currentData?.settings?.programme?.classes_bn||"\u0995\u09CD\u09B2\u09BE\u09B8 \u09EC\u2013\u09E7\u09E6",exam:currentData?.settings?.programme?.exam||"SSC",classes_per_month:Number(document.getElementById("classesPerMonth").value)||12,mock_per_month:Number(document.getElementById("mockPerMonth").value)||4,sibling_discount_pct:Number(document.getElementById("siblingDiscount").value)||10};try{(await fetch("/api/content",{method:"POST",headers:{"Content-Type":"application/json",Authorization:"Bearer "+o},body:JSON.stringify({setting:{key:"programme",value:n}})})).ok?showToast("\u2713 \u0985\u09CD\u09AF\u09BE\u0995\u09BE\u09A1\u09C7\u09AE\u09BF\u0995 \u0995\u09B0\u09CD\u09AE\u09B8\u09C2\u099A\u09BF \u09A4\u09A5\u09CD\u09AF \u09B8\u0982\u09B0\u0995\u09CD\u09B7\u09BF\u09A4 \u09B9\u09AF\u09BC\u09C7\u099B\u09C7!"):showToast("\u0995\u09B0\u09CD\u09AE\u09B8\u09C2\u099A\u09BF \u09B8\u0982\u09B0\u0995\u09CD\u09B7\u09A3 \u09AC\u09CD\u09AF\u09B0\u09CD\u09A5!",!0)}catch(t){showToast("\u09B8\u09BE\u09B0\u09CD\u09AD\u09BE\u09B0 \u09AF\u09CB\u0997\u09BE\u09AF\u09CB\u0997\u09C7 \u09A4\u09CD\u09B0\u09C1\u099F\u09BF: "+t.message,!0)}}),document.getElementById("contactForm").addEventListener("submit",async function(e){e.preventDefault();const o=getToken();if(!o){showToast("\u09AA\u09BE\u09B8\u0993\u09AF\u09BC\u09BE\u09B0\u09CD\u09A1 \u09AA\u09CD\u09B0\u09AF\u09BC\u09CB\u099C\u09A8!",!0);return}const n={...currentData?.settings?.contact||{},phone_display:document.getElementById("phoneDisplay").value.trim(),phone_raw:document.getElementById("phoneRaw").value.trim(),whatsapp:document.getElementById("whatsappNum").value.trim()};try{(await fetch("/api/content",{method:"POST",headers:{"Content-Type":"application/json",Authorization:"Bearer "+o},body:JSON.stringify({setting:{key:"contact",value:n}})})).ok?showToast("\u2713 \u09AF\u09CB\u0997\u09BE\u09AF\u09CB\u0997 \u09A8\u09AE\u09CD\u09AC\u09B0\u09B8\u09AE\u09C2\u09B9 \u09B8\u0982\u09B0\u0995\u09CD\u09B7\u09BF\u09A4 \u09B9\u09AF\u09BC\u09C7\u099B\u09C7!"):showToast("\u09AF\u09CB\u0997\u09BE\u09AF\u09CB\u0997 \u09A4\u09A5\u09CD\u09AF \u09B8\u0982\u09B0\u0995\u09CD\u09B7\u09A3 \u09AC\u09CD\u09AF\u09B0\u09CD\u09A5!",!0)}catch(t){showToast("\u09B8\u09BE\u09B0\u09CD\u09AD\u09BE\u09B0 \u09AF\u09CB\u0997\u09BE\u09AF\u09CB\u0997\u09C7 \u09A4\u09CD\u09B0\u09C1\u099F\u09BF: "+t.message,!0)}});function renderBlogPosts(e){const o=document.getElementById("blogPostsTableBody");if(o){if(!e||!e.length){o.innerHTML='<tr><td colspan="3" style="padding:16px;text-align:center;color:#777">\u0995\u09CB\u09A8\u09CB \u09AC\u09CD\u09B2\u0997 \u09AA\u09CB\u09B8\u09CD\u099F \u09AA\u09BE\u0993\u09AF\u09BC\u09BE \u09AF\u09BE\u09AF\u09BC\u09A8\u09BF\u0964</td></tr>';return}o.innerHTML=e.map(n=>`
+    `,o.appendChild(r)})}function toggleCardVisual(n){const o=document.getElementById("act_"+n).checked,t=document.getElementById("batch_"+n);o?t.classList.remove("is-inactive"):t.classList.add("is-inactive")}function stepSeat(n,o){const t=document.getElementById("fill_"+n),e=currentData?.capacity||15;let a=Number(t.value)+o;a<0&&(a=0),a>e&&(a=e),t.value=a,updateMeter(n)}function updateMeter(n){const o=document.getElementById("fill_"+n),t=currentData?.capacity||15,e=Math.min(t,Math.max(0,Number(o.value)||0));o.value=e;const a=Math.max(0,t-e),l=Math.round(e/t*100);document.getElementById("meter_"+n).style.width=l+"%",document.getElementById("seatStat_"+n).innerHTML=`<b>${e}</b> \u09AD\u09B0\u09CD\u09A4\u09BF \xB7 <b>${a}</b> \u0996\u09BE\u09B2\u09BF`}function renderSettings(n){n.notice&&(document.getElementById("noticeActive").checked=!!n.notice.active,document.getElementById("noticeText").value=n.notice.text_bn||""),n.next_batch&&(document.getElementById("nextBatchLabel").value=n.next_batch.label_bn||"",document.getElementById("nextBatchDate").value=n.next_batch.date_bn||"",document.getElementById("nextBatchAfter").value=n.next_batch.after_bn||"",document.getElementById("nextBatchStartAt").value=n.next_batch.start_at||""),n.programme&&(document.getElementById("classesPerMonth").value=n.programme.classes_per_month||12,document.getElementById("mockPerMonth").value=n.programme.mock_per_month||4,document.getElementById("siblingDiscount").value=n.programme.sibling_discount_pct||10),n.contact&&(document.getElementById("phoneDisplay").value=n.contact.phone_display||"",document.getElementById("phoneRaw").value=n.contact.phone_raw||"",document.getElementById("whatsappNum").value=n.contact.whatsapp||""),n.library?renderLibraryPdfs(n.library):renderLibraryPdfs({items:[]}),n.mock_results?renderMockResults(n.mock_results):renderMockResults({}),Array.isArray(n.hall_of_fame)?renderHallOfFameTable(n.hall_of_fame):renderHallOfFameTable([])}async function saveBatch(n){const o=getToken();if(!o){showToast("\u09AA\u09BE\u09B8\u0993\u09AF\u09BC\u09BE\u09B0\u09CD\u09A1 \u09AA\u09CD\u09B0\u09AF\u09BC\u09CB\u099C\u09A8! \u0986\u09AC\u09BE\u09B0 \u09B2\u0997\u0987\u09A8 \u0995\u09B0\u09C1\u09A8\u0964",!0);return}const t=document.getElementById("name_"+n).value.trim(),e=document.getElementById("classes_"+n).value.trim(),a=Number(document.getElementById("fill_"+n).value),l=Number(document.getElementById("fee_"+n).value),d=document.getElementById("days_"+n).value.trim(),s=document.getElementById("time_"+n).value.trim(),r=document.getElementById("wa_"+n).value.trim(),m=document.getElementById("hot_"+n).checked,c=document.getElementById("act_"+n).checked;try{const i=await fetch("/api/content",{method:"POST",headers:{"Content-Type":"application/json",Authorization:"Bearer "+o},body:JSON.stringify({batch:{id:n,patch:{name_bn:t,classes_bn:e,filled:a,fee:l,days_bn:d,time_bn:s,wa_text:r,hot:m,active:c}}})}),u=await i.json();i.ok&&u.ok?(showToast("\u2713 "+(t||n)+" \u09B8\u09AB\u09B2\u09AD\u09BE\u09AC\u09C7 \u09B8\u0982\u09B0\u0995\u09CD\u09B7\u09BF\u09A4 \u09B9\u09AF\u09BC\u09C7\u099B\u09C7! \u0993\u09AF\u09BC\u09C7\u09AC\u09B8\u09BE\u0987\u099F\u09C7 \u09B2\u09BE\u0987\u09AD \u09A6\u09C7\u0996\u09A4\u09C7 \u09AA\u09BE\u09B0\u09C7\u09A8\u0964"),loadContent()):showToast("\u0986\u09AA\u09A1\u09C7\u099F \u09AC\u09CD\u09AF\u09B0\u09CD\u09A5: "+(u.error||"\u0985\u09A8\u09A8\u09C1\u09AE\u09CB\u09A6\u09BF\u09A4"),!0)}catch(i){showToast("\u09B8\u09BE\u09B0\u09CD\u09AD\u09BE\u09B0 \u09AF\u09CB\u0997\u09BE\u09AF\u09CB\u0997\u09C7 \u09A4\u09CD\u09B0\u09C1\u099F\u09BF: "+i.message,!0)}}document.getElementById("noticeForm").addEventListener("submit",async function(n){n.preventDefault();const o=getToken();if(!o){showToast("\u09AA\u09BE\u09B8\u0993\u09AF\u09BC\u09BE\u09B0\u09CD\u09A1 \u09AA\u09CD\u09B0\u09AF\u09BC\u09CB\u099C\u09A8!",!0);return}const t={active:document.getElementById("noticeActive").checked,text_bn:document.getElementById("noticeText").value.trim()};try{(await fetch("/api/content",{method:"POST",headers:{"Content-Type":"application/json",Authorization:"Bearer "+o},body:JSON.stringify({setting:{key:"notice",value:t}})})).ok?showToast("\u2713 \u09A8\u09CB\u099F\u09BF\u09B6 \u09AC\u09CD\u09AF\u09BE\u09A8\u09BE\u09B0 \u09B8\u09AB\u09B2\u09AD\u09BE\u09AC\u09C7 \u09B8\u0982\u09B0\u0995\u09CD\u09B7\u09BF\u09A4 \u09B9\u09AF\u09BC\u09C7\u099B\u09C7!"):showToast("\u09A8\u09CB\u099F\u09BF\u09B6 \u09B8\u0982\u09B0\u0995\u09CD\u09B7\u09A3 \u09AC\u09CD\u09AF\u09B0\u09CD\u09A5!",!0)}catch(e){showToast("\u09B8\u09BE\u09B0\u09CD\u09AD\u09BE\u09B0 \u09AF\u09CB\u0997\u09BE\u09AF\u09CB\u0997\u09C7 \u09A4\u09CD\u09B0\u09C1\u099F\u09BF: "+e.message,!0)}}),document.getElementById("nextBatchForm").addEventListener("submit",async function(n){n.preventDefault();const o=getToken();if(!o){showToast("\u09AA\u09BE\u09B8\u0993\u09AF\u09BC\u09BE\u09B0\u09CD\u09A1 \u09AA\u09CD\u09B0\u09AF\u09BC\u09CB\u099C\u09A8!",!0);return}const t={label_bn:document.getElementById("nextBatchLabel").value.trim(),date_bn:document.getElementById("nextBatchDate").value.trim(),after_bn:document.getElementById("nextBatchAfter").value.trim(),start_at:document.getElementById("nextBatchStartAt").value.trim()};try{(await fetch("/api/content",{method:"POST",headers:{"Content-Type":"application/json",Authorization:"Bearer "+o},body:JSON.stringify({setting:{key:"next_batch",value:t}})})).ok?showToast("\u2713 \u09AD\u09B0\u09CD\u09A4\u09BF \u0993 \u0987\u09A8\u099F\u09C7\u0995 \u09A4\u09A5\u09CD\u09AF \u09B8\u0982\u09B0\u0995\u09CD\u09B7\u09BF\u09A4 \u09B9\u09AF\u09BC\u09C7\u099B\u09C7!"):showToast("\u09B8\u09C7\u099F\u09BF\u0982\u09B8 \u09B8\u0982\u09B0\u0995\u09CD\u09B7\u09A3 \u09AC\u09CD\u09AF\u09B0\u09CD\u09A5!",!0)}catch(e){showToast("\u09B8\u09BE\u09B0\u09CD\u09AD\u09BE\u09B0 \u09AF\u09CB\u0997\u09BE\u09AF\u09CB\u0997\u09C7 \u09A4\u09CD\u09B0\u09C1\u099F\u09BF: "+e.message,!0)}}),document.getElementById("programmeForm").addEventListener("submit",async function(n){n.preventDefault();const o=getToken();if(!o){showToast("\u09AA\u09BE\u09B8\u0993\u09AF\u09BC\u09BE\u09B0\u09CD\u09A1 \u09AA\u09CD\u09B0\u09AF\u09BC\u09CB\u099C\u09A8!",!0);return}const t={classes_bn:currentData?.settings?.programme?.classes_bn||"\u0995\u09CD\u09B2\u09BE\u09B8 \u09EC\u2013\u09E7\u09E6",exam:currentData?.settings?.programme?.exam||"SSC",classes_per_month:Number(document.getElementById("classesPerMonth").value)||12,mock_per_month:Number(document.getElementById("mockPerMonth").value)||4,sibling_discount_pct:Number(document.getElementById("siblingDiscount").value)||10};try{(await fetch("/api/content",{method:"POST",headers:{"Content-Type":"application/json",Authorization:"Bearer "+o},body:JSON.stringify({setting:{key:"programme",value:t}})})).ok?showToast("\u2713 \u0985\u09CD\u09AF\u09BE\u0995\u09BE\u09A1\u09C7\u09AE\u09BF\u0995 \u0995\u09B0\u09CD\u09AE\u09B8\u09C2\u099A\u09BF \u09A4\u09A5\u09CD\u09AF \u09B8\u0982\u09B0\u0995\u09CD\u09B7\u09BF\u09A4 \u09B9\u09AF\u09BC\u09C7\u099B\u09C7!"):showToast("\u0995\u09B0\u09CD\u09AE\u09B8\u09C2\u099A\u09BF \u09B8\u0982\u09B0\u0995\u09CD\u09B7\u09A3 \u09AC\u09CD\u09AF\u09B0\u09CD\u09A5!",!0)}catch(e){showToast("\u09B8\u09BE\u09B0\u09CD\u09AD\u09BE\u09B0 \u09AF\u09CB\u0997\u09BE\u09AF\u09CB\u0997\u09C7 \u09A4\u09CD\u09B0\u09C1\u099F\u09BF: "+e.message,!0)}}),document.getElementById("contactForm").addEventListener("submit",async function(n){n.preventDefault();const o=getToken();if(!o){showToast("\u09AA\u09BE\u09B8\u0993\u09AF\u09BC\u09BE\u09B0\u09CD\u09A1 \u09AA\u09CD\u09B0\u09AF\u09BC\u09CB\u099C\u09A8!",!0);return}const t={...currentData?.settings?.contact||{},phone_display:document.getElementById("phoneDisplay").value.trim(),phone_raw:document.getElementById("phoneRaw").value.trim(),whatsapp:document.getElementById("whatsappNum").value.trim()};try{(await fetch("/api/content",{method:"POST",headers:{"Content-Type":"application/json",Authorization:"Bearer "+o},body:JSON.stringify({setting:{key:"contact",value:t}})})).ok?showToast("\u2713 \u09AF\u09CB\u0997\u09BE\u09AF\u09CB\u0997 \u09A8\u09AE\u09CD\u09AC\u09B0\u09B8\u09AE\u09C2\u09B9 \u09B8\u0982\u09B0\u0995\u09CD\u09B7\u09BF\u09A4 \u09B9\u09AF\u09BC\u09C7\u099B\u09C7!"):showToast("\u09AF\u09CB\u0997\u09BE\u09AF\u09CB\u0997 \u09A4\u09A5\u09CD\u09AF \u09B8\u0982\u09B0\u0995\u09CD\u09B7\u09A3 \u09AC\u09CD\u09AF\u09B0\u09CD\u09A5!",!0)}catch(e){showToast("\u09B8\u09BE\u09B0\u09CD\u09AD\u09BE\u09B0 \u09AF\u09CB\u0997\u09BE\u09AF\u09CB\u0997\u09C7 \u09A4\u09CD\u09B0\u09C1\u099F\u09BF: "+e.message,!0)}});function getDirectDownloadUrl(n){if(!n)return"";n=String(n).trim();var o=n.match(/\/file\/d\/([a-zA-Z0-9_-]+)/)||n.match(/[?&]id=([a-zA-Z0-9_-]+)/);return o&&o[1]?"https://drive.google.com/uc?export=download&id="+o[1]:n}function renderLibraryPdfs(n){const o=document.getElementById("libraryPdfsTableBody");if(!o)return;const t=n&&Array.isArray(n.items)?n.items:[];if(!t.length){o.innerHTML='<tr><td colspan="4" style="padding:16px;text-align:center;color:#777">\u0995\u09CB\u09A8\u09CB PDF \u09B0\u09BF\u09B8\u09CB\u09B0\u09CD\u09B8 \u09AF\u09C1\u0995\u09CD\u09A4 \u0995\u09B0\u09BE \u09B9\u09AF\u09BC\u09A8\u09BF\u0964 \u0989\u09AA\u09B0\u09C7 "+ \u09A8\u09A4\u09C1\u09A8 PDF \u09AF\u09C1\u0995\u09CD\u09A4 \u0995\u09B0\u09C1\u09A8" \u09AC\u09CB\u09A4\u09BE\u09AE\u09C7 \u0995\u09CD\u09B2\u09BF\u0995 \u0995\u09B0\u09C1\u09A8\u0964</td></tr>';return}o.innerHTML=t.map(e=>{const a=e.drive_url?getDirectDownloadUrl(e.drive_url):e.file_url||"/assets/"+(e.local_file||"english-dialogue-format.pdf"),l=!!(e.drive_url&&(e.drive_url.includes("drive.google.com")||e.drive_url.includes("google.com")));return`
+      <tr style="border-bottom:1px solid #e5e5e5">
+        <td style="padding:12px 10px;vertical-align:top">
+          <span class="mono" style="font-size:11px;font-weight:700;background:${e.tag_color==="red"?"#8a1c14;color:#fff":"var(--paper-2);color:var(--ink)"};padding:2px 6px;border:1px solid #ccc;display:inline-block">${escapeHtml(e.tag||"\u09B0\u09BF\u09B8\u09CB\u09B0\u09CD\u09B8")}</span>
+          <div class="mono" style="font-size:11px;color:#777;margin-top:4px">${escapeHtml(e.code||"PDF")}</div>
+        </td>
+        <td style="padding:12px 10px;vertical-align:top">
+          <div style="font-weight:700;font-size:14px;color:var(--ink)">${escapeHtml(e.title||"")}</div>
+          <div style="font-size:12px;color:#666;line-height:1.4;margin-top:3px">${escapeHtml(e.desc||"")}</div>
+          <div class="mono" style="font-size:11px;color:#999;margin-top:4px">${escapeHtml(e.meta_info||"")} ${e.file_size?"\xB7 "+escapeHtml(e.file_size):""}</div>
+        </td>
+        <td style="padding:12px 10px;vertical-align:top">
+          <div class="mono" style="font-size:11.5px;word-break:break-all;color:var(--teal)">
+            ${escapeHtml(e.drive_url||e.file_url||e.local_file||"\u09B2\u09CB\u0995\u09BE\u09B2 \u09AB\u09BE\u0987\u09B2")}
+          </div>
+          ${l?'<div class="mono" style="font-size:10.5px;color:#2e7d32;margin-top:3px">\u2713 Direct Google Drive Stream</div>':""}
+        </td>
+        <td style="padding:12px 10px;vertical-align:top;text-align:right;white-space:nowrap">
+          <button type="button" class="btn btn--outline btn--sm" onclick="editPdfResource('${escapeHtml(e.id)}')">\u098F\u09A1\u09BF\u099F \u270E</button>
+          <a href="${escapeHtml(a)}" target="_blank" rel="noopener noreferrer" class="btn btn--outline btn--sm" style="margin-left:4px" title="\u099F\u09C7\u09B8\u09CD\u099F \u09A1\u09BE\u0989\u09A8\u09B2\u09CB\u09A1">\u099F\u09C7\u09B8\u09CD\u099F \u2197</a>
+          <button type="button" class="btn btn--outline btn--sm" style="margin-left:4px;color:#8a1c14" onclick="deletePdfResource('${escapeHtml(e.id)}')">\u09AE\u09C1\u099B\u09C1\u09A8 \u2715</button>
+        </td>
+      </tr>
+    `}).join("")}function openNewPdfModal(){document.getElementById("pdfIsNew").value="1",document.getElementById("pdfId").value="pdf-"+Date.now(),document.getElementById("pdfEditorHeading").textContent="\u09A8\u09A4\u09C1\u09A8 PDF \u09B0\u09BF\u09B8\u09CB\u09B0\u09CD\u09B8 \u09AF\u09C1\u0995\u09CD\u09A4 \u0995\u09B0\u09C1\u09A8",document.getElementById("pdfTitle").value="",document.getElementById("pdfTag").value="\u09B8\u09AC\u099A\u09C7\u09AF\u09BC\u09C7 \u099C\u09A8\u09AA\u09CD\u09B0\u09BF\u09AF\u09BC",document.getElementById("pdfTagColor").value="red",document.getElementById("pdfCode").value="MATH-SSC \xB7 PDF",document.getElementById("pdfDesc").value="",document.getElementById("pdfDriveUrl").value="",document.getElementById("pdfMetaInfo").value="PDF \xB7 \u09EB \u09AA\u09C3\u09B7\u09CD\u09A0\u09BE",document.getElementById("pdfFilename").value="";const n=document.getElementById("pdfEditorModal");n.style.display="block",n.scrollIntoView({behavior:"smooth",block:"start"})}function editPdfResource(n){const t=(currentData?.settings?.library?.items||[]).find(a=>a.id===n);if(!t){showToast("PDF \u09B0\u09BF\u09B8\u09CB\u09B0\u09CD\u09B8\u099F\u09BF \u0996\u09C1\u0981\u099C\u09C7 \u09AA\u09BE\u0993\u09AF\u09BC\u09BE \u09AF\u09BE\u09AF\u09BC\u09A8\u09BF!",!0);return}document.getElementById("pdfIsNew").value="0",document.getElementById("pdfId").value=t.id,document.getElementById("pdfEditorHeading").textContent="PDF \u09B0\u09BF\u09B8\u09CB\u09B0\u09CD\u09B8 \u09B8\u09AE\u09CD\u09AA\u09BE\u09A6\u09A8\u09BE: "+(t.title||t.id),document.getElementById("pdfTitle").value=t.title||"",document.getElementById("pdfTag").value=t.tag||"",document.getElementById("pdfTagColor").value=t.tag_color||"red",document.getElementById("pdfCode").value=t.code||"",document.getElementById("pdfDesc").value=t.desc||"",document.getElementById("pdfDriveUrl").value=t.drive_url||t.file_url||"",document.getElementById("pdfMetaInfo").value=t.meta_info||"",document.getElementById("pdfFilename").value=t.filename||"";const e=document.getElementById("pdfEditorModal");e.style.display="block",e.scrollIntoView({behavior:"smooth",block:"start"})}function closePdfEditor(){document.getElementById("pdfEditorModal").style.display="none"}async function saveLibrarySetting(n){const o=getToken();if(!o)return showToast("\u09AA\u09BE\u09B8\u0993\u09AF\u09BC\u09BE\u09B0\u09CD\u09A1 \u09AA\u09CD\u09B0\u09AF\u09BC\u09CB\u099C\u09A8! \u0985\u09A8\u09C1\u0997\u09CD\u09B0\u09B9 \u0995\u09B0\u09C7 \u0986\u09AC\u09BE\u09B0 \u09B2\u0997\u0987\u09A8 \u0995\u09B0\u09C1\u09A8\u0964",!0),!1;const t={section_kicker:currentData?.settings?.library?.section_kicker||"SEC 06 // \u09B0\u09BF\u09B8\u09CB\u09B0\u09CD\u09B8 \u0993 \u09A1\u09BE\u0989\u09A8\u09B2\u09CB\u09A1 \u09B2\u09BE\u0987\u09AC\u09CD\u09B0\u09C7\u09B0\u09BF",section_title:currentData?.settings?.library?.section_title||"\u0997\u09A3\u09BF\u09A4 \u0993 \u09B8\u09CD\u099F\u09BE\u09A1\u09BF \u09B0\u09BF\u09B8\u09CB\u09B0\u09CD\u09B8 \u09B2\u09BE\u0987\u09AC\u09CD\u09B0\u09C7\u09B0\u09BF",section_lead:currentData?.settings?.library?.section_lead||"SSC \u0993 \u0995\u09CD\u09B2\u09BE\u09B8 \u09EC\u2013\u09E7\u09E6 \u0997\u09A3\u09BF\u09A4\u09C7\u09B0 \u0997\u09C1\u09B0\u09C1\u09A4\u09CD\u09AC\u09AA\u09C2\u09B0\u09CD\u09A3 \u09B9\u09CD\u09AF\u09BE\u09A8\u09CD\u09A1\u09A8\u09CB\u099F, \u0985\u09A7\u09CD\u09AF\u09BE\u09AF\u09BC\u09AD\u09BF\u09A4\u09CD\u09A4\u09BF\u0995 \u09B8\u09C2\u09A4\u09CD\u09B0, \u09B8\u09BE\u099C\u09C7\u09B6\u09A8 \u0993 \u0985\u09A8\u09C1\u09B6\u09C0\u09B2\u09A8\u09C0 \u09B6\u09BF\u099F \u09B8\u09B0\u09BE\u09B8\u09B0\u09BF \u09A1\u09BE\u0989\u09A8\u09B2\u09CB\u09A1 \u0995\u09B0\u09C1\u09A8\u0964",items:n};try{const e=await fetch("/api/content",{method:"POST",headers:{"Content-Type":"application/json",Authorization:"Bearer "+o},body:JSON.stringify({setting:{key:"library",value:t}})}),a=await e.json().catch(()=>({}));return e.ok&&a.ok?(currentData.settings||(currentData.settings={}),currentData.settings.library=t,renderLibraryPdfs(t),showToast("\u2713 PDF \u09B0\u09BF\u09B8\u09CB\u09B0\u09CD\u09B8 \u09B8\u09AB\u09B2\u09AD\u09BE\u09AC\u09C7 \u09B8\u0982\u09B0\u0995\u09CD\u09B7\u09BF\u09A4 \u09B9\u09AF\u09BC\u09C7\u099B\u09C7!"),!0):(showToast("\u09B0\u09BF\u09B8\u09CB\u09B0\u09CD\u09B8 \u09B8\u0982\u09B0\u0995\u09CD\u09B7\u09A3\u09C7 \u09A4\u09CD\u09B0\u09C1\u099F\u09BF: "+(a.error||"\u0985\u099C\u09BE\u09A8\u09BE \u09B8\u09AE\u09B8\u09CD\u09AF\u09BE"),!0),!1)}catch(e){return showToast("\u09B8\u09BE\u09B0\u09CD\u09AD\u09BE\u09B0 \u09AF\u09CB\u0997\u09BE\u09AF\u09CB\u0997\u09C7 \u09A4\u09CD\u09B0\u09C1\u099F\u09BF: "+e.message,!0),!1}}async function deletePdfResource(n){const o=currentData?.settings?.library?.items||[],t=o.find(a=>a.id===n);if(!confirm(`\u0986\u09AA\u09A8\u09BF \u0995\u09BF \u09A8\u09BF\u09B6\u09CD\u099A\u09BF\u09A4 \u09AF\u09C7 "${t?.title||n}" \u09B0\u09BF\u09B8\u09CB\u09B0\u09CD\u09B8\u099F\u09BF \u09AE\u09C1\u099B\u09C7 \u09AB\u09C7\u09B2\u09A4\u09C7 \u099A\u09BE\u09A8?`))return;const e=o.filter(a=>a.id!==n);await saveLibrarySetting(e)}document.getElementById("pdfResourceForm").addEventListener("submit",async function(n){n.preventDefault();const o=document.getElementById("pdfIsNew").value==="1",t=document.getElementById("pdfId").value.trim()||"pdf-"+Date.now(),e=document.getElementById("pdfTitle").value.trim(),a=document.getElementById("pdfTag").value.trim(),l=document.getElementById("pdfTagColor").value,d=document.getElementById("pdfCode").value.trim(),s=document.getElementById("pdfDesc").value.trim(),r=document.getElementById("pdfDriveUrl").value.trim(),m=document.getElementById("pdfMetaInfo").value.trim(),c=document.getElementById("pdfFilename").value.trim();if(!e||!a){showToast("\u09B6\u09BF\u09B0\u09CB\u09A8\u09BE\u09AE \u0993 \u099F\u09CD\u09AF\u09BE\u0997 \u0986\u09AC\u09B6\u09CD\u09AF\u0995\u0964",!0);return}const i=[...currentData?.settings?.library?.items||[]],u={id:t,title:e,tag:a,tag_color:l,code:d||"PDF",desc:s,drive_url:r,meta_info:m||"PDF \u09AB\u09BE\u0987\u09B2",download_label:"PDF \u09A1\u09BE\u0989\u09A8\u09B2\u09CB\u09A1",filename:c||e.replace(/\s+/g,"-")+".pdf"},g=i.findIndex(p=>p.id===t);g!==-1?i[g]={...i[g],...u}:i.push(u),await saveLibrarySetting(i)&&closePdfEditor()});function renderMockResults(n){const o=document.getElementById("mockResultsTableBody");if(!o)return;const t=Object.entries(n||{});if(!t.length){o.innerHTML='<tr><td colspan="7" style="padding:16px;text-align:center;color:#777">\u0995\u09CB\u09A8\u09CB \u09B6\u09BF\u0995\u09CD\u09B7\u09BE\u09B0\u09CD\u09A5\u09C0\u09B0 \u09AA\u09B0\u09C0\u0995\u09CD\u09B7\u09BE\u09B0 \u09AB\u09B2\u09BE\u09AB\u09B2 \u09AF\u09C1\u0995\u09CD\u09A4 \u0995\u09B0\u09BE \u09B9\u09AF\u09BC\u09A8\u09BF\u0964 \u0989\u09AA\u09B0\u09C7 "+ \u09A8\u09A4\u09C1\u09A8 \u09AB\u09B2\u09BE\u09AB\u09B2 \u09AF\u09C1\u0995\u09CD\u09A4 \u0995\u09B0\u09C1\u09A8" \u09AC\u09CB\u09A4\u09BE\u09AE\u09C7 \u0995\u09CD\u09B2\u09BF\u0995 \u0995\u09B0\u09C1\u09A8\u0964</td></tr>';return}o.innerHTML=t.map(([e,a])=>{const l=Array.isArray(a.bars)?a.bars:[0,0,0],d=`\u09AC\u09C0\u099C: ${l[0]||0} \xB7 \u099C\u09CD\u09AF\u09BE\u09AE\u09BF: ${l[1]||0} \xB7 \u09A4\u09CD\u09B0\u09BF\u0995\u09CB: ${l[2]||0}`;return`
+      <tr style="border-bottom:1px solid #e5e5e5">
+        <td style="padding:12px 10px;vertical-align:top">
+          <span class="mono" style="font-size:12px;font-weight:700;color:var(--ink);background:var(--paper-2);padding:2px 6px;border:1px solid #ccc;display:inline-block">${escapeHtml(e)}</span>
+        </td>
+        <td style="padding:12px 10px;vertical-align:top">
+          <div style="font-weight:700;font-size:14px;color:var(--ink)">${escapeHtml(a.name||"")}</div>
+          <div class="mono" style="font-size:11.5px;color:#666;margin-top:2px">${escapeHtml(a.batch||"")}</div>
+        </td>
+        <td style="padding:12px 10px;vertical-align:top">
+          <div style="font-weight:600;font-size:13px">${escapeHtml(a.test||"")}</div>
+          <div class="mono" style="font-size:12px;color:#8a1c14;font-weight:700;margin-top:2px">${escapeHtml(a.marks||"")}</div>
+        </td>
+        <td style="padding:12px 10px;vertical-align:top">
+          <div class="mono" style="font-size:12px;font-weight:700;color:var(--teal)">\u09B8\u09CD\u09A5\u09BE\u09A8: ${escapeHtml(a.rank||"\u2014")}</div>
+          <div class="mono" style="font-size:11px;color:#777;margin-top:2px">${escapeHtml(a.pct||"")}</div>
+        </td>
+        <td style="padding:12px 10px;vertical-align:top">
+          <div class="mono" style="font-size:11.5px;color:#333">${d}</div>
+          <div style="display:flex;gap:3px;margin-top:4px;height:6px;width:120px;background:#eee;border-radius:3px;overflow:hidden">
+            <div style="width:${Math.min(100,l[0]||0)}%;background:#1d4ed8" title="\u09AC\u09C0\u099C\u0997\u09A3\u09BF\u09A4"></div>
+            <div style="width:${Math.min(100,l[1]||0)}%;background:#059669" title="\u099C\u09CD\u09AF\u09BE\u09AE\u09BF\u09A4\u09BF"></div>
+            <div style="width:${Math.min(100,l[2]||0)}%;background:#b45309" title="\u09A4\u09CD\u09B0\u09BF\u0995\u09CB\u09A3\u09AE\u09BF\u09A4\u09BF"></div>
+          </div>
+        </td>
+        <td style="padding:12px 10px;vertical-align:top">
+          <div style="font-size:12px;color:#555;line-height:1.4">${escapeHtml(a.note||"")}</div>
+        </td>
+        <td style="padding:12px 10px;vertical-align:top;text-align:right;white-space:nowrap">
+          <button type="button" class="btn btn--outline btn--sm" onclick="editResultRecord('${escapeHtml(e)}')">\u098F\u09A1\u09BF\u099F \u270E</button>
+          <button type="button" class="btn btn--outline btn--sm" style="margin-left:4px;color:#8a1c14" onclick="deleteResultRecord('${escapeHtml(e)}')">\u09AE\u09C1\u099B\u09C1\u09A8 \u2715</button>
+        </td>
+      </tr>
+    `}).join("")}function openNewResultModal(){document.getElementById("resIsNew").value="1",document.getElementById("resOriginalRoll").value="",document.getElementById("resultEditorHeading").textContent="\u09A8\u09A4\u09C1\u09A8 \u09B6\u09BF\u0995\u09CD\u09B7\u09BE\u09B0\u09CD\u09A5\u09C0\u09B0 \u09AA\u09B0\u09C0\u0995\u09CD\u09B7\u09BE\u09B0 \u09AB\u09B2\u09BE\u09AB\u09B2 \u09AF\u09C1\u0995\u09CD\u09A4 \u0995\u09B0\u09C1\u09A8",document.getElementById("resRoll").value="",document.getElementById("resRoll").readOnly=!1,document.getElementById("resStudentName").value="",document.getElementById("resBatchName").value="SSC \u09E8\u09E6\u09E8\u09ED \u09AC\u09CD\u09AF\u09BE\u099A",document.getElementById("resTestTitle").value="\u09AE\u0995 \u099F\u09C7\u09B8\u09CD\u099F-\u09E6\u09EA",document.getElementById("resTotalMarks").value="\u09EF\u09EB / \u09E7\u09E6\u09E6",document.getElementById("resRankText").value="\u09E7\u09AE",document.getElementById("resPctText").value="\u09EF\u09EF.\u09E6%",document.getElementById("resBarAlgebra").value=95,document.getElementById("resBarGeometry").value=92,document.getElementById("resBarTrig").value=98,document.getElementById("resTrainerNote").value="";const n=document.getElementById("resultEditorModal");n.style.display="block",n.scrollIntoView({behavior:"smooth",block:"start"})}function editResultRecord(n){const t=(currentData?.settings?.mock_results||{})[n];if(!t){showToast("\u09AB\u09B2\u09BE\u09AB\u09B2 \u09B0\u09C7\u0995\u09B0\u09CD\u09A1\u099F\u09BF \u0996\u09C1\u0981\u099C\u09C7 \u09AA\u09BE\u0993\u09AF\u09BC\u09BE \u09AF\u09BE\u09AF\u09BC\u09A8\u09BF!",!0);return}document.getElementById("resIsNew").value="0",document.getElementById("resOriginalRoll").value=n,document.getElementById("resultEditorHeading").textContent="\u09AB\u09B2\u09BE\u09AB\u09B2 \u09B8\u09AE\u09CD\u09AA\u09BE\u09A6\u09A8\u09BE: "+n+" ("+(t.name||"")+")",document.getElementById("resRoll").value=n,document.getElementById("resRoll").readOnly=!1,document.getElementById("resStudentName").value=t.name||"",document.getElementById("resBatchName").value=t.batch||"",document.getElementById("resTestTitle").value=t.test||"",document.getElementById("resTotalMarks").value=t.marks||"",document.getElementById("resRankText").value=t.rank||"",document.getElementById("resPctText").value=t.pct||"";const e=Array.isArray(t.bars)?t.bars:[0,0,0];document.getElementById("resBarAlgebra").value=e[0]!=null?e[0]:0,document.getElementById("resBarGeometry").value=e[1]!=null?e[1]:0,document.getElementById("resBarTrig").value=e[2]!=null?e[2]:0,document.getElementById("resTrainerNote").value=t.note||"";const a=document.getElementById("resultEditorModal");a.style.display="block",a.scrollIntoView({behavior:"smooth",block:"start"})}function closeResultEditor(){document.getElementById("resultEditorModal").style.display="none"}async function saveMockResultsSetting(n){const o=getToken();if(!o)return showToast("\u09AA\u09BE\u09B8\u0993\u09AF\u09BC\u09BE\u09B0\u09CD\u09A1 \u09AA\u09CD\u09B0\u09AF\u09BC\u09CB\u099C\u09A8! \u0985\u09A8\u09C1\u0997\u09CD\u09B0\u09B9 \u0995\u09B0\u09C7 \u0986\u09AC\u09BE\u09B0 \u09B2\u0997\u0987\u09A8 \u0995\u09B0\u09C1\u09A8\u0964",!0),!1;try{const t=await fetch("/api/content",{method:"POST",headers:{"Content-Type":"application/json",Authorization:"Bearer "+o},body:JSON.stringify({setting:{key:"mock_results",value:n}})}),e=await t.json().catch(()=>({}));return t.ok&&e.ok?(currentData.settings||(currentData.settings={}),currentData.settings.mock_results=n,renderMockResults(n),showToast("\u2713 \u09B6\u09BF\u0995\u09CD\u09B7\u09BE\u09B0\u09CD\u09A5\u09C0\u09B0 \u09AE\u0995 \u099F\u09C7\u09B8\u09CD\u099F \u09AB\u09B2\u09BE\u09AB\u09B2 \u09B8\u09AB\u09B2\u09AD\u09BE\u09AC\u09C7 \u09B8\u0982\u09B0\u0995\u09CD\u09B7\u09BF\u09A4 \u09B9\u09AF\u09BC\u09C7\u099B\u09C7!"),!0):(showToast("\u09AB\u09B2\u09BE\u09AB\u09B2 \u09B8\u0982\u09B0\u0995\u09CD\u09B7\u09A3\u09C7 \u09A4\u09CD\u09B0\u09C1\u099F\u09BF: "+(e.error||"\u0985\u099C\u09BE\u09A8\u09BE \u09B8\u09AE\u09B8\u09CD\u09AF\u09BE"),!0),!1)}catch(t){return showToast("\u09B8\u09BE\u09B0\u09CD\u09AD\u09BE\u09B0 \u09AF\u09CB\u0997\u09BE\u09AF\u09CB\u0997\u09C7 \u09A4\u09CD\u09B0\u09C1\u099F\u09BF: "+t.message,!0),!1}}async function deleteResultRecord(n){const o=currentData?.settings?.mock_results||{},t=o[n];if(!confirm(`\u0986\u09AA\u09A8\u09BF \u0995\u09BF \u09A8\u09BF\u09B6\u09CD\u099A\u09BF\u09A4 \u09AF\u09C7 "${n} (${t?.name||""})" \u09B6\u09BF\u0995\u09CD\u09B7\u09BE\u09B0\u09CD\u09A5\u09C0\u09B0 \u09AB\u09B2\u09BE\u09AB\u09B2 \u09AE\u09C1\u099B\u09C7 \u09AB\u09C7\u09B2\u09A4\u09C7 \u099A\u09BE\u09A8?`))return;const e={...o};delete e[n],await saveMockResultsSetting(e)}document.getElementById("studentResultForm").addEventListener("submit",async function(n){n.preventDefault();const o=document.getElementById("resIsNew").value==="1",t=document.getElementById("resOriginalRoll").value.trim().toUpperCase(),e=document.getElementById("resRoll").value.trim().toUpperCase(),a=document.getElementById("resStudentName").value.trim(),l=document.getElementById("resBatchName").value.trim(),d=document.getElementById("resTestTitle").value.trim(),s=document.getElementById("resTotalMarks").value.trim(),r=document.getElementById("resRankText").value.trim(),m=document.getElementById("resPctText").value.trim(),c=Math.min(100,Math.max(0,parseInt(document.getElementById("resBarAlgebra").value,10)||0)),i=Math.min(100,Math.max(0,parseInt(document.getElementById("resBarGeometry").value,10)||0)),u=Math.min(100,Math.max(0,parseInt(document.getElementById("resBarTrig").value,10)||0)),g=document.getElementById("resTrainerNote").value.trim();if(!e||!a||!l||!d||!s){showToast("\u09B0\u09CB\u09B2, \u09A8\u09BE\u09AE, \u09AC\u09CD\u09AF\u09BE\u099A, \u09AA\u09B0\u09C0\u0995\u09CD\u09B7\u09BE \u098F\u09AC\u0982 \u09A8\u09AE\u09CD\u09AC\u09B0 \u0986\u09AC\u09B6\u09CD\u09AF\u0995\u0964",!0);return}const y={...currentData?.settings?.mock_results||{}};!o&&t&&t!==e&&delete y[t],y[e]={roll:e,name:a,batch:l,test:d,marks:s,rank:r||"\u2014",pct:m||"\u2014",bars:[c,i,u],note:g||"\u09A8\u09BF\u09AF\u09BC\u09AE\u09BF\u09A4 \u0985\u09A8\u09C1\u09B6\u09C0\u09B2\u09A8\u09C7 \u09A6\u0995\u09CD\u09B7\u09A4\u09BE \u0986\u09B0\u0993 \u09AC\u09C3\u09A6\u09CD\u09A7\u09BF \u09AA\u09BE\u09AC\u09C7\u0964"},await saveMockResultsSetting(y)&&closeResultEditor()});function renderHallOfFameTable(n){const o=document.getElementById("fameTableBody");if(o){if(!Array.isArray(n)||!n.length){o.innerHTML='<tr><td colspan="6" style="padding:16px;text-align:center;color:#777">\u0995\u09CB\u09A8\u09CB \u0995\u09C3\u09A4\u09C0 \u09B6\u09BF\u0995\u09CD\u09B7\u09BE\u09B0\u09CD\u09A5\u09C0 \u09A4\u09BE\u09B2\u09BF\u0995\u09BE \u09A8\u09C7\u0987\u0964</td></tr>';return}o.innerHTML=n.map(t=>{const e=(t.badge_color||"teal").trim().toLowerCase(),a=e==="red"||e==="brass"?" "+e:"",l=e==="red"?"\u09B2\u09BE\u09B2 (TOP 10)":e==="brass"?"\u09B8\u09CB\u09A8\u09BE\u09B2\u09C0 (\u099A\u09CD\u09AF\u09BE\u09AE\u09CD\u09AA\u09BF\u09AF\u09BC\u09A8)":"\u099F\u09BF\u09B2 (A+)",d=escapeHtml(t.badge_text||`A+
+SSC`).replace(/\n/g,"<br>");return`
+      <tr style="border-bottom:1px solid #e5e5e5">
+        <td style="padding:10px">
+          <div class="fame-card" style="min-width:auto;padding:6px;width:max-content;box-shadow:2px 2px 0 var(--ink)">
+            <div class="inst${a}" style="width:40px;height:40px;font-size:9px">${d}</div>
+          </div>
+        </td>
+        <td style="padding:10px;font-family:var(--mono);font-size:12px;font-weight:700">${escapeHtml(t.badge_text||"").replace(/\n/g," / ")}</td>
+        <td style="padding:10px;font-size:12px"><span class="badge" style="background:${e==="red"?"var(--red)":e==="brass"?"var(--brass)":"var(--teal)"};color:${e==="brass"?"#000":"#fff"};padding:2px 6px;border-radius:2px">${l}</span></td>
+        <td style="padding:10px"><b>${escapeHtml(t.name||"")}</b></td>
+        <td style="padding:10px;color:#444;font-size:12.5px">${escapeHtml(t.meta||"")}</td>
+        <td style="padding:10px;text-align:right">
+          <button type="button" class="btn btn--outline btn--sm" onclick="editFameItem('${t.id}')" style="margin-right:4px">\u09B8\u09AE\u09CD\u09AA\u09BE\u09A6\u09A8\u09BE</button>
+          <button type="button" class="btn btn--red btn--sm" onclick="deleteFameItem('${t.id}')">\u09AE\u09C1\u099B\u09C1\u09A8</button>
+        </td>
+      </tr>
+    `}).join("")}}function openNewFameModal(){document.getElementById("fameIsNew").value="1",document.getElementById("fameId").value="fame-"+Date.now(),document.getElementById("fameEditorHeading").textContent="\u09A8\u09A4\u09C1\u09A8 \u0995\u09C3\u09A4\u09C0 \u09B6\u09BF\u0995\u09CD\u09B7\u09BE\u09B0\u09CD\u09A5\u09C0 \u09AF\u09C1\u0995\u09CD\u09A4 \u0995\u09B0\u09C1\u09A8",document.getElementById("fameStudentName").value="",document.getElementById("fameMeta").value="",document.getElementById("fameBadgeText").value=`A+
+SSC`,document.getElementById("fameBadgeColor").value="teal";const n=document.getElementById("fameEditorModal");n.style.display="block",n.scrollIntoView({behavior:"smooth",block:"start"})}function closeFameEditor(){document.getElementById("fameEditorModal").style.display="none"}function editFameItem(n){const t=(currentData?.settings?.hall_of_fame||[]).find(a=>a.id===n);if(!t){showToast("\u09B0\u09C7\u0995\u09B0\u09CD\u09A1\u099F\u09BF \u0996\u09C1\u0981\u099C\u09C7 \u09AA\u09BE\u0993\u09AF\u09BC\u09BE \u09AF\u09BE\u09AF\u09BC\u09A8\u09BF!",!0);return}document.getElementById("fameIsNew").value="0",document.getElementById("fameId").value=n,document.getElementById("fameEditorHeading").textContent="\u0995\u09C3\u09A4\u09C0 \u09B6\u09BF\u0995\u09CD\u09B7\u09BE\u09B0\u09CD\u09A5\u09C0 \u09B8\u09AE\u09CD\u09AA\u09BE\u09A6\u09A8\u09BE: "+(t.name||""),document.getElementById("fameStudentName").value=t.name||"",document.getElementById("fameMeta").value=t.meta||"",document.getElementById("fameBadgeText").value=t.badge_text||`A+
+SSC`,document.getElementById("fameBadgeColor").value=(t.badge_color||"teal").trim().toLowerCase();const e=document.getElementById("fameEditorModal");e.style.display="block",e.scrollIntoView({behavior:"smooth",block:"start"})}async function saveHallOfFameSetting(n){const o=getToken();if(!o)return showToast("\u09AA\u09BE\u09B8\u0993\u09AF\u09BC\u09BE\u09B0\u09CD\u09A1 \u09AA\u09CD\u09B0\u09AF\u09BC\u09CB\u099C\u09A8! \u0985\u09A8\u09C1\u0997\u09CD\u09B0\u09B9 \u0995\u09B0\u09C7 \u0986\u09AC\u09BE\u09B0 \u09B2\u0997\u0987\u09A8 \u0995\u09B0\u09C1\u09A8\u0964",!0),!1;try{const t=await fetch("/api/content",{method:"POST",headers:{"Content-Type":"application/json",Authorization:"Bearer "+o},body:JSON.stringify({setting:{key:"hall_of_fame",value:n}})}),e=await t.json().catch(()=>({}));return t.ok&&e.ok?(currentData.settings||(currentData.settings={}),currentData.settings.hall_of_fame=n,renderHallOfFameTable(n),showToast("\u2713 \u0995\u09C3\u09A4\u09C0 \u09B6\u09BF\u0995\u09CD\u09B7\u09BE\u09B0\u09CD\u09A5\u09C0 \u09A4\u09BE\u09B2\u09BF\u0995\u09BE \u09B8\u09AB\u09B2\u09AD\u09BE\u09AC\u09C7 \u09B8\u0982\u09B0\u0995\u09CD\u09B7\u09BF\u09A4 \u09B9\u09AF\u09BC\u09C7\u099B\u09C7!"),!0):(showToast("\u09B8\u0982\u09B0\u0995\u09CD\u09B7\u09A3\u09C7 \u09A4\u09CD\u09B0\u09C1\u099F\u09BF: "+(e.error||"\u0985\u099C\u09BE\u09A8\u09BE \u09B8\u09AE\u09B8\u09CD\u09AF\u09BE"),!0),!1)}catch(t){return showToast("\u09B8\u09BE\u09B0\u09CD\u09AD\u09BE\u09B0 \u09AF\u09CB\u0997\u09BE\u09AF\u09CB\u0997\u09C7 \u09A4\u09CD\u09B0\u09C1\u099F\u09BF: "+t.message,!0),!1}}async function deleteFameItem(n){const o=currentData?.settings?.hall_of_fame||[],t=o.find(a=>a.id===n);if(!confirm(`\u0986\u09AA\u09A8\u09BF \u0995\u09BF \u09A8\u09BF\u09B6\u09CD\u099A\u09BF\u09A4 \u09AF\u09C7 "${t?.name||"\u098F\u0987 \u09B6\u09BF\u0995\u09CD\u09B7\u09BE\u09B0\u09CD\u09A5\u09C0"}"-\u0995\u09C7 \u0995\u09C3\u09A4\u09C0 \u09B6\u09BF\u0995\u09CD\u09B7\u09BE\u09B0\u09CD\u09A5\u09C0 \u09A4\u09BE\u09B2\u09BF\u0995\u09BE \u09A5\u09C7\u0995\u09C7 \u09AE\u09C1\u099B\u09C7 \u09AB\u09C7\u09B2\u09A4\u09C7 \u099A\u09BE\u09A8?`))return;const e=o.filter(a=>a.id!==n);await saveHallOfFameSetting(e)}document.getElementById("fameStudentForm").addEventListener("submit",async function(n){n.preventDefault();const o=document.getElementById("fameIsNew").value==="1",t=document.getElementById("fameId").value.trim()||"fame-"+Date.now(),e=document.getElementById("fameStudentName").value.trim(),a=document.getElementById("fameMeta").value.trim(),l=document.getElementById("fameBadgeText").value.replace(/\\n/g,`
+`).trim(),d=document.getElementById("fameBadgeColor").value.trim();if(!e||!a||!l){showToast("\u09A8\u09BE\u09AE, \u0985\u09B0\u09CD\u099C\u09A8 \u098F\u09AC\u0982 \u09AC\u09CD\u09AF\u09BE\u099C \u099F\u09C7\u0995\u09CD\u09B8\u099F \u0986\u09AC\u09B6\u09CD\u09AF\u0995\u0964",!0);return}const s=Array.isArray(currentData?.settings?.hall_of_fame)?[...currentData.settings.hall_of_fame]:[],r={id:t,name:e,meta:a,badge_text:l,badge_color:d},m=s.findIndex(i=>i.id===t);m!==-1?s[m]=r:s.push(r),await saveHallOfFameSetting(s)&&closeFameEditor()});function renderBlogPosts(n){const o=document.getElementById("blogPostsTableBody");if(o){if(!n||!n.length){o.innerHTML='<tr><td colspan="3" style="padding:16px;text-align:center;color:#777">\u0995\u09CB\u09A8\u09CB \u09AC\u09CD\u09B2\u0997 \u09AA\u09CB\u09B8\u09CD\u099F \u09AA\u09BE\u0993\u09AF\u09BC\u09BE \u09AF\u09BE\u09AF\u09BC\u09A8\u09BF\u0964</td></tr>';return}o.innerHTML=n.map(t=>`
     <tr style="border-bottom:1px solid #e5e5e5">
       <td style="padding:12px 10px;vertical-align:top">
-        <span class="mono" style="font-size:11px;font-weight:700;background:var(--paper-2);padding:2px 6px;border:1px solid #ccc;display:inline-block">${escapeHtml(n.tag||"\u09B8\u09BE\u09A7\u09BE\u09B0\u09A3")}</span>
-        <div class="mono" style="font-size:11px;color:#777;margin-top:4px">${n.mins||6} \u09AE\u09BF\u09A8\u09BF\u099F \xB7 ${escapeHtml(n.date||"")}</div>
+        <span class="mono" style="font-size:11px;font-weight:700;background:var(--paper-2);padding:2px 6px;border:1px solid #ccc;display:inline-block">${escapeHtml(t.tag||"\u09B8\u09BE\u09A7\u09BE\u09B0\u09A3")}</span>
+        <div class="mono" style="font-size:11px;color:#777;margin-top:4px">${t.mins||6} \u09AE\u09BF\u09A8\u09BF\u099F \xB7 ${escapeHtml(t.date||"")}</div>
       </td>
       <td style="padding:12px 10px;vertical-align:top">
-        <div style="font-weight:700;font-size:14px;color:var(--ink)">${escapeHtml(n.title||"")}</div>
-        <div class="mono" style="font-size:11.5px;color:#008080;margin:2px 0">/blog/${escapeHtml(n.slug)}/</div>
-        <div style="font-size:12px;color:#666;line-height:1.4">${escapeHtml(n.desc||"")}</div>
+        <div style="font-weight:700;font-size:14px;color:var(--ink)">${escapeHtml(t.title||"")}</div>
+        <div class="mono" style="font-size:11.5px;color:#008080;margin:2px 0">/blog/${escapeHtml(t.slug)}/</div>
+        <div style="font-size:12px;color:#666;line-height:1.4">${escapeHtml(t.desc||"")}</div>
       </td>
       <td style="padding:12px 10px;vertical-align:top;text-align:right;white-space:nowrap">
-        <button type="button" class="btn btn--outline btn--sm" onclick="editBlogPost('${escapeHtml(n.slug)}')">\u098F\u09A1\u09BF\u099F \u270E</button>
-        <a href="/blog/${escapeHtml(n.slug)}/" target="_blank" class="btn btn--outline btn--sm" style="margin-left:4px" title="\u09A8\u09A4\u09C1\u09A8 \u099F\u09CD\u09AF\u09BE\u09AC\u09C7 \u09A6\u09C7\u0996\u09C1\u09A8">\u09A6\u09C7\u0996\u09C1\u09A8 \u2197</a>
+        <button type="button" class="btn btn--outline btn--sm" onclick="editBlogPost('${escapeHtml(t.slug)}')">\u098F\u09A1\u09BF\u099F \u270E</button>
+        <a href="/blog/${escapeHtml(t.slug)}/" target="_blank" class="btn btn--outline btn--sm" style="margin-left:4px" title="\u09A8\u09A4\u09C1\u09A8 \u099F\u09CD\u09AF\u09BE\u09AC\u09C7 \u09A6\u09C7\u0996\u09C1\u09A8">\u09A6\u09C7\u0996\u09C1\u09A8 \u2197</a>
       </td>
     </tr>
-  `).join("")}}function escapeHtml(e){return e?String(e).replace(/[&<>"']/g,o=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[o]):""}function openNewPostModal(){document.getElementById("postIsNew").value="1",document.getElementById("blogEditorHeading").textContent="\u09A8\u09A4\u09C1\u09A8 \u09AC\u09CD\u09B2\u0997 \u09B2\u09BF\u0996\u09C1\u09A8",document.getElementById("postSlug").value="",document.getElementById("postSlug").readOnly=!1,document.getElementById("postTag").value="\u098F\u09B8\u098F\u09B8\u09B8\u09BF \u09E8\u09E6\u09E8\u09ED",document.getElementById("postMins").value="\u09EC",document.getElementById("postDate").value=new Date().toISOString().slice(0,10),document.getElementById("postTitle").value="",document.getElementById("postH1").value="",document.getElementById("postDesc").value="",document.getElementById("postKeyword").value="",document.getElementById("postBody").value="",document.getElementById("faqQ1").value="",document.getElementById("faqA1").value="",document.getElementById("faqQ2").value="",document.getElementById("faqA2").value="",document.getElementById("faqQ3").value="",document.getElementById("faqA3").value="";const e=document.getElementById("blogEditorModal");e.style.display="block",e.scrollIntoView({behavior:"smooth",block:"start"})}function editBlogPost(e){const n=(currentData?.posts||[]).find(l=>l.slug===e);if(!n){showToast("\u09AC\u09CD\u09B2\u0997\u099F\u09BF \u0996\u09C1\u0981\u099C\u09C7 \u09AA\u09BE\u0993\u09AF\u09BC\u09BE \u09AF\u09BE\u09AF\u09BC\u09A8\u09BF!",!0);return}document.getElementById("postIsNew").value="0",document.getElementById("blogEditorHeading").textContent="\u09AC\u09CD\u09B2\u0997 \u09B8\u09AE\u09CD\u09AA\u09BE\u09A6\u09A8\u09BE: "+(n.title||n.slug),document.getElementById("postSlug").value=n.slug,document.getElementById("postSlug").readOnly=!0,document.getElementById("postTag").value=n.tag||"",document.getElementById("postMins").value=n.mins||6,document.getElementById("postDate").value=n.date||new Date().toISOString().slice(0,10),document.getElementById("postTitle").value=n.title||"",document.getElementById("postH1").value=n.h1||n.title||"",document.getElementById("postDesc").value=n.desc||"",document.getElementById("postKeyword").value=n.keyword||"",document.getElementById("postBody").value=n.body||"";const t=Array.isArray(n.faq)?n.faq:[];document.getElementById("faqQ1").value=t[0]?.q||"",document.getElementById("faqA1").value=t[0]?.a||"",document.getElementById("faqQ2").value=t[1]?.q||"",document.getElementById("faqA2").value=t[1]?.a||"",document.getElementById("faqQ3").value=t[2]?.q||"",document.getElementById("faqA3").value=t[2]?.a||"";const a=document.getElementById("blogEditorModal");a.style.display="block",a.scrollIntoView({behavior:"smooth",block:"start"})}function closeBlogEditor(){document.getElementById("blogEditorModal").style.display="none"}document.getElementById("blogPostForm").addEventListener("submit",async function(e){e.preventDefault();const o=getToken();if(!o){showToast("\u09AA\u09BE\u09B8\u0993\u09AF\u09BC\u09BE\u09B0\u09CD\u09A1 \u09AA\u09CD\u09B0\u09AF\u09BC\u09CB\u099C\u09A8!",!0);return}const n=[],t=document.getElementById("faqQ1").value.trim(),a=document.getElementById("faqA1").value.trim();t&&a&&n.push({q:t,a});const l=document.getElementById("faqQ2").value.trim(),i=document.getElementById("faqA2").value.trim();l&&i&&n.push({q:l,a:i});const c=document.getElementById("faqQ3").value.trim(),d=document.getElementById("faqA3").value.trim();c&&d&&n.push({q:c,a:d});const u={slug:document.getElementById("postSlug").value.trim().toLowerCase(),tag:document.getElementById("postTag").value.trim(),mins:Number(document.getElementById("postMins").value)||6,date:document.getElementById("postDate").value.trim()||new Date().toISOString().slice(0,10),title:document.getElementById("postTitle").value.trim(),h1:document.getElementById("postH1").value.trim(),desc:document.getElementById("postDesc").value.trim(),keyword:document.getElementById("postKeyword").value.trim(),body:document.getElementById("postBody").value.trim(),faq:n};try{const m=await fetch("/api/content",{method:"POST",headers:{"Content-Type":"application/json",Authorization:"Bearer "+o},body:JSON.stringify({blog_post:u})}),s=await m.json();m.ok&&s.ok?(showToast("\u2713 \u09AC\u09CD\u09B2\u0997 \u09AA\u09CB\u09B8\u09CD\u099F \u09B8\u09AB\u09B2\u09AD\u09BE\u09AC\u09C7 \u09B8\u0982\u09B0\u0995\u09CD\u09B7\u09BF\u09A4 \u0993 \u0986\u09AA\u09A1\u09C7\u099F \u09B9\u09AF\u09BC\u09C7\u099B\u09C7!"),closeBlogEditor(),await loadContent()):showToast("\u09AC\u09CD\u09B2\u0997 \u09B8\u0982\u09B0\u0995\u09CD\u09B7\u09A3\u09C7 \u09A4\u09CD\u09B0\u09C1\u099F\u09BF: "+(s.error||"\u0985\u099C\u09BE\u09A8\u09BE \u09B8\u09AE\u09B8\u09CD\u09AF\u09BE"),!0)}catch(m){showToast("\u09B8\u09BE\u09B0\u09CD\u09AD\u09BE\u09B0 \u09AF\u09CB\u0997\u09BE\u09AF\u09CB\u0997\u09C7 \u09A4\u09CD\u09B0\u09C1\u099F\u09BF: "+m.message,!0)}}),document.getElementById("loginForm").addEventListener("submit",async function(e){e.preventDefault();const o=document.getElementById("adminPassword").value.trim();if(o)try{if((await fetch("/api/content",{method:"POST",headers:{"Content-Type":"application/json",Authorization:"Bearer "+o},body:JSON.stringify({})})).status===401){showToast("\u09AD\u09C1\u09B2 \u09AA\u09BE\u09B8\u0993\u09AF\u09BC\u09BE\u09B0\u09CD\u09A1! \u09B8\u09A0\u09BF\u0995 \u09AA\u09BE\u09B8\u0993\u09AF\u09BC\u09BE\u09B0\u09CD\u09A1 \u09A6\u09BF\u09A8\u0964",!0);return}sessionStorage.setItem("ma_admin_token",o),initDashboard(),showToast("\u2713 \u09B8\u09AB\u09B2\u09AD\u09BE\u09AC\u09C7 \u0985\u09CD\u09AF\u09BE\u09A1\u09AE\u09BF\u09A8 \u09B9\u09BF\u09B8\u09C7\u09AC\u09C7 \u09B2\u0997\u0987\u09A8 \u0995\u09B0\u09C7\u099B\u09C7\u09A8!")}catch(n){showToast("\u0995\u09BE\u09A8\u09C7\u0995\u09B6\u09A8 \u098F\u09B0\u09B0: "+n.message,!0)}});function initDashboard(){document.getElementById("loginSection").style.display="none",document.getElementById("dashboardSection").style.display="block",document.getElementById("logoutBtn").style.display="inline-flex",loadContent()}function logout(){sessionStorage.removeItem("ma_admin_token"),document.getElementById("loginSection").style.display="block",document.getElementById("dashboardSection").style.display="none",document.getElementById("logoutBtn").style.display="none",document.getElementById("adminPassword").value=""}checkHealth(),getToken()&&initDashboard();
+  `).join("")}}function escapeHtml(n){return n?String(n).replace(/[&<>"']/g,o=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[o]):""}function openNewPostModal(){document.getElementById("postIsNew").value="1",document.getElementById("blogEditorHeading").textContent="\u09A8\u09A4\u09C1\u09A8 \u09AC\u09CD\u09B2\u0997 \u09B2\u09BF\u0996\u09C1\u09A8",document.getElementById("postSlug").value="",document.getElementById("postSlug").readOnly=!1,document.getElementById("postTag").value="\u098F\u09B8\u098F\u09B8\u09B8\u09BF \u09E8\u09E6\u09E8\u09ED",document.getElementById("postMins").value="\u09EC",document.getElementById("postDate").value=new Date().toISOString().slice(0,10),document.getElementById("postTitle").value="",document.getElementById("postH1").value="",document.getElementById("postDesc").value="",document.getElementById("postKeyword").value="",document.getElementById("postBody").value="",document.getElementById("faqQ1").value="",document.getElementById("faqA1").value="",document.getElementById("faqQ2").value="",document.getElementById("faqA2").value="",document.getElementById("faqQ3").value="",document.getElementById("faqA3").value="";const n=document.getElementById("blogEditorModal");n.style.display="block",n.scrollIntoView({behavior:"smooth",block:"start"})}function editBlogPost(n){const t=(currentData?.posts||[]).find(l=>l.slug===n);if(!t){showToast("\u09AC\u09CD\u09B2\u0997\u099F\u09BF \u0996\u09C1\u0981\u099C\u09C7 \u09AA\u09BE\u0993\u09AF\u09BC\u09BE \u09AF\u09BE\u09AF\u09BC\u09A8\u09BF!",!0);return}document.getElementById("postIsNew").value="0",document.getElementById("blogEditorHeading").textContent="\u09AC\u09CD\u09B2\u0997 \u09B8\u09AE\u09CD\u09AA\u09BE\u09A6\u09A8\u09BE: "+(t.title||t.slug),document.getElementById("postSlug").value=t.slug,document.getElementById("postSlug").readOnly=!0,document.getElementById("postTag").value=t.tag||"",document.getElementById("postMins").value=t.mins||6,document.getElementById("postDate").value=t.date||new Date().toISOString().slice(0,10),document.getElementById("postTitle").value=t.title||"",document.getElementById("postH1").value=t.h1||t.title||"",document.getElementById("postDesc").value=t.desc||"",document.getElementById("postKeyword").value=t.keyword||"",document.getElementById("postBody").value=t.body||"";const e=Array.isArray(t.faq)?t.faq:[];document.getElementById("faqQ1").value=e[0]?.q||"",document.getElementById("faqA1").value=e[0]?.a||"",document.getElementById("faqQ2").value=e[1]?.q||"",document.getElementById("faqA2").value=e[1]?.a||"",document.getElementById("faqQ3").value=e[2]?.q||"",document.getElementById("faqA3").value=e[2]?.a||"";const a=document.getElementById("blogEditorModal");a.style.display="block",a.scrollIntoView({behavior:"smooth",block:"start"})}function closeBlogEditor(){document.getElementById("blogEditorModal").style.display="none"}document.getElementById("blogPostForm").addEventListener("submit",async function(n){n.preventDefault();const o=getToken();if(!o){showToast("\u09AA\u09BE\u09B8\u0993\u09AF\u09BC\u09BE\u09B0\u09CD\u09A1 \u09AA\u09CD\u09B0\u09AF\u09BC\u09CB\u099C\u09A8!",!0);return}const t=[],e=document.getElementById("faqQ1").value.trim(),a=document.getElementById("faqA1").value.trim();e&&a&&t.push({q:e,a});const l=document.getElementById("faqQ2").value.trim(),d=document.getElementById("faqA2").value.trim();l&&d&&t.push({q:l,a:d});const s=document.getElementById("faqQ3").value.trim(),r=document.getElementById("faqA3").value.trim();s&&r&&t.push({q:s,a:r});const m={slug:document.getElementById("postSlug").value.trim().toLowerCase(),tag:document.getElementById("postTag").value.trim(),mins:Number(document.getElementById("postMins").value)||6,date:document.getElementById("postDate").value.trim()||new Date().toISOString().slice(0,10),title:document.getElementById("postTitle").value.trim(),h1:document.getElementById("postH1").value.trim(),desc:document.getElementById("postDesc").value.trim(),keyword:document.getElementById("postKeyword").value.trim(),body:document.getElementById("postBody").value.trim(),faq:t};try{const c=await fetch("/api/content",{method:"POST",headers:{"Content-Type":"application/json",Authorization:"Bearer "+o},body:JSON.stringify({blog_post:m})}),i=await c.json();c.ok&&i.ok?(showToast("\u2713 \u09AC\u09CD\u09B2\u0997 \u09AA\u09CB\u09B8\u09CD\u099F \u09B8\u09AB\u09B2\u09AD\u09BE\u09AC\u09C7 \u09B8\u0982\u09B0\u0995\u09CD\u09B7\u09BF\u09A4 \u0993 \u0986\u09AA\u09A1\u09C7\u099F \u09B9\u09AF\u09BC\u09C7\u099B\u09C7!"),closeBlogEditor(),await loadContent()):showToast("\u09AC\u09CD\u09B2\u0997 \u09B8\u0982\u09B0\u0995\u09CD\u09B7\u09A3\u09C7 \u09A4\u09CD\u09B0\u09C1\u099F\u09BF: "+(i.error||"\u0985\u099C\u09BE\u09A8\u09BE \u09B8\u09AE\u09B8\u09CD\u09AF\u09BE"),!0)}catch(c){showToast("\u09B8\u09BE\u09B0\u09CD\u09AD\u09BE\u09B0 \u09AF\u09CB\u0997\u09BE\u09AF\u09CB\u0997\u09C7 \u09A4\u09CD\u09B0\u09C1\u099F\u09BF: "+c.message,!0)}}),document.getElementById("loginForm").addEventListener("submit",async function(n){n.preventDefault();const o=document.getElementById("adminPassword").value.trim();if(o)try{const t=await fetch("/api/content",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({action:"login",password:o})}),e=await t.json().catch(()=>({}));t.ok&&e.ok&&e.token?(sessionStorage.setItem("ma_admin_token",e.token),initDashboard(),showToast("\u2713 \u09B8\u09AB\u09B2\u09AD\u09BE\u09AC\u09C7 \u0985\u09CD\u09AF\u09BE\u09A1\u09AE\u09BF\u09A8 \u09B9\u09BF\u09B8\u09C7\u09AC\u09C7 \u09B2\u0997\u0987\u09A8 \u0995\u09B0\u09C7\u099B\u09C7\u09A8!")):showToast(e.error||"\u09AD\u09C1\u09B2 \u09AA\u09BE\u09B8\u0993\u09AF\u09BC\u09BE\u09B0\u09CD\u09A1! \u09B8\u09A0\u09BF\u0995 \u09AA\u09BE\u09B8\u0993\u09AF\u09BC\u09BE\u09B0\u09CD\u09A1 \u09A6\u09BF\u09A8\u0964",!0)}catch(t){showToast("\u0995\u09BE\u09A8\u09C7\u0995\u09B6\u09A8 \u098F\u09B0\u09B0: "+t.message,!0)}}),document.getElementById("changePasswordForm").addEventListener("submit",async function(n){n.preventDefault();const o=getToken();if(!o){showToast("\u09B2\u0997\u0987\u09A8 \u09B8\u09C7\u09B6\u09A8 \u09A8\u09C7\u0987! \u0985\u09A8\u09C1\u0997\u09CD\u09B0\u09B9 \u0995\u09B0\u09C7 \u0986\u09AC\u09BE\u09B0 \u09B2\u0997\u0987\u09A8 \u0995\u09B0\u09C1\u09A8\u0964",!0);return}const t=document.getElementById("currentPassword").value,e=document.getElementById("newPassword").value,a=document.getElementById("confirmNewPassword").value;if(!t||!e){showToast("\u09B8\u09AC\u0997\u09C1\u09B2\u09CB \u0998\u09B0 \u09AA\u09C2\u09B0\u09A3 \u0995\u09B0\u09C1\u09A8\u0964",!0);return}if(e.length<8){showToast("\u09A8\u09A4\u09C1\u09A8 \u09AA\u09BE\u09B8\u0993\u09AF\u09BC\u09BE\u09B0\u09CD\u09A1 \u0995\u09AE\u09AA\u0995\u09CD\u09B7\u09C7 \u09EE \u0985\u0995\u09CD\u09B7\u09B0\u09C7\u09B0 \u09B9\u09A4\u09C7 \u09B9\u09AC\u09C7\u0964",!0);return}if(e!==a){showToast("\u09A8\u09A4\u09C1\u09A8 \u09AA\u09BE\u09B8\u0993\u09AF\u09BC\u09BE\u09B0\u09CD\u09A1 \u098F\u09AC\u0982 \u09A8\u09BF\u09B6\u09CD\u099A\u09BF\u09A4\u0995\u09B0\u09A3 \u09AA\u09BE\u09B8\u0993\u09AF\u09BC\u09BE\u09B0\u09CD\u09A1 \u09AE\u09BF\u09B2\u099B\u09C7 \u09A8\u09BE!",!0);return}try{const l=await fetch("/api/content",{method:"POST",headers:{"Content-Type":"application/json",Authorization:"Bearer "+o},body:JSON.stringify({change_password:{current_password:t,new_password:e}})}),d=await l.json().catch(()=>({}));l.ok&&d.ok?(d.token&&sessionStorage.setItem("ma_admin_token",d.token),document.getElementById("currentPassword").value="",document.getElementById("newPassword").value="",document.getElementById("confirmNewPassword").value="",showToast("\u2713 "+(d.message||"\u09AA\u09BE\u09B8\u0993\u09AF\u09BC\u09BE\u09B0\u09CD\u09A1 \u09B8\u09AB\u09B2\u09AD\u09BE\u09AC\u09C7 \u09B8\u0982\u09B0\u0995\u09CD\u09B7\u09BF\u09A4 \u09B9\u09AF\u09BC\u09C7\u099B\u09C7!"))):showToast("\u09AA\u09BE\u09B8\u0993\u09AF\u09BC\u09BE\u09B0\u09CD\u09A1 \u09AA\u09B0\u09BF\u09AC\u09B0\u09CD\u09A4\u09A8 \u09AC\u09CD\u09AF\u09B0\u09CD\u09A5: "+(d.error||"\u09AD\u09C1\u09B2 \u09AA\u09BE\u09B8\u0993\u09AF\u09BC\u09BE\u09B0\u09CD\u09A1"),!0)}catch(l){showToast("\u09B8\u09BE\u09B0\u09CD\u09AD\u09BE\u09B0 \u09AF\u09CB\u0997\u09BE\u09AF\u09CB\u0997\u09C7 \u09A4\u09CD\u09B0\u09C1\u099F\u09BF: "+l.message,!0)}});function initDashboard(){document.getElementById("loginSection").style.display="none",document.getElementById("dashboardSection").style.display="block",document.getElementById("logoutBtn").style.display="inline-flex",loadContent()}function logout(){sessionStorage.removeItem("ma_admin_token"),document.getElementById("loginSection").style.display="block",document.getElementById("dashboardSection").style.display="none",document.getElementById("logoutBtn").style.display="none",document.getElementById("adminPassword").value=""}checkHealth(),getToken()&&initDashboard();
 </script>
 
 </body>

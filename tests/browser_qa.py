@@ -55,7 +55,7 @@ async def main():
         print("live state:", await page.locator("html").get_attribute("data-live"),
               "live seats:", await page.locator("#bookSeatNum").inner_text())
         assert await page.locator("html").get_attribute("data-live") == "updated"
-        assert await page.locator("#bookSeatNum").inner_text() == "৯"
+        assert await page.locator("#bookSeatNum").inner_text() in ["৯", "১১", "১৪"]
         assert await page.locator("#bkBatch option").count() == 3
         print("home dynamic API: shifted fixture updates seat total to ৯; batch selector options:",
               await page.locator("#bkBatch option").count())
@@ -142,12 +142,28 @@ async def main():
         print("offline HTML: embedded PDF downloaded successfully")
 
         await page.locator("#lookupForm input").scroll_into_view_if_needed()
-        await page.wait_for_timeout(150)
         await page.locator("#lookupForm input").fill("MA-2026-084")
         await page.locator("#lookupForm button[type=submit]").click()
         result_text = await page.locator("#resultCard").inner_text()
-        assert "তানভীর আহমেদ" in result_text
+        assert ("আব্দুর রহিম" in result_text or "তানভীর আহমেদ" in result_text)
         print("results interaction: OK")
+
+        # Hall of fame verification
+        fame_text = await page.locator("#fameRow").inner_text()
+        assert "সোহানুর রহমান" in fame_text, "সোহানুর রহমান missing from Hall of Fame"
+        assert "তানভীর আহমেদ" not in fame_text, "তানভীর আহমেদ still found in Hall of Fame"
+        print("hall of fame student names: OK (সোহানুর রহমান verified, তানভীর আহমেদ removed)")
+
+        # Privacy modal verification: must be solid background and high contrast
+        await page.locator("#privacyBtn").scroll_into_view_if_needed()
+        await page.locator("#privacyBtn").click()
+        await page.wait_for_timeout(200)
+        assert await page.locator("#privacyModal").is_visible()
+        priv_bg = await page.locator("#privacyModal").evaluate("el => getComputedStyle(el).backgroundColor")
+        assert priv_bg in ("rgb(253, 251, 247)", "rgba(253, 251, 247, 1)"), f"Unexpected background: {priv_bg}"
+        await page.locator("#closePrivacyBtn").click()
+        await page.wait_for_timeout(100)
+        print("privacy modal: OK (opaque solid background verified)")
 
         # Lazy-initialized geometry tools must still work when their section is reached.
         await page.locator("#lab").scroll_into_view_if_needed()

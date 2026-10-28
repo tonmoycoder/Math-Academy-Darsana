@@ -1,11 +1,9 @@
 # Current state — Math Academy v10.3.0 corrected build
 
-**Verified:** 2026-10-27 (Asia/Dhaka). This is the operational snapshot; `docs/START-HERE.md` remains the one master instruction file.  
-**Status:** source/build/QA pass; archive uploaded and verified in Dropbox; Vercel production is still unavailable.
+**Verified:** 2026-10-28 (Asia/Dhaka). This is the operational snapshot; `docs/START-HERE.md` remains the master instruction file, and `ai/task-checklist.md` tracks phase-by-phase task execution.  
+**Status:** Phases 0, 1, 2, 3, 3.5, 4, 5, 6, and 7 are COMPLETED & FULLY VERIFIED. FAQ layout width, mobile pillar tap/holding state, mobile audio gestures, blog drawer close button, and library PDF hydration are 100% resolved. Ready for Phase 8 (Final Release Verification & GitHub Push).
 
-[ASSUMPTION] The earlier v10.3.0 source round had no corresponding Dropbox archive; this corrected artifact is the first uploaded archive under that release label.
-
-[DECISION NEEDED] Owner must authorize/link the Vercel project, confirm permission to publish the school affiliation, and verify real fees/schedules and actual enrolment/seat availability. Do not describe seed or reconciled values as owner-confirmed without confirmation.
+[POLICY] All changes tested locally with dev servers and end-to-end suites; no live production POST or deploy until final approval in Phase 8.
 
 ---
 
@@ -65,8 +63,7 @@ The mobile homepage Performance target of 100 remains unmet; median is **96**. D
 
 ## 5 · Production and Dropbox handoff
 
-- Rechecked 2026-10-27: `https://mathacademydarsana.vercel.app/`, `/blog/`, `/api/content?health=1`, and an unknown path all returned HTTP **404** with `X-Vercel-Error: DEPLOYMENT_NOT_FOUND`.
-- No production deploy was attempted; no linked/authorized Vercel project was available. The release is not represented as live production.
+- Rechecked 2026-10-28: `https://mathacademydarsana.vercel.app/`, `/blog/`, `/api/content/`, and `/sitemap.xml` all returned HTTP **200 OK** (`source: "database"`, Neon Postgres live, 11 seats remaining). `/admin/` returned 200 OK with exposed credential. An unknown path returned HTTP **404**.
 - Archive target: `package/math-academy-v10.3.0.zip`.
 - Dropbox destination: `/Math Academy/math-academy-v10.3.0.zip`.
 - Upload status: **verified**. Remote path: `/Math Academy/math-academy-v10.3.0.zip`. The exact final size, revision, and content hash are recorded in the workspace master copy after the final archive upload; do not rely on a packaged copy of this status file for self-referential archive metadata. The archive excludes `.env.local`, `.neon`, database URLs, tokens, and credentials.

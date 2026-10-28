@@ -46,6 +46,15 @@
   function clamp(v,a,b){ return Math.max(a, Math.min(b, v)); }
   function degrees(a){ return (a*180/Math.PI); }
 
+  var mockResultsData = {
+    'MA-2026-084': {roll:'MA-2026-084', name:'তানভীর আহমেদ', batch:'SSC ২০২৭ ব্যাচ', test:'মক টেস্ট-০৪', marks:'৯৬ / ১০০', rank:'১ম', pct:'৯৯.২%', bars:[94,88,96],
+      note:'বীজগণিত ও ত্রিকোণমিতিতে দারুণ দক্ষতা। জ্যামিতির উপপাদ্য প্রমাণে চিত্র আরও নিখুঁত করার পরামর্শ।'},
+    'MA-2026-021': {roll:'MA-2026-021', name:'সাদিয়া আফরিন', batch:'প্রগ্রেস ব্যাচ (ক্লাস ৮–৯)', test:'মক টেস্ট-০৩', marks:'৮৮ / ১০০', rank:'৩য়', pct:'৯৪.৫%', bars:[90,82,92],
+      note:'ধারাবাহিক উন্নতি সন্তোষজনক। সমীকরণ সমাধান ও লেখচিত্রে মনোযোগ দিলে নম্বর আরও বাড়বে।'},
+    'MA-2026-112': {roll:'MA-2026-112', name:'রাকিব হাসান', batch:'ভিত্তি ব্যাচ (ক্লাস ৬–৭)', test:'মাসিক মূল্যায়ন-০২', marks:'৮২ / ১০০', rank:'৫ম', pct:'৮৮.০%', bars:[80,78,88],
+      note:'পাটিগণিত ও মৌলিক ধারণায় ভালো দখল। নিয়মিত অনুশীলনে গতি বাড়ানো প্রয়োজন।'}
+  };
+
 
   /* ============================================================
      SFX — synthesised UI audio. Web Audio only: no files, no network,
@@ -65,9 +74,9 @@
       try{
         ctx = new Ctx();
         var comp = ctx.createDynamicsCompressor();
-        comp.threshold.value = -24; comp.knee.value = 20; comp.ratio.value = 8;
+        comp.threshold.value = -16; comp.knee.value = 16; comp.ratio.value = 6;
         comp.attack.value = .003; comp.release.value = .25;
-        out = ctx.createGain(); out.gain.value = .32;
+        out = ctx.createGain(); out.gain.value = .80;
         out.connect(comp); comp.connect(ctx.destination);
         /* Safari / iOS only honours audio inside a gesture — and only if a buffer
            has actually been played there. This 1-frame silent buffer is the
@@ -120,44 +129,45 @@
     }
 
     var VOICE = {
-      /* micro-interactions — deliberately tiny (peak gain ≈ .02–.05) */
-      hover:  function(){ if(gap('hover', 95)) return; tone(1480, .05, {type:'sine', gain:.020, to:1770}); },
+      /* micro-interactions — clear & audible on mobile without harshness */
+      hover:  function(){ if(gap('hover', 95)) return; tone(1480, .05, {type:'sine', gain:.040, to:1770}); },
       slider: function(pos){
                 if(gap('slider', 34)) return;
                 var f = 420 + Math.max(0, Math.min(1, pos || 0)) * 760;
-                tone(f, .045, {type:'triangle', gain:.038, to:f * 1.05});
-                noise(.02, {freq: f * 2.4, gain:.014, q:3});
+                tone(f, .045, {type:'triangle', gain:.065, to:f * 1.05});
+                noise(.02, {freq: f * 2.4, gain:.025, q:3});
               },
-      press:  function(){ tone(150, .10, {type:'triangle', gain:.045, to:72}); noise(.05, {freq:2400, gain:.045, q:2.2}); },
-      tab:    function(){ tone(660, .06, {type:'triangle', gain:.035}); tone(990, .08, {type:'triangle', gain:.03, delay:.05}); },
-      tick:   function(){ if(gap('tick', 85)) return; tone(1180, .035, {type:'square', gain:.010}); },
+      press:  function(){ tone(150, .10, {type:'triangle', gain:.085, to:72}); noise(.05, {freq:2400, gain:.080, q:2.2}); },
+      tab:    function(){ tone(660, .06, {type:'triangle', gain:.065}); tone(990, .08, {type:'triangle', gain:.055, delay:.05}); },
+      tick:   function(){ if(gap('tick', 85)) return; tone(1180, .035, {type:'square', gain:.025}); },
+      /* page scroll — kept low & subtle per user request */
       scroll: function(){ if(gap('scroll', 190)) return;
-                noise(.07, {freq: 1250 + Math.random()*750, filter:'bandpass', gain:.042, q:1.9});
-                tone(210 + Math.random()*90, .035, {type:'sine', gain:.016}); },
-      /* preloader choreography */
-      sweep:  function(){ noise(.28, {freq:4200, to:400, gain:.070, q:.9}); },
-      shutter:function(){ noise(.40, {freq:1600, to:150, gain:.080, q:.7});
-                          noise(.12, {freq:300, filter:'lowpass', gain:.045}); },
+                noise(.07, {freq: 1250 + Math.random()*750, filter:'bandpass', gain:.025, q:1.9});
+                tone(210 + Math.random()*90, .035, {type:'sine', gain:.012}); },
+      /* preloader choreography — substantially amplified & punchy */
+      sweep:  function(){ noise(.28, {freq:4200, to:400, gain:.18, q:.9}); },
+      shutter:function(){ noise(.40, {freq:1600, to:150, gain:.20, q:.7});
+                          noise(.12, {freq:300, filter:'lowpass', gain:.10}); },
       lock:   function(){ [523.25, 659.25, 783.99, 1046.5].forEach(function(f, i){
-                          tone(f, .42, {type:'triangle', gain:.050, delay:i*.075});
-                          tone(f*2, .28, {type:'sine', gain:.012, delay:i*.075}); }); },
-      /* ---- the intro "track" ---- */
-      kick:   function(){ tone(118, .16, {type:'sine', gain:.115, to:44, attack:.002});
-                          noise(.03, {freq:900, filter:'lowpass', gain:.035}); },
-      hat:    function(){ noise(.035, {freq:7800, filter:'highpass', gain:.030, q:.7}); },
-      arp:    function(f){ tone(f, .19, {type:'triangle', gain:.055});
-                           tone(f*2, .12, {type:'sine', gain:.016}); },
-      riser:  function(){ noise(1.05, {freq:320, to:6200, filter:'bandpass', gain:.070, q:.8}); },
-      impact: function(){ noise(.34, {freq:2400, to:90, filter:'lowpass', gain:.130, q:.6});
-                          tone(74, .45, {type:'sine', gain:.110, to:38, attack:.002}); },
-      chord:  function(f){ tone(f, .85, {type:'triangle', gain:.055});
-                           tone(f*1.5, .7, {type:'sine', gain:.022}); },
-      whoosh: function(){ noise(.5, {freq:5600, to:500, filter:'bandpass', gain:.055, q:.7}); },
+                          tone(f, .42, {type:'triangle', gain:.14, delay:i*.075});
+                          tone(f*2, .28, {type:'sine', gain:.045, delay:i*.075}); }); },
+      /* ---- the intro "track" — significantly boosted for mobile clarity ---- */
+      kick:   function(){ tone(118, .16, {type:'sine', gain:.28, to:44, attack:.002});
+                          noise(.03, {freq:900, filter:'lowpass', gain:.09}); },
+      hat:    function(){ noise(.035, {freq:7800, filter:'highpass', gain:.085, q:.7}); },
+      arp:    function(f){ tone(f, .19, {type:'triangle', gain:.15});
+                           tone(f*2, .12, {type:'sine', gain:.05}); },
+      riser:  function(){ noise(1.05, {freq:320, to:6200, filter:'bandpass', gain:.18, q:.8}); },
+      impact: function(){ noise(.34, {freq:2400, to:90, filter:'lowpass', gain:.32, q:.6});
+                          tone(74, .45, {type:'sine', gain:.28, to:38, attack:.002}); },
+      chord:  function(f){ tone(f, .85, {type:'triangle', gain:.16});
+                           tone(f*1.5, .7, {type:'sine', gain:.07}); },
+      whoosh: function(){ noise(.5, {freq:5600, to:500, filter:'bandpass', gain:.15, q:.7}); },
       /* feedback */
-      toast:  function(){ tone(784, .16, {type:'sine', gain:.045}); tone(1046, .22, {type:'sine', gain:.04, delay:.10}); },
-      success:function(){ [659.25, 880, 1174.7].forEach(function(f, i){ tone(f, .40, {type:'triangle', gain:.045, delay:i*.09}); }); },
-      error:  function(){ tone(240, .14, {type:'square', gain:.030, to:176}); },
-      open:   function(){ noise(.26, {freq:600, to:2400, gain:.045, q:1.4}); }
+      toast:  function(){ tone(784, .16, {type:'sine', gain:.09}); tone(1046, .22, {type:'sine', gain:.08, delay:.10}); },
+      success:function(){ [659.25, 880, 1174.7].forEach(function(f, i){ tone(f, .40, {type:'triangle', gain:.10, delay:i*.09}); }); },
+      error:  function(){ tone(240, .14, {type:'square', gain:.075, to:176}); },
+      open:   function(){ noise(.26, {freq:600, to:2400, gain:.10, q:1.4}); }
     };
 
     /* CUE(name, delaySeconds, arg) — used by the intro track scheduler */
@@ -170,13 +180,13 @@
     }
 
     return {
-      play: function(name){
+      play: function(name, arg){
         if(!on) return;
         var v = VOICE[name]; if(!v) return;
         if(!boot()) return;
         if(ctx.state === 'suspended'){
-          reviving = ctx.resume().then(function(){ try{ v(); }catch(e){} }, function(){});
-        } else { try{ v(); }catch(e){} }
+          reviving = ctx.resume().then(function(){ try{ v(arg); }catch(e){} }, function(){});
+        } else { try{ v(arg); }catch(e){} }
       },
       arm: function(){ if(!on) return; boot(); if(ctx && ctx.state === 'suspended') ctx.resume(); },
       isOn: function(){ return on; },
@@ -480,6 +490,15 @@
     function esc(s){
       return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
     }
+    function getDirectDownloadUrl(url){
+      if(!url) return '';
+      url = String(url).trim();
+      var match = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/) || url.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+      if(match && match[1]){
+        return 'https://drive.google.com/uc?export=download&id=' + match[1];
+      }
+      return url;
+    }
 
     function apply(d){
       if(!d || !Array.isArray(d.batches) || typeof d.seatsLeft !== 'number') return false;
@@ -642,6 +661,73 @@
           document.querySelectorAll('a[href*="wa.me"]').forEach(function(a){
             a.href = a.href.replace(/wa\.me\/\d+/, 'wa.me/' + c.whatsapp);
           });
+        }
+      }
+
+      // 8. Dynamic Download Library & PDF resources
+      if(d.settings && d.settings.library){
+        var lib = d.settings.library;
+        var libKicker = document.getElementById('libKicker');
+        if(libKicker && lib.section_kicker) setText(libKicker, lib.section_kicker);
+        var libTitle = document.getElementById('libTitle');
+        if(libTitle && lib.section_title) libTitle.innerHTML = esc(lib.section_title);
+        var libLead = document.getElementById('libLead');
+        if(libLead && lib.section_lead) setText(libLead, lib.section_lead);
+
+        var vaultGrid = document.getElementById('vaultGrid');
+        if(vaultGrid && Array.isArray(lib.items) && lib.items.length > 0){
+          var cardsHtml = lib.items.map(function(item){
+            var dlUrl = item.drive_url ? getDirectDownloadUrl(item.drive_url) : (item.file_url || '/assets/' + (item.local_file || 'english-dialogue-format.pdf'));
+            var tagClass = item.tag_color === 'red' ? 'sheet__tag sheet__tag--red' : 'sheet__tag';
+            var fname = item.filename || (item.title ? item.title.replace(/\s+/g, '-') + '.pdf' : 'download.pdf');
+            return '<article class="sheet rv in" data-id="' + esc(item.id || '') + '">' +
+              '<span class="' + tagClass + '">' + esc(item.tag || 'রিসোর্স') + '</span>' +
+              '<div>' +
+                '<div class="sheet__code"><svg class="ico" style="width:13px;height:13px"><use href="#i-dl"/></svg> ' + esc(item.code || 'PDF') + '</div>' +
+                '<h3>' + esc(item.title || '') + '</h3>' +
+                '<p>' + esc(item.desc || '') + '</p>' +
+              '</div>' +
+              '<div>' +
+                '<div class="sheet__foot"><span>' + esc(item.meta_info || 'PDF ফাইল') + '</span><b>DIRECT DOWNLOAD</b></div>' +
+                '<a class="btn btn--sm btn--block" href="' + esc(dlUrl) + '" target="_blank" rel="noopener noreferrer" download="' + esc(fname) + '" aria-label="' + esc(item.title || '') + ' সরাসরি ডাউনলোড করুন">PDF ডাউনলোড <svg class="ico"><use href="#i-dl"/></svg></a>' +
+              '</div>' +
+            '</article>';
+          }).join('');
+          vaultGrid.innerHTML = cardsHtml;
+        }
+      }
+
+      // 9. Dynamic Mock Test Results
+      if(d.settings && d.settings.mock_results && typeof d.settings.mock_results === 'object'){
+        var liveResults = d.settings.mock_results;
+        var rKeys = Object.keys(liveResults);
+        if(rKeys.length > 0){
+          for(var k in mockResultsData){ delete mockResultsData[k]; }
+          for(var i = 0; i < rKeys.length; i++){
+            var rKey = rKeys[i].toUpperCase();
+            var item = liveResults[rKeys[i]];
+            if(item && typeof item === 'object'){
+              item.roll = rKey;
+              mockResultsData[rKey] = item;
+            }
+          }
+          if(typeof window.__updateMockResultsUI === 'function'){
+            window.__updateMockResultsUI();
+          }
+        }
+      }
+
+      // 10. Dynamic Hall of Fame Marquee
+      if(d.settings && Array.isArray(d.settings.hall_of_fame) && d.settings.hall_of_fame.length > 0){
+        var fameRow = document.getElementById('fameRow');
+        if(fameRow){
+          var fameHtml = d.settings.hall_of_fame.map(function(it){
+            var col = (it.badge_color || '').trim().toLowerCase();
+            var colCls = (col === 'red' || col === 'brass') ? ' ' + col : '';
+            var bText = esc(it.badge_text || 'A+\nSSC').replace(/\n/g, '<br>');
+            return '<div class="fame-card"><div class="inst' + colCls + '">' + bText + '</div><div><b>' + esc(it.name || '') + '</b><small>' + esc(it.meta || '') + '</small></div></div>';
+          }).join('');
+          fameRow.innerHTML = fameHtml + fameHtml;
         }
       }
 
@@ -1462,45 +1548,81 @@
      ============================================================ */
   initWhenVisible($('#results'), function(){
   (function(){
-    var data = {
-      'MA-2026-084': {name:'তানভীর আহমেদ', batch:'SSC ২০২৭ ব্যাচ', test:'মক টেস্ট-০৪', marks:'৯৬ / ১০০', rank:'১ম', pct:'৯৯.২%', bars:[94,88,96],
-        note:'বীজগণিত ও ত্রিকোণমিতিতে দারুণ দক্ষতা। জ্যামিতির উপপাদ্য প্রমাণে চিত্র আরও নিখুঁত করার পরামর্শ।'},
-      'MA-2026-021': {name:'সাদিয়া আফরিন', batch:'প্রগ্রেস ব্যাচ (ক্লাস ৮–৯)', test:'মক টেস্ট-০৩', marks:'৮৮ / ১০০', rank:'৩য়', pct:'৯৪.৫%', bars:[90,82,92],
-        note:'ধারাবাহিক উন্নতি সন্তোষজনক। সমীকরণ সমাধান ও লেখচিত্রে মনোযোগ দিলে নম্বর আরও বাড়বে।'},
-      'MA-2026-112': {name:'রাকিব হাসান', batch:'ভিত্তি ব্যাচ (ক্লাস ৬–৭)', test:'মাসিক মূল্যায়ন-০২', marks:'৮২ / ১০০', rank:'৫ম', pct:'৮৮.০%', bars:[80,78,88],
-        note:'পাটিগণিত ও মৌলিক ধারণায় ভালো দখল। নিয়মিত অনুশীলনে গতি বাড়ানো প্রয়োজন।'}
-    };
     var form = $('#lookupForm'); if(!form) return;
     var input = $('#rollInput'), card = $('#resultCard');
     var resName = $('#resName'), resId = $('#resId'), resBatch = $('#resBatch');
     var resTest = $('#resTest'), resMarks = $('#resMarks'), resRank = $('#resRank'), resPct = $('#resPct'), resNote = $('#resNote');
+    var chipsContainer = $('#mockRollChips');
+
+    function renderChips(){
+      if(!chipsContainer) return;
+      var keys = Object.keys(mockResultsData);
+      if(!keys.length) return;
+      var html = keys.map(function(k){
+        return '<button class="chip chip--mini" type="button" data-roll="' + k + '">' + k + '</button>';
+      }).join(' ');
+      chipsContainer.innerHTML = html;
+      $$('[data-roll]', chipsContainer).forEach(function(b){
+        b.addEventListener('click', function(){
+          input.value = b.getAttribute('data-roll');
+          lookup(input.value);
+        });
+      });
+    }
 
     function fill(rec, code){
-      resId.textContent = code; resName.textContent = rec.name; resBatch.textContent = rec.batch;
-      resTest.textContent = rec.test; resMarks.textContent = rec.marks; resRank.textContent = rec.rank; resPct.textContent = rec.pct;
-      resNote.textContent = rec.note;
-      $$('.rbar .track i', card).forEach(function(bar, i){
-        bar.style.width = '0%';
-        var v = rec.bars[i] || 0;
-        setTimeout(function(){ bar.style.width = v + '%'; }, 120 + i*120);
+      resId.textContent = code;
+      resName.textContent = rec.name || 'শিক্ষার্থী';
+      resBatch.textContent = rec.batch || 'ম্যাথ একাডেমি';
+      resTest.textContent = rec.test || 'মক টেস্ট';
+      resMarks.textContent = rec.marks || '—';
+      resRank.textContent = rec.rank || '—';
+      resPct.textContent = rec.pct || '—';
+      resNote.textContent = rec.note || 'নিয়মিত অনুশীলনে দক্ষতা আরও বৃদ্ধি পাবে।';
+
+      $$('.rbar', card).forEach(function(rbar, i){
+        var bar = rbar.querySelector('.track i');
+        var valEl = rbar.querySelector('b');
+        var v = (rec.bars && rec.bars[i] != null) ? Number(rec.bars[i]) : 0;
+        if(valEl) valEl.textContent = toBn(v);
+        if(bar){
+          bar.style.width = '0%';
+          setTimeout(function(){ bar.style.width = v + '%'; }, 120 + i*120);
+        }
       });
       card.classList.remove('done');
       requestAnimationFrame(function(){ card.classList.add('done'); });
     }
+
     function lookup(code){
       var key = code.trim().toUpperCase();
-      var rec = data[key];
-      if(rec){ fill(rec, key); toast('ফলাফল পাওয়া গেছে', key + ' · ' + rec.name, 'ok'); }
-      else {
-        toast('রোল খুঁজে পাওয়া যায়নি', 'যাচাইকৃত রোল: MA-2026-084 / 021 / 112', 'error');
+      var rec = mockResultsData[key];
+      if(rec){
+        fill(rec, key);
+        toast('ফলাফল পাওয়া গেছে', key + ' · ' + (rec.name || ''), 'ok');
+      } else {
+        var sampleKeys = Object.keys(mockResultsData).slice(0, 3).join(' / ');
+        toast('রোল খুঁজে পাওয়া যায়নি', 'যাচাইকৃত রোল: ' + (sampleKeys || 'MA-2026-084'), 'error');
         input.focus(); input.select();
       }
     }
+
     form.addEventListener('submit', function(e){ e.preventDefault(); lookup(input.value); });
-    $$('[data-roll]').forEach(function(b){
-      b.addEventListener('click', function(){ input.value = b.getAttribute('data-roll'); lookup(input.value); });
-    });
-    fill(data['MA-2026-084'], 'MA-2026-084');
+    renderChips();
+
+    var firstKey = Object.keys(mockResultsData)[0] || 'MA-2026-084';
+    if(mockResultsData[firstKey]) fill(mockResultsData[firstKey], firstKey);
+
+    window.__updateMockResultsUI = function(){
+      renderChips();
+      var currentKey = (input.value || '').trim().toUpperCase();
+      if(mockResultsData[currentKey]){
+        fill(mockResultsData[currentKey], currentKey);
+      } else {
+        var first = Object.keys(mockResultsData)[0];
+        if(first && mockResultsData[first]) fill(mockResultsData[first], first);
+      }
+    };
   })();
   });
 
@@ -1581,11 +1703,11 @@
     });
   }
 
-  // tactile press feedback on touch — delegated to avoid per-card listeners
+  // tactile press feedback on touch — delegated
   if(window.matchMedia('(hover:none)').matches){
     var touchTarget = null;
     document.addEventListener('touchstart', function(e){
-      var el2 = e.target.closest && e.target.closest('.btn, .pillar, .sheet, .thabit, .fame-card, .tab');
+      var el2 = e.target.closest && e.target.closest('.btn, .sheet, .thabit, .fame-card, .tab');
       if(!el2) return;
       touchTarget = el2;
       el2.style.transition = 'transform .12s ease';
@@ -1598,6 +1720,34 @@
     document.addEventListener('touchend', releaseTouch, {passive:true});
     document.addEventListener('touchcancel', releaseTouch, {passive:true});
   }
+
+  // Interactive pillar cards (.pillar) on mobile and desktop
+  $$('.pillar').forEach(function(card){
+    card.setAttribute('role', 'button');
+    card.setAttribute('tabindex', '0');
+    card.setAttribute('aria-pressed', 'false');
+    function togglePillar(){
+      var wasActive = card.classList.contains('is-active');
+      $$('.pillar').forEach(function(c){
+        c.classList.remove('is-active');
+        c.setAttribute('aria-pressed', 'false');
+      });
+      if(!wasActive){
+        card.classList.add('is-active');
+        card.setAttribute('aria-pressed', 'true');
+        SFX.play('tab');
+      } else {
+        SFX.play('press');
+      }
+    }
+    card.addEventListener('click', togglePillar);
+    card.addEventListener('keydown', function(e){
+      if(e.key === 'Enter' || e.key === ' '){
+        e.preventDefault();
+        togglePillar();
+      }
+    });
+  });
 
 
   /* ============================================================
@@ -1704,10 +1854,27 @@
       SFX.play('hover');
     }, {passive:true});
   }
+
+  // Mobile Web Audio unlock on user touch/click gesture
+  function unlockMobileAudio(){
+    SFX.arm();
+  }
+  ['touchstart','touchend','pointerdown','click'].forEach(function(evt){
+    document.addEventListener(evt, unlockMobileAudio, {passive:true});
+  });
+
   document.addEventListener('pointerdown', function(e){
-    var t = e.target.closest && e.target.closest('a,button');
+    var t = e.target.closest && e.target.closest('a, button, summary, .faq__q, .tab, .chip, .pillar, .sheet a, .fame-card, .thabit, input[type=range], .top-notice__close');
     if(t) SFX.play('press');
   }, {passive:true});
+
+  // Sound on accordion open/close
+  document.addEventListener('toggle', function(e){
+    if(e.target && e.target.classList && e.target.classList.contains('faq__item')){
+      if(e.target.open) SFX.play('open');
+      else SFX.play('tick');
+    }
+  }, true);
 
   /* ============================================================
      ANCHORS
@@ -1726,6 +1893,36 @@
       try { history.replaceState(null, '', id); } catch(err){}
     });
   });
+
+  /* ============================================================
+     PRIVACY POLICY MODAL (Option 1: Zero-Tracking Transparency)
+     ============================================================ */
+  var privModal = document.getElementById('privacyModal');
+  var privBtn = document.getElementById('privacyBtn');
+  var closePrivBtn = document.getElementById('closePrivacyBtn');
+  var confirmPrivBtn = document.getElementById('confirmPrivacyBtn');
+
+  function openPrivacyModal(){
+    if(privModal){
+      if(typeof privModal.showModal === 'function') privModal.showModal();
+      else privModal.setAttribute('open', '');
+    }
+  }
+  function closePrivacyModal(){
+    if(privModal){
+      if(typeof privModal.close === 'function') privModal.close();
+      else privModal.removeAttribute('open');
+    }
+  }
+  window.__openPrivacyModal = openPrivacyModal;
+  if(privBtn) privBtn.addEventListener('click', openPrivacyModal);
+  if(closePrivBtn) closePrivBtn.addEventListener('click', closePrivacyModal);
+  if(confirmPrivBtn) confirmPrivBtn.addEventListener('click', closePrivacyModal);
+  if(privModal){
+    privModal.addEventListener('click', function(e){
+      if(e.target === privModal) closePrivacyModal();
+    });
+  }
 
   var year = $('#year');
   if(year) year.textContent = toBn(new Date().getFullYear());

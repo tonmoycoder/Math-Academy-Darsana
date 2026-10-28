@@ -128,8 +128,8 @@ body{background:var(--paper);color:var(--ink);font-family:var(--sans);min-height
     <form id="loginForm">
       <div class="field">
         <label for="adminPassword">অ্যাডমিন পাসওয়ার্ড (Admin Password)</label>
-        <input type="password" id="adminPassword" placeholder="আপনার পাসওয়ার্ড দিন (যেমন: pranto2026)" required autocomplete="current-password">
-        <small>.env ফাইলের ADMIN_PASSWORD দিয়ে লগইন করুন (ডিফল্ট: <b>pranto2026</b>)</small>
+        <input type="password" id="adminPassword" placeholder="আপনার অ্যাডমিন পাসওয়ার্ড লিখুন" required autocomplete="current-password">
+        <small>ওয়েবসাইট পরিচালনার জন্য অনুমোদিত অ্যাডমিন পাসওয়ার্ড প্রদান করুন।</small>
       </div>
       <button type="submit" class="btn btn--ink btn--block">লগইন করুন</button>
     </form>
@@ -266,6 +266,271 @@ body{background:var(--paper);color:var(--ink);font-family:var(--sans);min-height
       </form>
     </div>
 
+    <!-- Download Library & PDF Resources Management Card -->
+    <div class="card" id="libraryCard">
+      <div class="card__title" style="display:flex;justify-content:space-between;align-items:center">
+        <div>
+          <span>ডাউনলোড লাইব্রেরি ও PDF রিসোর্স ব্যবস্থাপনা</span>
+          <span class="card__subtitle mono">// RESOURCE LIBRARY & PDF CMS</span>
+        </div>
+        <button type="button" class="btn btn--red btn--sm" onclick="openNewPdfModal()">+ নতুন PDF যুক্ত করুন</button>
+      </div>
+      <p style="font-size:13.5px;color:#555;margin-bottom:16px">
+        ওয়েবসাইটের ডাউনলোড লাইব্রেরিতে শিক্ষার্থীদের জন্য গণিত হ্যান্ডনোট, সাজেশন ও মডেল টেস্টের PDF আপলোড/লিঙ্ক যুক্ত করুন। যেকোনো Google Drive লিংক পেস্ট করলে স্বয়ংক্রিয়ভাবে ডিরেক্ট ডাউনলোড লিংক তৈরি হবে।
+      </p>
+
+      <div style="overflow-x:auto;margin-bottom:16px">
+        <table class="blog-table" style="width:100%;border-collapse:collapse;font-size:13px;border:var(--line)">
+          <thead>
+            <tr style="background:var(--paper-2);border-bottom:var(--line);text-align:left">
+              <th style="padding:10px;font-family:var(--mono);font-size:11px;width:140px">ট্যাগ ও কোড</th>
+              <th style="padding:10px">শিরোনাম ও বিবরণ</th>
+              <th style="padding:10px;width:240px">ফাইল / ড্রাইভ লিঙ্ক</th>
+              <th style="padding:10px;text-align:right;width:160px">অ্যাকশন</th>
+            </tr>
+          </thead>
+          <tbody id="libraryPdfsTableBody">
+            <tr><td colspan="4" style="padding:16px;text-align:center;color:#777">রিসোর্স লোড হচ্ছে...</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- PDF Editor Modal / Panel (Hidden by default) -->
+      <div id="pdfEditorModal" style="display:none;padding:20px;border:var(--line);background:var(--paper-2);box-shadow:var(--shadow-sm);margin-top:16px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;border-bottom:1px dashed #bbb;padding-bottom:10px">
+          <h3 id="pdfEditorHeading" style="font-size:17px;font-weight:700">নতুন PDF রিসোর্স যুক্ত করুন</h3>
+          <button type="button" class="btn btn--outline btn--sm" onclick="closePdfEditor()">✕ বন্ধ করুন</button>
+        </div>
+        <form id="pdfResourceForm">
+          <input type="hidden" id="pdfIsNew" value="1">
+          <input type="hidden" id="pdfId" value="">
+          <div class="fields-grid">
+            <div class="field">
+              <label for="pdfTitle">PDF শিরোনাম (Title) *</label>
+              <input type="text" id="pdfTitle" placeholder="যেমন: SSC ২০২৭ গণিত পূর্ণাঙ্গ সূত্র ও হ্যান্ডনোট" required>
+            </div>
+            <div class="field">
+              <label for="pdfTag">ট্যাগ (Tag) *</label>
+              <input type="text" id="pdfTag" placeholder="যেমন: সবচেয়ে জনপ্রিয় / SSC ২০২৭ / হ্যান্ডনোট" required>
+            </div>
+            <div class="field">
+              <label for="pdfTagColor">ট্যাগ কালার (Badge Color)</label>
+              <select id="pdfTagColor">
+                <option value="red">লাল হাইলাইট (Red Accent)</option>
+                <option value="brass">গোল্ডেন / স্ট্যান্ডার্ড (Brass)</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="pdfCode">কোড / ক্যাটাগরি লেবেল</label>
+              <input type="text" id="pdfCode" placeholder="যেমন: MATH-SSC · PDF">
+            </div>
+          </div>
+          <div class="field" style="margin-top:12px">
+            <label for="pdfDesc">সংক্ষিপ্ত বিবরণ (Description)</label>
+            <textarea id="pdfDesc" rows="2" placeholder="যেমন: অধ্যায়ভিত্তিক বীজগণিত, জ্যামিতি ও ত্রিকোণমিতির সকল প্রয়োজনীয় সূত্রের নির্ভুল সংকলন।"></textarea>
+          </div>
+          <div class="field" style="margin-top:12px">
+            <label for="pdfDriveUrl">Google Drive লিংক বা সরাসরি ডাউনলোড URL *</label>
+            <input type="url" id="pdfDriveUrl" placeholder="https://drive.google.com/file/d/1A2B3C4D5E.../view?usp=sharing">
+            <small style="color:var(--teal)">💡 গুগল ড্রাইভের শেয়ার করা লিঙ্ক পেস্ট করলেই ওয়েবসাইটে বোতামে চাপ দিলে সরাসরি (Direct Download) শুরু হবে।</small>
+          </div>
+          <div class="fields-grid" style="margin-top:12px">
+            <div class="field">
+              <label for="pdfMetaInfo">সাইজ ও পৃষ্ঠা তথ্য (Meta Info)</label>
+              <input type="text" id="pdfMetaInfo" placeholder="যেমন: PDF · ৫ পৃষ্ঠা (১১০ KB)">
+            </div>
+            <div class="field">
+              <label for="pdfFilename">ডাউনলোড ফাইলনেম (ঐচ্ছিক)</label>
+              <input type="text" id="pdfFilename" placeholder="যেমন: ssc-math-formula-2027.pdf">
+            </div>
+          </div>
+          <div style="display:flex;justify-content:flex-end;gap:10px;margin-top:16px">
+            <button type="button" class="btn btn--outline" onclick="closePdfEditor()">বাতিল</button>
+            <button type="submit" class="btn btn--ink">সংরক্ষণ করুন</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Mock Test & Student Results Management Card -->
+    <div class="card" id="resultsCard">
+      <div class="card__title" style="display:flex;justify-content:space-between;align-items:center">
+        <div>
+          <span>মক টেস্ট ফলাফল ও শিক্ষার্থী মূল্যায়ন ব্যবস্থাপনা</span>
+          <span class="card__subtitle mono">// MOCK TEST & STUDENT RESULTS CMS</span>
+        </div>
+        <button type="button" class="btn btn--red btn--sm" onclick="openNewResultModal()">+ নতুন ফলাফল যুক্ত করুন</button>
+      </div>
+      <p style="font-size:13.5px;color:#555;margin-bottom:16px">
+        ওয়েবসাইটের SEC 07 ফলাফল যাচাই পোর্টালে শিক্ষার্থীদের মক টেস্ট ও পরীক্ষার মূল্যায়ন ফলাফল (রোল নম্বর, বিষয়ভিত্তিক নম্বর, মেধাক্রম, পার্সেন্টাইল ও মন্তব্য) যুক্ত ও সম্পাদনা করুন।
+      </p>
+
+      <div style="overflow-x:auto;margin-bottom:16px">
+        <table class="blog-table" style="width:100%;border-collapse:collapse;font-size:13px;border:var(--line)">
+          <thead>
+            <tr style="background:var(--paper-2);border-bottom:var(--line);text-align:left">
+              <th style="padding:10px;font-family:var(--mono);font-size:11px;width:120px">রোল নম্বর</th>
+              <th style="padding:10px;width:180px">নাম ও ব্যাচ</th>
+              <th style="padding:10px;width:140px">পরীক্ষা ও নম্বর</th>
+              <th style="padding:10px;width:130px">র‌্যাঙ্ক ও পার্সেন্টাইল</th>
+              <th style="padding:10px;width:180px">বিষয়ভিত্তিক স্কোর</th>
+              <th style="padding:10px">প্রশিক্ষকের মন্তব্য</th>
+              <th style="padding:10px;text-align:right;width:150px">অ্যাকশন</th>
+            </tr>
+          </thead>
+          <tbody id="mockResultsTableBody">
+            <tr><td colspan="7" style="padding:16px;text-align:center;color:#777">ফলাফল লোড হচ্ছে...</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Result Editor Modal / Panel (Hidden by default) -->
+      <div id="resultEditorModal" style="display:none;padding:20px;border:var(--line);background:var(--paper-2);box-shadow:var(--shadow-sm);margin-top:16px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;border-bottom:1px dashed #bbb;padding-bottom:10px">
+          <h3 id="resultEditorHeading" style="font-size:17px;font-weight:700">শিক্ষার্থীর ফলাফল যুক্ত করুন</h3>
+          <button type="button" class="btn btn--outline btn--sm" onclick="closeResultEditor()">✕ বন্ধ করুন</button>
+        </div>
+        <form id="studentResultForm">
+          <input type="hidden" id="resIsNew" value="1">
+          <input type="hidden" id="resOriginalRoll" value="">
+          <div class="fields-grid">
+            <div class="field">
+              <label for="resRoll">রোল নম্বর (যেমন: MA-2026-084) *</label>
+              <input type="text" id="resRoll" placeholder="MA-2026-084" required pattern="[A-Za-z0-9\-_]+" style="text-transform:uppercase">
+              <small>শিক্ষার্থী এই রোল টাইপ করে ওয়েবসাইটে ফলাফল দেখতে পাবে</small>
+            </div>
+            <div class="field">
+              <label for="resStudentName">শিক্ষার্থীর পূর্ণ নাম *</label>
+              <input type="text" id="resStudentName" placeholder="যেমন: তানভীর আহমেদ" required>
+            </div>
+            <div class="field">
+              <label for="resBatchName">ব্যাচের নাম *</label>
+              <input type="text" id="resBatchName" placeholder="যেমন: SSC ২০২৭ ব্যাচ" required>
+            </div>
+            <div class="field">
+              <label for="resTestTitle">পরীক্ষার নাম *</label>
+              <input type="text" id="resTestTitle" placeholder="যেমন: মক টেস্ট-০৪" required>
+            </div>
+          </div>
+
+          <div class="fields-grid" style="margin-top:12px">
+            <div class="field">
+              <label for="resTotalMarks">প্রাপ্ত নম্বর / মোট নম্বর *</label>
+              <input type="text" id="resTotalMarks" placeholder="যেমন: ৯৬ / ১০০" required>
+            </div>
+            <div class="field">
+              <label for="resRankText">মেধাক্রম (Rank) *</label>
+              <input type="text" id="resRankText" placeholder="যেমন: ১ম" required>
+            </div>
+            <div class="field">
+              <label for="resPctText">পার্সেন্টাইল (Percentile) *</label>
+              <input type="text" id="resPctText" placeholder="যেমন: ৯৯.২%" required>
+            </div>
+          </div>
+
+          <div style="margin-top:14px;padding:12px;background:#fff;border:1px dashed #ccc">
+            <h4 style="font-size:13px;font-weight:700;margin-bottom:8px">বিষয়ভিত্তিক অগ্রগতি স্কোর (০ থেকে ১০০ এর মধ্যে)</h4>
+            <div class="fields-grid">
+              <div class="field">
+                <label for="resBarAlgebra">বীজগণিত স্কোর (০–১০০)</label>
+                <input type="number" id="resBarAlgebra" min="0" max="100" placeholder="94" required>
+              </div>
+              <div class="field">
+                <label for="resBarGeometry">জ্যামিতি স্কোর (০–১০০)</label>
+                <input type="number" id="resBarGeometry" min="0" max="100" placeholder="88" required>
+              </div>
+              <div class="field">
+                <label for="resBarTrig">ত্রিকোণমিতি স্কোর (০–১০০)</label>
+                <input type="number" id="resBarTrig" min="0" max="100" placeholder="96" required>
+              </div>
+            </div>
+          </div>
+
+          <div class="field" style="margin-top:12px">
+            <label for="resTrainerNote">প্রশিক্ষকের মূল্যায়ন ও পরামর্শ (Trainer Note)</label>
+            <textarea id="resTrainerNote" rows="2" placeholder="যেমন: বীজগণিত ও ত্রিকোণমিতিতে দারুণ দক্ষতা। জ্যামিতির উপপাদ্য প্রমাণে চিত্র আরও নিখুঁত করার পরামর্শ।"></textarea>
+          </div>
+
+          <div style="display:flex;justify-content:flex-end;gap:10px;margin-top:16px">
+            <button type="button" class="btn btn--outline" onclick="closeResultEditor()">বাতিল</button>
+            <button type="submit" class="btn btn--ink">ফলাফল সংরক্ষণ করুন</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Hall of Fame Management Card -->
+    <div class="card" id="fameCard">
+      <div class="card__title" style="display:flex;justify-content:space-between;align-items:center">
+        <div>
+          <span>কৃতী শিক্ষার্থী ও সাফল্য ব্যবস্থাপনা</span>
+          <span class="card__subtitle mono">// HALL OF FAME CMS</span>
+        </div>
+        <button type="button" class="btn btn--red btn--sm" onclick="openNewFameModal()">+ নতুন কৃতী শিক্ষার্থী যুক্ত করুন</button>
+      </div>
+      <p style="font-size:13.5px;color:#555;margin-bottom:16px">
+        ওয়েবসাইটের SEC 07 ফলাফল সেকশনের নিচে চলমান "HALL OF FAME // কৃতী শিক্ষার্থী" মারকিতে প্রদর্শিত শিক্ষার্থীদের নাম, অর্জন, ব্যাজ ও মেধা স্মারক সম্পাদনা, সংযোজন ও অপসারণ করুন।
+      </p>
+
+      <div style="overflow-x:auto;margin-bottom:16px">
+        <table class="blog-table" style="width:100%;border-collapse:collapse;font-size:13px;border:var(--line)">
+          <thead>
+            <tr style="background:var(--paper-2);border-bottom:var(--line);text-align:left">
+              <th style="padding:10px;font-family:var(--mono);font-size:11px;width:90px">ব্যাজ প্রিভিউ</th>
+              <th style="padding:10px;width:120px">ব্যাজ টেক্সট</th>
+              <th style="padding:10px;width:120px">রঙ/থিম</th>
+              <th style="padding:10px;width:180px">শিক্ষার্থীর নাম</th>
+              <th style="padding:10px">অর্জন ও বিবরণ</th>
+              <th style="padding:10px;text-align:right;width:140px">অ্যাকশন</th>
+            </tr>
+          </thead>
+          <tbody id="fameTableBody">
+            <tr><td colspan="6" style="padding:16px;text-align:center;color:#777">কৃতী শিক্ষার্থী তালিকা লোড হচ্ছে...</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Fame Editor Modal / Panel (Hidden by default) -->
+      <div id="fameEditorModal" style="display:none;padding:20px;border:var(--line);background:var(--paper-2);box-shadow:var(--shadow-sm);margin-top:16px">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;border-bottom:1px dashed #bbb;padding-bottom:10px">
+          <h3 id="fameEditorHeading" style="font-size:17px;font-weight:700">কৃতী শিক্ষার্থী তথ্য যুক্ত করুন</h3>
+          <button type="button" class="btn btn--outline btn--sm" onclick="closeFameEditor()">✕ বন্ধ করুন</button>
+        </div>
+        <form id="fameStudentForm">
+          <input type="hidden" id="fameIsNew" value="1">
+          <input type="hidden" id="fameId" value="">
+          <div class="fields-grid">
+            <div class="field">
+              <label for="fameStudentName">শিক্ষার্থীর নাম *</label>
+              <input type="text" id="fameStudentName" placeholder="যেমন: সোহানুর রহমান" required>
+            </div>
+            <div class="field">
+              <label for="fameMeta">অর্জন ও বিবরণ *</label>
+              <input type="text" id="fameMeta" placeholder="যেমন: GPA 5.00 · দর্শনা" required>
+            </div>
+            <div class="field">
+              <label for="fameBadgeText">ব্যাজ টেক্সট (২ লাইনে দিতে পারেন) *</label>
+              <input type="text" id="fameBadgeText" placeholder="A+\nSSC অথবা ৯৯\nMOCK" required>
+              <small>লাইন ব্রেকের জন্য \n ব্যবহার করতে পারেন (যেমন: A+\nSSC)</small>
+            </div>
+            <div class="field">
+              <label for="fameBadgeColor">ব্যাজের রঙ ও ধরন</label>
+              <select id="fameBadgeColor" style="padding:8px 10px;border:var(--line);font-family:inherit">
+                <option value="teal">টিল / সবুজ (সাধারণ A+)</option>
+                <option value="red">ভার্মিলিয়ন লাল (বিশেষ অর্জন / TOP 10)</option>
+                <option value="brass">সোনালী / ব্রাস (মক সিরিজ চ্যাম্পিয়ন / ৯৯)</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="display:flex;justify-content:flex-end;gap:10px;margin-top:16px">
+            <button type="button" class="btn btn--outline" onclick="closeFameEditor()">বাতিল</button>
+            <button type="submit" class="btn btn--ink">সংরক্ষণ করুন</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
     <!-- Blog & Articles Management Card -->
     <div class="card" id="blogCard">
       <div class="card__title" style="display:flex;justify-content:space-between;align-items:center">
@@ -387,6 +652,37 @@ body{background:var(--paper);color:var(--ink);font-family:var(--sans);min-height
           </div>
         </form>
       </div>
+    </div>
+
+    <!-- Admin Security & Password Change Card -->
+    <div class="card" id="securityCard">
+      <div class="card__title">
+        <span>অ্যাডমিন পাসওয়ার্ড পরিবর্তন ও নিরাপত্তা</span>
+        <span class="card__subtitle mono">// ADMIN SECURITY & AUTH</span>
+      </div>
+      <p style="font-size:13.5px;color:#555;margin-bottom:14px">
+        অ্যাডমিন প্যানেলে প্রবেশের গোপন পাসওয়ার্ড এখান থেকে নিরাপদে পরিবর্তন করতে পারবেন। পাসওয়ার্ডটি ক্রিপ্টোগ্রাফিক সল্টসহ scrypt হ্যাশ আকারে ডাটাবেজে সংরক্ষিত হয়।
+      </p>
+      <form id="changePasswordForm">
+        <div class="fields-grid">
+          <div class="field">
+            <label for="currentPassword">বর্তমান পাসওয়ার্ড *</label>
+            <input type="password" id="currentPassword" placeholder="বর্তমান পাসওয়ার্ড দিন" required autocomplete="current-password">
+          </div>
+          <div class="field">
+            <label for="newPassword">নতুন পাসওয়ার্ড (কমপক্ষে ৮ অক্ষর) *</label>
+            <input type="password" id="newPassword" placeholder="নতুন পাসওয়ার্ড" minlength="8" required autocomplete="new-password">
+            <small>কমপক্ষে ৮ অক্ষরের শক্তিশালী পাসওয়ার্ড দিন।</small>
+          </div>
+          <div class="field">
+            <label for="confirmNewPassword">নতুন পাসওয়ার্ড নিশ্চিতকরণ *</label>
+            <input type="password" id="confirmNewPassword" placeholder="নতুন পাসওয়ার্ড পুনরায় লিখুন" minlength="8" required autocomplete="new-password">
+          </div>
+        </div>
+        <div style="margin-top:14px;text-align:right">
+          <button type="submit" class="btn btn--ink">পাসওয়ার্ড পরিবর্তন ও সংরক্ষণ করুন</button>
+        </div>
+      </form>
     </div>
 
   </div>
@@ -581,6 +877,24 @@ function renderSettings(settings){
     document.getElementById('phoneRaw').value = settings.contact.phone_raw || '';
     document.getElementById('whatsappNum').value = settings.contact.whatsapp || '';
   }
+  // Library
+  if(settings.library){
+    renderLibraryPdfs(settings.library);
+  } else {
+    renderLibraryPdfs({ items: [] });
+  }
+  // Mock Results
+  if(settings.mock_results){
+    renderMockResults(settings.mock_results);
+  } else {
+    renderMockResults({});
+  }
+  // Hall of Fame
+  if(Array.isArray(settings.hall_of_fame)){
+    renderHallOfFameTable(settings.hall_of_fame);
+  } else {
+    renderHallOfFameTable([]);
+  }
 }
 
 async function saveBatch(id){
@@ -742,6 +1056,552 @@ document.getElementById('contactForm').addEventListener('submit', async function
   }
 });
 
+// ===================================================================
+// Library & PDF Resources Management
+// ===================================================================
+function getDirectDownloadUrl(url){
+  if(!url) return '';
+  url = String(url).trim();
+  var match = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/) || url.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+  if(match && match[1]){
+    return 'https://drive.google.com/uc?export=download&id=' + match[1];
+  }
+  return url;
+}
+
+function renderLibraryPdfs(library){
+  const tbody = document.getElementById('libraryPdfsTableBody');
+  if(!tbody) return;
+  const items = (library && Array.isArray(library.items)) ? library.items : [];
+  if(!items.length){
+    tbody.innerHTML = '<tr><td colspan="4" style="padding:16px;text-align:center;color:#777">কোনো PDF রিসোর্স যুক্ত করা হয়নি। উপরে "+ নতুন PDF যুক্ত করুন" বোতামে ক্লিক করুন।</td></tr>';
+    return;
+  }
+  tbody.innerHTML = items.map(it => {
+    const directUrl = it.drive_url ? getDirectDownloadUrl(it.drive_url) : (it.file_url || '/assets/' + (it.local_file || 'english-dialogue-format.pdf'));
+    const isDrive = !!(it.drive_url && (it.drive_url.includes('drive.google.com') || it.drive_url.includes('google.com')));
+    return `
+      <tr style="border-bottom:1px solid #e5e5e5">
+        <td style="padding:12px 10px;vertical-align:top">
+          <span class="mono" style="font-size:11px;font-weight:700;background:${it.tag_color === 'red' ? '#8a1c14;color:#fff' : 'var(--paper-2);color:var(--ink)'};padding:2px 6px;border:1px solid #ccc;display:inline-block">${escapeHtml(it.tag || 'রিসোর্স')}</span>
+          <div class="mono" style="font-size:11px;color:#777;margin-top:4px">${escapeHtml(it.code || 'PDF')}</div>
+        </td>
+        <td style="padding:12px 10px;vertical-align:top">
+          <div style="font-weight:700;font-size:14px;color:var(--ink)">${escapeHtml(it.title || '')}</div>
+          <div style="font-size:12px;color:#666;line-height:1.4;margin-top:3px">${escapeHtml(it.desc || '')}</div>
+          <div class="mono" style="font-size:11px;color:#999;margin-top:4px">${escapeHtml(it.meta_info || '')} ${it.file_size ? '· ' + escapeHtml(it.file_size) : ''}</div>
+        </td>
+        <td style="padding:12px 10px;vertical-align:top">
+          <div class="mono" style="font-size:11.5px;word-break:break-all;color:var(--teal)">
+            ${escapeHtml(it.drive_url || it.file_url || it.local_file || 'লোকাল ফাইল')}
+          </div>
+          ${isDrive ? '<div class="mono" style="font-size:10.5px;color:#2e7d32;margin-top:3px">✓ Direct Google Drive Stream</div>' : ''}
+        </td>
+        <td style="padding:12px 10px;vertical-align:top;text-align:right;white-space:nowrap">
+          <button type="button" class="btn btn--outline btn--sm" onclick="editPdfResource('${escapeHtml(it.id)}')">এডিট ✎</button>
+          <a href="${escapeHtml(directUrl)}" target="_blank" rel="noopener noreferrer" class="btn btn--outline btn--sm" style="margin-left:4px" title="টেস্ট ডাউনলোড">টেস্ট ↗</a>
+          <button type="button" class="btn btn--outline btn--sm" style="margin-left:4px;color:#8a1c14" onclick="deletePdfResource('${escapeHtml(it.id)}')">মুছুন ✕</button>
+        </td>
+      </tr>
+    `;
+  }).join('');
+}
+
+function openNewPdfModal(){
+  document.getElementById('pdfIsNew').value = '1';
+  document.getElementById('pdfId').value = 'pdf-' + Date.now();
+  document.getElementById('pdfEditorHeading').textContent = 'নতুন PDF রিসোর্স যুক্ত করুন';
+  document.getElementById('pdfTitle').value = '';
+  document.getElementById('pdfTag').value = 'সবচেয়ে জনপ্রিয়';
+  document.getElementById('pdfTagColor').value = 'red';
+  document.getElementById('pdfCode').value = 'MATH-SSC · PDF';
+  document.getElementById('pdfDesc').value = '';
+  document.getElementById('pdfDriveUrl').value = '';
+  document.getElementById('pdfMetaInfo').value = 'PDF · ৫ পৃষ্ঠা';
+  document.getElementById('pdfFilename').value = '';
+
+  const modal = document.getElementById('pdfEditorModal');
+  modal.style.display = 'block';
+  modal.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function editPdfResource(id){
+  const items = currentData?.settings?.library?.items || [];
+  const item = items.find(it => it.id === id);
+  if(!item){
+    showToast('PDF রিসোর্সটি খুঁজে পাওয়া যায়নি!', true);
+    return;
+  }
+  document.getElementById('pdfIsNew').value = '0';
+  document.getElementById('pdfId').value = item.id;
+  document.getElementById('pdfEditorHeading').textContent = 'PDF রিসোর্স সম্পাদনা: ' + (item.title || item.id);
+  document.getElementById('pdfTitle').value = item.title || '';
+  document.getElementById('pdfTag').value = item.tag || '';
+  document.getElementById('pdfTagColor').value = item.tag_color || 'red';
+  document.getElementById('pdfCode').value = item.code || '';
+  document.getElementById('pdfDesc').value = item.desc || '';
+  document.getElementById('pdfDriveUrl').value = item.drive_url || item.file_url || '';
+  document.getElementById('pdfMetaInfo').value = item.meta_info || '';
+  document.getElementById('pdfFilename').value = item.filename || '';
+
+  const modal = document.getElementById('pdfEditorModal');
+  modal.style.display = 'block';
+  modal.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function closePdfEditor(){
+  document.getElementById('pdfEditorModal').style.display = 'none';
+}
+
+async function saveLibrarySetting(newItems){
+  const token = getToken();
+  if(!token){ showToast('পাসওয়ার্ড প্রয়োজন! অনুগ্রহ করে আবার লগইন করুন।', true); return false; }
+
+  const libraryData = {
+    section_kicker: currentData?.settings?.library?.section_kicker || "SEC 06 // রিসোর্স ও ডাউনলোড লাইব্রেরি",
+    section_title: currentData?.settings?.library?.section_title || "গণিত ও স্টাডি রিসোর্স লাইব্রেরি",
+    section_lead: currentData?.settings?.library?.section_lead || "SSC ও ক্লাস ৬–১০ গণিতের গুরুত্বপূর্ণ হ্যান্ডনোট, অধ্যায়ভিত্তিক সূত্র, সাজেশন ও অনুশীলনী শিট সরাসরি ডাউনলোড করুন।",
+    items: newItems
+  };
+
+  try {
+    const res = await fetch('/api/content', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+      },
+      body: JSON.stringify({
+        setting: {
+          key: 'library',
+          value: libraryData
+        }
+      })
+    });
+    const result = await res.json().catch(() => ({}));
+    if(res.ok && result.ok){
+      if(!currentData.settings) currentData.settings = {};
+      currentData.settings.library = libraryData;
+      renderLibraryPdfs(libraryData);
+      showToast('✓ PDF রিসোর্স সফলভাবে সংরক্ষিত হয়েছে!');
+      return true;
+    } else {
+      showToast('রিসোর্স সংরক্ষণে ত্রুটি: ' + (result.error || 'অজানা সমস্যা'), true);
+      return false;
+    }
+  } catch(err){
+    showToast('সার্ভার যোগাযোগে ত্রুটি: ' + err.message, true);
+    return false;
+  }
+}
+
+async function deletePdfResource(id){
+  const items = currentData?.settings?.library?.items || [];
+  const item = items.find(it => it.id === id);
+  if(!confirm(`আপনি কি নিশ্চিত যে "${item?.title || id}" রিসোর্সটি মুছে ফেলতে চান?`)) return;
+
+  const filtered = items.filter(it => it.id !== id);
+  await saveLibrarySetting(filtered);
+}
+
+// PDF Resource Form Submit
+document.getElementById('pdfResourceForm').addEventListener('submit', async function(e){
+  e.preventDefault();
+  const isNew = document.getElementById('pdfIsNew').value === '1';
+  const id = document.getElementById('pdfId').value.trim() || ('pdf-' + Date.now());
+  const title = document.getElementById('pdfTitle').value.trim();
+  const tag = document.getElementById('pdfTag').value.trim();
+  const tagColor = document.getElementById('pdfTagColor').value;
+  const code = document.getElementById('pdfCode').value.trim();
+  const desc = document.getElementById('pdfDesc').value.trim();
+  const driveUrl = document.getElementById('pdfDriveUrl').value.trim();
+  const metaInfo = document.getElementById('pdfMetaInfo').value.trim();
+  const filename = document.getElementById('pdfFilename').value.trim();
+
+  if(!title || !tag){
+    showToast('শিরোনাম ও ট্যাগ আবশ্যক।', true);
+    return;
+  }
+
+  const items = [...(currentData?.settings?.library?.items || [])];
+  const itemObj = {
+    id: id,
+    title: title,
+    tag: tag,
+    tag_color: tagColor,
+    code: code || 'PDF',
+    desc: desc,
+    drive_url: driveUrl,
+    meta_info: metaInfo || 'PDF ফাইল',
+    download_label: 'PDF ডাউনলোড',
+    filename: filename || (title.replace(/\s+/g, '-') + '.pdf')
+  };
+
+  const existingIdx = items.findIndex(it => it.id === id);
+  if(existingIdx !== -1){
+    items[existingIdx] = { ...items[existingIdx], ...itemObj };
+  } else {
+    items.push(itemObj);
+  }
+
+  const ok = await saveLibrarySetting(items);
+  if(ok){
+    closePdfEditor();
+  }
+});
+
+// ===================================================================
+// Mock Test & Student Results Management
+// ===================================================================
+function renderMockResults(resultsObj){
+  const tbody = document.getElementById('mockResultsTableBody');
+  if(!tbody) return;
+  const entries = Object.entries(resultsObj || {});
+  if(!entries.length){
+    tbody.innerHTML = '<tr><td colspan="7" style="padding:16px;text-align:center;color:#777">কোনো শিক্ষার্থীর পরীক্ষার ফলাফল যুক্ত করা হয়নি। উপরে "+ নতুন ফলাফল যুক্ত করুন" বোতামে ক্লিক করুন।</td></tr>';
+    return;
+  }
+  tbody.innerHTML = entries.map(([roll, rec]) => {
+    const bars = Array.isArray(rec.bars) ? rec.bars : [0, 0, 0];
+    const barsText = `বীজ: ${bars[0] || 0} · জ্যামি: ${bars[1] || 0} · ত্রিকো: ${bars[2] || 0}`;
+    return `
+      <tr style="border-bottom:1px solid #e5e5e5">
+        <td style="padding:12px 10px;vertical-align:top">
+          <span class="mono" style="font-size:12px;font-weight:700;color:var(--ink);background:var(--paper-2);padding:2px 6px;border:1px solid #ccc;display:inline-block">${escapeHtml(roll)}</span>
+        </td>
+        <td style="padding:12px 10px;vertical-align:top">
+          <div style="font-weight:700;font-size:14px;color:var(--ink)">${escapeHtml(rec.name || '')}</div>
+          <div class="mono" style="font-size:11.5px;color:#666;margin-top:2px">${escapeHtml(rec.batch || '')}</div>
+        </td>
+        <td style="padding:12px 10px;vertical-align:top">
+          <div style="font-weight:600;font-size:13px">${escapeHtml(rec.test || '')}</div>
+          <div class="mono" style="font-size:12px;color:#8a1c14;font-weight:700;margin-top:2px">${escapeHtml(rec.marks || '')}</div>
+        </td>
+        <td style="padding:12px 10px;vertical-align:top">
+          <div class="mono" style="font-size:12px;font-weight:700;color:var(--teal)">স্থান: ${escapeHtml(rec.rank || '—')}</div>
+          <div class="mono" style="font-size:11px;color:#777;margin-top:2px">${escapeHtml(rec.pct || '')}</div>
+        </td>
+        <td style="padding:12px 10px;vertical-align:top">
+          <div class="mono" style="font-size:11.5px;color:#333">${barsText}</div>
+          <div style="display:flex;gap:3px;margin-top:4px;height:6px;width:120px;background:#eee;border-radius:3px;overflow:hidden">
+            <div style="width:${Math.min(100, bars[0]||0)}%;background:#1d4ed8" title="বীজগণিত"></div>
+            <div style="width:${Math.min(100, bars[1]||0)}%;background:#059669" title="জ্যামিতি"></div>
+            <div style="width:${Math.min(100, bars[2]||0)}%;background:#b45309" title="ত্রিকোণমিতি"></div>
+          </div>
+        </td>
+        <td style="padding:12px 10px;vertical-align:top">
+          <div style="font-size:12px;color:#555;line-height:1.4">${escapeHtml(rec.note || '')}</div>
+        </td>
+        <td style="padding:12px 10px;vertical-align:top;text-align:right;white-space:nowrap">
+          <button type="button" class="btn btn--outline btn--sm" onclick="editResultRecord('${escapeHtml(roll)}')">এডিট ✎</button>
+          <button type="button" class="btn btn--outline btn--sm" style="margin-left:4px;color:#8a1c14" onclick="deleteResultRecord('${escapeHtml(roll)}')">মুছুন ✕</button>
+        </td>
+      </tr>
+    `;
+  }).join('');
+}
+
+function openNewResultModal(){
+  document.getElementById('resIsNew').value = '1';
+  document.getElementById('resOriginalRoll').value = '';
+  document.getElementById('resultEditorHeading').textContent = 'নতুন শিক্ষার্থীর পরীক্ষার ফলাফল যুক্ত করুন';
+  document.getElementById('resRoll').value = '';
+  document.getElementById('resRoll').readOnly = false;
+  document.getElementById('resStudentName').value = '';
+  document.getElementById('resBatchName').value = 'SSC ২০২৭ ব্যাচ';
+  document.getElementById('resTestTitle').value = 'মক টেস্ট-০৪';
+  document.getElementById('resTotalMarks').value = '৯৫ / ১০০';
+  document.getElementById('resRankText').value = '১ম';
+  document.getElementById('resPctText').value = '৯৯.০%';
+  document.getElementById('resBarAlgebra').value = 95;
+  document.getElementById('resBarGeometry').value = 92;
+  document.getElementById('resBarTrig').value = 98;
+  document.getElementById('resTrainerNote').value = '';
+
+  const modal = document.getElementById('resultEditorModal');
+  modal.style.display = 'block';
+  modal.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function editResultRecord(roll){
+  const dict = currentData?.settings?.mock_results || {};
+  const rec = dict[roll];
+  if(!rec){
+    showToast('ফলাফল রেকর্ডটি খুঁজে পাওয়া যায়নি!', true);
+    return;
+  }
+  document.getElementById('resIsNew').value = '0';
+  document.getElementById('resOriginalRoll').value = roll;
+  document.getElementById('resultEditorHeading').textContent = 'ফলাফল সম্পাদনা: ' + roll + ' (' + (rec.name || '') + ')';
+  document.getElementById('resRoll').value = roll;
+  document.getElementById('resRoll').readOnly = false;
+  document.getElementById('resStudentName').value = rec.name || '';
+  document.getElementById('resBatchName').value = rec.batch || '';
+  document.getElementById('resTestTitle').value = rec.test || '';
+  document.getElementById('resTotalMarks').value = rec.marks || '';
+  document.getElementById('resRankText').value = rec.rank || '';
+  document.getElementById('resPctText').value = rec.pct || '';
+  const bars = Array.isArray(rec.bars) ? rec.bars : [0, 0, 0];
+  document.getElementById('resBarAlgebra').value = bars[0] != null ? bars[0] : 0;
+  document.getElementById('resBarGeometry').value = bars[1] != null ? bars[1] : 0;
+  document.getElementById('resBarTrig').value = bars[2] != null ? bars[2] : 0;
+  document.getElementById('resTrainerNote').value = rec.note || '';
+
+  const modal = document.getElementById('resultEditorModal');
+  modal.style.display = 'block';
+  modal.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function closeResultEditor(){
+  document.getElementById('resultEditorModal').style.display = 'none';
+}
+
+async function saveMockResultsSetting(newResultsObj){
+  const token = getToken();
+  if(!token){ showToast('পাসওয়ার্ড প্রয়োজন! অনুগ্রহ করে আবার লগইন করুন।', true); return false; }
+
+  try {
+    const res = await fetch('/api/content', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+      },
+      body: JSON.stringify({
+        setting: {
+          key: 'mock_results',
+          value: newResultsObj
+        }
+      })
+    });
+    const result = await res.json().catch(() => ({}));
+    if(res.ok && result.ok){
+      if(!currentData.settings) currentData.settings = {};
+      currentData.settings.mock_results = newResultsObj;
+      renderMockResults(newResultsObj);
+      showToast('✓ শিক্ষার্থীর মক টেস্ট ফলাফল সফলভাবে সংরক্ষিত হয়েছে!');
+      return true;
+    } else {
+      showToast('ফলাফল সংরক্ষণে ত্রুটি: ' + (result.error || 'অজানা সমস্যা'), true);
+      return false;
+    }
+  } catch(err){
+    showToast('সার্ভার যোগাযোগে ত্রুটি: ' + err.message, true);
+    return false;
+  }
+}
+
+async function deleteResultRecord(roll){
+  const dict = currentData?.settings?.mock_results || {};
+  const rec = dict[roll];
+  if(!confirm(`আপনি কি নিশ্চিত যে "${roll} (${rec?.name || ''})" শিক্ষার্থীর ফলাফল মুছে ফেলতে চান?`)) return;
+
+  const updatedDict = { ...dict };
+  delete updatedDict[roll];
+  await saveMockResultsSetting(updatedDict);
+}
+
+// Student Result Form Submit
+document.getElementById('studentResultForm').addEventListener('submit', async function(e){
+  e.preventDefault();
+  const isNew = document.getElementById('resIsNew').value === '1';
+  const originalRoll = document.getElementById('resOriginalRoll').value.trim().toUpperCase();
+  const roll = document.getElementById('resRoll').value.trim().toUpperCase();
+  const name = document.getElementById('resStudentName').value.trim();
+  const batch = document.getElementById('resBatchName').value.trim();
+  const test = document.getElementById('resTestTitle').value.trim();
+  const marks = document.getElementById('resTotalMarks').value.trim();
+  const rank = document.getElementById('resRankText').value.trim();
+  const pct = document.getElementById('resPctText').value.trim();
+  const barAlg = Math.min(100, Math.max(0, parseInt(document.getElementById('resBarAlgebra').value, 10) || 0));
+  const barGeo = Math.min(100, Math.max(0, parseInt(document.getElementById('resBarGeometry').value, 10) || 0));
+  const barTrig = Math.min(100, Math.max(0, parseInt(document.getElementById('resBarTrig').value, 10) || 0));
+  const note = document.getElementById('resTrainerNote').value.trim();
+
+  if(!roll || !name || !batch || !test || !marks){
+    showToast('রোল, নাম, ব্যাচ, পরীক্ষা এবং নম্বর আবশ্যক।', true);
+    return;
+  }
+
+  const results = { ...(currentData?.settings?.mock_results || {}) };
+
+  // If roll was renamed during edit, remove the old roll entry
+  if(!isNew && originalRoll && originalRoll !== roll){
+    delete results[originalRoll];
+  }
+
+  results[roll] = {
+    roll: roll,
+    name: name,
+    batch: batch,
+    test: test,
+    marks: marks,
+    rank: rank || '—',
+    pct: pct || '—',
+    bars: [barAlg, barGeo, barTrig],
+    note: note || 'নিয়মিত অনুশীলনে দক্ষতা আরও বৃদ্ধি পাবে।'
+  };
+
+  const ok = await saveMockResultsSetting(results);
+  if(ok){
+    closeResultEditor();
+  }
+});
+
+// ============================================================
+// Hall of Fame Rendering & Management
+// ============================================================
+function renderHallOfFameTable(list){
+  const tbody = document.getElementById('fameTableBody');
+  if(!tbody) return;
+  if(!Array.isArray(list) || !list.length){
+    tbody.innerHTML = '<tr><td colspan="6" style="padding:16px;text-align:center;color:#777">কোনো কৃতী শিক্ষার্থী তালিকা নেই।</td></tr>';
+    return;
+  }
+  tbody.innerHTML = list.map(it => {
+    const col = (it.badge_color || 'teal').trim().toLowerCase();
+    const colClass = (col === 'red' || col === 'brass') ? ' ' + col : '';
+    const colLabel = col === 'red' ? 'লাল (TOP 10)' : (col === 'brass' ? 'সোনালী (চ্যাম্পিয়ন)' : 'টিল (A+)');
+    const badgeHtml = escapeHtml(it.badge_text || 'A+\nSSC').replace(/\n/g, '<br>');
+    return `
+      <tr style="border-bottom:1px solid #e5e5e5">
+        <td style="padding:10px">
+          <div class="fame-card" style="min-width:auto;padding:6px;width:max-content;box-shadow:2px 2px 0 var(--ink)">
+            <div class="inst${colClass}" style="width:40px;height:40px;font-size:9px">${badgeHtml}</div>
+          </div>
+        </td>
+        <td style="padding:10px;font-family:var(--mono);font-size:12px;font-weight:700">${escapeHtml(it.badge_text || '').replace(/\n/g, ' / ')}</td>
+        <td style="padding:10px;font-size:12px"><span class="badge" style="background:${col === 'red' ? 'var(--red)' : (col === 'brass' ? 'var(--brass)' : 'var(--teal)')};color:${col === 'brass' ? '#000' : '#fff'};padding:2px 6px;border-radius:2px">${colLabel}</span></td>
+        <td style="padding:10px"><b>${escapeHtml(it.name || '')}</b></td>
+        <td style="padding:10px;color:#444;font-size:12.5px">${escapeHtml(it.meta || '')}</td>
+        <td style="padding:10px;text-align:right">
+          <button type="button" class="btn btn--outline btn--sm" onclick="editFameItem('${it.id}')" style="margin-right:4px">সম্পাদনা</button>
+          <button type="button" class="btn btn--red btn--sm" onclick="deleteFameItem('${it.id}')">মুছুন</button>
+        </td>
+      </tr>
+    `;
+  }).join('');
+}
+
+function openNewFameModal(){
+  document.getElementById('fameIsNew').value = '1';
+  document.getElementById('fameId').value = 'fame-' + Date.now();
+  document.getElementById('fameEditorHeading').textContent = 'নতুন কৃতী শিক্ষার্থী যুক্ত করুন';
+  document.getElementById('fameStudentName').value = '';
+  document.getElementById('fameMeta').value = '';
+  document.getElementById('fameBadgeText').value = 'A+\nSSC';
+  document.getElementById('fameBadgeColor').value = 'teal';
+
+  const modal = document.getElementById('fameEditorModal');
+  modal.style.display = 'block';
+  modal.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function closeFameEditor(){
+  document.getElementById('fameEditorModal').style.display = 'none';
+}
+
+function editFameItem(id){
+  const list = currentData?.settings?.hall_of_fame || [];
+  const it = list.find(item => item.id === id);
+  if(!it){
+    showToast('রেকর্ডটি খুঁজে পাওয়া যায়নি!', true);
+    return;
+  }
+  document.getElementById('fameIsNew').value = '0';
+  document.getElementById('fameId').value = id;
+  document.getElementById('fameEditorHeading').textContent = 'কৃতী শিক্ষার্থী সম্পাদনা: ' + (it.name || '');
+  document.getElementById('fameStudentName').value = it.name || '';
+  document.getElementById('fameMeta').value = it.meta || '';
+  document.getElementById('fameBadgeText').value = it.badge_text || 'A+\nSSC';
+  document.getElementById('fameBadgeColor').value = (it.badge_color || 'teal').trim().toLowerCase();
+
+  const modal = document.getElementById('fameEditorModal');
+  modal.style.display = 'block';
+  modal.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+async function saveHallOfFameSetting(newList){
+  const token = getToken();
+  if(!token){ showToast('পাসওয়ার্ড প্রয়োজন! অনুগ্রহ করে আবার লগইন করুন।', true); return false; }
+
+  try {
+    const res = await fetch('/api/content', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token
+      },
+      body: JSON.stringify({
+        setting: {
+          key: 'hall_of_fame',
+          value: newList
+        }
+      })
+    });
+    const result = await res.json().catch(() => ({}));
+    if(res.ok && result.ok){
+      if(!currentData.settings) currentData.settings = {};
+      currentData.settings.hall_of_fame = newList;
+      renderHallOfFameTable(newList);
+      showToast('✓ কৃতী শিক্ষার্থী তালিকা সফলভাবে সংরক্ষিত হয়েছে!');
+      return true;
+    } else {
+      showToast('সংরক্ষণে ত্রুটি: ' + (result.error || 'অজানা সমস্যা'), true);
+      return false;
+    }
+  } catch(err){
+    showToast('সার্ভার যোগাযোগে ত্রুটি: ' + err.message, true);
+    return false;
+  }
+}
+
+async function deleteFameItem(id){
+  const list = currentData?.settings?.hall_of_fame || [];
+  const it = list.find(item => item.id === id);
+  if(!confirm(`আপনি কি নিশ্চিত যে "${it?.name || 'এই শিক্ষার্থী'}"-কে কৃতী শিক্ষার্থী তালিকা থেকে মুছে ফেলতে চান?`)) return;
+
+  const updatedList = list.filter(item => item.id !== id);
+  await saveHallOfFameSetting(updatedList);
+}
+
+// Hall of Fame Form Submit
+document.getElementById('fameStudentForm').addEventListener('submit', async function(e){
+  e.preventDefault();
+  const isNew = document.getElementById('fameIsNew').value === '1';
+  const id = document.getElementById('fameId').value.trim() || ('fame-' + Date.now());
+  const name = document.getElementById('fameStudentName').value.trim();
+  const meta = document.getElementById('fameMeta').value.trim();
+  const badgeText = document.getElementById('fameBadgeText').value.replace(/\\n/g, '\n').trim();
+  const badgeColor = document.getElementById('fameBadgeColor').value.trim();
+
+  if(!name || !meta || !badgeText){
+    showToast('নাম, অর্জন এবং ব্যাজ টেক্সট আবশ্যক।', true);
+    return;
+  }
+
+  const list = Array.isArray(currentData?.settings?.hall_of_fame) ? [...currentData.settings.hall_of_fame] : [];
+  const itemObj = {
+    id: id,
+    name: name,
+    meta: meta,
+    badge_text: badgeText,
+    badge_color: badgeColor
+  };
+
+  const idx = list.findIndex(it => it.id === id);
+  if(idx !== -1){
+    list[idx] = itemObj;
+  } else {
+    list.push(itemObj);
+  }
+
+  const ok = await saveHallOfFameSetting(list);
+  if(ok){
+    closeFameEditor();
+  }
+});
+
 // Blog Posts Rendering & Management
 function renderBlogPosts(posts){
   const tbody = document.getElementById('blogPostsTableBody');
@@ -898,27 +1758,79 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
   const passInput = document.getElementById('adminPassword').value.trim();
   if(!passInput) return;
 
-  // Test credentials by preflight POST
   try {
-    const testRes = await fetch('/api/content', {
+    const res = await fetch('/api/content', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: 'login', password: passInput })
+    });
+
+    const data = await res.json().catch(() => ({}));
+
+    if(res.ok && data.ok && data.token){
+      sessionStorage.setItem('ma_admin_token', data.token);
+      initDashboard();
+      showToast('✓ সফলভাবে অ্যাডমিন হিসেবে লগইন করেছেন!');
+    } else {
+      showToast(data.error || 'ভুল পাসওয়ার্ড! সঠিক পাসওয়ার্ড দিন।', true);
+    }
+  } catch(err){
+    showToast('কানেকশন এরর: ' + err.message, true);
+  }
+});
+
+// Change Password Form Submit
+document.getElementById('changePasswordForm').addEventListener('submit', async function(e){
+  e.preventDefault();
+  const token = getToken();
+  if(!token){ showToast('লগইন সেশন নেই! অনুগ্রহ করে আবার লগইন করুন।', true); return; }
+
+  const curPass = document.getElementById('currentPassword').value;
+  const newPass = document.getElementById('newPassword').value;
+  const confirmPass = document.getElementById('confirmNewPassword').value;
+
+  if(!curPass || !newPass){
+    showToast('সবগুলো ঘর পূরণ করুন।', true);
+    return;
+  }
+  if(newPass.length < 8){
+    showToast('নতুন পাসওয়ার্ড কমপক্ষে ৮ অক্ষরের হতে হবে।', true);
+    return;
+  }
+  if(newPass !== confirmPass){
+    showToast('নতুন পাসওয়ার্ড এবং নিশ্চিতকরণ পাসওয়ার্ড মিলছে না!', true);
+    return;
+  }
+
+  try {
+    const res = await fetch('/api/content', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + passInput
+        'Authorization': 'Bearer ' + token
       },
-      body: JSON.stringify({}) // API returns 400 if authorized, 401 if unauthorized
+      body: JSON.stringify({
+        change_password: {
+          current_password: curPass,
+          new_password: newPass
+        }
+      })
     });
 
-    if(testRes.status === 401){
-      showToast('ভুল পাসওয়ার্ড! সঠিক পাসওয়ার্ড দিন।', true);
-      return;
+    const data = await res.json().catch(() => ({}));
+    if(res.ok && data.ok){
+      if(data.token){
+        sessionStorage.setItem('ma_admin_token', data.token);
+      }
+      document.getElementById('currentPassword').value = '';
+      document.getElementById('newPassword').value = '';
+      document.getElementById('confirmNewPassword').value = '';
+      showToast('✓ ' + (data.message || 'পাসওয়ার্ড সফলভাবে সংরক্ষিত হয়েছে!'));
+    } else {
+      showToast('পাসওয়ার্ড পরিবর্তন ব্যর্থ: ' + (data.error || 'ভুল পাসওয়ার্ড'), true);
     }
-
-    sessionStorage.setItem('ma_admin_token', passInput);
-    initDashboard();
-    showToast('✓ সফলভাবে অ্যাডমিন হিসেবে লগইন করেছেন!');
   } catch(err){
-    showToast('কানেকশন এরর: ' + err.message, true);
+    showToast('সার্ভার যোগাযোগে ত্রুটি: ' + err.message, true);
   }
 });
 

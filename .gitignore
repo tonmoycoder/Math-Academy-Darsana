@@ -6,4 +6,6 @@ dist/api
 node_modules/
 scratch/
 .config/
-
+__pycache__/
+*.pyc
+.vscode/

@@ -243,10 +243,80 @@ def book_batch_options():
     return ''.join(options)
 
 
+def get_direct_download_url(url):
+    if not url:
+        return ''
+    url = str(url).strip()
+    m = _re.search(r'/file/d/([a-zA-Z0-9_-]+)', url) or _re.search(r'[?&]id=([a-zA-Z0-9_-]+)', url)
+    if m:
+        return f'https://drive.google.com/uc?export=download&id={m.group(1)}'
+    return url
+
+
+def render_library_cards(items, is_offline=False):
+    cards = []
+    for it in (items or []):
+        tag_color = it.get('tag_color', 'red')
+        tag_class = 'sheet__tag sheet__tag--red' if tag_color == 'red' else 'sheet__tag'
+        tag = _html.escape(str(it.get('tag', 'রিসোর্স')), quote=True)
+        code = _html.escape(str(it.get('code', 'PDF')), quote=True)
+        title = _html.escape(str(it.get('title', 'ডাউনলোড ফাইল')), quote=True)
+        desc = _html.escape(str(it.get('desc', '')), quote=True)
+        meta = _html.escape(str(it.get('meta_info', 'PDF ফাইল')), quote=True)
+        drive_url = str(it.get('drive_url') or '').strip()
+        local_file = str(it.get('local_file') or 'english-dialogue-format.pdf').strip()
+
+        if is_offline and local_file and (A / local_file).exists():
+            href = 'data:application/pdf;base64,' + b64(A / local_file)
+        elif drive_url:
+            href = _html.escape(get_direct_download_url(drive_url), quote=True)
+        else:
+            href = _html.escape(str(it.get('file_url') or f'/assets/{local_file}'), quote=True)
+
+        filename = _html.escape(str(it.get('filename') or (title.replace(' ', '-') + '.pdf')), quote=True)
+        card = (
+            f'<article class="sheet rv in" data-id="{_html.escape(str(it.get("id", "")), quote=True)}">\n'
+            f'  <span class="{tag_class}">{tag}</span>\n'
+            f'  <div>\n'
+            f'    <div class="sheet__code"><svg class="ico" style="width:13px;height:13px"><use href="#i-dl"/></svg> {code}</div>\n'
+            f'    <h3>{title}</h3>\n'
+            f'    <p>{desc}</p>\n'
+            f'  </div>\n'
+            f'  <div>\n'
+            f'    <div class="sheet__foot"><span>{meta}</span><b>DIRECT DOWNLOAD</b></div>\n'
+            f'    <a class="btn btn--sm btn--block" href="{href}" target="_blank" rel="noopener noreferrer" download="{filename}" aria-label="{title} সরাসরি ডাউনলোড করুন">PDF ডাউনলোড <svg class="ico"><use href="#i-dl"/></svg></a>\n'
+            f'  </div>\n'
+            f'</article>'
+        )
+        cards.append(card)
+    return '\n'.join(cards)
+
+
+def render_hall_of_fame(items):
+    cards = []
+    for it in (items or []):
+        color = str(it.get('badge_color', '')).strip().lower()
+        color_cls = f' {color}' if color in ('red', 'brass') else ''
+        badge = _html.escape(str(it.get('badge_text', 'A+\nSSC')), quote=True).replace('\n', '<br>')
+        name = _html.escape(str(it.get('name', '')), quote=True)
+        meta = _html.escape(str(it.get('meta', '')), quote=True)
+        card = (
+            f'<div class="fame-card">'
+            f'<div class="inst{color_cls}">{badge}</div>'
+            f'<div><b>{name}</b><small>{meta}</small></div>'
+            f'</div>'
+        )
+        cards.append(card)
+    return ''.join(cards)
+
+
 def content_tokens():
     c, tm = CFG['contact'], CFG['team']
     pro, pr = CFG['programme'], CFG['pricing']
     feat = next((b for b in BATCHES if b.get('hot')), BATCHES[0])
+    lib = CFG.get('library', {})
+    items = lib.get('items', [])
+    fame_items = CFG.get('hall_of_fame', [])
     return {
         '{{FEAT_NAME}}':      feat['name_bn'],
         '{{FEAT_CODE}}':      feat['code'],
@@ -260,7 +330,12 @@ def content_tokens():
         '{{CAP_NUM}}':        str(CAP),
         '{{EXP_NUM}}':        str(int(tm['experience_years'])),
         '{{FOUNDED_YEAR}}':   str(int(tm['founded_year'])),
+        '{{LIBRARY_KICKER}}': lib.get('section_kicker', 'SEC 06 // রিসোর্স ও ডাউনলোড লাইব্রেরি'),
+        '{{LIBRARY_TITLE}}':  lib.get('section_title', 'গণিত ও স্টাডি রিসোর্স লাইব্রেরি'),
+        '{{LIBRARY_LEAD}}':   lib.get('section_lead', 'SSC ও ক্লাস ৬–১০ গণিতের গুরুত্বপূর্ণ হ্যান্ডনোট, অধ্যায়ভিত্তিক সূত্র, সাজেশন ও অনুশীলনী শিট সরাসরি ডাউনলোড করুন।'),
+        '{{LIBRARY_CARDS}}':  render_library_cards(items, is_offline=False),
         '{{LIBRARY_PDF_HREF}}': '/assets/english-dialogue-format.pdf',
+        '{{HALL_OF_FAME_CARDS}}': render_hall_of_fame(fame_items),
         '{{MOCK_NUM}}':       str(int(pro['mock_per_month'])),
         '{{FEAT_FILLED_NUM}}': str(int(feat['filled'])),
         '{{FEAT_ID}}':        feat['id'],
@@ -370,7 +445,7 @@ def home_faq_markup():
     for i, (question, answer) in enumerate(HOME_FAQS):
         opened = ' open' if i == 0 else ''
         parts.append(
-            '<details class="faq__item"%s><summary class="faq__q">%s</summary>'
+            '<details class="faq__item"%s><summary class="faq__q"><span>%s</span><span class="faq__ic" aria-hidden="true">+</span></summary>'
             '<div class="faq__a"><p>%s</p></div></details>' %
             (opened, _html.escape(question), _html.escape(answer)))
     return '\n'.join(parts)
@@ -712,6 +787,7 @@ doc = doc.replace('__SITE__', S)
 # Self-contained offline HTML embeds the library PDF; the published page uses the same-origin asset path.
 _pdf_data_uri = 'data:application/pdf;base64,' + b64(A / 'english-dialogue-format.pdf')
 doc = doc.replace('{{LIBRARY_PDF_HREF}}', _pdf_data_uri)
+doc = doc.replace('{{LIBRARY_CARDS}}', render_library_cards(CFG.get('library', {}).get('items', []), is_offline=True))
 doc = apply_content(doc)
 pathlib.Path('math-academy.html').write_text(doc, encoding='utf-8')
 print('built', os.path.getsize('math-academy.html') // 1024, 'KB')
@@ -903,8 +979,20 @@ __CSP__
                'icon-192-maskable.png', 'icon-512-maskable.png'):
         (D / _f).write_bytes((pathlib.Path('_src/pwa') / _f).read_bytes())
     (D / 'assets' / 'fonts.css').write_text(fonts_css, encoding='utf-8')
-    LOGO = '<img class="brand__svg" src="/assets/favicon.png" alt="" width="38" height="38">'
+    LOGO_TIGHT = TOKENS['__LOGO_TIGHT__']
+    LOGO = '<img class="brand__svg" src="data:image/png;base64,' + LOGO_TIGHT + '" alt="ম্যাথ একাডেমি লোগো" width="40" height="40" aria-hidden="true">'
     WA = 'https://wa.me/8801641045469'
+
+    SVG_SPRITE = '''<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"><path d="M4 12h15M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"><path d="M4 12.5l5 5L20 6.5"/></symbol>
+  <symbol id="i-wa" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M3 21l1.7-5A8.5 8.5 0 1 1 8 19.4L3 21z"/><path d="M8.5 8.5c0 3 2.5 5.3 5.5 5.5.7 0 1.4-.5 1.4-1.2 0-.5-1.6-1.2-2-1.2-.3 0-.6.7-1 .7-.8 0-2.3-1.5-2.3-2.3 0-.4.7-.7.7-1 0-.4-.7-2-1.2-2-.7 0-1.1.7-1.1 1.5z" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 4h4l2 5-2.5 1.5a12 12 0 0 0 6 6L15 14l5 2v4a12 12 0 0 1-16-16z"/></symbol>
+  <symbol id="i-fb" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.07C24 5.41 18.63 0 12 0S0 5.41 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.8-4.7 4.54-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.5c-1.5 0-1.96.93-1.96 1.89v2.26h3.32l-.53 3.49h-2.79V24C19.62 23.1 24 18.1 24 12.07z"/></symbol>
+  <symbol id="i-wa2" viewBox="0 0 24 24" fill="currentColor"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.26-.47-2.39-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.44-.52.15-.18.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.87 1.21 3.07c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.42.25-.69.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35M12.05 21.79h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88 2.64 0 5.12 1.03 6.99 2.9a9.82 9.82 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.88 9.88m8.41-18.3A11.82 11.82 0 0 0 12.05 0C5.49 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.69 1.45h.01c6.55 0 11.89-5.34 11.89-11.89 0-3.18-1.24-6.17-3.48-8.42"/></symbol>
+  <symbol id="i-gmap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 21.5s7-6.4 7-11.5a7 7 0 1 0-14 0c0 5.1 7 11.5 7 11.5z"/><circle cx="12" cy="9.6" r="2.7"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/><path d="M12 14.5v2.5"/></symbol>
+</svg>'''
 
     # Reuse the landing page's Web Audio approach on the blog with rich cues,
     # shared volume levels, and sync with landing page mute state.
@@ -948,9 +1036,9 @@ __CSP__
       if(!ctx){
         ctx=new AudioCtx();
         var comp=ctx.createDynamicsCompressor();
-        comp.threshold.value=-24;comp.knee.value=20;comp.ratio.value=8;
+        comp.threshold.value=-16;comp.knee.value=16;comp.ratio.value=6;
         comp.attack.value=.003;comp.release.value=.25;
-        out=ctx.createGain();out.gain.value=.32;
+        out=ctx.createGain();out.gain.value=.80;
         out.connect(comp);comp.connect(ctx.destination);
         var b=ctx.createBuffer(1,1,22050);
         var s=ctx.createBufferSource();s.buffer=b;s.connect(ctx.destination);s.start(0);
@@ -967,7 +1055,7 @@ __CSP__
     osc.type=type||'sine';osc.frequency.setValueAtTime(freq,t);
     if(to)osc.frequency.exponentialRampToValueAtTime(Math.max(30,to),t+dur);
     g.gain.setValueAtTime(.0001,t);
-    g.gain.exponentialRampToValueAtTime(Math.max(.0003,gain||.04),t+.006);
+    g.gain.exponentialRampToValueAtTime(Math.max(.0003,gain||.05),t+.006);
     g.gain.exponentialRampToValueAtTime(.0001,t+dur);
     osc.connect(g);g.connect(out);osc.start(t);osc.stop(t+dur+.03);
   }
@@ -980,23 +1068,22 @@ __CSP__
     src.buffer=buf;flt.type=filterType||'bandpass';flt.frequency.setValueAtTime(freq||1800,t);
     if(to)flt.frequency.exponentialRampToValueAtTime(Math.max(60,to),t+dur);
     flt.Q.value=1.5;
-    g.gain.setValueAtTime(gain||.04,t);
+    g.gain.setValueAtTime(gain||.08,t);
     g.gain.exponentialRampToValueAtTime(.0001,t+dur);
     src.connect(flt);flt.connect(g);g.connect(out);src.start(t);src.stop(t+dur+.03);
   }
   function cueNow(name){
     if(!on||!ctx||ctx.state!=='running')return;
-    if(name==='enter'){
+    if(name==='enter'||name==='toggle'){
       [523.25, 659.25, 783.99, 1046.5].forEach(function(f,i){
-        tone(f,.32,.045,'triangle',null,i*.06);
-        tone(f*2,.20,.014,'sine',null,i*.06);
+        tone(f,.40,.12,'triangle',null,i*.075);
+        tone(f*2,.26,.045,'sine',null,i*.075);
       });
     }
-    else if(name==='hover')tone(1480,.045,.022,'sine',1770);
-    else if(name==='press'){tone(150,.09,.05,'triangle',72);noise(.035,2400,.035);}
-    else if(name==='scroll'){noise(.06,1250+Math.random()*600,.035);tone(220,.03,.015,'sine');}
-    else if(name==='toggle'){tone(659,.08,.04,'triangle');tone(880,.10,.04,'triangle',null,.06);}
-    else if(name==='open'){noise(.22,700,.045,'bandpass',2200);}
+    else if(name==='hover')tone(1480,.05,.040,'sine',1770);
+    else if(name==='press'){tone(150,.10,.085,'triangle',72);noise(.05,2400,.080);}
+    else if(name==='scroll'){noise(.07,1250+Math.random()*750,.025);tone(210+Math.random()*90,.035,.012,'sine');}
+    else if(name==='open'){noise(.26,600,.10,'bandpass',2400);}
     grant();
   }
   function cue(name){ensure().then(function(ok){if(ok)cueNow(name);});}
@@ -1018,10 +1105,28 @@ __CSP__
     var y=window.scrollY||0,now=Date.now();
     if(Math.abs(y-lastY)>55&&now-lastScroll>240){lastY=y;lastScroll=now;cue('scroll');}
   },{passive:true});
+  var toastEl=document.getElementById('blogToast'),toastTimer;
+  function showToast(title,sub,isOk){
+    if(!toastEl)return;
+    var titleEl=document.getElementById('blogToastTitle');
+    var subEl=document.getElementById('blogToastSub');
+    if(titleEl)titleEl.textContent=title;
+    if(subEl)subEl.textContent=sub||'';
+    var icon=toastEl.querySelector('svg');
+    if(icon)icon.style.color=isOk?'var(--mint)':'#FF9F97';
+    toastEl.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer=setTimeout(function(){toastEl.classList.remove('show');},3600);
+  }
   if(btn){
     btn.addEventListener('click',function(){
       on=!on;paint();grant();
-      if(on){entered=true;cue('toggle');unbind();}
+      if(on){
+        entered=true;cue('toggle');unbind();
+        showToast('সাউন্ড চালু','হোভার, ক্লিক ও স্ক্রলে শব্দ — চাইলে আবার বন্ধ করুন',true);
+      }else{
+        showToast('সাউন্ড বন্ধ','সাইট এখন নীরব',false);
+      }
     });
   }
   if(burger&&drawer){
@@ -1030,7 +1135,17 @@ __CSP__
       burger.setAttribute('aria-expanded',open?'true':'false');
       drawer.setAttribute('aria-hidden',open?'false':'true');
       if(open)cue('open');
+      else cue('toggle');
     });
+    var closeBtn=document.getElementById('blogDrawerClose');
+    if(closeBtn){
+      closeBtn.addEventListener('click',function(){
+        document.body.classList.remove('menu-open');
+        burger.setAttribute('aria-expanded','false');
+        drawer.setAttribute('aria-hidden','true');
+        cue('toggle');
+      });
+    }
     drawer.querySelectorAll('a').forEach(function(a){
       a.addEventListener('click',function(){
         document.body.classList.remove('menu-open');
@@ -1038,6 +1153,19 @@ __CSP__
         drawer.setAttribute('aria-hidden','true');
       });
     });
+  }
+  var yEl=document.getElementById('y');
+  if(yEl)yEl.textContent=String(new Date().getFullYear()).replace(/\d/g,function(d){return "০১২৩৪৫৬৭৮৯"[+d];});
+
+  var privBtn=document.getElementById('privacyBtn');
+  var privModal=document.getElementById('privacyModal');
+  var closePrivBtn=document.getElementById('closePrivacyBtn');
+  var confirmPrivBtn=document.getElementById('confirmPrivacyBtn');
+  if(privBtn&&privModal){
+    privBtn.addEventListener('click',function(){if(privModal.showModal)privModal.showModal();else privModal.setAttribute('open','');});
+    if(closePrivBtn)closePrivBtn.addEventListener('click',function(){if(privModal.close)privModal.close();else privModal.removeAttribute('open');});
+    if(confirmPrivBtn)confirmPrivBtn.addEventListener('click',function(){if(privModal.close)privModal.close();else privModal.removeAttribute('open');});
+    privModal.addEventListener('click',function(e){if(e.target===privModal){if(privModal.close)privModal.close();else privModal.removeAttribute('open');}});
   }
   paint();
   enter();
@@ -1051,8 +1179,9 @@ __CSP__
                 '\n' + CSP_META +
                 '\n<meta name="theme-color" content="#0A0A0A">\n<meta name="color-scheme" content="light">\n'
                 '<link rel="stylesheet" href="/assets/fonts.css">\n'
-                '<link rel="icon" type="image/png" href="/assets/favicon.png">\n'
-                '</head>\n<body>\n' + body_html + BLOG_SOUND_SCRIPT + '\n</body>\n</html>\n')
+                '<link rel="icon" type="image/png" href="data:image/png;base64,' + LOGO_TIGHT + '">\n'
+                '<link rel="apple-touch-icon" href="data:image/png;base64,' + LOGO_TIGHT + '">\n'
+                '</head>\n<body>\n' + SVG_SPRITE + '\n' + body_html + BLOG_SOUND_SCRIPT + '\n</body>\n</html>\n')
 
     def head_for(title, desc, url, extra_ld):
         return ('<title>%s</title>\n<meta name="description" content="%s">\n'
@@ -1092,6 +1221,7 @@ __CSP__
             '<a href="/blog/"' + hub_class + '>ব্লগ</a>'
             '</nav>'
             '<div class="bhead__actions">'
+            '<span class="live-pill"><span class="live-dot"></span>মোট <b id="pillSeats">' + bn(SEATS_LEFT) + '</b>টি সিট বাকি</span>'
             '<a class="btn btn--red btn--sm bhead__cta" href="' + WA + '?text=' + _quote('আসসালামু আলাইকুম, বর্তমান অফলাইন ব্যাচ, আসন, সময় ও ফি জানতে চাই।') + '" '
             'target="_blank" rel="noopener" aria-label="বর্তমান ব্যাচের তথ্য WhatsApp-এ জানতে লিখুন">'
             'ব্যাচের তথ্য <svg class="ico ar" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>'
@@ -1103,6 +1233,10 @@ __CSP__
             '<span></span><span></span><span></span></button>'
             '</div></div></header>'
             '<div class="drawer" id="blogDrawer" aria-hidden="true">'
+            '<div class="drawer__top-bar">'
+            '<span class="live-pill" style="display:inline-flex"><span class="live-dot"></span>মোট ' + bn(SEATS_LEFT) + 'টি আসন বাকি</span>'
+            '<button class="drawer__close" id="blogDrawerClose" type="button" aria-label="মেনু বন্ধ করুন">✕ বন্ধ করুন</button>'
+            '</div>'
             '<nav class="drawer__nav" aria-label="মোবাইল নেভিগেশন">'
             '<a href="/#why">কেন আমরা <span>01</span></a>'
             '<a href="/#method">পদ্ধতি <span>02</span></a>'
@@ -1123,7 +1257,7 @@ __CSP__
     def footer_html():
         return (
             '<section class="maker" aria-labelledby="makerT">'
-            '<div class="maker__in">'
+            '<div class="wrap maker__in">'
             '<div class="maker__l">'
             '<p class="maker__k mono">// DESIGN &amp; DEVELOPMENT</p>'
             '<h2 class="maker__t" id="makerT">এই সাইটের ডিজাইন ও কোড — <b>তানভীর ইসলাম তন্ময়</b></h2>'
@@ -1138,17 +1272,23 @@ __CSP__
             '</a></div></section>'
             '<footer class="footer">'
             '<div class="footer__marq" aria-hidden="true">'
-            '<div class="marquee">'
-            '<span>MATH ACADEMY ■ PROOF OVER MEMORY ■ দর্শনা, চুয়াডাঙ্গা ■ OFFLINE BATCH ■ </span>'
-            '<span>MATH ACADEMY ■ PROOF OVER MEMORY ■ দর্শনা, চুয়াডাঙ্গা ■ OFFLINE BATCH ■ </span>'
+            '<div class="marquee marquee--slow">'
+            '<span>MATH ACADEMY <em>■</em> PROOF OVER MEMORY <em>■</em> দর্শনা, চুয়াডাঙ্গা <em>■</em> OFFLINE BATCH <em>■</em></span>'
+            '<span>MATH ACADEMY <em>■</em> PROOF OVER MEMORY <em>■</em> দর্শনা, চুয়াডাঙ্গা <em>■</em> OFFLINE BATCH <em>■</em></span>'
+            '<span>MATH ACADEMY <em>■</em> PROOF OVER MEMORY <em>■</em> দর্শনা, চুয়াডাঙ্গা <em>■</em> OFFLINE BATCH <em>■</em></span>'
+            '<span>MATH ACADEMY <em>■</em> PROOF OVER MEMORY <em>■</em> দর্শনা, চুয়াডাঙ্গা <em>■</em> OFFLINE BATCH <em>■</em></span>'
             '</div></div>'
+            '<div class="wrap">'
             '<div class="footer__grid">'
             '<div>'
             '<div class="footer__brand">'
-            '<img src="/assets/favicon.png" alt="ম্যাথ একাডেমি" width="44" height="44">'
+            '<img src="data:image/png;base64,' + LOGO_TIGHT + '" alt="ম্যাথ একাডেমি লোগো" width="52" height="52" loading="lazy">'
             '<div><b>MATH ACADEMY</b><small>ম্যাথ একাডেমি · দর্শনা, চুয়াডাঙ্গা</small></div>'
             '</div>'
             '<p class="footer__desc">SSC ও ক্লাস ৬–১০ শিক্ষার্থীদের জন্য দর্শনার ভিজ্যুয়াল গণিতের স্টুডিও। ছবি দিয়ে শুরু, যুক্তি দিয়ে শেষ — তারপর গতি।</p>'
+            '<div class="footer__note">'
+            'আসন, ফি, সময়সূচি ও মাসিক ক্লাস/মক সংখ্যা ডেটাবেস-নির্ভর; ভর্তির পূর্বে WhatsApp-এ আসন প্রাপ্যতা ও চলতি তথ্য নিশ্চিত করে সরাসরি কেন্দ্রে যোগাযোগ করুন।'
+            '</div>'
             '</div>'
             '<div>'
             '<h3 class="footer__h">একাডেমি</h3>'
@@ -1172,19 +1312,60 @@ __CSP__
             '<div>'
             '<h3 class="footer__h">যোগাযোগ</h3>'
             '<address>দর্শনা, চুয়াডাঙ্গা<br>নির্দিষ্ট ঠিকানা ম্যাপে দেখুন</address>'
-            '<ul>'
-            '<li><a href="tel:+8801641045469">📞 ০১৬৪১-০৪৫৪৬৯</a></li>'
-            '<li><a href="https://wa.me/8801641045469" target="_blank" rel="noopener">💬 WhatsApp</a></li>'
-            '<li><a href="https://www.facebook.com/pranto.rai.37" target="_blank" rel="noopener me">📘 Facebook — প্রান্ত রায়</a></li>'
-            '<li><a href="https://maps.app.goo.gl/UyNxwUBw3sjnmGE29" target="_blank" rel="noopener">📍 Google Maps — দর্শনা</a></li>'
+            '<div class="soc" role="group" aria-label="সোশ্যাল ও যোগাযোগ">'
+            '<a class="soc__a soc__a--wa soc__a--pulse" href="https://wa.me/8801641045469" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp">'
+            '<svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa2"/></svg></a>'
+            '<a class="soc__a soc__a--fb" href="https://www.facebook.com/pranto.rai.37" target="_blank" rel="noopener me" aria-label="Facebook — প্রান্ত রায়" title="Facebook">'
+            '<svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-fb"/></svg></a>'
+            '<a class="soc__a soc__a--map" href="https://maps.app.goo.gl/UyNxwUBw3sjnmGE29" target="_blank" rel="noopener" aria-label="Google Maps — দর্শনা" title="Google Maps">'
+            '<svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-gmap"/></svg></a>'
+            '<a class="soc__a soc__a--tel" href="tel:+8801641045469" aria-label="কল — ০১৬৪১-০৪৫৪৬৯" title="কল করুন">'
+            '<svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-phone"/></svg></a>'
+            '</div>'
+            '<ul style="margin-top:14px">'
+            '<li><a href="tel:+8801641045469"><svg class="ico" style="width:14px;height:14px"><use href="#i-phone"/></svg> ০১৬৪১-০৪৫৪৬৯</a></li>'
+            '<li><a href="https://wa.me/8801641045469" target="_blank" rel="noopener" data-wa="আসসালামু আলাইকুম, বর্তমান অফলাইন ব্যাচ, আসন, সময় ও ফি জানতে চাই।"><svg class="ico" style="width:14px;height:14px"><use href="#i-wa"/></svg> WhatsApp · ০১৬৪১-০৪৫৪৬৯</a></li>'
+            '<li><a href="https://www.facebook.com/pranto.rai.37" target="_blank" rel="noopener me"><svg class="ico" style="width:14px;height:14px"><use href="#i-fb"/></svg> Facebook — প্রান্ত রায়</a></li>'
+            '<li><a href="https://maps.app.goo.gl/UyNxwUBw3sjnmGE29" target="_blank" rel="noopener"><svg class="ico" style="width:14px;height:14px"><use href="#i-gmap"/></svg> ম্যাপে দেখুন — দর্শনা</a></li>'
             '</ul></div>'
             '</div>'
             '<div class="footer__bottom">'
             '<span>© <span id="y">২০২৬</span> MATH ACADEMY · সর্বস্বত্ব সংরক্ষিত</span>'
-            '<a class="ssl" href="/.well-known/security.txt" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> HTTPS · SSL সুরক্ষিত</a>'
+            '<button type="button" class="link-u" id="privacyBtn" style="color:#d8d6cf;background:none;border:none;cursor:pointer;font-family:inherit;font-size:12px;padding:0" aria-haspopup="dialog">গোপনীয়তা ও ডেটা সুরক্ষা নীতি</button>'
+            '<a class="ssl" href="/.well-known/security.txt" target="_blank" rel="noopener" title="HTTPS · TLS · HSTS — নিরাপত্তা নীতি">'
+            '<svg viewBox="0 0 24 24" aria-hidden="true" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>'
+            '<span><b>HTTPS · SSL সুরক্ষিত</b><small>TLS · HSTS · সিকিউর কানেকশন</small></span></a>'
             '<a href="#top" class="toplink">উপরে যাও ↑</a>'
-            '</div></footer>'
-            '<script>document.getElementById("y").textContent=String(new Date().getFullYear()).replace(/\\d/g,function(d){return "০১২৩৪৫৬৭৮৯"[+d]})</script>'
+            '</div></div></footer>'
+            '<dialog id="privacyModal" class="pmodal" aria-labelledby="privTitle">'
+            '<div class="pmodal__head">'
+            '<div>'
+            '<span class="kicker kicker--red" style="font-size:11px">স্বচ্ছতা ও সুরক্ষা</span>'
+            '<h3 id="privTitle" style="font-size:20px;font-weight:700;margin-top:4px;color:var(--ink)">গোপনীয়তা ও ডেটা সুরক্ষা নীতি</h3>'
+            '</div>'
+            '<button type="button" id="closePrivacyBtn" aria-label="বন্ধ করুন" class="btn btn--outline btn--sm" style="padding:4px 10px;font-size:16px">✕</button>'
+            '</div>'
+            '<div class="pmodal__body">'
+            '<p>ম্যাথ একাডেমি দর্শনা শিক্ষার্থীদের গোপনীয়তা এবং ব্যবহারকারীদের ডেটা সুরক্ষায় সম্পূর্ণ প্রতিশ্রুতিবদ্ধ। আমাদের ওয়েবসাইট সম্পূর্ণ বিজ্ঞাপনমুক্ত এবং ব্যবহারকারী-বান্ধব।</p>'
+            '<h4>১. সম্পূর্ণ জিরো-ট্র্যাকিং নীতি (Zero Tracking Cookies)</h4>'
+            '<p>সাধারণ দর্শকদের ব্রাউজিংয়ে আমরা কোনো থার্ড-পার্টি ট্র্যাকিং কুকি, ক্রস-সাইট ট্র্যাকার বা বাণিজ্যিক অ্যানালিটিক্স স্ক্রিপ্ট ব্যবহার করি না। আপনার ব্রাউজিং কার্যকলাপ কোনো বিজ্ঞাপনী সংস্থার কাছে বিক্রি বা শেয়ার করা হয় না।</p>'
+            '<h4>২. সার্চ কনসোল ও ইনডেক্সিং (Google &amp; Bing)</h4>'
+            '<p>ওয়েবসাইটটি সার্চ ইঞ্জিনে খুঁজে পাওয়ার জন্য আমরা স্ট্যান্ডার্ড সার্চ কনসোল ও সাইটম্যাপ ব্যবহার করি, যা কোনো ব্যক্তিগত ট্র্যাকিং বা ব্যবহারকারীর ডিভাইসে অতিরিক্ত মেমোরি খরচ করে না। এটি শতভাগ হালকা ও দ্রুতগতির ব্রাউজিং নিশ্চিত করে।</p>'
+            '<h4>৩. মক টেস্ট ফলাফল ও শিক্ষার্থীর তথ্য</h4>'
+            '<p>ফলাফল পোর্টালে প্রদর্শিত রোল নম্বর ও মূল্যায়ন কেবল শিক্ষার্থীদের একাডেমিক অগ্রগতি মূল্যায়নের সুবিধার্থে সংরক্ষিত। প্রাতিষ্ঠানিক অনুমোদন সাপেক্ষে এবং শিক্ষার্থীদের মেধার স্বীকৃতি স্বরূপ এগুলো প্রদর্শিত হয়।</p>'
+            '<h4>৪. এনক্রিপ্টেড ও সুরক্ষিত সংযোগ</h4>'
+            '<p>সম্পূর্ণ ওয়েবসাইটটি অত্যাধুনিক TLS/SSL এনক্রিপশন ও HSTS নিরাপত্তা প্রটোকলের অধীনে পরিচালিত। কোনো বহিরাগত অননুমোদিত ব্যক্তি ওয়েবসাইটের তথ্য বিকৃত করতে পারে না।</p>'
+            '<h4>৫. যোগাযোগ ও জিজ্ঞাসা</h4>'
+            '<p>যেকোনো তথ্য যাচাই বা ব্যাচ সংক্রান্ত অনুসন্ধানের জন্য সরাসরি আমাদের শিক্ষক প্রান্ত রায়-এর সাথে WhatsApp বা সরাসরি ফোনে যোগাযোগ করতে পারেন।</p>'
+            '</div>'
+            '<div class="pmodal__foot" style="padding:12px 20px;border-top:1px solid #ddd;background:#f3efe6">'
+            '<button type="button" class="btn btn--ink" id="confirmPrivacyBtn">বুঝেছি</button>'
+            '</div>'
+            '</dialog>'
+            '<div class="toast" id="blogToast" role="status" aria-live="polite">'
+            '<svg viewBox="0 0 24 24" aria-hidden="true" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>'
+            '<div><b id="blogToastTitle">সাউন্ড চালু</b><small id="blogToastSub">হোভার, ক্লিক ও স্ক্রলে শব্দ — চাইলে আবার বন্ধ করুন</small></div>'
+            '</div>'
         )
 
     org_ld = {"@type": "EducationalOrganization", "@id": SITE_HOST + "/#org",

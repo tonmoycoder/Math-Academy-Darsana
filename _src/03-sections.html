@@ -524,26 +524,15 @@
   <div class="wrap">
     <div class="sec-head">
       <div>
-        <span class="kicker">SEC 06 // লাইব্রেরি · পরীক্ষামূলক</span>
-        <h2 class="sec-title" id="libTitle">ডাউনলোড লাইব্রেরি — <span class="bn">একটি PDF</span></h2>
-        <p class="sec-lead">পরীক্ষার জন্য আপাতত একটি ফাইল রাখা হয়েছে। ফাইলটির প্রকৃত শিরোনাম “English Dialogue Format”; বোতামে চাপলে PDF সরাসরি ডাউনলোড হবে।</p>
+        <span class="kicker kicker--red" id="libKicker">{{LIBRARY_KICKER}}</span>
+        <h2 class="sec-title" id="libTitle">{{LIBRARY_TITLE}}</h2>
+        <p class="sec-lead" id="libLead">{{LIBRARY_LEAD}}</p>
       </div>
       <div class="sec-no">06</div>
     </div>
 
     <div class="vault__grid" id="vaultGrid">
-      <article class="sheet rv" data-cat="english">
-        <span class="sheet__tag sheet__tag--red">পরীক্ষামূলক PDF</span>
-        <div>
-          <div class="sheet__code"><svg class="ico" style="width:13px;height:13px"><use href="#i-dl"/></svg> ENGLISH-DIALOGUE · PDF</div>
-          <h3>English Dialogue Format</h3>
-          <p>ইংরেজি dialogue লেখার format ও নমুনা অনুশীলনের PDF।</p>
-        </div>
-        <div>
-          <div class="sheet__foot"><span>PDF · ৫ পৃষ্ঠা</span><b>DIRECT DOWNLOAD</b></div>
-          <a class="btn btn--sm btn--block" href="{{LIBRARY_PDF_HREF}}" download="English-Dialogue-Format.pdf" aria-label="English Dialogue Format PDF সরাসরি ডাউনলোড করুন">PDF ডাউনলোড <svg class="ico"><use href="#i-dl"/></svg></a>
-        </div>
-      </article>
+      {{LIBRARY_CARDS}}
     </div>
     <p class="hint" style="margin-top:16px">ম্যাথ একাডেমির শিক্ষার্থীদের জন্য স্টাডি মেটেরিয়াল। সরাসরি PDF ডাউনলোড করতে বোতামটি ব্যবহার করুন।</p>
   </div>
@@ -574,9 +563,11 @@
           <button class="btn btn--ink btn--block" type="submit" style="margin-top:14px">ফলাফল দেখাও <svg class="ico"><use href="#i-search"/></svg></button>
         </form>
         <p class="hint">রোল নম্বর নির্বাচন:
-          <button class="chip chip--mini" type="button" data-roll="MA-2026-084">MA-2026-084</button>
-          <button class="chip chip--mini" type="button" data-roll="MA-2026-021">MA-2026-021</button>
-          <button class="chip chip--mini" type="button" data-roll="MA-2026-112">MA-2026-112</button>
+          <span id="mockRollChips">
+            <button class="chip chip--mini" type="button" data-roll="MA-2026-084">MA-2026-084</button>
+            <button class="chip chip--mini" type="button" data-roll="MA-2026-021">MA-2026-021</button>
+            <button class="chip chip--mini" type="button" data-roll="MA-2026-112">MA-2026-112</button>
+          </span>
         </p>
         <div class="pcard__hud" style="margin:16px 0 0"><span>STATUS: VERIFIED</span><span>EVALUATION: OFFICIAL</span></div>
       </div>
@@ -612,17 +603,9 @@
         <span>মেধা ও সাফল্যের স্মারক</span>
       </div>
       <div class="fame__wrap">
-        <div class="fame__row">
-          <div class="fame-card"><div class="inst">A+<br>SSC</div><div><b>তানভীর আহমেদ</b><small>GPA 5.00 · দর্শনা</small></div></div>
-          <div class="fame-card"><div class="inst red">A+<br>SSC</div><div><b>সাদিয়া আফরিন</b><small>GPA 5.00 · ক্লাস টেস্ট ১ম</small></div></div>
-          <div class="fame-card"><div class="inst brass">৯৯<br>MOCK</div><div><b>তাহমিদ হাসান</b><small>মক সিরিজ চ্যাম্পিয়ন</small></div></div>
-          <div class="fame-card"><div class="inst">A+<br>SSC</div><div><b>ফারহানা ইয়াসমিন</b><small>GPA 5.00 · চুয়াডাঙ্গা</small></div></div>
-          <div class="fame-card"><div class="inst red">TOP<br>10</div><div><b>মেহরাব হোসেন</b><small>ক্লাস ৯ · গণিত অলিম্পিয়াড</small></div></div>
-          <div class="fame-card"><div class="inst">A+<br>SSC</div><div><b>তানভীর আহমেদ</b><small>GPA 5.00 · দর্শনা</small></div></div>
-          <div class="fame-card"><div class="inst red">A+<br>SSC</div><div><b>সাদিয়া আফরিন</b><small>GPA 5.00 · ক্লাস টেস্ট ১ম</small></div></div>
-          <div class="fame-card"><div class="inst brass">৯৯<br>MOCK</div><div><b>তাহমিদ হাসান</b><small>মক সিরিজ চ্যাম্পিয়ন</small></div></div>
-          <div class="fame-card"><div class="inst">A+<br>SSC</div><div><b>ফারহানা ইয়াসমিন</b><small>GPA 5.00 · চুয়াডাঙ্গা</small></div></div>
-          <div class="fame-card"><div class="inst red">TOP<br>10</div><div><b>মেহরাব হোসেন</b><small>ক্লাস ৯ · গণিত অলিম্পিয়াড</small></div></div>
+        <div class="fame__row" id="fameRow">
+          {{HALL_OF_FAME_CARDS}}
+          {{HALL_OF_FAME_CARDS}}
         </div>
       </div>
     </div>
