@@ -9,3 +9,7 @@ scratch/
 __pycache__/
 *.pyc
 .vscode/
+
+service-account.json
+*-credentials.json
+

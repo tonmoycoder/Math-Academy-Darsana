@@ -213,6 +213,10 @@
     "api/content.js": {
       "memory": 512,
       "maxDuration": 10
+    },
+    "api/index-url.js": {
+      "memory": 512,
+      "maxDuration": 15
     }
   }
 }

@@ -13,11 +13,15 @@
     "db:migrate": "node db/migrate.mjs",
     "neon:up": "bash scripts/neon-bootstrap.sh",
     "dev": "node scripts/preview-server.mjs",
-    "preview": "node scripts/preview-server.mjs"
+    "preview": "node scripts/preview-server.mjs",
+    "index:push": "node scripts/google-index.mjs",
+    "index:all": "node scripts/google-index.mjs --all",
+    "index:status": "node scripts/google-index.mjs --status"
   },
   "dependencies": {
     "@neon/config": "^1.9.4",
-    "@neondatabase/serverless": "^1.2.0"
+    "@neondatabase/serverless": "^1.2.0",
+    "googleapis": "^188.0.0"
   },
   "engines": {
     "node": "24.x"
