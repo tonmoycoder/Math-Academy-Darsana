@@ -31,6 +31,9 @@ head = """<!DOCTYPE html>
 <meta name="keywords" content="ম্যাথ একাডেমি, Math Academy Darshana, দর্শনার ম্যাথ টিউটর, প্রান্ত রায়, Pranto Roy, দর্শনা আইডিয়াল স্কুল গণিত শিক্ষক, চুয়াডাঙ্গা গণিত কোচিং, SSC গণিত দর্শনা, ক্লাস ৬–১০ গণিত দর্শনা, SSC Math Darshana, গণিত শিক্ষক চুয়াডাঙ্গা, math tutor Darshana, SSC preparation Darshana">
 <meta name="author" content="প্রান্ত রায় · ম্যাথ একাডেমি">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+<meta name="google-site-verification" content="googlee3840f5ed89d0b8b.html">
+<meta name="google-site-verification" content="googlee3840f5ed89d0b8b">
+<meta name="google-site-verification" content="e3840f5ed89d0b8b">
 <meta name="theme-color" content="#0A0A0A">
 <meta name="color-scheme" content="light">
 <meta name="format-detection" content="telephone=yes">
@@ -1186,6 +1189,9 @@ __CSP__
     def head_for(title, desc, url, extra_ld):
         return ('<title>%s</title>\n<meta name="description" content="%s">\n'
                 '<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">\n'
+                '<meta name="google-site-verification" content="googlee3840f5ed89d0b8b.html">\n'
+                '<meta name="google-site-verification" content="googlee3840f5ed89d0b8b">\n'
+                '<meta name="google-site-verification" content="e3840f5ed89d0b8b">\n'
                 '<link rel="canonical" href="%s">\n'
                 '<meta property="og:type" content="article">\n'
                 '<meta property="og:site_name" content="ম্যাথ একাডেমি, দর্শনা">\n'
@@ -1560,6 +1566,8 @@ __CSP__
           + '</urlset>\n')
     (D / 'sitemap.xml').write_text(sm, encoding='utf-8')
     pathlib.Path('sitemap.xml').write_text(sm, encoding='utf-8')     # keep the repo copy identical
+    (D / 'googlee3840f5ed89d0b8b.html').write_text('google-site-verification: googlee3840f5ed89d0b8b.html\n', encoding='utf-8')
+    pathlib.Path('googlee3840f5ed89d0b8b.html').write_text('google-site-verification: googlee3840f5ed89d0b8b.html\n', encoding='utf-8')
 
     # ---------- llms-full.txt: the readable text of every page, for AI engines ----------
     import re as _r2, html as _html
