@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-10-27T20:20:43.010Z",
-  "dbUpdatedAt": "2026-10-26T21:10:27.025Z",
+  "generatedAt": "2026-10-28T20:12:08.871Z",
+  "dbUpdatedAt": "2026-10-28T17:53:54.424Z",
   "capacity": 15,
   "foundedYear": 2022,
   "nextBatch": {
@@ -18,64 +18,6 @@
     "classes_per_month": 16,
     "sibling_discount_pct": 10
   },
-  "library": {
-    "section_kicker": "SEC 06 // রিসোর্স ও ডাউনলোড লাইব্রেরি",
-    "section_title": "গণিত ও স্টাডি রিসোর্স লাইব্রেরি",
-    "section_lead": "SSC ও ক্লাস ৬–১০ গণিতের গুরুত্বপূর্ণ হ্যান্ডনোট, অধ্যায়ভিত্তিক সূত্র, সাজেশন ও অনুশীলনী শিট সরাসরি ডাউনলোড করুন।",
-    "items": [
-      {
-        "id": "english-dialogue",
-        "title": "English Dialogue Format (পূর্ণাঙ্গ গাইড)",
-        "desc": "ইংরেজি dialogue লেখার format ও নমুনা অনুশীলনের পূর্ণাঙ্গ রেফারেন্স PDF।",
-        "tag": "সবচেয়ে জনপ্রিয়",
-        "tag_color": "red",
-        "category": "english",
-        "code": "ENGLISH-DIALOGUE · PDF",
-        "meta_info": "PDF · ৫ পৃষ্ঠা",
-        "download_label": "PDF ডাউনলোড",
-        "drive_url": "",
-        "local_file": "english-dialogue-format.pdf",
-        "file_size": "১১০ KB"
-      }
-    ]
-  },
-  "hall_of_fame": [
-    {
-      "id": "fame-1",
-      "badge_text": "A+\nSSC",
-      "badge_color": "teal",
-      "name": "সোহানুর রহমান",
-      "meta": "GPA 5.00 · দর্শনা"
-    },
-    {
-      "id": "fame-2",
-      "badge_text": "A+\nSSC",
-      "badge_color": "red",
-      "name": "সাদিয়া আফরিন",
-      "meta": "GPA 5.00 · ক্লাস টেস্ট ১ম"
-    },
-    {
-      "id": "fame-3",
-      "badge_text": "৯৯\nMOCK",
-      "badge_color": "brass",
-      "name": "তাহমিদ হাসান",
-      "meta": "মক সিরিজ চ্যাম্পিয়ন"
-    },
-    {
-      "id": "fame-4",
-      "badge_text": "A+\nSSC",
-      "badge_color": "teal",
-      "name": "ফারহানা ইয়াসমিন",
-      "meta": "GPA 5.00 · চুয়াডাঙ্গা"
-    },
-    {
-      "id": "fame-5",
-      "badge_text": "TOP\n10",
-      "badge_color": "red",
-      "name": "মেহরাব হোসেন",
-      "meta": "ক্লাস ৯ · গণিত অলিম্পিয়াড"
-    }
-  ],
   "batches": [
     {
       "id": "vitti",
