@@ -16,12 +16,14 @@
     "preview": "node scripts/preview-server.mjs",
     "index:push": "node scripts/google-index.mjs",
     "index:all": "node scripts/google-index.mjs --all",
-    "index:status": "node scripts/google-index.mjs --status"
+    "index:status": "node scripts/google-index.mjs --status",
+    "indexnow:push": "python submit_indexnow.py"
   },
   "dependencies": {
     "@neon/config": "^1.9.4",
     "@neondatabase/serverless": "^1.2.0",
     "@vercel/analytics": "^2.0.1",
+    "@vercel/speed-insights": "^2.0.0",
     "googleapis": "^188.0.0"
   },
   "engines": {

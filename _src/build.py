@@ -1,3 +1,12 @@
+VERCEL_ANALYTICS_SCRIPTS = (
+    '<script>\n'
+    '  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };\n'
+    '  window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };\n'
+    '</script>\n'
+    '<script defer src="/_vercel/insights/script.js"></script>\n'
+    '<script defer src="/_vercel/speed-insights/script.js"></script>'
+)
+
 import os, json, pathlib, base64, html as _html, re as _re, math as _math
 from urllib.parse import quote as _quote
 
@@ -44,9 +53,9 @@ head = """<!DOCTYPE html>
 <link rel="alternate" hreflang="x-default" href="__SITE__/">
 
 <!-- Brand and Site Name (Stops Google from showing Vercel) -->
-<meta property="og:site_name" content="Math Academy Darsana">
-<meta name="application-name" content="Math Academy Darsana">
-<meta name="apple-mobile-web-app-title" content="Math Academy Darsana">
+<meta property="og:site_name" content="ম্যাথ একাডেমি দর্শনা">
+<meta name="application-name" content="ম্যাথ একাডেমি দর্শনা">
+<meta name="apple-mobile-web-app-title" content="ম্যাথ একাডেমি দর্শনা">
 
 <!-- Open Graph (OG) -->
 <meta property="og:type" content="website">
@@ -68,10 +77,10 @@ head = """<!DOCTYPE html>
 
 <!-- Google Search Compliant Favicons -->
 <link rel="icon" href="/favicon.ico" sizes="48x48">
-<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
-<link rel="icon" type="image/png" sizes="192x192" href="/icon-192x192.png">
-<link rel="icon" type="image/png" sizes="512x512" href="/icon-512x512.png">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" href="/favicon-48x48.png" sizes="48x48" type="image/png">
+<link rel="icon" href="/favicon-96x96.png" sizes="96x96" type="image/png">
+<link rel="icon" href="/favicon-192x192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
 __CSP__
 <!--__PWA__-->
@@ -433,10 +442,9 @@ CSP_META = ('<meta http-equiv="Content-Security-Policy" content="'
             "default-src 'self'; "
             "img-src 'self' data:; "
             "style-src 'self' 'unsafe-inline'; "
-            "script-src 'self' 'unsafe-inline' https://va.vercel-scripts.com; "
+            "script-src 'self' 'unsafe-inline' https://va.vercel-scripts.com https://vitals.vercel-insights.com; "
             "font-src 'self' data:; "
-            ""          # the sound probe plays a 0-ms silent wav
-            "connect-src 'self' https://*.vercel-analytics.com https://*.vercel-insights.com; "
+            "connect-src 'self' https://va.vercel-scripts.com https://vitals.vercel-insights.com https://*.vercel-analytics.com https://*.vercel-insights.com; "
             "object-src 'none'; "
             "base-uri 'self'; "
             "form-action 'self'"
@@ -471,8 +479,8 @@ bot = bot.replace('<!--__HOME_FAQ__-->', home_faq_markup())
 
 LD = {"@context": "https://schema.org", "@graph": [
   {"@type": "WebSite", "@id": S + "/#website",
-   "url": S + "/", "name": "Math Academy Darsana",
-   "alternateName": ["Math Academy", "ম্যাথ একাডেমি দর্শনা", "ম্যাথ একাডেমি"],
+   "url": S + "/", "name": "ম্যাথ একাডেমি দর্শনা",
+   "alternateName": ["Math Academy Darshana", "Math Academy Darsana"],
    "publisher": {"@id": S + "/#organization"},
    "inLanguage": "bn-BD"},
   {"@type": "EducationalOrganization", "@id": S + "/#organization",
@@ -531,7 +539,7 @@ LD = {"@context": "https://schema.org", "@graph": [
     for q, a in HOME_FAQS]},
   {"@type": "BreadcrumbList", "@id": S + "/#crumbs", "itemListElement": [
     {"@type": "ListItem", "position": 1, "name": "হোম", "item": S + "/"},
-    {"@type": "ListItem", "position": 2, "name": "শিক্ষক প্র�������ন্ত রাই", "item": S + "/#teacher"},
+    {"@type": "ListItem", "position": 2, "name": "শিক্ষক প্রান্ত রাই", "item": S + "/#teacher"},
     {"@type": "ListItem", "position": 3, "name": "ব্যাচ ও আসন", "item": S + "/#batches"},
     {"@type": "ListItem", "position": 4, "name": "ভর্তি-তথ্য", "item": S + "/#book"}]}
 ]}
@@ -547,13 +555,6 @@ doc = (head
        + '\n<script>\n' + gsap + '\n</script>\n'
        + '<script>\n' + js + '\n</script>\n'
        + jsonld
-       + '<script>\n'
-       + '!function(){window.va||(window.va=function(){(window.vaq=window.vaq||[]).push(arguments)}),'
-       + 'window.vam="production";var e=document.createElement("script");'
-       + 'e.src="/_vercel/insights/script.js",e.defer=!0,'
-       + 'e.dataset.sdkn="@vercel/analytics",e.dataset.sdkv="2.0.1",'
-       + 'document.head.appendChild(e)}();\n'
-       + '</script>\n'
        + '</body>\n</html>\n')
 
 doc = doc.replace('__KEEP_PRELOAD__', '')          # inline: nothing to preload
@@ -739,7 +740,7 @@ for cp in custom_posts:
         'mins': int(cp.get('mins', 5)),
         'faq': cp.get('faq') if isinstance(cp.get('faq'), list) and len(cp.get('faq')) == 3 else [
             ('এই লেখাটি কাদের জন্য?', 'ম্যাথ একাডেমির শিক্ষার্থী ও অভিভাবকদের জন্য।'),
-            ('ক��ভাবে প্রস্তুতি নেব?', 'নিয়মিত অনুশীলন ও মক টেস্টের মাধ্যমে।'),
+            ('কীভাবে প্রস্তুতি নেব?', 'নিয়মিত অনুশীলন ও মক টেস্টের মাধ্যমে।'),
             ('আরও জানতে কোথায় যোগাযোগ করব?', 'আমাদের হোয়াটসঅ্যাপ নম্বরে যোগাযোগ করুন।')
         ],
         'body': cp.get('body', '') if '<p>' in cp.get('body', '') else _markdown_to_html(cp.get('body', ''))
@@ -850,20 +851,13 @@ if '--publish' in sys.argv:
     pub = (head + '<style>' + fonts + css + extra_css + '</style>'
            + top + mid + bot
            + '<script>' + gsap + '</script>' + '<script>' + js + '</script>' + jsonld
-           + '<script>\n'
-           + '!function(){window.va||(window.va=function(){(window.vaq=window.vaq||[]).push(arguments)}),'
-           + 'window.vam="production";var e=document.createElement("script");'
-           + 'e.src="/_vercel/insights/script.js",e.defer=!0,'
-           + 'e.dataset.sdkn="@vercel/analytics",e.dataset.sdkv="2.0.1",'
-           + 'document.head.appendChild(e)}();\n'
-           + '</script>\n'
-           + '</body></html>')
+           + '\n' + VERCEL_ANALYTICS_SCRIPTS + '\n</body></html>')
     # __SITE__ must be resolved in the published build too (canonical, hreflang, og:url, og:image)
     pub = pub.replace('__SITE__', S)
     pub = pub.replace('<!--__PWA__-->',
         '<meta name="apple-mobile-web-app-capable" content="yes">\n'
         '<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">\n'
-        '<meta name="apple-mobile-web-app-title" content="Math Academy Darsana">\n'
+        '<meta name="apple-mobile-web-app-title" content="ম্যাথ একাডেমি দর্শনা">\n'
         '<meta name="mobile-web-app-capable" content="yes">')
     pub = apply_content(pub)
     pub = pub.replace('__KEEP_PRELOAD__', '')      # the real preload links are injected below
@@ -954,7 +948,7 @@ if '--publish' in sys.argv:
     pub = pub.replace('</head>', pre + '</head>')
     (D / 'index.html').write_text(pub, encoding='utf-8')
     OLD_HOSTS = ('https://math-academy-darsana.vercel.app', 'https://mathacademydarsana.vercel.app')
-    for extra in ('robots.txt', 'sitemap.xml', 'llms.txt'):
+    for extra in ('robots.txt', 'sitemap.xml', 'llms.txt', 'bc14bb9c7dc34ee3818627cbec856bfe.txt'):
         src = pathlib.Path(extra)
         if src.exists():
             # rewrite the host so robots/sitemap can never drift from SITE_HOST
@@ -993,14 +987,21 @@ if '--publish' in sys.argv:
 <meta name="theme-color" content="#0A0A0A">
 <meta name="color-scheme" content="light">
 __CSP__
-<link rel="icon" type="image/png" href="/assets/favicon.png">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/favicon-48x48.png" sizes="48x48" type="image/png">
+<link rel="icon" href="/favicon-96x96.png" sizes="96x96" type="image/png">
+<link rel="icon" href="/favicon-192x192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta property="og:site_name" content="ম্যাথ একাডেমি দর্শনা">
+<meta name="application-name" content="ম্যাথ একাডেমি দর্শনা">
 </head>
 <body>
 '''
     doc404 = (head404.replace('__CSP__', CSP_META)
               + '<style>' + fonts + css + '</style>'
               + pathlib.Path('_src/404-body.html').read_text(encoding='utf-8')
-              + '</body></html>')
+              + '\n' + VERCEL_ANALYTICS_SCRIPTS + '\n</body></html>')
     doc404 = _re.sub(r"url\(data:font/woff2;base64,([A-Za-z0-9+/=]+)\) format\('woff2'\)", _font_repl, doc404)
     doc404 = doc404.replace('</head>', pre + '</head>')
     # 404.html is served from ANY depth (/blog/<slug>/typo, /x/y/z …), so every
@@ -1025,7 +1026,7 @@ __CSP__
     # absolute paths: the same sheet is used at /, /blog/ and /blog/<slug>/
     fonts_css = fonts_css.replace('url(assets/', 'url(/assets/')
     # ---- PWA: manifest, icons, service worker (installable = durable autoplay grant)
-    for _f in ('manifest.webmanifest', 'site.webmanifest', 'sw.js', 'logo.png', 'logo-512.png', 'favicon-48x48.png', 'icon-192x192.png', 'icon-512x512.png', 'apple-touch-icon.png', 'favicon.ico', 'icon-192.png', 'icon-512.png',
+    for _f in ('manifest.webmanifest', 'site.webmanifest', 'sw.js', 'logo.png', 'logo-512.png', 'favicon-48x48.png', 'favicon-96x96.png', 'favicon-192x192.png', 'icon-192x192.png', 'icon-512x512.png', 'apple-touch-icon.png', 'favicon.ico', 'icon-192.png', 'icon-512.png',
                'icon-192-maskable.png', 'icon-512-maskable.png'):
         (D / _f).write_bytes((pathlib.Path('_src/pwa') / _f).read_bytes())
     (D / 'assets' / 'fonts.css').write_text(fonts_css, encoding='utf-8')
@@ -1227,11 +1228,17 @@ __CSP__
                 '<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">\n'
                 + head_html +
                 '\n' + CSP_META +
-                '\n<meta name="theme-color" content="#0A0A0A">\n<meta name="color-scheme" content="light">\n'
+                '\n<meta name="theme-color" content="#1a4d3e">\n<meta name="color-scheme" content="light">\n'
                 '<link rel="stylesheet" href="/assets/fonts.css">\n'
-                '<link rel="icon" type="image/png" href="data:image/png;base64,' + LOGO_TIGHT + '">\n'
-                '<link rel="apple-touch-icon" href="data:image/png;base64,' + LOGO_TIGHT + '">\n'
-                '</head>\n<body>\n' + SVG_SPRITE + '\n' + body_html + BLOG_SOUND_SCRIPT + '\n</body>\n</html>\n')
+                '<link rel="icon" href="/favicon.ico" sizes="48x48">\n'
+                '<link rel="icon" href="/favicon-48x48.png" sizes="48x48" type="image/png">\n'
+                '<link rel="icon" href="/favicon-96x96.png" sizes="96x96" type="image/png">\n'
+                '<link rel="icon" href="/favicon-192x192.png" sizes="192x192" type="image/png">\n'
+                '<link rel="apple-touch-icon" href="/apple-touch-icon.png">\n'
+                '<link rel="manifest" href="/site.webmanifest">\n'
+                '<meta property="og:site_name" content="ম্যাথ একাডেমি দর্শনা">\n'
+                '<meta name="application-name" content="ম্যাথ একাডেমি দর্শনা">\n'
+                '</head>\n<body>\n' + SVG_SPRITE + '\n' + body_html + BLOG_SOUND_SCRIPT + '\n' + VERCEL_ANALYTICS_SCRIPTS + '\n</body>\n</html>\n')
 
     def head_for(title, desc, url, extra_ld):
         return ('<title>%s</title>\n<meta name="description" content="%s">\n'
@@ -1241,7 +1248,8 @@ __CSP__
                 '<meta name="google-site-verification" content="e3840f5ed89d0b8b">\n'
                 '<link rel="canonical" href="%s">\n'
                 '<meta property="og:type" content="article">\n'
-                '<meta property="og:site_name" content="ম্যাথ একাডেমি, দর্শনা">\n'
+                '<meta property="og:site_name" content="ম্যাথ একাডেমি দর্শনা">\n'
+                '<meta name="application-name" content="ম্যাথ একাডেমি দর্শনা">\n'
                 '<meta property="og:locale" content="bn_BD">\n'
                 '<meta property="og:title" content="%s">\n'
                 '<meta property="og:description" content="%s">\n'
@@ -1338,7 +1346,7 @@ __CSP__
             '<img src="data:image/png;base64,' + LOGO_TIGHT + '" alt="ম্যাথ একাডেমি লোগো" width="52" height="52" loading="lazy">'
             '<div><b>MATH ACADEMY</b><small>ম্যাথ একাডেমি · দর্শনা, চুয়াডাঙ্গা</small></div>'
             '</div>'
-            '<p class="footer__desc">SSC ও ক্লাস ৬–১০ শিক্ষার্থীদের জন্য দর্শনার ভিজ্যুয়াল গণিতের স্টুডিও। ছবি দিয়ে শুরু, যুক্তি দিয���ে শেষ — তারপর গতি।</p>'
+            '<p class="footer__desc">SSC ও ক্লাস ৬–১০ শিক্ষার্থীদের জন্য দর্শনার ভিজ্যুয়াল গণিতের স্টুডিও। ছবি দিয়ে শুরু, যুক্তি দিয়ে শেষ — তারপর গতি।</p>'
             '<div class="footer__note">'
             'আসন, ফি, সময়সূচি ও মাসিক ক্লাস/মক সংখ্যা ডেটাবেস-নির্ভর; ভর্তির পূর্বে WhatsApp-এ আসন প্রাপ্যতা ও চলতি তথ্য নিশ্চিত করে সরাসরি কেন্দ্রে যোগাযোগ করুন।'
             '</div>'
@@ -1368,7 +1376,7 @@ __CSP__
             '<div class="soc" role="group" aria-label="সোশ্যাল ও যোগাযোগ">'
             '<a class="soc__a soc__a--wa soc__a--pulse" href="https://wa.me/8801641045469" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp">'
             '<svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa2"/></svg></a>'
-            '<a class="soc__a soc__a--fb" href="https://www.facebook.com/pranto.rai.37" target="_blank" rel="noopener me" aria-label="Facebook — ���্রান্ত রাই" title="Facebook">'
+            '<a class="soc__a soc__a--fb" href="https://www.facebook.com/pranto.rai.37" target="_blank" rel="noopener me" aria-label="Facebook — প্রান্ত রাই" title="Facebook">'
             '<svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-fb"/></svg></a>'
             '<a class="soc__a soc__a--map" href="https://maps.app.goo.gl/UyNxwUBw3sjnmGE29" target="_blank" rel="noopener" aria-label="Google Maps — দর্শনা" title="Google Maps">'
             '<svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-gmap"/></svg></a>'
@@ -1478,12 +1486,12 @@ __CSP__
         '<h2 class="hub-sub" id="all">সব লেখা <span>(' + bn(len(BLOG.POSTS)) + 'টি)</span></h2>'
         '<div class="cards">' + ''.join(cards) + '</div>'
         '<div class="cta" style="margin-top:30px">'
-        '<p>গণিতের পড়া বা ব্যাচ সম্পর্কে প্রশ্ন থাকলে হোয়াটসঅ্য���প��� বার্তা পাঠান।</p>'
+        '<p>গণিতের পড়া বা ব্যাচ সম্পর্কে প্রশ্ন থাকলে হোয়াটসঅ্যাপে বার্তা পাঠান।</p>'
         '<a class="btn" href="' + WA + '?text=%E0%A6%86%E0%A6%B8%E0%A6%B8%E0%A6%BE%E0%A6%B2%E0%A6%BE%E0%A6%AE%E0%A7%81%20%E0%A6%86%E0%A6%B2%E0%A6%BE%E0%A6%87%E0%A6%95%E0%A7%81%E0%A6%AE%2C%20%E0%A6%AA%E0%A7%9C%E0%A6%BE%E0%A6%B6%E0%A7%8B%E0%A6%A8%E0%A6%BE%20%E0%A6%A8%E0%A6%BF%E0%A7%9F%E0%A7%87%20%E0%A6%9C%E0%A6%BE%E0%A6%A8%E0%A6%A4%E0%A7%87%20%E0%A6%9A%E0%A6%BE%E0%A6%87%E0%A5%A4" '
         'target="_blank" rel="noopener">প্রশ্ন করুন</a></div>'
         '</main>' + footer_html())
     hub = chrome(head_for('ব্লগ | SSC ও ক্লাস ৬–১০ গণিত — ম্যাথ একাডেমি দর্শনা',
-                          'দর্শনা ও চুয়াডাঙ্গার শিক্ষার্থীদের জন্য গণিতের নোট — SSC প্রস্তুতি, অধ্যায়ের ক্রম, রুটি��� আর কোচিং বাছাইয়ের পরামর্শ।',
+                          'দর্শনা ও চুয়াডাঙ্গার শিক্ষার্থীদের জন্য গণিতের নোট — SSC প্রস্তুতি, অধ্যায়ের ক্রম, রুটিন আর কোচিং বাছাইয়ের পরামর্শ।',
                           hub_url, hub_ld), hub_body)
     hub = hub.replace('</head>', '<style>' + blog_css + '</style>\n</head>')
 
@@ -1638,7 +1646,7 @@ __CSP__
     # ---------- .well-known/security.txt (RFC 9116) ----------
     (D / '.well-known').mkdir(exist_ok=True)
     (D / '.well-known' / 'security.txt').write_text(
-        '# Security policy — ম্যাথ ��কাডেমি (Math Academy), Darshana\n'
+        '# Security policy — ম্যাথ একাডেমি (Math Academy), Darshana\n'
         'Contact: https://www.facebook.com/pranto.rai.37\n'
         'Contact: tel:+8801641045469\n'
         'Expires: 2027-10-01T00:00:00.000Z\n'

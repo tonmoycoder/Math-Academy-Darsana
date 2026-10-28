@@ -8,8 +8,15 @@
 <meta name="robots" content="noindex,follow">
 <meta name="theme-color" content="#0A0A0A">
 <meta name="color-scheme" content="light">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; font-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
-<link rel="icon" type="image/png" href="/assets/favicon.png">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' https://va.vercel-scripts.com https://vitals.vercel-insights.com; font-src 'self' data:; connect-src 'self' https://va.vercel-scripts.com https://vitals.vercel-insights.com https://*.vercel-analytics.com https://*.vercel-insights.com; object-src 'none'; base-uri 'self'; form-action 'self'">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/favicon-48x48.png" sizes="48x48" type="image/png">
+<link rel="icon" href="/favicon-96x96.png" sizes="96x96" type="image/png">
+<link rel="icon" href="/favicon-192x192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta property="og:site_name" content="ম্যাথ একাডেমি দর্শনা">
+<meta name="application-name" content="ম্যাথ একাডেমি দর্শনা">
 <link rel="preload" as="font" type="font/woff2" href="/assets/f1.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="/assets/f2.woff2" crossorigin>
 <link rel="preload" as="font" type="font/woff2" href="/assets/f3.woff2" crossorigin>
@@ -91,4 +98,9 @@
 
 <script>(function(){var e=document.getElementById("e404Year");if(e){var t="\u09E6\u09E7\u09E8\u09E9\u09EA\u09EB\u09EC\u09ED\u09EE\u09EF",n=String(new Date().getFullYear()).replace(/\d/g,function(r){return t[+r]});e.textContent=n}})();
 </script>
+
+<script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)},window.si=window.si||function(){(window.siq=window.siq||[]).push(arguments)};
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/_vercel/speed-insights/script.js"></script>
 </body></html>

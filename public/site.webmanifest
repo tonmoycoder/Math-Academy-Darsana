@@ -1,19 +1,11 @@
 {
-  "id": "/",
-  "name": "Math Academy Darsana",
-  "short_name": "Math Academy",
+  "name": "ম্যাথ একাডেমি দর্শনা",
+  "short_name": "ম্যাথ একাডেমি",
   "description": "দর্শনায় ৬ষ্ঠ-১০ম শ্রেণি ও SSC-এর সেরা গণিত শিক্ষক প্রান্ত রাই (দর্শনা আইডিয়াল স্কুল)। মুখস্থ নয়, ম্যাথ একাডেমিতে যুক্তির সাহায্যে গণিত শিখুন। আজই যোগাযোগ করুন।",
-  "lang": "bn-BD",
-  "dir": "ltr",
-  "start_url": "/?utm_source=pwa",
-  "scope": "/",
+  "start_url": "/",
   "display": "standalone",
-  "orientation": "portrait",
   "background_color": "#ffffff",
   "theme_color": "#1a4d3e",
-  "categories": [
-    "education"
-  ],
   "icons": [
     {
       "src": "/favicon-48x48.png",
@@ -21,64 +13,27 @@
       "type": "image/png"
     },
     {
-      "src": "/icon-192x192.png",
+      "src": "/favicon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/icon-192.png",
+      "src": "/icon-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any"
+      "purpose": "any maskable"
     },
     {
       "src": "/icon-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "/icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "/icon-192-maskable.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "maskable"
-    },
-    {
-      "src": "/icon-512-maskable.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "maskable"
-    }
-  ],
-  "shortcuts": [
-    {
-      "name": "ব্যাচে ভর্তি ও তথ্য",
-      "short_name": "ভর্তি তথ্য",
-      "url": "/#book",
-      "icons": [
-        {
-          "src": "/icon-192.png",
-          "sizes": "192x192"
-        }
-      ]
-    },
-    {
-      "name": "ব্যাচ ও সময়সূচি",
-      "short_name": "ব্যাচসমূহ",
-      "url": "/#batches",
-      "icons": [
-        {
-          "src": "/icon-192.png",
-          "sizes": "192x192"
-        }
-      ]
+      "purpose": "any maskable"
     }
   ]
 }
