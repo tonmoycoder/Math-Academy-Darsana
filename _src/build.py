@@ -433,10 +433,10 @@ CSP_META = ('<meta http-equiv="Content-Security-Policy" content="'
             "default-src 'self'; "
             "img-src 'self' data:; "
             "style-src 'self' 'unsafe-inline'; "
-            "script-src 'self' 'unsafe-inline'; "
+            "script-src 'self' 'unsafe-inline' https://va.vercel-scripts.com; "
             "font-src 'self' data:; "
             ""          # the sound probe plays a 0-ms silent wav
-            "connect-src 'self'; "
+            "connect-src 'self' https://*.vercel-analytics.com https://*.vercel-insights.com; "
             "object-src 'none'; "
             "base-uri 'self'; "
             "form-action 'self'"
@@ -531,7 +531,7 @@ LD = {"@context": "https://schema.org", "@graph": [
     for q, a in HOME_FAQS]},
   {"@type": "BreadcrumbList", "@id": S + "/#crumbs", "itemListElement": [
     {"@type": "ListItem", "position": 1, "name": "হোম", "item": S + "/"},
-    {"@type": "ListItem", "position": 2, "name": "শিক্ষক প্রান্ত রাই", "item": S + "/#teacher"},
+    {"@type": "ListItem", "position": 2, "name": "শিক্ষক প্র���ন্ত রাই", "item": S + "/#teacher"},
     {"@type": "ListItem", "position": 3, "name": "ব্যাচ ও আসন", "item": S + "/#batches"},
     {"@type": "ListItem", "position": 4, "name": "ভর্তি-তথ্য", "item": S + "/#book"}]}
 ]}
@@ -547,6 +547,13 @@ doc = (head
        + '\n<script>\n' + gsap + '\n</script>\n'
        + '<script>\n' + js + '\n</script>\n'
        + jsonld
+       + '<script>\n'
+       + '!function(){window.va||(window.va=function(){(window.vaq=window.vaq||[]).push(arguments)}),'
+       + 'window.vam="production";var e=document.createElement("script");'
+       + 'e.src="/_vercel/insights/script.js",e.defer=!0,'
+       + 'e.dataset.sdkn="@vercel/analytics",e.dataset.sdkv="1.6.1",'
+       + 'document.head.appendChild(e)}();\n'
+       + '</script>\n'
        + '</body>\n</html>\n')
 
 doc = doc.replace('__KEEP_PRELOAD__', '')          # inline: nothing to preload
@@ -732,7 +739,7 @@ for cp in custom_posts:
         'mins': int(cp.get('mins', 5)),
         'faq': cp.get('faq') if isinstance(cp.get('faq'), list) and len(cp.get('faq')) == 3 else [
             ('এই লেখাটি কাদের জন্য?', 'ম্যাথ একাডেমির শিক্ষার্থী ও অভিভাবকদের জন্য।'),
-            ('কীভাবে প্রস্তুতি নেব?', 'নিয়মিত অনুশীলন ও মক টেস্টের মাধ্যমে।'),
+            ('ক��ভাবে প্রস্তুতি নেব?', 'নিয়মিত অনুশীলন ও মক টেস্টের মাধ্যমে।'),
             ('আরও জানতে কোথায় যোগাযোগ করব?', 'আমাদের হোয়াটসঅ্যাপ নম্বরে যোগাযোগ করুন।')
         ],
         'body': cp.get('body', '') if '<p>' in cp.get('body', '') else _markdown_to_html(cp.get('body', ''))
@@ -843,6 +850,13 @@ if '--publish' in sys.argv:
     pub = (head + '<style>' + fonts + css + extra_css + '</style>'
            + top + mid + bot
            + '<script>' + gsap + '</script>' + '<script>' + js + '</script>' + jsonld
+           + '<script>\n'
+           + '!function(){window.va||(window.va=function(){(window.vaq=window.vaq||[]).push(arguments)}),'
+           + 'window.vam="production";var e=document.createElement("script");'
+           + 'e.src="/_vercel/insights/script.js",e.defer=!0,'
+           + 'e.dataset.sdkn="@vercel/analytics",e.dataset.sdkv="1.6.1",'
+           + 'document.head.appendChild(e)}();\n'
+           + '</script>\n'
            + '</body></html>')
     # __SITE__ must be resolved in the published build too (canonical, hreflang, og:url, og:image)
     pub = pub.replace('__SITE__', S)
@@ -1324,7 +1338,7 @@ __CSP__
             '<img src="data:image/png;base64,' + LOGO_TIGHT + '" alt="ম্যাথ একাডেমি লোগো" width="52" height="52" loading="lazy">'
             '<div><b>MATH ACADEMY</b><small>ম্যাথ একাডেমি · দর্শনা, চুয়াডাঙ্গা</small></div>'
             '</div>'
-            '<p class="footer__desc">SSC ও ক্লাস ৬–১০ শিক্ষার্থীদের জন্য দর্শনার ভিজ্যুয়াল গণিতের স্টুডিও। ছবি দিয়ে শুরু, যুক্তি দিয়ে শেষ — তারপর গতি।</p>'
+            '<p class="footer__desc">SSC ও ক্লাস ৬–১০ শিক্ষার্থীদের জন্য দর্শনার ভিজ্যুয়াল গণিতের স্টুডিও। ছবি দিয়ে শুরু, যুক্তি দিয���ে শেষ — তারপর গতি।</p>'
             '<div class="footer__note">'
             'আসন, ফি, সময়সূচি ও মাসিক ক্লাস/মক সংখ্যা ডেটাবেস-নির্ভর; ভর্তির পূর্বে WhatsApp-এ আসন প্রাপ্যতা ও চলতি তথ্য নিশ্চিত করে সরাসরি কেন্দ্রে যোগাযোগ করুন।'
             '</div>'
@@ -1354,7 +1368,7 @@ __CSP__
             '<div class="soc" role="group" aria-label="সোশ্যাল ও যোগাযোগ">'
             '<a class="soc__a soc__a--wa soc__a--pulse" href="https://wa.me/8801641045469" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp">'
             '<svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa2"/></svg></a>'
-            '<a class="soc__a soc__a--fb" href="https://www.facebook.com/pranto.rai.37" target="_blank" rel="noopener me" aria-label="Facebook — প্রান্ত রাই" title="Facebook">'
+            '<a class="soc__a soc__a--fb" href="https://www.facebook.com/pranto.rai.37" target="_blank" rel="noopener me" aria-label="Facebook — ���্রান্ত রাই" title="Facebook">'
             '<svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-fb"/></svg></a>'
             '<a class="soc__a soc__a--map" href="https://maps.app.goo.gl/UyNxwUBw3sjnmGE29" target="_blank" rel="noopener" aria-label="Google Maps — দর্শনা" title="Google Maps">'
             '<svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-gmap"/></svg></a>'
@@ -1469,7 +1483,7 @@ __CSP__
         'target="_blank" rel="noopener">প্রশ্ন করুন</a></div>'
         '</main>' + footer_html())
     hub = chrome(head_for('ব্লগ | SSC ও ক্লাস ৬–১০ গণিত — ম্যাথ একাডেমি দর্শনা',
-                          'দর্শনা ও চুয়াডাঙ্গার শিক্ষার্থীদের জন্য গণিতের নোট — SSC প্রস্তুতি, অধ্যায়ের ক্রম, রুটিন আর কোচিং বাছাইয়ের পরামর্শ।',
+                          'দর্শনা ও চুয়াডাঙ্গার শিক্ষার্থীদের জন্য গণিতের নোট — SSC প্রস্তুতি, অধ্যায়ের ক্রম, রুটি��� আর কোচিং বাছাইয়ের পরামর্শ।',
                           hub_url, hub_ld), hub_body)
     hub = hub.replace('</head>', '<style>' + blog_css + '</style>\n</head>')
 
@@ -1624,7 +1638,7 @@ __CSP__
     # ---------- .well-known/security.txt (RFC 9116) ----------
     (D / '.well-known').mkdir(exist_ok=True)
     (D / '.well-known' / 'security.txt').write_text(
-        '# Security policy — ম্যাথ একাডেমি (Math Academy), Darshana\n'
+        '# Security policy — ম্যাথ ��কাডেমি (Math Academy), Darshana\n'
         'Contact: https://www.facebook.com/pranto.rai.37\n'
         'Contact: tel:+8801641045469\n'
         'Expires: 2027-10-01T00:00:00.000Z\n'
