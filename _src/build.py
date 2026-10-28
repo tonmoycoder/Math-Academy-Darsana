@@ -531,7 +531,7 @@ LD = {"@context": "https://schema.org", "@graph": [
     for q, a in HOME_FAQS]},
   {"@type": "BreadcrumbList", "@id": S + "/#crumbs", "itemListElement": [
     {"@type": "ListItem", "position": 1, "name": "হোম", "item": S + "/"},
-    {"@type": "ListItem", "position": 2, "name": "শিক্ষক প্র���ন্ত রাই", "item": S + "/#teacher"},
+    {"@type": "ListItem", "position": 2, "name": "শিক্ষক প্র�������ন্ত রাই", "item": S + "/#teacher"},
     {"@type": "ListItem", "position": 3, "name": "ব্যাচ ও আসন", "item": S + "/#batches"},
     {"@type": "ListItem", "position": 4, "name": "ভর্তি-তথ্য", "item": S + "/#book"}]}
 ]}
@@ -551,7 +551,7 @@ doc = (head
        + '!function(){window.va||(window.va=function(){(window.vaq=window.vaq||[]).push(arguments)}),'
        + 'window.vam="production";var e=document.createElement("script");'
        + 'e.src="/_vercel/insights/script.js",e.defer=!0,'
-       + 'e.dataset.sdkn="@vercel/analytics",e.dataset.sdkv="1.6.1",'
+       + 'e.dataset.sdkn="@vercel/analytics",e.dataset.sdkv="2.0.1",'
        + 'document.head.appendChild(e)}();\n'
        + '</script>\n'
        + '</body>\n</html>\n')
@@ -854,7 +854,7 @@ if '--publish' in sys.argv:
            + '!function(){window.va||(window.va=function(){(window.vaq=window.vaq||[]).push(arguments)}),'
            + 'window.vam="production";var e=document.createElement("script");'
            + 'e.src="/_vercel/insights/script.js",e.defer=!0,'
-           + 'e.dataset.sdkn="@vercel/analytics",e.dataset.sdkv="1.6.1",'
+           + 'e.dataset.sdkn="@vercel/analytics",e.dataset.sdkv="2.0.1",'
            + 'document.head.appendChild(e)}();\n'
            + '</script>\n'
            + '</body></html>')
@@ -1478,7 +1478,7 @@ __CSP__
         '<h2 class="hub-sub" id="all">সব লেখা <span>(' + bn(len(BLOG.POSTS)) + 'টি)</span></h2>'
         '<div class="cards">' + ''.join(cards) + '</div>'
         '<div class="cta" style="margin-top:30px">'
-        '<p>গণিতের পড়া বা ব্যাচ সম্পর্কে প্রশ্ন থাকলে হোয়াটসঅ্যাপে বার্তা পাঠান।</p>'
+        '<p>গণিতের পড়া বা ব্যাচ সম্পর্কে প্রশ্ন থাকলে হোয়াটসঅ্য���প��� বার্তা পাঠান।</p>'
         '<a class="btn" href="' + WA + '?text=%E0%A6%86%E0%A6%B8%E0%A6%B8%E0%A6%BE%E0%A6%B2%E0%A6%BE%E0%A6%AE%E0%A7%81%20%E0%A6%86%E0%A6%B2%E0%A6%BE%E0%A6%87%E0%A6%95%E0%A7%81%E0%A6%AE%2C%20%E0%A6%AA%E0%A7%9C%E0%A6%BE%E0%A6%B6%E0%A7%8B%E0%A6%A8%E0%A6%BE%20%E0%A6%A8%E0%A6%BF%E0%A7%9F%E0%A7%87%20%E0%A6%9C%E0%A6%BE%E0%A6%A8%E0%A6%A4%E0%A7%87%20%E0%A6%9A%E0%A6%BE%E0%A6%87%E0%A5%A4" '
         'target="_blank" rel="noopener">প্রশ্ন করুন</a></div>'
         '</main>' + footer_html())
