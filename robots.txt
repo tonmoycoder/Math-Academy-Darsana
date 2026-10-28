@@ -1,12 +1,22 @@
-# ম্যাথ একাডেমি — দর্শনা, চুয়াডাঙ্গা
-# Search crawlers
+# Math Academy Darsana — Robots.txt
 User-agent: *
 Allow: /
 Disallow: /admin/
 Disallow: /api/
 Allow: /*?fast=
 
-# AI answer engines (GEO / AEO) — explicitly welcomed
+# Ensure Googlebot & Googlebot-Image fetch logos and favicons smoothly
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /logo.png
+Allow: /favicon*.png
+Allow: /icon-*.png
+Allow: /favicon.ico
+Allow: /apple-touch-icon.png
+
+# AI answer engines (GEO / AEO)
 User-agent: GPTBot
 Allow: /
 

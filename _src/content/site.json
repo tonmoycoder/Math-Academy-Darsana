@@ -77,13 +77,14 @@
     "note_bn": "ব্যাচভেদে মাসিক ফি আলাদা; চলতি ফি নিচের টেবিলে দেখুন"
   },
   "team": {
-    "teacher_bn": "প্রান্ত রায়",
+    "teacher_bn": "প্রান্ত রাই",
     "teacher_title_bn": "প্রতিষ্ঠাতা ও শিক্ষক",
     "experience_years": 10,
     "founded_year": 2022,
     "degree_bn": "গণিতে অনার্স ও মাস্টার্স",
     "developer_bn": "তানভীর ইসলাম তন্ময়",
-    "developer_url": "https://www.facebook.com/tanverislamtonmoyofficial"
+    "developer_url": "https://www.facebook.com/tanverislamtonmoyofficial",
+    "teacher_en": "Pranto Rai"
   },
   "site": {
     "host": "https://mathacademydarsana.vercel.app",

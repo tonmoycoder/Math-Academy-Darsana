@@ -26,40 +26,54 @@ head = """<!DOCTYPE html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>ম্যাথ একাডেমি দর্শনা | SSC ও ৬–১০ গণিত · প্রান্ত রায়</title>
-<meta name="description" content="দর্শনা, চুয়াডাঙ্গায় {{CLASS_RANGE}}-এর অফলাইন গণিত ব্যাচ · প্রতি ব্যাচে সর্বোচ্চ {{CAP}} জন · যোগাযোগ: {{PHONE}}">
-<meta name="keywords" content="ম্যাথ একাডেমি, Math Academy Darshana, দর্শনার ম্যাথ টিউটর, প্রান্ত রায়, Pranto Roy, দর্শনা আইডিয়াল স্কুল গণিত শিক্ষক, চুয়াডাঙ্গা গণিত কোচিং, SSC গণিত দর্শনা, ক্লাস ৬–১০ গণিত দর্শনা, SSC Math Darshana, গণিত শিক্ষক চুয়াডাঙ্গা, math tutor Darshana, SSC preparation Darshana">
-<meta name="author" content="প্রান্ত রায় · ম্যাথ একাডেমি">
-<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+<title>ম্যাথ একাডেমি দর্শনা | সেরা গণিত শিক্ষক | প্রান্ত রাই</title>
+<meta name="description" content="দর্শনায় ৬ষ্ঠ-১০ম শ্রেণি ও SSC-এর সেরা গণিত শিক্ষক প্রান্ত রাই (দর্শনা আইডিয়াল স্কুল)। মুখস্থ নয়, ম্যাথ একাডেমিতে যুক্তির সাহায্যে গণিত শিখুন। আজই যোগাযোগ করুন।">
+<meta name="keywords" content="Math Academy Darsana, Pranto Rai, best math teacher in Darsana, Darsana Ideal School, Chuadanga, গণিত শিক্ষক দর্শনা, প্রান্ত রাই, SSC গণিত দর্শনা">
+<meta name="author" content="Pranto Rai">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
 <meta name="google-site-verification" content="googlee3840f5ed89d0b8b.html">
 <meta name="google-site-verification" content="googlee3840f5ed89d0b8b">
 <meta name="google-site-verification" content="e3840f5ed89d0b8b">
-<meta name="theme-color" content="#0A0A0A">
+<meta name="theme-color" content="#1a4d3e">
 <meta name="color-scheme" content="light">
 <meta name="format-detection" content="telephone=yes">
 <meta name="geo.region" content="BD-19">
-<meta name="geo.placename" content="দর্শনা, চুয়াডাঙ্গা">
+<meta name="geo.placename" content="Darshana, Chuadanga, Bangladesh">
 <link rel="canonical" href="__SITE__/">
 <link rel="alternate" hreflang="bn-BD" href="__SITE__/">
 <link rel="alternate" hreflang="x-default" href="__SITE__/">
-<meta property="og:site_name" content="ম্যাথ একাডেমি, দর্শনা">
-<meta property="og:locale" content="bn_BD">
+
+<!-- Brand and Site Name (Stops Google from showing Vercel) -->
+<meta property="og:site_name" content="Math Academy Darsana">
+<meta name="application-name" content="Math Academy Darsana">
+<meta name="apple-mobile-web-app-title" content="Math Academy Darsana">
+
+<!-- Open Graph (OG) -->
 <meta property="og:type" content="website">
-<meta property="og:title" content="ম্যাথ একাডেমি দর্শনা — SSC ও ক্লাস ৬–১০ গণিত · প্রান্ত রায়">
-<meta property="og:description" content="দর্শনা, চুয়াডাঙ্গায় {{CLASS_RANGE}}-এর অফলাইন ব্যাচ · সর্বোচ্চ {{CAP}} জন/ব্যাচ · মাসে {{CLASSES_PM}} ক্লাস ও {{MOCK}} মক টেস্ট · {{PHONE}}">
 <meta property="og:url" content="__SITE__/">
-<meta property="og:image" content="__SITE__/og-1200x630.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="ম্যাথ একাডেমি — দর্শনা, চুয়াডাঙ্গা · গণিত কোচিং">
+<meta property="og:title" content="ম্যাথ একাডেমি দর্শনা | সেরা গণিত শিক্ষক | প্রান্ত রাই">
+<meta property="og:description" content="দর্শনায় ৬ষ্ঠ-১০ম শ্রেণি ও SSC-এর সেরা গণিত শিক্ষক প্রান্ত রাই (দর্শনা আইডিয়াল স্কুল)। মুখস্থ নয়, ম্যাথ একাডেমিতে যুক্তির সাহায্যে গণিত শিখুন। আজই যোগাযোগ করুন।">
+<meta property="og:image" content="__SITE__/logo.png">
+<meta property="og:image:width" content="1024">
+<meta property="og:image:height" content="1024">
+<meta property="og:image:alt" content="Math Academy Darsana Logo - Founded by Pranto Rai">
+<meta property="og:locale" content="bn_BD">
 <meta property="og:phone_number" content="+8801641045469">
+
+<!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="ম্যাথ একাডেমি দর্শনা — SSC ও ক্লাস ৬–১০ গণিত">
-<meta name="twitter:description" content="দর্শনা, চুয়াডাঙ্গায় অফলাইন {{CLASS_RANGE}} গণিত ব্যাচ · প্রতি ব্যাচে সর্বোচ্চ {{CAP}} জন · শিক্ষক প্রান্ত রায়।">
-<meta name="twitter:image" content="__SITE__/og-1200x630.jpg">
+<meta name="twitter:title" content="ম্যাথ একাডেমি দর্শনা | সেরা গণিত শিক্ষক | প্রান্ত রাই">
+<meta name="twitter:description" content="দর্শনায় ৬ষ্ঠ-১০ম শ্রেণি ও SSC-এর সেরা গণিত শিক্ষক প্রান্ত রাই (দর্শনা আইডিয়াল স্কুল)। যুক্তির সাহায্যে গণিত শিখুন।">
+<meta name="twitter:image" content="__SITE__/logo.png">
+
+<!-- Google Search Compliant Favicons -->
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon-192x192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/icon-512x512.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
 __CSP__
-<link rel="icon" type="image/png" href="data:image/png;base64,__LOGO_TIGHT__">
-<link rel="apple-touch-icon" href="data:image/png;base64,__LOGO_TIGHT__">
 <!--__PWA__-->
 <!--__PRELOAD__-->
 </head>
@@ -456,47 +470,68 @@ def home_faq_markup():
 bot = bot.replace('<!--__HOME_FAQ__-->', home_faq_markup())
 
 LD = {"@context": "https://schema.org", "@graph": [
-  {"@type": ["EducationalOrganization", "LocalBusiness"], "@id": S + "/#org",
-   "name": "ম্যাথ একাডেমি", "alternateName": ["Math Academy Darshana", "ম্যাথ একাডেমি দর্শনা", "Math Academy"],
-   "url": S + "/", "logo": S + "/logo-512.png", "image": S + "/og-1200x630.jpg",
-   "description": "দর্শনা, চুয়াডাঙ্গায় {{CLASS_RANGE}} শিক্ষার্থীদের জন্য অফলাইন গণিতের ব্যাচ; প্রতি ব্যাচে সর্বোচ্চ {{CAP}} জন।",
-   "foundingDate": str(int(CFG['team']['founded_year'])),
-   "slogan": "গণিত মুখস্থ নয় — এটা যুক্তির ভাষা",
-   "telephone": "+8801641045469", "priceRange": "{{FEE_RANGE}} / মাস",
+  {"@type": "WebSite", "@id": S + "/#website",
+   "url": S + "/", "name": "Math Academy Darsana",
+   "alternateName": ["Math Academy", "ম্যাথ একাডেমি দর্শনা", "ম্যাথ একাডেমি"],
+   "publisher": {"@id": S + "/#organization"},
+   "inLanguage": "bn-BD"},
+  {"@type": "EducationalOrganization", "@id": S + "/#organization",
+   "name": "Math Academy", "alternateName": ["Math Academy Darsana", "ম্যাথ একাডেমি", "ম্যাথ একাডেমি দর্শনা"],
+   "url": S + "/",
+   "logo": {
+     "@type": "ImageObject",
+     "@id": S + "/#logo",
+     "url": S + "/logo.png",
+     "caption": "Math Academy Darsana Official Logo"
+   },
+   "image": S + "/logo.png",
+   "telephone": "+8801641045469",
+   "priceRange": "{{FEE_RANGE}} / মাস",
    "currenciesAccepted": "BDT",
-   "address": {"@type": "PostalAddress", "addressLocality": "দর্শনা", "addressRegion": "চুয়াডাঙ্গা",
-               "addressCountry": "BD"},
+   "address": {
+     "@type": "PostalAddress",
+     "streetAddress": "Darshana, Chuadanga, Bangladesh",
+     "addressLocality": "Darshana",
+     "addressRegion": "Chuadanga",
+     "postalCode": "7200",
+     "addressCountry": "BD"
+   },
    "hasMap": "https://maps.app.goo.gl/UyNxwUBw3sjnmGE29",
-   "areaServed": [{"@type": "City", "name": "দর্শনা"}, {"@type": "City", "name": "চুয়াডাঙ্গা"},
-                  {"@type": "AdministrativeArea", "name": "চুয়াডাঙ্গা জেলা"}],
-   "sameAs": ["https://www.facebook.com/pranto.rai.37"],
-   "founder": {"@id": S + "/#teacher"}}, 
-  {"@type": "Person", "@id": S + "/#teacher", "name": "প্রান্ত রায়", "alternateName": "Pranto Roy",
-   "jobTitle": "গণিত শিক্ষক", "url": S + "/#teacher",
-   "worksFor": [
-     {"@type": "EducationalOrganization", "name": "দর্শনা আইডিয়াল স্কুল",
-      "url": "https://www.darsanaidealschool.com/"},
-     {"@id": S + "/#org"}],
+   "areaServed": [
+     {"@type": "City", "name": "Darshana"},
+     {"@type": "AdministrativeArea", "name": "Chuadanga"}
+   ],
+   "founder": {"@id": S + "/#person-pranto-rai"},
+   "sameAs": ["https://www.facebook.com/pranto.rai.37"]},
+  {"@type": "Person", "@id": S + "/#person-pranto-rai",
+   "name": "Pranto Rai",
+   "alternateName": "প্রান্ত রাই",
+   "jobTitle": "Mathematics Teacher",
+   "description": "Founder and lead instructor at Math Academy Darsana, and Mathematics Teacher at Darsana Ideal School.",
+   "worksFor": {
+     "@type": "EducationalOrganization",
+     "name": "Darsana Ideal School",
+     "url": "https://www.darsanaidealschool.com/"
+   },
+   "affiliation": {"@id": S + "/#organization"},
    "telephone": "+8801641045469",
    "sameAs": ["https://www.facebook.com/pranto.rai.37"],
-   "knowsAbout": ["গণিত", "উচ্চতর গণিত", "জ্যামিতি", "ত্রিকোণমিতি", "SSC গণিত", "ক্লাস ৬–১০ গণিত", "বীজগণিত"],
+   "knowsAbout": ["Mathematics", "Higher Mathematics", "Secondary School Certificate (SSC) Mathematics", "গণিত", "উচ্চতর গণিত", "জ্যামিতি", "ত্রিকোণমিতি", "বীজগণিত"],
    "knowsLanguage": ["bn", "en"]},
   {"@type": "Course", "@id": S + "/#courses", "name": "{{CLASS_RANGE}} গণিতের অফলাইন ব্যাচ (দর্শনা)",
    "description": "{{CLASS_RANGE}}-এর অফলাইন গণিতের ব্যাচ; প্রতি ব্যাচে সর্বোচ্চ {{CAP}} জন। মাসে {{CLASSES_PM}}টি ক্লাস ও {{MOCK}}টি মক টেস্ট। ব্যাচভেদে মাসিক ফি {{FEE_RANGE}}।",
-   "provider": {"@id": S + "/#org"},
+   "provider": {"@id": S + "/#organization"},
    "hasCourseInstance": [
      {"@type": "CourseInstance", "courseMode": "onsite", "name": b['name_bn'],
       "description": b['classes_bn'] + ' · ' + b['days_bn'] + ' · ' + b['time_bn']}
-     for b in BATCHES]}, 
-  {"@type": "WebSite", "@id": S + "/#site", "url": S + "/", "name": "ম্যাথ একাডেমি দর্শনা",
-   "inLanguage": "bn-BD", "publisher": {"@id": S + "/#org"}, "dateModified": "2026-10-27"},
+     for b in BATCHES]},
   {"@type": "FAQPage", "@id": S + "/#faq", "mainEntity": [
     {"@type": "Question", "name": q,
      "acceptedAnswer": {"@type": "Answer", "text": a}}
-    for q, a in HOME_FAQS]}, 
+    for q, a in HOME_FAQS]},
   {"@type": "BreadcrumbList", "@id": S + "/#crumbs", "itemListElement": [
     {"@type": "ListItem", "position": 1, "name": "হোম", "item": S + "/"},
-    {"@type": "ListItem", "position": 2, "name": "শিক্ষক প্রান্ত রায়", "item": S + "/#teacher"},
+    {"@type": "ListItem", "position": 2, "name": "শিক্ষক প্রান্ত রাই", "item": S + "/#teacher"},
     {"@type": "ListItem", "position": 3, "name": "ব্যাচ ও আসন", "item": S + "/#batches"},
     {"@type": "ListItem", "position": 4, "name": "ভর্তি-তথ্য", "item": S + "/#book"}]}
 ]}
@@ -692,8 +727,8 @@ for cp in custom_posts:
         'h1': str(cp.get('h1', cp.get('title', cp['slug']))),
         'desc': str(cp.get('desc', '')),
         'keyword': str(cp.get('keyword', cp.get('tag', 'গণিত'))),
-        'date': str(cp.get('date', '2026-10-27')),
-        'updated': str(cp.get('updated', '2026-10-27')),
+        'date': str(cp.get('date', '2026-10-28')),
+        'updated': str(cp.get('updated', '2026-10-28')),
         'mins': int(cp.get('mins', 5)),
         'faq': cp.get('faq') if isinstance(cp.get('faq'), list) and len(cp.get('faq')) == 3 else [
             ('এই লেখাটি কাদের জন্য?', 'ম্যাথ একাডেমির শিক্ষার্থী ও অভিভাবকদের জন্য।'),
@@ -733,7 +768,7 @@ _BN_MONTHS = ['জানুয়ারি', 'ফেব্রুয়ারি'
 
 
 def bn_date(iso):
-    """'2026-10-27' → '২৬ অক্টোবর ২০২৬' — no Latin digits anywhere in visible text."""
+    """'2026-10-28' → '২৬ অক্টোবর ২০২৬' — no Latin digits anywhere in visible text."""
     try:
         y, m, d = iso.split('-')
         return '%s %s %s' % (bn(int(d)), _BN_MONTHS[int(m) - 1], bn(int(y)))
@@ -812,11 +847,9 @@ if '--publish' in sys.argv:
     # __SITE__ must be resolved in the published build too (canonical, hreflang, og:url, og:image)
     pub = pub.replace('__SITE__', S)
     pub = pub.replace('<!--__PWA__-->',
-        '<link rel="manifest" href="/manifest.webmanifest">\n'
-        '<link rel="apple-touch-icon" sizes="192x192" href="/icon-192.png">\n'
         '<meta name="apple-mobile-web-app-capable" content="yes">\n'
         '<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">\n'
-        '<meta name="apple-mobile-web-app-title" content="ম্যাথ একাডেমি">\n'
+        '<meta name="apple-mobile-web-app-title" content="Math Academy Darsana">\n'
         '<meta name="mobile-web-app-capable" content="yes">')
     pub = apply_content(pub)
     pub = pub.replace('__KEEP_PRELOAD__', '')      # the real preload links are injected below
@@ -978,7 +1011,7 @@ __CSP__
     # absolute paths: the same sheet is used at /, /blog/ and /blog/<slug>/
     fonts_css = fonts_css.replace('url(assets/', 'url(/assets/')
     # ---- PWA: manifest, icons, service worker (installable = durable autoplay grant)
-    for _f in ('manifest.webmanifest', 'sw.js', 'icon-192.png', 'icon-512.png',
+    for _f in ('manifest.webmanifest', 'site.webmanifest', 'sw.js', 'logo.png', 'logo-512.png', 'favicon-48x48.png', 'icon-192x192.png', 'icon-512x512.png', 'apple-touch-icon.png', 'favicon.ico', 'icon-192.png', 'icon-512.png',
                'icon-192-maskable.png', 'icon-512-maskable.png'):
         (D / _f).write_bytes((pathlib.Path('_src/pwa') / _f).read_bytes())
     (D / 'assets' / 'fonts.css').write_text(fonts_css, encoding='utf-8')
@@ -1321,7 +1354,7 @@ __CSP__
             '<div class="soc" role="group" aria-label="সোশ্যাল ও যোগাযোগ">'
             '<a class="soc__a soc__a--wa soc__a--pulse" href="https://wa.me/8801641045469" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp">'
             '<svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa2"/></svg></a>'
-            '<a class="soc__a soc__a--fb" href="https://www.facebook.com/pranto.rai.37" target="_blank" rel="noopener me" aria-label="Facebook — প্রান্ত রায়" title="Facebook">'
+            '<a class="soc__a soc__a--fb" href="https://www.facebook.com/pranto.rai.37" target="_blank" rel="noopener me" aria-label="Facebook — প্রান্ত রাই" title="Facebook">'
             '<svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-fb"/></svg></a>'
             '<a class="soc__a soc__a--map" href="https://maps.app.goo.gl/UyNxwUBw3sjnmGE29" target="_blank" rel="noopener" aria-label="Google Maps — দর্শনা" title="Google Maps">'
             '<svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-gmap"/></svg></a>'
@@ -1331,7 +1364,7 @@ __CSP__
             '<ul style="margin-top:14px">'
             '<li><a href="tel:+8801641045469"><svg class="ico" style="width:14px;height:14px"><use href="#i-phone"/></svg> ০১৬৪১-০৪৫৪৬৯</a></li>'
             '<li><a href="https://wa.me/8801641045469" target="_blank" rel="noopener" data-wa="আসসালামু আলাইকুম, বর্তমান অফলাইন ব্যাচ, আসন, সময় ও ফি জানতে চাই।"><svg class="ico" style="width:14px;height:14px"><use href="#i-wa"/></svg> WhatsApp · ০১৬৪১-০৪৫৪৬৯</a></li>'
-            '<li><a href="https://www.facebook.com/pranto.rai.37" target="_blank" rel="noopener me"><svg class="ico" style="width:14px;height:14px"><use href="#i-fb"/></svg> Facebook — প্রান্ত রায়</a></li>'
+            '<li><a href="https://www.facebook.com/pranto.rai.37" target="_blank" rel="noopener me"><svg class="ico" style="width:14px;height:14px"><use href="#i-fb"/></svg> Facebook — প্রান্ত রাই</a></li>'
             '<li><a href="https://maps.app.goo.gl/UyNxwUBw3sjnmGE29" target="_blank" rel="noopener"><svg class="ico" style="width:14px;height:14px"><use href="#i-gmap"/></svg> ম্যাপে দেখুন — দর্শনা</a></li>'
             '</ul></div>'
             '</div>'
@@ -1362,7 +1395,7 @@ __CSP__
             '<h4>৪. এনক্রিপ্টেড ও সুরক্ষিত সংযোগ</h4>'
             '<p>সম্পূর্ণ ওয়েবসাইটটি অত্যাধুনিক TLS/SSL এনক্রিপশন ও HSTS নিরাপত্তা প্রটোকলের অধীনে পরিচালিত। কোনো বহিরাগত অননুমোদিত ব্যক্তি ওয়েবসাইটের তথ্য বিকৃত করতে পারে না।</p>'
             '<h4>৫. যোগাযোগ ও জিজ্ঞাসা</h4>'
-            '<p>যেকোনো তথ্য যাচাই বা ব্যাচ সংক্রান্ত অনুসন্ধানের জন্য সরাসরি আমাদের শিক্ষক প্রান্ত রায়-এর সাথে WhatsApp বা সরাসরি ফোনে যোগাযোগ করতে পারেন।</p>'
+            '<p>যেকোনো তথ্য যাচাই বা ব্যাচ সংক্রান্ত অনুসন্ধানের জন্য সরাসরি আমাদের শিক্ষক প্রান্ত রাই-এর সাথে WhatsApp বা সরাসরি ফোনে যোগাযোগ করতে পারেন।</p>'
             '</div>'
             '<div class="pmodal__foot" style="padding:12px 20px;border-top:1px solid #ddd;background:#f3efe6">'
             '<button type="button" class="btn btn--ink" id="confirmPrivacyBtn">বুঝেছি</button>'
@@ -1462,7 +1495,7 @@ __CSP__
              "description": pst['desc'], "inLanguage": "bn-BD", "url": url,
              "mainEntityOfPage": {"@id": url},
              "datePublished": pst['date'], "dateModified": pst['updated'],
-             "author": {"@type": "Person", "name": "প্রান্ত রায় (Pranto Roy)",
+             "author": {"@type": "Person", "name": "প্রান্ত রাই (Pranto Rai)",
                         "url": SITE_HOST + "/#teacher",
                         "jobTitle": "গণিত শিক্ষক, দর্শনা আইডিয়াল স্কুল"},
              "publisher": {"@id": SITE_HOST + "/#org"},
@@ -1484,7 +1517,7 @@ __CSP__
             '<header class="post-head">'
             '<span class="eyebrow">' + pst['tag'] + '</span>'
             '<h1>' + pst['h1'] + '</h1>'
-            '<div class="post-meta"><span>লিখেছেন <b>প্রান্ত রায়</b></span>'
+            '<div class="post-meta"><span>লিখেছেন <b>প্রান্ত রাই</b></span>'
             '<span>' + bn(pst['mins']) + ' মিনিট পড়া</span>'
             '<span>প্রকাশ <b><time datetime="' + pst['date'] + '">' + bn_date(pst['date']) + '</time></b></span>'
             '<span>দর্শনা, চুয়াডাঙ্গা</span></div>'
@@ -1559,8 +1592,8 @@ __CSP__
     sm = ('<?xml version="1.0" encoding="UTF-8"?>\n'
           '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"\n'
           '        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n'
-          + _u(SITE_HOST + '/', '2026-10-27', 'weekly', '1.0')
-          + _u(hub_url, '2026-10-27', 'weekly', '0.8')
+          + _u(SITE_HOST + '/', '2026-10-28', 'weekly', '1.0')
+          + _u(hub_url, '2026-10-28', 'weekly', '0.8')
           + ''.join(_u(SITE_HOST + '/blog/' + x['slug'] + '/', x['updated'], 'monthly', '0.7', False)
                     for x in BLOG.POSTS)
           + '</urlset>\n')
@@ -1602,7 +1635,7 @@ __CSP__
     # ---------- humans.txt ----------
     (D / 'humans.txt').write_text(
         '/* TEAM */\n'
-        '  Teacher / owner : প্রান্ত রায় — ম্যাথ একাডেমি, দর্শনা, চুয়াডাঙ্গা\n'
+        '  Teacher / owner : প্রান্ত রাই — ম্যাথ একাডেমি, দর্শনা, চুয়াডাঙ্গা\n'
         '  Design & code   : তানভীর ইসলাম তন্ময় (Tanver Islam Tonmoy)\n'
         '                    https://www.facebook.com/tanverislamtonmoyofficial\n'
         '\n/* SITE */\n'
