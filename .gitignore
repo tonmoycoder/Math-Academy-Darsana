@@ -4,6 +4,8 @@
 .vercel
 dist/api
 node_modules/
+.cache/
+promo-video/.hyperframes/
 scratch/
 .config/
 __pycache__/

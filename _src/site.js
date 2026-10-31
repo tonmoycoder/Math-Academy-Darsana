@@ -240,7 +240,7 @@
   }
 
   /* ---------- whatsapp links ---------- */
-  var WA_NUMBER = '8801641045469';   // প্রান্ত রাই — আসল নম্বর
+  var WA_NUMBER = '8801641045469';   // প্রান্ত রায় — আসল নম্বর
   $$('[data-wa]').forEach(function(a){
     var msg = a.getAttribute('data-wa');
     if(a.tagName === 'A'){

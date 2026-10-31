@@ -3,7 +3,7 @@
 | Fact | Value | Source |
 |---|---|---|
 | Academy | ম্যাথ একাডেমি / Math Academy | user |
-| Teacher | প্রান্ত রায় / Pranto Roy | user |
+| Teacher | প্রান্ত রায় / Pranto Roy | user |
 | School | দর্শনা আইডিয়াল স্কুল — https://www.darsanaidealschool.com/ | user |
 | Location | দর্শনা, চুয়াডাঙ্গা, বাংলাদেশ — https://maps.app.goo.gl/UyNxwUBw3sjnmGE29 | user |
 | WhatsApp / phone | +880 1641-045469 | user |

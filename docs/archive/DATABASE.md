@@ -70,7 +70,7 @@ Stored as `<tr>` rows in `_src/03-sections.html` (§`#batches`). Derived, never 
 
 | Field | Value |
 |---|---|
-| name_bn / name_en | প্রান্ত রায় / Pranto Roy |
+| name_bn / name_en | প্রান্ত রায় / Pranto Roy |
 | role | প্রতিষ্ঠাতা ও শিক্ষক |
 | affiliation | দর্শনা আইডিয়াল স্কুল (https://www.darsanaidealschool.com/) |
 | degrees | গণিতে অনার্স ও মাস্টার্স (no institution named) |

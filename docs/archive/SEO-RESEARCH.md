@@ -3,7 +3,7 @@
 > **Purpose.** Nine published SEO resources were read; this file records **what each one actually says**,
 > **what is already done** in this project, **what is still open**, and **what was deliberately skipped as useless
 > for a one-page local business site**.
-> **Owner:** প্রান্ত রায় · **Canonical host:** `https://mathacademydarsana.vercel.app`
+> **Owner:** প্রান্ত রায় · **Canonical host:** `https://mathacademydarsana.vercel.app`
 > **Last updated:** 2026-10-25 (v7)
 
 ---
