@@ -2,7 +2,7 @@
 
 > **Status:** implemented and verified 2026-10-25 (v6).
 > **Scope:** the four artefacts below are the *whole* technical-SEO + security surface of this site.
-> **Owner:** প্রান্ত রায় · **Canonical host:** `https://math-academy-darsana.vercel.app`
+> **Owner:** প্রান্ত রায় · **Canonical host:** `https://math-academy-darsana.vercel.app`
 
 ---
 

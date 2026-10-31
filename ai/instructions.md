@@ -19,7 +19,7 @@
 
 ## 2 · Project facts and architecture that must stay aligned
 
-- Bengali-first Math Academy, Darshana/Chuadanga; founded **2022**; teacher প্রান্ত রায়, দর্শনা আইডিয়াল স্কুল; ১০+ years; WhatsApp `+8801641045469`; Facebook `pranto.rai.37`; map id `UyNxwUBw3sjnmGE29`.
+- Bengali-first Math Academy, Darshana/Chuadanga; founded **2022**; teacher প্রান্ত রায়, দর্শনা আইডিয়াল স্কুল; ১০+ years; WhatsApp `+8801641045469`; Facebook `pranto.rai.37`; map id `UyNxwUBw3sjnmGE29`.
 - Vercel is the deployment target and `https://mathacademydarsana.vercel.app` is the exact canonical domain.
 - Neon Postgres is the database. Keep exactly one Vercel Function, `api/content.js`; no other Neon services/functions.
 - Batch capacity is **15**. Live seats, fees and changing content are dynamic; never hard-code a volatile count into copy or generated HTML.

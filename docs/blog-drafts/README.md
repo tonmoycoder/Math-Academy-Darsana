@@ -72,7 +72,7 @@ Use Bengali digits for visible Bengali prose when appropriate. Greek letters and
 - Link to two or three related articles where relevant, using meaningful Bengali anchor text.
 - Keep limits and dated context visible. Do not imply a promised result or guaranteed rank.
 - Make the article complete and formatted on its own route; a card summary is not a substitute for the full Markdown article.
-- Preserve the academy's exact public facts if it is relevant: teacher প্রান্ত রায়, দর্শনা আইডিয়াল স্কুল, WhatsApp +880 1641-045469, Facebook `pranto.rai.37`, and Darshana/Chuadanga. Avoid unrelated business claims.
+- Preserve the academy's exact public facts if it is relevant: teacher প্রান্ত রায়, দর্শনা আইডিয়াল স্কুল, WhatsApp +880 1641-045469, Facebook `pranto.rai.37`, and Darshana/Chuadanga. Avoid unrelated business claims.
 
 ## 6 · Source and build workflow
 

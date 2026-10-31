@@ -21,7 +21,7 @@ The canonical domain is `https://mathacademydarsana.vercel.app`. The project als
 | Fact | Current value / rule |
 |---|---|
 | Academy | ম্যাথ একাডেমি · দর্শনা, চুয়াডাঙ্গা · founded **2022** |
-| Teacher | প্রান্ত রায় · দর্শনা আইডিয়াল স্কুল · ১০+ বছর অভিজ্ঞতা |
+| Teacher | প্রান্ত রায় · দর্শনা আইডিয়াল স্কুল · ১০+ বছর অভিজ্ঞতা |
 | Phone / WhatsApp | `+8801641045469` · visible form `০১৬৪১-০৪৫৪৬৯` |
 | Facebook | `pranto.rai.37` |
 | Google Maps | short id `UyNxwUBw3sjnmGE29` |

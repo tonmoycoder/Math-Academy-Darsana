@@ -27,7 +27,7 @@ You cannot out-rank a school website or a Facebook page on generic terms ("গ�
 |---|---|---|
 | ম্যাথ একাডেমি | Math Academy | brand |
 | ম্যাথ একাডেমি দর্শনা | Math Academy Darshana | brand + geo |
-| প্রান্ত রায় / প্রান্ত রায় স্যার | Pranto Roy / Pranto Rai | person |
+| প্রান্ত রায় / প্রান্ত রায় স্যার | Pranto Roy / Pranto Rai | person |
 | দর্শনা আইডিয়াল স্কুল গণিত শিক্ষক | Darshana Ideal School math teacher | person + institution |
 
 ### 1.2 Local / geo-targeted (the money keywords)
@@ -62,15 +62,15 @@ You cannot out-rank a school website or a Facebook page on generic terms ("গ�
 
 ### 2.1 `<title>` — three options
 
-1. **`ম্যাথ একাডেমি দর্শনা | SSC ও ৬–১০ গণিত · প্রান্ত রায়`** *(in use, 53 chars)* — brand + scope + name + location.
-2. `প্রান্ত রায় · দর্শনা গণিত শিক্ষক | Math Academy` *(50)* — person-first, best if people search the name.
+1. **`ম্যাথ একাডেমি দর্শনা | SSC ও ৬–১০ গণিত · প্রান্ত রায়`** *(in use, 53 chars)* — brand + scope + name + location.
+2. `প্রান্ত রায় · দর্শনা গণিত শিক্ষক | Math Academy` *(50)* — person-first, best if people search the name.
 3. `SSC ও ক্লাস ৬–১০ গণিত কোচিং দর্শনা | ম্যাথ একাডেমি` *(51)* — service-first, best for cold local queries.
 
 ### 2.2 `<meta name="description">` — three options (≤150 chars, Bengali, with a call action)
 
-1. **`দর্শনার ম্যাথ একাডেমি — SSC ও ক্লাস ৬–১০ গণিতের ছোট ব্যাচ (১২ জন)। শিক্ষক প্রান্ত রায়, দর্শনা আইডিয়াল স্কুল। সিট বুকিং ০১৬৪১-০৪৫৪৬৯।`** *(134 — in use)*
-2. `দর্শনায় SSC ও ক্লাস ৬–১০ গণিত প্রাইভেট — ১২ জনের ব্যাচ, প্রতি শনিবার অভিভাবক রিপোর্ট। প্রান্ত রায় (দর্শনা আইডিয়াল স্কুল)। ০১৬৪১-০৪৫৪৬৯।`
-3. `গণিত মুখস্থ নয় — যুক্তির ভাষা। দর্শনা আইডিয়াল স্কুলের শিক্ষক প্রান্ত রায়ের ম্যাথ একাডেমি, SSC ও ক্লাস ৬–১০ ব্যাচ। সিট আছে কি না জানুন ০১৬৪১-০৪৫৪৬৯।`
+1. **`দর্শনার ম্যাথ একাডেমি — SSC ও ক্লাস ৬–১০ গণিতের ছোট ব্যাচ (১২ জন)। শিক্ষক প্রান্ত রায়, দর্শনা আইডিয়াল স্কুল। সিট বুকিং ০১৬৪১-০৪৫৪৬৯।`** *(134 — in use)*
+2. `দর্শনায় SSC ও ক্লাস ৬–১০ গণিত প্রাইভেট — ১২ জনের ব্যাচ, প্রতি শনিবার অভিভাবক রিপোর্ট। প্রান্ত রায় (দর্শনা আইডিয়াল স্কুল)। ০১৬৪১-০৪৫৪৬৯।`
+3. `গণিত মুখস্থ নয় — যুক্তির ভাষা। দর্শনা আইডিয়াল স্কুলের শিক্ষক প্রান্ত রায়ের ম্যাথ একাডেমি, SSC ও ক্লাস ৬–১০ ব্যাচ। সিট আছে কি না জানুন ০১৬৪১-০৪৫৪৬৯।`
 
 > Options 2 and 3 are ready to swap into `_src/build.py` if you prefer them; each is written to survive Google's truncation.
 
@@ -79,11 +79,11 @@ You cannot out-rank a school website or a Facebook page on generic terms ("গ�
 | Element | Content |
 |---|---|
 | `<h1>` | "গণিত মুখস্থ নয় — এটা যুক্তির ভাষা" (brand promise, not a keyword soup) |
-| First 100 words | contains ম্যাথ একাডেমি, দর্শনা, SSC, ক্লাস ৬–১০, প্রান্ত রায়, ১২ জন |
+| First 100 words | contains ম্যাথ একাডেমি, দর্শনা, SSC, ক্লাস ৬–১০, প্রান্ত রায়, ১২ জন |
 | H2s | কেন আমরা · পদ্ধতি · হাতে-কলমে ল্যাব · শিক্ষক পরিচিতি · ব্যাচ ও আসন · লাইব্রেরি · ফলাফল |
 | About block | 3 paragraphs with school, degrees, 10+ years, phone |
 | Footer | NAP block + phone + map + Facebook |
-| Images | `alt="প্রান্ত রায় — ম্যাথ একাডেমির শিক্ষক, দর্শনা চুয়াডাঙ্গা"` |
+| Images | `alt="প্রান্ত রায় — ম্যাথ একাডেমির শিক্ষক, দর্শনা চুয়াডাঙ্গা"` |
 | Internal anchors | nav uses descriptive Bengali labels, not "এখানে ক্লিক করুন" |
 
 ---
@@ -106,9 +106,9 @@ The live `@graph` contains 6 nodes and is generated in `_src/build.py` (`LD` dic
 
 ## 4. "About the teacher" section (shipped, in the teacher block)
 
-> **প্রান্ত রায়** — দর্শনা আইডিয়াল স্কুলের গণিত শিক্ষক, ম্যাথ একাডেমির প্রতিষ্ঠাতা।
+> **প্রান্ত রায়** — দর্শনা আইডিয়াল স্কুলের গণিত শিক্ষক, ম্যাথ একাডেমির প্রতিষ্ঠাতা।
 >
-> আমি প্রান্ত রায়। দর্শনা আইডিয়াল স্কুলে গণিত পড়াই, আর দর্শনার ম্যাথ একাডেমিতে SSC ও ক্লাস ৬–১০ শিক্ষার্থীদের জন্য ছোট ব্যাচে ক্লাস নিই। এক দশকের বেশি ক্লাসরুমে কাজ করে যে জিনিসটা বারবার দেখেছি — গণিতে পিছিয়ে পড়ার কারণ মেধা নয়, একটা বাদ পড়া ধাপ। তাই এখানে শুরুতেই ছবি আর উদাহরণ দিয়ে সেই ধাপটা পূরণ করা হয়, মুখস্থ করানো হয় না।
+> আমি প্রান্ত রায়। দর্শনা আইডিয়াল স্কুলে গণিত পড়াই, আর দর্শনার ম্যাথ একাডেমিতে SSC ও ক্লাস ৬–১০ শিক্ষার্থীদের জন্য ছোট ব্যাচে ক্লাস নিই। এক দশকের বেশি ক্লাসরুমে কাজ করে যে জিনিসটা বারবার দেখেছি — গণিতে পিছিয়ে পড়ার কারণ মেধা নয়, একটা বাদ পড়া ধাপ। তাই এখানে শুরুতেই ছবি আর উদাহরণ দিয়ে সেই ধাপটা পূরণ করা হয়, মুখস্থ করানো হয় না।
 >
 > গণিতে অনার্স ও মাস্টার্স পড়াশোনা, ১০+ বছরের ক্লাসরুম অভিজ্ঞতা — এই সময়ে শুধু ভালো ছাত্রদের নয়, যারা বলে "স্যার, পারি না" তাদের নিয়েই বেশি কাজ করেছি। প্রতি ব্যাচে সর্বোচ্চ ১২ জন, প্রতিটি খাতা নিজে ধরে দেখা হয়, আর প্রতি শনিবার অভিভাবককে সত্যি রিপোর্ট দেওয়া হয়।
 >
@@ -151,5 +151,5 @@ The live `@graph` contains 6 nodes and is generated in `_src/build.py` (`LD` dic
 - **`llms.txt`** now lists `/blog/` and all six posts (it had been pointing at `/guide/`).
 - **Sitemap** contains only canonical URLs: `/`, `/blog/`, six post URLs. `lastmod` comes from each post's
   `updated` field.
-- **E-E-A-T**: every post credits প্রান্ত রায় as `author` with `jobTitle` + a link to `/#teacher`; the
+- **E-E-A-T**: every post credits প্রান্ত রায় as `author` with `jobTitle` + a link to `/#teacher`; the
   posts are written from classroom practice, not rewritten from a textbook.

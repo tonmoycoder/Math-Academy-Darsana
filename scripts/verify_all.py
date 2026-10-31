@@ -87,8 +87,10 @@ with open('dist/index.html', 'r', encoding='utf-8') as f:
         errors.append("WebSite name in JSON-LD is missing or incorrect")
     if 'Math Academy Darshana' not in idx_content:
         errors.append("Math Academy Darshana missing in alternateName")
-    if 'প্রান্ত রায়' in idx_content:
-        errors.append("Found incorrect name 'প্রান্ত রায়' in dist/index.html")
+    if 'প্রান্ত রায়' not in idx_content:
+        errors.append("Preferred Bengali teacher name 'প্রান্ত রায়' is missing in dist/index.html")
+    if 'প্রান্ত রাই' in idx_content or 'প্রান্ত রায়' in idx_content:
+        errors.append("Found an outdated Bengali spelling of the teacher's name in dist/index.html")
 
 if errors:
     print(f"FAILED with {len(errors)} errors:")
