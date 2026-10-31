@@ -13,7 +13,7 @@ for p in txt_paths:
         errors.append(f"Missing {p}")
     else:
         with open(p, 'rb') as f:
-            content = f.read().decode('utf-8')
+            content = f.read().decode('utf-8').strip()
             if content != 'bc14bb9c7dc34ee3818627cbec856bfe':
                 errors.append(f"Content mismatch in {p}: '{content}'")
 
@@ -80,15 +80,21 @@ for hf in checked_files:
         if '/_vercel/speed-insights/script.js' not in content:
             errors.append(f"Missing speed insights script in {hf}")
 
-# 5. Check JSON-LD in dist/index.html
+# 5. Check SEO Title, Name and JSON-LD in dist/index.html
 with open('dist/index.html', 'r', encoding='utf-8') as f:
     idx_content = f.read()
+    if '<title>ম্যাথ একাডেমি দর্শনা | SSC ও ৬ষ্ঠ–১০ম শ্রেণির গণিত</title>' not in idx_content:
+        errors.append("Homepage title mismatch or not updated")
+    if 'সেরা গণিত শিক্ষক' in idx_content:
+        errors.append("Found unsupported boastful claim 'সেরা গণিত শিক্ষক' in dist/index.html")
     if '"name":"ম্যাথ একাডেমি দর্শনা"' not in idx_content and '"name": "ম্যাথ একাডেমি দর্শনা"' not in idx_content:
         errors.append("WebSite name in JSON-LD is missing or incorrect")
     if 'Math Academy Darshana' not in idx_content:
         errors.append("Math Academy Darshana missing in alternateName")
-    if 'প্রান্ত রায়' in idx_content:
-        errors.append("Found incorrect name 'প্রান্ত রায়' in dist/index.html")
+    if 'প্রান্ত রায়' not in idx_content:
+        errors.append("Required spelling 'প্রান্ত রায়' not found in dist/index.html")
+    if 'প্রান্ত রাই' in idx_content:
+        errors.append("Found forbidden spelling 'প্রান্ত রাই' in dist/index.html")
 
 if errors:
     print(f"FAILED with {len(errors)} errors:")

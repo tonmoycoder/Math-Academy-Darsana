@@ -1,5 +1,5 @@
 /* TEAM */
-  Teacher / owner : প্রান্ত রাই — ম্যাথ একাডেমি, দর্শনা, চুয়াডাঙ্গা
+  Teacher / owner : প্রান্ত রায় — ম্যাথ একাডেমি, দর্শনা, চুয়াডাঙ্গা
   Design & code   : তানভীর ইসলাম তন্ময় (Tanver Islam Tonmoy)
                     https://www.facebook.com/tanverislamtonmoyofficial
 

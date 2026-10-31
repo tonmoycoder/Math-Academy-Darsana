@@ -13,3 +13,6 @@ __pycache__/
 service-account.json
 *-credentials.json
 
+# Local promotional video assets (not for production release)
+promo-video/
+

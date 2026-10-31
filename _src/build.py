@@ -35,9 +35,9 @@ head = """<!DOCTYPE html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>ম্যাথ একাডেমি দর্শনা | সেরা গণিত শিক্ষক | প্রান্ত রাই</title>
-<meta name="description" content="দর্শনায় ৬ষ্ঠ-১০ম শ্রেণি ও SSC-এর সেরা গণিত শিক্ষক প্রান্ত রাই (দর্শনা আইডিয়াল স্কুল)। মুখস্থ নয়, ম্যাথ একাডেমিতে যুক্তির সাহায্যে গণিত শিখুন। আজই যোগাযোগ করুন।">
-<meta name="keywords" content="Math Academy Darsana, Pranto Rai, best math teacher in Darsana, Darsana Ideal School, Chuadanga, গণিত শিক্ষক দর্শনা, প্রান্ত রাই, SSC গণিত দর্শনা">
+<title>ম্যাথ একাডেমি দর্শনা | SSC ও ৬ষ্ঠ–১০ম শ্রেণির গণিত</title>
+<meta name="description" content="দর্শনায় ৬ষ্ঠ–১০ম শ্রেণি ও SSC শিক্ষার্থীদের জন্য গণিত একাডেমি। শিক্ষক প্রান্ত রায় (দর্শনা আইডিয়াল স্কুল)। মুখস্থ নয়, ম্যাথ একাডেমিতে যুক্তির সাহায্যে গণিত শিখুন।">
+<meta name="keywords" content="ম্যাথ একাডেমি দর্শনা, Math Academy Darsana, Pranto Rai, প্রান্ত রায়, দর্শনা আইডিয়াল স্কুল, Darsana Ideal School, Chuadanga, গণিত একাডেমি দর্শনা, SSC গণিত দর্শনা">
 <meta name="author" content="Pranto Rai">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
 <meta name="google-site-verification" content="googlee3840f5ed89d0b8b.html">
@@ -60,8 +60,8 @@ head = """<!DOCTYPE html>
 <!-- Open Graph (OG) -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="__SITE__/">
-<meta property="og:title" content="ম্যাথ একাডেমি দর্শনা | সেরা গণিত শিক্ষক | প্রান্ত রাই">
-<meta property="og:description" content="দর্শনায় ৬ষ্ঠ-১০ম শ্রেণি ও SSC-এর সেরা গণিত শিক্ষক প্রান্ত রাই (দর্শনা আইডিয়াল স্কুল)। মুখস্থ নয়, ম্যাথ একাডেমিতে যুক্তির সাহায্যে গণিত শিখুন। আজই যোগাযোগ করুন।">
+<meta property="og:title" content="ম্যাথ একাডেমি দর্শনা | SSC ও ৬ষ্ঠ–১০ম শ্রেণির গণিত">
+<meta property="og:description" content="দর্শনায় ৬ষ্ঠ–১০ম শ্রেণি ও SSC শিক্ষার্থীদের জন্য গণিত একাডেমি। শিক্ষক প্রান্ত রায় (দর্শনা আইডিয়াল স্কুল)। মুখস্থ নয়, ম্যাথ একাডেমিতে যুক্তির সাহায্যে গণিত শিখুন।">
 <meta property="og:image" content="__SITE__/logo.png">
 <meta property="og:image:width" content="1024">
 <meta property="og:image:height" content="1024">
@@ -71,8 +71,8 @@ head = """<!DOCTYPE html>
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="ম্যাথ একাডেমি দর্শনা | সেরা গণিত শিক্ষক | প্রান্ত রাই">
-<meta name="twitter:description" content="দর্শনায় ৬ষ্ঠ-১০ম শ্রেণি ও SSC-এর সেরা গণিত শিক্ষক প্রান্ত রাই (দর্শনা আইডিয়াল স্কুল)। যুক্তির সাহায্যে গণিত শিখুন।">
+<meta name="twitter:title" content="ম্যাথ একাডেমি দর্শনা | SSC ও ৬ষ্ঠ–১০ম শ্রেণির গণিত">
+<meta name="twitter:description" content="দর্শনায় ৬ষ্ঠ–১০ম শ্রেণি ও SSC শিক্ষার্থীদের জন্য গণিত একাডেমি। শিক্ষক প্রান্ত রায় (দর্শনা আইডিয়াল স্কুল)। যুক্তির সাহায্যে গণিত শিখুন।">
 <meta name="twitter:image" content="__SITE__/logo.png">
 
 <!-- Google Search Compliant Favicons -->
@@ -513,7 +513,7 @@ LD = {"@context": "https://schema.org", "@graph": [
    "sameAs": ["https://www.facebook.com/pranto.rai.37"]},
   {"@type": "Person", "@id": S + "/#person-pranto-rai",
    "name": "Pranto Rai",
-   "alternateName": "প্রান্ত রাই",
+   "alternateName": "প্রান্ত রায়",
    "jobTitle": "Mathematics Teacher",
    "description": "Founder and lead instructor at Math Academy Darsana, and Mathematics Teacher at Darsana Ideal School.",
    "worksFor": {
@@ -539,7 +539,7 @@ LD = {"@context": "https://schema.org", "@graph": [
     for q, a in HOME_FAQS]},
   {"@type": "BreadcrumbList", "@id": S + "/#crumbs", "itemListElement": [
     {"@type": "ListItem", "position": 1, "name": "হোম", "item": S + "/"},
-    {"@type": "ListItem", "position": 2, "name": "শিক্ষক প্রান্ত রাই", "item": S + "/#teacher"},
+    {"@type": "ListItem", "position": 2, "name": "শিক্ষক প্রান্ত রায়", "item": S + "/#teacher"},
     {"@type": "ListItem", "position": 3, "name": "ব্যাচ ও আসন", "item": S + "/#batches"},
     {"@type": "ListItem", "position": 4, "name": "ভর্তি-তথ্য", "item": S + "/#book"}]}
 ]}
@@ -1376,7 +1376,7 @@ __CSP__
             '<div class="soc" role="group" aria-label="সোশ্যাল ও যোগাযোগ">'
             '<a class="soc__a soc__a--wa soc__a--pulse" href="https://wa.me/8801641045469" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp">'
             '<svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa2"/></svg></a>'
-            '<a class="soc__a soc__a--fb" href="https://www.facebook.com/pranto.rai.37" target="_blank" rel="noopener me" aria-label="Facebook — প্রান্ত রাই" title="Facebook">'
+            '<a class="soc__a soc__a--fb" href="https://www.facebook.com/pranto.rai.37" target="_blank" rel="noopener me" aria-label="Facebook — প্রান্ত রায়" title="Facebook">'
             '<svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-fb"/></svg></a>'
             '<a class="soc__a soc__a--map" href="https://maps.app.goo.gl/UyNxwUBw3sjnmGE29" target="_blank" rel="noopener" aria-label="Google Maps — দর্শনা" title="Google Maps">'
             '<svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-gmap"/></svg></a>'
@@ -1386,7 +1386,7 @@ __CSP__
             '<ul style="margin-top:14px">'
             '<li><a href="tel:+8801641045469"><svg class="ico" style="width:14px;height:14px"><use href="#i-phone"/></svg> ০১৬৪১-০৪৫৪৬৯</a></li>'
             '<li><a href="https://wa.me/8801641045469" target="_blank" rel="noopener" data-wa="আসসালামু আলাইকুম, বর্তমান অফলাইন ব্যাচ, আসন, সময় ও ফি জানতে চাই।"><svg class="ico" style="width:14px;height:14px"><use href="#i-wa"/></svg> WhatsApp · ০১৬৪১-০৪৫৪৬৯</a></li>'
-            '<li><a href="https://www.facebook.com/pranto.rai.37" target="_blank" rel="noopener me"><svg class="ico" style="width:14px;height:14px"><use href="#i-fb"/></svg> Facebook — প্রান্ত রাই</a></li>'
+            '<li><a href="https://www.facebook.com/pranto.rai.37" target="_blank" rel="noopener me"><svg class="ico" style="width:14px;height:14px"><use href="#i-fb"/></svg> Facebook — প্রান্ত রায়</a></li>'
             '<li><a href="https://maps.app.goo.gl/UyNxwUBw3sjnmGE29" target="_blank" rel="noopener"><svg class="ico" style="width:14px;height:14px"><use href="#i-gmap"/></svg> ম্যাপে দেখুন — দর্শনা</a></li>'
             '</ul></div>'
             '</div>'
@@ -1417,7 +1417,7 @@ __CSP__
             '<h4>৪. এনক্রিপ্টেড ও সুরক্ষিত সংযোগ</h4>'
             '<p>সম্পূর্ণ ওয়েবসাইটটি অত্যাধুনিক TLS/SSL এনক্রিপশন ও HSTS নিরাপত্তা প্রটোকলের অধীনে পরিচালিত। কোনো বহিরাগত অননুমোদিত ব্যক্তি ওয়েবসাইটের তথ্য বিকৃত করতে পারে না।</p>'
             '<h4>৫. যোগাযোগ ও জিজ্ঞাসা</h4>'
-            '<p>যেকোনো তথ্য যাচাই বা ব্যাচ সংক্রান্ত অনুসন্ধানের জন্য সরাসরি আমাদের শিক্ষক প্রান্ত রাই-এর সাথে WhatsApp বা সরাসরি ফোনে যোগাযোগ করতে পারেন।</p>'
+            '<p>যেকোনো তথ্য যাচাই বা ব্যাচ সংক্রান্ত অনুসন্ধানের জন্য সরাসরি আমাদের শিক্ষক প্রান্ত রায়ের সাথে WhatsApp বা সরাসরি ফোনে যোগাযোগ করতে পারেন।</p>'
             '</div>'
             '<div class="pmodal__foot" style="padding:12px 20px;border-top:1px solid #ddd;background:#f3efe6">'
             '<button type="button" class="btn btn--ink" id="confirmPrivacyBtn">বুঝেছি</button>'
@@ -1517,7 +1517,7 @@ __CSP__
              "description": pst['desc'], "inLanguage": "bn-BD", "url": url,
              "mainEntityOfPage": {"@id": url},
              "datePublished": pst['date'], "dateModified": pst['updated'],
-             "author": {"@type": "Person", "name": "প্রান্ত রাই (Pranto Rai)",
+             "author": {"@type": "Person", "name": "প্রান্ত রায় (Pranto Rai)",
                         "url": SITE_HOST + "/#teacher",
                         "jobTitle": "গণিত শিক্ষক, দর্শনা আইডিয়াল স্কুল"},
              "publisher": {"@id": SITE_HOST + "/#org"},
@@ -1539,7 +1539,7 @@ __CSP__
             '<header class="post-head">'
             '<span class="eyebrow">' + pst['tag'] + '</span>'
             '<h1>' + pst['h1'] + '</h1>'
-            '<div class="post-meta"><span>লিখেছেন <b>প্রান্ত রাই</b></span>'
+            '<div class="post-meta"><span>লিখেছেন <b>প্রান্ত রায়</b></span>'
             '<span>' + bn(pst['mins']) + ' মিনিট পড়া</span>'
             '<span>প্রকাশ <b><time datetime="' + pst['date'] + '">' + bn_date(pst['date']) + '</time></b></span>'
             '<span>দর্শনা, চুয়াডাঙ্গা</span></div>'
@@ -1657,7 +1657,7 @@ __CSP__
     # ---------- humans.txt ----------
     (D / 'humans.txt').write_text(
         '/* TEAM */\n'
-        '  Teacher / owner : প্রান্ত রাই — ম্যাথ একাডেমি, দর্শনা, চুয়াডাঙ্গা\n'
+        '  Teacher / owner : প্রান্ত রায় — ম্যাথ একাডেমি, দর্শনা, চুয়াডাঙ্গা\n'
         '  Design & code   : তানভীর ইসলাম তন্ময় (Tanver Islam Tonmoy)\n'
         '                    https://www.facebook.com/tanverislamtonmoyofficial\n'
         '\n/* SITE */\n'

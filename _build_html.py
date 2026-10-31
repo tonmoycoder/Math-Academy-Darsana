@@ -18,3 +18,4 @@ if __name__ == '__main__':
     cmd = [sys.executable, script_path] + args
     res = subprocess.run(cmd)
     sys.exit(res.returncode)
+
