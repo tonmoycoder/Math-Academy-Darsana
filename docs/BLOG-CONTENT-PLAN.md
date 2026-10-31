@@ -45,13 +45,13 @@ No search-volume numbers have been invented. Prioritize queries by what the read
 
 | Intent group | Example query | Main answer route |
 |---|---|---|
-| Study method | গণিত ভালো করার উপায় | `/blog/gonit-valo-kore-podar-upay/` |
+| Study method | গণিত ভালো করার উপায় | `/blog/gonit-valo-kore-podar-upay/` |
 | SSC reference | SSC গণিতের সব সূত্র, SSC গণিত ২০২৬ মানবণ্টন | `/blog/ssc-goniter-sob-sutro/` |
-| Emotional/parent support | গণিতের ভয় কাটানোর উপায় | `/blog/goniter-voy-katanor-7-obhyas/` |
-| Skill diagnosis | গণিতে দুর্বলতা কাটানোর উপায় | `/blog/gonite-durobolota-katanor-upay/` |
-| Practice routine | গণিত প্র্যাকটিস করার নিয়ম | `/blog/gonit-practice-sera-upay/` |
-| Local commercial | দর্শনায় গণিতের কোচিং | `/blog/darshanay-math-academy-keno/` |
-| Chapter sequence | SSC গণিত কোন অধ্যায় আগে | `/blog/ssc-gonit-kon-odhyay-age/` |
+| Emotional/parent support | গণিতের ভয় কাটানোর উপায় | `/blog/goniter-voy-katanor-7-obhyas/` |
+| Skill diagnosis | গণিতে দুর্বলতা কাটানোর উপায় | `/blog/gonite-durobolota-katanor-upay/` |
+| Practice routine | গণিত প্র্যাকটিস করার নিয়ম | `/blog/gonit-practice-sera-upay/` |
+| Local commercial | দর্শনায় গণিতের কোচিং | `/blog/darshanay-math-academy-keno/` |
+| Chapter sequence | SSC গণিত কোন অধ্যায় আগে | `/blog/ssc-gonit-kon-odhyay-age/` |
 | Parent plan | গণিতে দুর্বল শিক্ষার্থীর রুটিন | `/blog/gonite-durbal-shishu-30-diner-rutin/` |
 | Foundation | অষ্টম শ্রেণির গণিতের ভিত | `/blog/ashtom-shrenir-gonit-vit/` |
 | Local board long-tail | যশোর বোর্ড SSC গণিত ২০২৬ | `/blog/jessore-board-ssc-gonit-prashna/` |

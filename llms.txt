@@ -1,11 +1,11 @@
 # ম্যাথ একাডেমি / Math Academy — Darshana, Chuadanga
 
-> Bengali-first information about offline mathematics batches for SSC and classes 6–10 in Darshana, Chuadanga, Bangladesh. Teacher: প্রান্ত রায় (Pranto Rai), who also teaches at Darshana Ideal School. Founded {{FOUNDED_YEAR}}.
+> Bengali-first information about offline mathematics batches for SSC and classes 6–10 in Darshana, Chuadanga, Bangladesh. Teacher: প্রান্ত রায় (Pranto Rai), who also teaches at Darshana Ideal School. Founded {{FOUNDED_YEAR}}.
 
 ## Facts
 - Academy: ম্যাথ একাডেমি (Math Academy)
-- Teacher: প্রান্ত রায় (Pranto Rai) — BSc & MSc in Mathematics; ১০+ years of classroom experience
-- School affiliation: দর্শনা আইডিয়াল স্কুল — https://www.darsanaidealschool.com/
+- Teacher: প্রান্ত রায় (Pranto Rai) — BSc & MSc in Mathematics; ১০+ years of classroom experience
+- School affiliation: দর্শনা আইডিয়াল স্কুল — https://www.darsanaidealschool.com/
 - Location: Darshana, Chuadanga, Bangladesh — https://maps.app.goo.gl/UyNxwUBw3sjnmGE29
 - Founded: {{FOUNDED_YEAR}}
 - Phone / WhatsApp: +880 1641-045-469 — https://wa.me/8801641045469

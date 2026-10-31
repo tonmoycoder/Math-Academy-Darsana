@@ -12,7 +12,7 @@
 
 ## 1 · Product summary
 
-A Bengali-first, mobile-first website for **ম্যাথ একাডেমি, দর্শনা, চুয়াডাঙ্গা**. Its landing page explains the offline math batches and offers a direct WhatsApp contact route. A static, SEO-oriented blog contains exactly ten complete articles, with Markdown drafts as the source of truth. Dynamic batch data is stored in Neon Postgres and served through exactly one Vercel Function, `api/content.js`; the generated HTML remains the fast baseline/fallback.
+A Bengali-first, mobile-first website for **ম্যাথ একাডেমি, দর্শনা, চুয়াডাঙ্গা**. Its landing page explains the offline math batches and offers a direct WhatsApp contact route. A static, SEO-oriented blog contains exactly ten complete articles, with Markdown drafts as the source of truth. Dynamic batch data is stored in Neon Postgres and served through exactly one Vercel Function, `api/content.js`; the generated HTML remains the fast baseline/fallback.
 
 The canonical domain is `https://mathacademydarsana.vercel.app`. The project also generates one self-contained offline `math-academy.html` file; the hosted build is `dist/`.
 
@@ -20,8 +20,8 @@ The canonical domain is `https://mathacademydarsana.vercel.app`. The project als
 
 | Fact | Current value / rule |
 |---|---|
-| Academy | ম্যাথ একাডেমি · দর্শনা, চুয়াডাঙ্গা · founded **2022** |
-| Teacher | প্রান্ত রায় · দর্শনা আইডিয়াল স্কুল · ১০+ বছর অভিজ্ঞতা |
+| Academy | ম্যাথ একাডেমি · দর্শনা, চুয়াডাঙ্গা · founded **2022** |
+| Teacher | প্রান্ত রায় · দর্শনা আইডিয়াল স্কুল · ১০+ বছর অভিজ্ঞতা |
 | Phone / WhatsApp | `+8801641045469` · visible form `০১৬৪১-০৪৫৪৬৯` |
 | Facebook | `pranto.rai.37` |
 | Google Maps | short id `UyNxwUBw3sjnmGE29` |

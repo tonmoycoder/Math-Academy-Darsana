@@ -3,7 +3,7 @@
 > **Purpose.** Nine published SEO resources were read; this file records **what each one actually says**,
 > **what is already done** in this project, **what is still open**, and **what was deliberately skipped as useless
 > for a one-page local business site**.
-> **Owner:** প্রান্ত রায় · **Canonical host:** `https://mathacademydarsana.vercel.app`
+> **Owner:** প্রান্ত রায় · **Canonical host:** `https://mathacademydarsana.vercel.app`
 > **Last updated:** 2026-10-25 (v7)
 
 ---
@@ -54,9 +54,9 @@ different intents. This is the single biggest structural change in v7.
 | Page | Intent | Phrase it owns |
 |---|---|---|
 | `/` | **Transactional / visit-in-person** | ম্যাথ একাডেমি দর্শনা · SSC গণিত শিক্ষক |
-| `/guide/ssc-gonit-kon-odhyay-age/` | **Informational** (student) | SSC গণিত অধ্যায় ক্রম |
+| `/guide/ssc-gonit-kon-odhyay-age/` | **Informational** (student) | SSC গণিত অধ্যায় ক্রম |
 | `/guide/gonite-durbal-shishu-30-diner-rutin/` | **Informational** (parent, anxiety) | গণিতে দুর্বল ছাত্র |
-| `/guide/darshana-ssc-gonit-coaching-7-proshno/` | **Commercial investigation** | দর্শনায় SSC গণিত কোচিং |
+| `/guide/darshana-ssc-gonit-coaching-7-proshno/` | **Commercial investigation** | দর্শনায় SSC গণিত কোচিং |
 
 | Item | State | Note |
 |---|---|---|
@@ -125,8 +125,8 @@ different intents. This is the single biggest structural change in v7.
 
 | Tempting tactic | Why it is not here |
 |---|---|
-| Keyword-stuffed H1 ("দর্শনা চুয়াডাঙ্গা SSC গণিত কোচিং …") | Google's title/H1 guidance and helpful-content update punish it; it also reads badly to a parent |
-| 20 thin location pages ("গণিত কোচিং চুয়াডাঙ্গা", "…দামুড়হুদা" …) | no unique content per page → doorway-page risk. A page earns its place only if the teacher can write something only he knows |
+| Keyword-stuffed H1 ("দর্শনা চুয়াডাঙ্গা SSC গণিত কোচিং …") | Google's title/H1 guidance and helpful-content update punish it; it also reads badly to a parent |
+| 20 thin location pages ("গণিত কোচিং চুয়াডাঙ্গা", "…দামুড়হুদা" …) | no unique content per page → doorway-page risk. A page earns its place only if the teacher can write something only he knows |
 | Blog cadence of 3 posts/week | the owner cannot sustain it; two good posts a month beat twelve rewritten ones |
 | Buying backlinks / link exchange | Moz: authority must be earned; a manual action would wipe the local gains instantly |
 | AI-generated bulk FAQ on every topic | every answer here is something the teacher can defend in person — that is the only durable advantage |

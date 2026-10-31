@@ -36,8 +36,8 @@ head = """<!DOCTYPE html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>ম্যাথ একাডেমি দর্শনা | SSC ও ৬ষ্ঠ–১০ম শ্রেণির গণিত</title>
-<meta name="description" content="দর্শনায় ৬ষ্ঠ–১০ম শ্রেণি ও SSC শিক্ষার্থীদের জন্য গণিত একাডেমি। শিক্ষক প্রান্ত রায় (দর্শনা আইডিয়াল স্কুল)। মুখস্থ নয়, ম্যাথ একাডেমিতে যুক্তির সাহায্যে গণিত শিখুন।">
-<meta name="keywords" content="ম্যাথ একাডেমি দর্শনা, Math Academy Darsana, Pranto Rai, প্রান্ত রায়, দর্শনা আইডিয়াল স্কুল, Darsana Ideal School, Chuadanga, গণিত একাডেমি দর্শনা, SSC গণিত দর্শনা">
+<meta name="description" content="দর্শনায় ৬ষ্ঠ–১০ম শ্রেণি ও SSC শিক্ষার্থীদের জন্য গণিত একাডেমি। শিক্ষক প্রান্ত রায় (দর্শনা আইডিয়াল স্কুল)। মুখস্থ নয়, ম্যাথ একাডেমিতে যুক্তির সাহায্যে গণিত শিখুন।">
+<meta name="keywords" content="ম্যাথ একাডেমি দর্শনা, Math Academy Darsana, Pranto Rai, প্রান্ত রায়, দর্শনা আইডিয়াল স্কুল, Darsana Ideal School, Chuadanga, গণিত একাডেমি দর্শনা, SSC গণিত দর্শনা">
 <meta name="author" content="Pranto Rai">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
 <meta name="google-site-verification" content="googlee3840f5ed89d0b8b.html">
@@ -61,19 +61,19 @@ head = """<!DOCTYPE html>
 <meta property="og:type" content="website">
 <meta property="og:url" content="__SITE__/">
 <meta property="og:title" content="ম্যাথ একাডেমি দর্শনা | SSC ও ৬ষ্ঠ–১০ম শ্রেণির গণিত">
-<meta property="og:description" content="দর্শনায় ৬ষ্ঠ–১০ম শ্রেণি ও SSC শিক্ষার্থীদের জন্য গণিত একাডেমি। শিক্ষক প্রান্ত রায় (দর্শনা আইডিয়াল স্কুল)। মুখস্থ নয়, ম্যাথ একাডেমিতে যুক্তির সাহায্যে গণিত শিখুন।">
-<meta property="og:image" content="__SITE__/logo.png">
-<meta property="og:image:width" content="1024">
-<meta property="og:image:height" content="1024">
-<meta property="og:image:alt" content="Math Academy Darsana Logo - Founded by Pranto Rai">
+<meta property="og:description" content="দর্শনায় ৬ষ্ঠ–১০ম শ্রেণি ও SSC শিক্ষার্থীদের জন্য গণিত একাডেমি। শিক্ষক প্রান্ত রায় (দর্শনা আইডিয়াল স্কুল)। মুখস্থ নয়, ম্যাথ একাডেমিতে যুক্তির সাহায্যে গণিত শিখুন।">
+<meta property="og:image" content="__SITE__/og-1200x630.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="ম্যাথ একাডেমি দর্শনা">
 <meta property="og:locale" content="bn_BD">
 <meta property="og:phone_number" content="+8801641045469">
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="ম্যাথ একাডেমি দর্শনা | SSC ও ৬ষ্ঠ–১০ম শ্রেণির গণিত">
-<meta name="twitter:description" content="দর্শনায় ৬ষ্ঠ–১০ম শ্রেণি ও SSC শিক্ষার্থীদের জন্য গণিত একাডেমি। শিক্ষক প্রান্ত রায় (দর্শনা আইডিয়াল স্কুল)। যুক্তির সাহায্যে গণিত শিখুন।">
-<meta name="twitter:image" content="__SITE__/logo.png">
+<meta name="twitter:description" content="দর্শনায় ৬ষ্ঠ–১০ম শ্রেণি ও SSC শিক্ষার্থীদের জন্য গণিত একাডেমি। শিক্ষক প্রান্ত রায় (দর্শনা আইডিয়াল স্কুল)। যুক্তির সাহায্যে গণিত শিখুন।">
+<meta name="twitter:image" content="__SITE__/og-1200x630.jpg">
 
 <!-- Google Search Compliant Favicons -->
 <link rel="icon" href="/favicon.ico" sizes="48x48">
@@ -235,7 +235,7 @@ def batch_rows():
     out = []
     for b in BATCHES:
         hot = ' class="is-hot"' if b.get('hot') else ''
-        badge = ' <em class="hot">সবচেয়ে চাহিদা</em>' if b.get('hot') else ''
+        badge = ' <em class="hot">সবচেয়ে চাহিদা</em>' if b.get('hot') else ''
         full_cls = ' is-full' if b['left'] == 0 else ''
         out.append(
             '<tr%s data-batch="%s" data-filled="%d" data-cap="%d" data-left="%d">'
@@ -358,7 +358,7 @@ def content_tokens():
         '{{FOUNDED_YEAR}}':   str(int(tm['founded_year'])),
         '{{LIBRARY_KICKER}}': lib.get('section_kicker', 'SEC 06 // রিসোর্স ও ডাউনলোড লাইব্রেরি'),
         '{{LIBRARY_TITLE}}':  lib.get('section_title', 'গণিত ও স্টাডি রিসোর্স লাইব্রেরি'),
-        '{{LIBRARY_LEAD}}':   lib.get('section_lead', 'SSC ও ক্লাস ৬–১০ গণিতের গুরুত্বপূর্ণ হ্যান্ডনোট, অধ্যায়ভিত্তিক সূত্র, সাজেশন ও অনুশীলনী শিট সরাসরি ডাউনলোড করুন।'),
+        '{{LIBRARY_LEAD}}':   lib.get('section_lead', 'SSC ও ক্লাস ৬–১০ গণিতের গুরুত্বপূর্ণ হ্যান্ডনোট, অধ্যায়ভিত্তিক সূত্র, সাজেশন ও অনুশীলনী শিট সরাসরি ডাউনলোড করুন।'),
         '{{LIBRARY_CARDS}}':  render_library_cards(items, is_offline=False),
         '{{LIBRARY_PDF_HREF}}': '/assets/english-dialogue-format.pdf',
         '{{HALL_OF_FAME_CARDS}}': render_hall_of_fame(fame_items),
@@ -453,16 +453,16 @@ CSP_META = ('<meta http-equiv="Content-Security-Policy" content="'
 # Homepage copy and FAQPage schema share this single source so visible answers
 # cannot drift away from the JSON-LD. Tokens are resolved by apply_content().
 HOME_FAQS = [
-  ("ক্লাস কোথায় হয়? অনলাইন ক্লাস আছে?",
-   "ক্লাসগুলো দর্শনা, চুয়াডাঙ্গায় অফলাইন ব্যাচে হয়; অনলাইন ক্লাস এই অফারের অংশ নয়। নির্দিষ্ট লোকেশন, বর্তমান ব্যাচের সময় ও আসন ভর্তি আগে WhatsApp-এ নিশ্চিত করুন."),
+  ("ক্লাস কোথায় হয়? অনলাইন ক্লাস আছে?",
+   "ক্লাসগুলো দর্শনা, চুয়াডাঙ্গায় অফলাইন ব্যাচে হয়; অনলাইন ক্লাস এই অফারের অংশ নয়। নির্দিষ্ট লোকেশন, বর্তমান ব্যাচের সময় ও আসন ভর্তি আগে WhatsApp-এ নিশ্চিত করুন."),
   ("কোন শ্রেণির শিক্ষার্থীরা ভর্তি হতে পারে?",
-   "বর্তমান প্রোগ্রামে {{CLASS_RANGE}} অন্তর্ভুক্ত; প্রতি ব্যাচে সর্বোচ্চ {{CAP}} জন। কোন শ্রেণির ব্যাচ চালু আছে, তার সময় ও আসন ব্যাচের তালিকা বা WhatsApp-এ নিশ্চিত করুন."),
+   "বর্তমান প্রোগ্রামে {{CLASS_RANGE}} অন্তর্ভুক্ত; প্রতি ব্যাচে সর্বোচ্চ {{CAP}} জন। কোন শ্রেণির ব্যাচ চালু আছে, তার সময় ও আসন ব্যাচের তালিকা বা WhatsApp-এ নিশ্চিত করুন."),
   ("মাসে কতগুলো ক্লাস, মক টেস্ট, আর ফি কত?",
-   "বর্তমান প্রোগ্রামে মাসে {{CLASSES_PM}}টি ক্লাস ও {{MOCK}}টি মক টেস্ট। ব্যাচভেদে মাসিক ফি {{FEE_RANGE}}। ভর্তি আগে নিজের শ্রেণির ব্যাচ, সময় ও ফি WhatsApp-এ নিশ্চিত করুন."),
-  ("বর্তমান আসন ও ভর্তি-প্রক্রিয়া কীভাবে জানব?",
-   "WhatsApp-এ শিক্ষার্থীর নাম, শ্রেণি ও পছন্দের ব্যাচ লিখে চলতি আসন ও ভর্তি-প্রক্রিয়া জেনে নিন। এই ফর্ম আসন সংরক্ষণ করে না; ভর্তি নিশ্চিত করার আগে মালিকের কাছ থেকে উত্তর নিন."),
+   "বর্তমান প্রোগ্রামে মাসে {{CLASSES_PM}}টি ক্লাস ও {{MOCK}}টি মক টেস্ট। ব্যাচভেদে মাসিক ফি {{FEE_RANGE}}। ভর্তি আগে নিজের শ্রেণির ব্যাচ, সময় ও ফি WhatsApp-এ নিশ্চিত করুন."),
+  ("বর্তমান আসন ও ভর্তি-প্রক্রিয়া কীভাবে জানব?",
+   "WhatsApp-এ শিক্ষার্থীর নাম, শ্রেণি ও পছন্দের ব্যাচ লিখে চলতি আসন ও ভর্তি-প্রক্রিয়া জেনে নিন। এই ফর্ম আসন সংরক্ষণ করে না; ভর্তি নিশ্চিত করার আগে মালিকের কাছ থেকে উত্তর নিন."),
   ("গণিতে দুর্বল হলে কীভাবে শুরু করব?",
-   "শ্রেণি, সমস্যার অধ্যায় বা ধাপ, এবং পছন্দের ব্যাচ জানিয়ে WhatsApp-এ জিজ্ঞেস করুন বর্তমান অফলাইন ব্যাচটি উপযুক্ত কি না। কোনো নির্দিষ্ট নম্বর বা পরীক্ষার ফলের নিশ্চয়তা দেওয়া হয় না."),
+   "শ্রেণি, সমস্যার অধ্যায় বা ধাপ, এবং পছন্দের ব্যাচ জানিয়ে WhatsApp-এ জিজ্ঞেস করুন বর্তমান অফলাইন ব্যাচটি উপযুক্ত কি না। কোনো নির্দিষ্ট নম্বর বা পরীক্ষার ফলের নিশ্চয়তা দেওয়া হয় না."),
 ]
 
 def home_faq_markup():
@@ -480,11 +480,11 @@ bot = bot.replace('<!--__HOME_FAQ__-->', home_faq_markup())
 LD = {"@context": "https://schema.org", "@graph": [
   {"@type": "WebSite", "@id": S + "/#website",
    "url": S + "/", "name": "ম্যাথ একাডেমি দর্শনা",
-   "alternateName": ["Math Academy Darshana", "Math Academy Darsana"],
+   "alternateName": ["Math Academy Darshana", "Math Academy Darsana", "ম্যাথ একাডেমি"],
    "publisher": {"@id": S + "/#organization"},
    "inLanguage": "bn-BD"},
   {"@type": "EducationalOrganization", "@id": S + "/#organization",
-   "name": "Math Academy", "alternateName": ["Math Academy Darsana", "ম্যাথ একাডেমি", "ম্যাথ একাডেমি দর্শনা"],
+   "name": "ম্যাথ একাডেমি দর্শনা", "alternateName": ["Math Academy", "Math Academy Darsana", "Math Academy Darshana", "ম্যাথ একাডেমি"],
    "url": S + "/",
    "logo": {
      "@type": "ImageObject",
@@ -513,7 +513,7 @@ LD = {"@context": "https://schema.org", "@graph": [
    "sameAs": ["https://www.facebook.com/pranto.rai.37"]},
   {"@type": "Person", "@id": S + "/#person-pranto-rai",
    "name": "Pranto Rai",
-   "alternateName": "প্রান্ত রায়",
+   "alternateName": "প্রান্ত রায়",
    "jobTitle": "Mathematics Teacher",
    "description": "Founder and lead instructor at Math Academy Darsana, and Mathematics Teacher at Darsana Ideal School.",
    "worksFor": {
@@ -539,7 +539,7 @@ LD = {"@context": "https://schema.org", "@graph": [
     for q, a in HOME_FAQS]},
   {"@type": "BreadcrumbList", "@id": S + "/#crumbs", "itemListElement": [
     {"@type": "ListItem", "position": 1, "name": "হোম", "item": S + "/"},
-    {"@type": "ListItem", "position": 2, "name": "শিক্ষক প্রান্ত রায়", "item": S + "/#teacher"},
+    {"@type": "ListItem", "position": 2, "name": "শিক্ষক প্রান্ত রায়", "item": S + "/#teacher"},
     {"@type": "ListItem", "position": 3, "name": "ব্যাচ ও আসন", "item": S + "/#batches"},
     {"@type": "ListItem", "position": 4, "name": "ভর্তি-তথ্য", "item": S + "/#book"}]}
 ]}
@@ -740,8 +740,8 @@ for cp in custom_posts:
         'mins': int(cp.get('mins', 5)),
         'faq': cp.get('faq') if isinstance(cp.get('faq'), list) and len(cp.get('faq')) == 3 else [
             ('এই লেখাটি কাদের জন্য?', 'ম্যাথ একাডেমির শিক্ষার্থী ও অভিভাবকদের জন্য।'),
-            ('কীভাবে প্রস্তুতি নেব?', 'নিয়মিত অনুশীলন ও মক টেস্টের মাধ্যমে।'),
-            ('আরও জানতে কোথায় যোগাযোগ করব?', 'আমাদের হোয়াটসঅ্যাপ নম্বরে যোগাযোগ করুন।')
+            ('কীভাবে প্রস্তুতি নেব?', 'নিয়মিত অনুশীলন ও মক টেস্টের মাধ্যমে।'),
+            ('আরও জানতে কোথায় যোগাযোগ করব?', 'আমাদের হোয়াটসঅ্যাপ নম্বরে যোগাযোগ করুন।')
         ],
         'body': cp.get('body', '') if '<p>' in cp.get('body', '') else _markdown_to_html(cp.get('body', ''))
     }
@@ -771,7 +771,7 @@ def bn(n):
     return str(n).translate(_BN)
 
 
-_BN_MONTHS = ['জানুয়ারি', 'ফেব্রুয়ারি', 'মার্চ', 'এপ্রিল', 'মে', 'জুন', 'জুলাই',
+_BN_MONTHS = ['জানুয়ারি', 'ফেব্রুয়ারি', 'মার্চ', 'এপ্রিল', 'মে', 'জুন', 'জুলাই',
               'আগস্ট', 'সেপ্টেম্বর', 'অক্টোবর', 'নভেম্বর', 'ডিসেম্বর']
 
 
@@ -806,7 +806,7 @@ def blog_section(linked=True, n=4):
                 '<a class="btn btn--red btn--lg" href="/blog/">আরও ব্লগ দেখুন '
                 '<svg class="ico ar"><use href="#i-arrow"/></svg></a>'
                 '<p class="blogsec__more-note">বাকি ' + bn(len(BLOG.POSTS) - n) +
-                'টি লেখা ব্লগ পাতায় — সূত্রের তালিকা, রুটিন, অভিভাবকের প্রশ্ন আর '
+                'টি লেখা ব্লগ পাতায় — সূত্রের তালিকা, রুটিন, অভিভাবকের প্রশ্ন আর '
                 'পরীক্ষার কৌশল।</p></div>')
     note = '' if linked else (
         '<p class="blogsec__note">পূর্ণ লেখাগুলো অনলাইন সাইটে — '
@@ -816,9 +816,9 @@ def blog_section(linked=True, n=4):
         '<div class="wrap">'
         '<div class="sec-head"><div>'
         '<span class="kicker kicker--red">SEC 09 // ব্লগ ও লেখা</span>'
-        '<h2 class="sec-title" id="blogTitle">গণিত নিয়ে <span class="bn">যা লিখি</span></h2>'
+        '<h2 class="sec-title" id="blogTitle">গণিত নিয়ে <span class="bn">যা লিখি</span></h2>'
         '<p class="sec-lead">ক্লাসরুমে যে প্রশ্নগুলো বারবার আসে — সেগুলোর উত্তর লিখে রাখি। '
-        'দর্শনা ও চুয়াডাঙ্গার অভিভাবকদের জন্য, বইয়ের অনুবাদ নয়।</p>'
+        'দর্শনা ও চুয়াডাঙ্গার অভিভাবকদের জন্য, বইয়ের অনুবাদ নয়।</p>'
         '</div><div class="sec-no">09</div></div>'
         '<div class="bloggrid">' + ''.join(cards) + '</div>' + note + more +
         '</div></section>')
@@ -981,8 +981,8 @@ if '--publish' in sys.argv:
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>৪০৪ — পৃষ্ঠা পাওয়া যায়নি | ম্যাথ একাডেমি দর্শনা</title>
-<meta name="description" content="এই ঠিকানায় কোনো পৃষ্ঠা নেই। ম্যাথ একাডেমি, দর্শনা — SSC ও ক্লাস ৬–১০ গণিত; প্রতি ব্যাচে সর্বোচ্চ {{CAP}} জন।">
+<title>৪০৪ — পৃষ্ঠা পাওয়া যায়নি | ম্যাথ একাডেমি দর্শনা</title>
+<meta name="description" content="এই ঠিকানায় কোনো পৃষ্ঠা নেই। ম্যাথ একাডেমি, দর্শনা — SSC ও ক্লাস ৬–১০ গণিত; প্রতি ব্যাচে সর্বোচ্চ {{CAP}} জন।">
 <meta name="robots" content="noindex,follow">
 <meta name="theme-color" content="#0A0A0A">
 <meta name="color-scheme" content="light">
@@ -1283,7 +1283,7 @@ __CSP__
             '</nav>'
             '<div class="bhead__actions">'
             '<span class="live-pill"><span class="live-dot"></span>মোট <b id="pillSeats">' + bn(SEATS_LEFT) + '</b>টি সিট বাকি</span>'
-            '<a class="btn btn--red btn--sm bhead__cta" href="' + WA + '?text=' + _quote('আসসালামু আলাইকুম, বর্তমান অফলাইন ব্যাচ, আসন, সময় ও ফি জানতে চাই।') + '" '
+            '<a class="btn btn--red btn--sm bhead__cta" href="' + WA + '?text=' + _quote('আসসালামু আলাইকুম, বর্তমান অফলাইন ব্যাচ, আসন, সময় ও ফি জানতে চাই।') + '" '
             'target="_blank" rel="noopener" aria-label="বর্তমান ব্যাচের তথ্য WhatsApp-এ জানতে লিখুন">'
             'ব্যাচের তথ্য <svg class="ico ar" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>'
             '<button class="sndbtn" id="blogSoundBtn" type="button" aria-pressed="true" aria-label="সাউন্ড বন্ধ করুন" title="সাউন্ড বন্ধ/চালু">'
@@ -1309,9 +1309,9 @@ __CSP__
             '<a href="/blog/"' + hub_class + '>ব্লগ ও লেখা <span>09</span></a>'
             '</nav>'
             '<div class="drawer__foot">'
-            '<a class="btn btn--red btn--block" href="' + WA + '?text=' + _quote('আসসালামু আলাইকুম, বর্তমান অফলাইন ব্যাচ, আসন, সময় ও ফি জানতে চাই।') + '" target="_blank" rel="noopener">ব্যাচের তথ্য জানতে লিখুন →</a>'
+            '<a class="btn btn--red btn--block" href="' + WA + '?text=' + _quote('আসসালামু আলাইকুম, বর্তমান অফলাইন ব্যাচ, আসন, সময় ও ফি জানতে চাই।') + '" target="_blank" rel="noopener">ব্যাচের তথ্য জানতে লিখুন →</a>'
             '<a class="btn btn--block" style="--bg:#0A0A0A;--fg:#FDFBF7;--bd:#FDFBF7" href="tel:+8801641045469">📞 ০১৬৪১-০৪৫৪৬৯</a>'
-            '<p class="drawer__meta">দর্শনা, চুয়াডাঙ্গা · অফলাইন ব্যাচ</p>'
+            '<p class="drawer__meta">দর্শনা, চুয়াডাঙ্গা · অফলাইন ব্যাচ</p>'
             '</div></div>'
         )
 
@@ -1321,7 +1321,7 @@ __CSP__
             '<div class="wrap maker__in">'
             '<div class="maker__l">'
             '<p class="maker__k mono">// DESIGN &amp; DEVELOPMENT</p>'
-            '<h2 class="maker__t" id="makerT">এই সাইটের ডিজাইন ও কোড — <b>তানভীর ইসলাম তন্ময়</b></h2>'
+            '<h2 class="maker__t" id="makerT">এই সাইটের ডিজাইন ও কোড — <b>তানভীর ইসলাম তন্ময়</b></h2>'
             '<p class="maker__s">Tanver Islam Tonmoy · UI · মোশন · ফ্রন্টএন্ড</p>'
             '</div>'
             '<a class="maker__a" href="https://www.facebook.com/tanverislamtonmoyofficial" target="_blank" rel="noopener me">'
@@ -1334,21 +1334,21 @@ __CSP__
             '<footer class="footer">'
             '<div class="footer__marq" aria-hidden="true">'
             '<div class="marquee marquee--slow">'
-            '<span>MATH ACADEMY <em>■</em> PROOF OVER MEMORY <em>■</em> দর্শনা, চুয়াডাঙ্গা <em>■</em> OFFLINE BATCH <em>■</em></span>'
-            '<span>MATH ACADEMY <em>■</em> PROOF OVER MEMORY <em>■</em> দর্শনা, চুয়াডাঙ্গা <em>■</em> OFFLINE BATCH <em>■</em></span>'
-            '<span>MATH ACADEMY <em>■</em> PROOF OVER MEMORY <em>■</em> দর্শনা, চুয়াডাঙ্গা <em>■</em> OFFLINE BATCH <em>■</em></span>'
-            '<span>MATH ACADEMY <em>■</em> PROOF OVER MEMORY <em>■</em> দর্শনা, চুয়াডাঙ্গা <em>■</em> OFFLINE BATCH <em>■</em></span>'
+            '<span>MATH ACADEMY <em>■</em> PROOF OVER MEMORY <em>■</em> দর্শনা, চুয়াডাঙ্গা <em>■</em> OFFLINE BATCH <em>■</em></span>'
+            '<span>MATH ACADEMY <em>■</em> PROOF OVER MEMORY <em>■</em> দর্শনা, চুয়াডাঙ্গা <em>■</em> OFFLINE BATCH <em>■</em></span>'
+            '<span>MATH ACADEMY <em>■</em> PROOF OVER MEMORY <em>■</em> দর্শনা, চুয়াডাঙ্গা <em>■</em> OFFLINE BATCH <em>■</em></span>'
+            '<span>MATH ACADEMY <em>■</em> PROOF OVER MEMORY <em>■</em> দর্শনা, চুয়াডাঙ্গা <em>■</em> OFFLINE BATCH <em>■</em></span>'
             '</div></div>'
             '<div class="wrap">'
             '<div class="footer__grid">'
             '<div>'
             '<div class="footer__brand">'
             '<img src="data:image/png;base64,' + LOGO_TIGHT + '" alt="ম্যাথ একাডেমি লোগো" width="52" height="52" loading="lazy">'
-            '<div><b>MATH ACADEMY</b><small>ম্যাথ একাডেমি · দর্শনা, চুয়াডাঙ্গা</small></div>'
+            '<div><b>MATH ACADEMY</b><small>ম্যাথ একাডেমি · দর্শনা, চুয়াডাঙ্গা</small></div>'
             '</div>'
-            '<p class="footer__desc">SSC ও ক্লাস ৬–১০ শিক্ষার্থীদের জন্য দর্শনার ভিজ্যুয়াল গণিতের স্টুডিও। ছবি দিয়ে শুরু, যুক্তি দিয়ে শেষ — তারপর গতি।</p>'
+            '<p class="footer__desc">SSC ও ক্লাস ৬–১০ শিক্ষার্থীদের জন্য দর্শনার ভিজ্যুয়াল গণিতের স্টুডিও। ছবি দিয়ে শুরু, যুক্তি দিয়ে শেষ — তারপর গতি।</p>'
             '<div class="footer__note">'
-            'আসন, ফি, সময়সূচি ও মাসিক ক্লাস/মক সংখ্যা ডেটাবেস-নির্ভর; ভর্তির পূর্বে WhatsApp-এ আসন প্রাপ্যতা ও চলতি তথ্য নিশ্চিত করে সরাসরি কেন্দ্রে যোগাযোগ করুন।'
+            'আসন, ফি, সময়সূচি ও মাসিক ক্লাস/মক সংখ্যা ডেটাবেস-নির্ভর; ভর্তির পূর্বে WhatsApp-এ আসন প্রাপ্যতা ও চলতি তথ্য নিশ্চিত করে সরাসরি কেন্দ্রে যোগাযোগ করুন।'
             '</div>'
             '</div>'
             '<div>'
@@ -1366,17 +1366,17 @@ __CSP__
             '<ul>'
             '<li><a href="/blog/">সব ব্লগ ও লেখা</a></li>'
             '<li><a href="/blog/ssc-goniter-sob-sutro/">SSC গণিতের সব সূত্র</a></li>'
-            '<li><a href="/blog/goniter-voy-katanor-7-obhyas/">ভয় কাটানোর ৭ অভ্যাস</a></li>'
-            '<li><a href="/blog/gonit-valo-kore-podar-upay/">গণিত ভালো করার উপায়</a></li>'
+            '<li><a href="/blog/goniter-voy-katanor-7-obhyas/">ভয় কাটানোর ৭ অভ্যাস</a></li>'
+            '<li><a href="/blog/gonit-valo-kore-podar-upay/">গণিত ভালো করার উপায়</a></li>'
             '<li><a href="/#library">অনুশীলন শিট</a></li>'
             '</ul></div>'
             '<div>'
             '<h3 class="footer__h">যোগাযোগ</h3>'
-            '<address>দর্শনা, চুয়াডাঙ্গা<br>নির্দিষ্ট ঠিকানা ম্যাপে দেখুন</address>'
+            '<address>দর্শনা, চুয়াডাঙ্গা<br>নির্দিষ্ট ঠিকানা ম্যাপে দেখুন</address>'
             '<div class="soc" role="group" aria-label="সোশ্যাল ও যোগাযোগ">'
             '<a class="soc__a soc__a--wa soc__a--pulse" href="https://wa.me/8801641045469" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp">'
             '<svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa2"/></svg></a>'
-            '<a class="soc__a soc__a--fb" href="https://www.facebook.com/pranto.rai.37" target="_blank" rel="noopener me" aria-label="Facebook — প্রান্ত রায়" title="Facebook">'
+            '<a class="soc__a soc__a--fb" href="https://www.facebook.com/pranto.rai.37" target="_blank" rel="noopener me" aria-label="Facebook — প্রান্ত রায়" title="Facebook">'
             '<svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-fb"/></svg></a>'
             '<a class="soc__a soc__a--map" href="https://maps.app.goo.gl/UyNxwUBw3sjnmGE29" target="_blank" rel="noopener" aria-label="Google Maps — দর্শনা" title="Google Maps">'
             '<svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-gmap"/></svg></a>'
@@ -1385,14 +1385,14 @@ __CSP__
             '</div>'
             '<ul style="margin-top:14px">'
             '<li><a href="tel:+8801641045469"><svg class="ico" style="width:14px;height:14px"><use href="#i-phone"/></svg> ০১৬৪১-০৪৫৪৬৯</a></li>'
-            '<li><a href="https://wa.me/8801641045469" target="_blank" rel="noopener" data-wa="আসসালামু আলাইকুম, বর্তমান অফলাইন ব্যাচ, আসন, সময় ও ফি জানতে চাই।"><svg class="ico" style="width:14px;height:14px"><use href="#i-wa"/></svg> WhatsApp · ০১৬৪১-০৪৫৪৬৯</a></li>'
-            '<li><a href="https://www.facebook.com/pranto.rai.37" target="_blank" rel="noopener me"><svg class="ico" style="width:14px;height:14px"><use href="#i-fb"/></svg> Facebook — প্রান্ত রায়</a></li>'
+            '<li><a href="https://wa.me/8801641045469" target="_blank" rel="noopener" data-wa="আসসালামু আলাইকুম, বর্তমান অফলাইন ব্যাচ, আসন, সময় ও ফি জানতে চাই।"><svg class="ico" style="width:14px;height:14px"><use href="#i-wa"/></svg> WhatsApp · ০১৬৪১-০৪৫৪৬৯</a></li>'
+            '<li><a href="https://www.facebook.com/pranto.rai.37" target="_blank" rel="noopener me"><svg class="ico" style="width:14px;height:14px"><use href="#i-fb"/></svg> Facebook — প্রান্ত রায়</a></li>'
             '<li><a href="https://maps.app.goo.gl/UyNxwUBw3sjnmGE29" target="_blank" rel="noopener"><svg class="ico" style="width:14px;height:14px"><use href="#i-gmap"/></svg> ম্যাপে দেখুন — দর্শনা</a></li>'
             '</ul></div>'
             '</div>'
             '<div class="footer__bottom">'
             '<span>© <span id="y">২০২৬</span> MATH ACADEMY · সর্বস্বত্ব সংরক্ষিত</span>'
-            '<button type="button" class="link-u" id="privacyBtn" style="color:#d8d6cf;background:none;border:none;cursor:pointer;font-family:inherit;font-size:12px;padding:0" aria-haspopup="dialog">গোপনীয়তা ও ডেটা সুরক্ষা নীতি</button>'
+            '<button type="button" class="link-u" id="privacyBtn" style="color:#d8d6cf;background:none;border:none;cursor:pointer;font-family:inherit;font-size:12px;padding:0" aria-haspopup="dialog">গোপনীয়তা ও ডেটা সুরক্ষা নীতি</button>'
             '<a class="ssl" href="/.well-known/security.txt" target="_blank" rel="noopener" title="HTTPS · TLS · HSTS — নিরাপত্তা নীতি">'
             '<svg viewBox="0 0 24 24" aria-hidden="true" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>'
             '<span><b>HTTPS · SSL সুরক্ষিত</b><small>TLS · HSTS · সিকিউর কানেকশন</small></span></a>'
@@ -1402,22 +1402,22 @@ __CSP__
             '<div class="pmodal__head">'
             '<div>'
             '<span class="kicker kicker--red" style="font-size:11px">স্বচ্ছতা ও সুরক্ষা</span>'
-            '<h3 id="privTitle" style="font-size:20px;font-weight:700;margin-top:4px;color:var(--ink)">গোপনীয়তা ও ডেটা সুরক্ষা নীতি</h3>'
+            '<h3 id="privTitle" style="font-size:20px;font-weight:700;margin-top:4px;color:var(--ink)">গোপনীয়তা ও ডেটা সুরক্ষা নীতি</h3>'
             '</div>'
             '<button type="button" id="closePrivacyBtn" aria-label="বন্ধ করুন" class="btn btn--outline btn--sm" style="padding:4px 10px;font-size:16px">✕</button>'
             '</div>'
             '<div class="pmodal__body">'
-            '<p>ম্যাথ একাডেমি দর্শনা শিক্ষার্থীদের গোপনীয়তা এবং ব্যবহারকারীদের ডেটা সুরক্ষায় সম্পূর্ণ প্রতিশ্রুতিবদ্ধ। আমাদের ওয়েবসাইট সম্পূর্ণ বিজ্ঞাপনমুক্ত এবং ব্যবহারকারী-বান্ধব।</p>'
+            '<p>ম্যাথ একাডেমি দর্শনা শিক্ষার্থীদের গোপনীয়তা এবং ব্যবহারকারীদের ডেটা সুরক্ষায় সম্পূর্ণ প্রতিশ্রুতিবদ্ধ। আমাদের ওয়েবসাইট সম্পূর্ণ বিজ্ঞাপনমুক্ত এবং ব্যবহারকারী-বান্ধব।</p>'
             '<h4>১. সম্পূর্ণ জিরো-ট্র্যাকিং নীতি (Zero Tracking Cookies)</h4>'
-            '<p>সাধারণ দর্শকদের ব্রাউজিংয়ে আমরা কোনো থার্ড-পার্টি ট্র্যাকিং কুকি, ক্রস-সাইট ট্র্যাকার বা বাণিজ্যিক অ্যানালিটিক্স স্ক্রিপ্ট ব্যবহার করি না। আপনার ব্রাউজিং কার্যকলাপ কোনো বিজ্ঞাপনী সংস্থার কাছে বিক্রি বা শেয়ার করা হয় না।</p>'
+            '<p>সাধারণ দর্শকদের ব্রাউজিংয়ে আমরা কোনো থার্ড-পার্টি ট্র্যাকিং কুকি, ক্রস-সাইট ট্র্যাকার বা বাণিজ্যিক অ্যানালিটিক্স স্ক্রিপ্ট ব্যবহার করি না। আপনার ব্রাউজিং কার্যকলাপ কোনো বিজ্ঞাপনী সংস্থার কাছে বিক্রি বা শেয়ার করা হয় না।</p>'
             '<h4>২. সার্চ কনসোল ও ইনডেক্সিং (Google &amp; Bing)</h4>'
-            '<p>ওয়েবসাইটটি সার্চ ইঞ্জিনে খুঁজে পাওয়ার জন্য আমরা স্ট্যান্ডার্ড সার্চ কনসোল ও সাইটম্যাপ ব্যবহার করি, যা কোনো ব্যক্তিগত ট্র্যাকিং বা ব্যবহারকারীর ডিভাইসে অতিরিক্ত মেমোরি খরচ করে না। এটি শতভাগ হালকা ও দ্রুতগতির ব্রাউজিং নিশ্চিত করে।</p>'
+            '<p>ওয়েবসাইটটি সার্চ ইঞ্জিনে খুঁজে পাওয়ার জন্য আমরা স্ট্যান্ডার্ড সার্চ কনসোল ও সাইটম্যাপ ব্যবহার করি, যা কোনো ব্যক্তিগত ট্র্যাকিং বা ব্যবহারকারীর ডিভাইসে অতিরিক্ত মেমোরি খরচ করে না। এটি শতভাগ হালকা ও দ্রুতগতির ব্রাউজিং নিশ্চিত করে।</p>'
             '<h4>৩. মক টেস্ট ফলাফল ও শিক্ষার্থীর তথ্য</h4>'
-            '<p>ফলাফল পোর্টালে প্রদর্শিত রোল নম্বর ও মূল্যায়ন কেবল শিক্ষার্থীদের একাডেমিক অগ্রগতি মূল্যায়নের সুবিধার্থে সংরক্ষিত। প্রাতিষ্ঠানিক অনুমোদন সাপেক্ষে এবং শিক্ষার্থীদের মেধার স্বীকৃতি স্বরূপ এগুলো প্রদর্শিত হয়।</p>'
+            '<p>ফলাফল পোর্টালে প্রদর্শিত রোল নম্বর ও মূল্যায়ন কেবল শিক্ষার্থীদের একাডেমিক অগ্রগতি মূল্যায়নের সুবিধার্থে সংরক্ষিত। প্রাতিষ্ঠানিক অনুমোদন সাপেক্ষে এবং শিক্ষার্থীদের মেধার স্বীকৃতি স্বরূপ এগুলো প্রদর্শিত হয়।</p>'
             '<h4>৪. এনক্রিপ্টেড ও সুরক্ষিত সংযোগ</h4>'
-            '<p>সম্পূর্ণ ওয়েবসাইটটি অত্যাধুনিক TLS/SSL এনক্রিপশন ও HSTS নিরাপত্তা প্রটোকলের অধীনে পরিচালিত। কোনো বহিরাগত অননুমোদিত ব্যক্তি ওয়েবসাইটের তথ্য বিকৃত করতে পারে না।</p>'
+            '<p>সম্পূর্ণ ওয়েবসাইটটি অত্যাধুনিক TLS/SSL এনক্রিপশন ও HSTS নিরাপত্তা প্রটোকলের অধীনে পরিচালিত। কোনো বহিরাগত অননুমোদিত ব্যক্তি ওয়েবসাইটের তথ্য বিকৃত করতে পারে না।</p>'
             '<h4>৫. যোগাযোগ ও জিজ্ঞাসা</h4>'
-            '<p>যেকোনো তথ্য যাচাই বা ব্যাচ সংক্রান্ত অনুসন্ধানের জন্য সরাসরি আমাদের শিক্ষক প্রান্ত রায়ের সাথে WhatsApp বা সরাসরি ফোনে যোগাযোগ করতে পারেন।</p>'
+            '<p>যেকোনো তথ্য যাচাই বা ব্যাচ সংক্রান্ত অনুসন্ধানের জন্য সরাসরি আমাদের শিক্ষক প্রান্ত রায়ের সাথে WhatsApp বা সরাসরি ফোনে যোগাযোগ করতে পারেন।</p>'
             '</div>'
             '<div class="pmodal__foot" style="padding:12px 20px;border-top:1px solid #ddd;background:#f3efe6">'
             '<button type="button" class="btn btn--ink" id="confirmPrivacyBtn">বুঝেছি</button>'
@@ -1434,7 +1434,7 @@ __CSP__
               "foundingDate": str(int(CFG['team']['founded_year'])),
               "telephone": "+8801641045469",
               "address": {"@type": "PostalAddress", "addressLocality": "দর্শনা",
-                          "addressRegion": "চুয়াডাঙ্গা", "addressCountry": "BD"}}
+                          "addressRegion": "চুয়াডাঙ্গা", "addressCountry": "BD"}}
 
     # ---------- hub ----------
     cards = []
@@ -1475,9 +1475,9 @@ __CSP__
         '<header class="hub-head">'
         '<span class="eyebrow">ব্লগ // MATH NOTES</span>'
         '<h1>গণিতের লেখা, রুটিন আর অভিভাবকের প্রশ্ন</h1>'
-        '<p>দর্শনা ও চুয়াডাঙ্গার শিক্ষার্থীদের জন্য SSC ও ক্লাস ৬–১০ গণিতের প্রস্তুতি, অধ্যায়ের '
-        'ক্রম, অনুশীলন আর অভিভাবকের প্রশ্ন নিয়ে দশটি পূর্ণ লেখা। প্রতিটি লেখায় প্রয়োজনীয় '
-        'ব্যাখ্যা, ব্যবহারিক উদাহরণ ও প্রাসঙ্গিক উৎস রাখা হয়েছে।</p>'
+        '<p>দর্শনা ও চুয়াডাঙ্গার শিক্ষার্থীদের জন্য SSC ও ক্লাস ৬–১০ গণিতের প্রস্তুতি, অধ্যায়ের '
+        'ক্রম, অনুশীলন আর অভিভাবকের প্রশ্ন নিয়ে দশটি পূর্ণ লেখা। প্রতিটি লেখায় প্রয়োজনীয় '
+        'ব্যাখ্যা, ব্যবহারিক উদাহরণ ও প্রাসঙ্গিক উৎস রাখা হয়েছে।</p>'
         '</header>'
         '<h2 class="hub-sub" id="start">হোমপেজের নির্বাচিত লেখা</h2>'
         '<p class="hub-note">হোমপেজে থাকা চারটি লেখা এখানেও একই ক্রমে সাজানো। আপনার প্রশ্নের '
@@ -1486,12 +1486,12 @@ __CSP__
         '<h2 class="hub-sub" id="all">সব লেখা <span>(' + bn(len(BLOG.POSTS)) + 'টি)</span></h2>'
         '<div class="cards">' + ''.join(cards) + '</div>'
         '<div class="cta" style="margin-top:30px">'
-        '<p>গণিতের পড়া বা ব্যাচ সম্পর্কে প্রশ্ন থাকলে হোয়াটসঅ্যাপে বার্তা পাঠান।</p>'
+        '<p>গণিতের পড়া বা ব্যাচ সম্পর্কে প্রশ্ন থাকলে হোয়াটসঅ্যাপে বার্তা পাঠান।</p>'
         '<a class="btn" href="' + WA + '?text=%E0%A6%86%E0%A6%B8%E0%A6%B8%E0%A6%BE%E0%A6%B2%E0%A6%BE%E0%A6%AE%E0%A7%81%20%E0%A6%86%E0%A6%B2%E0%A6%BE%E0%A6%87%E0%A6%95%E0%A7%81%E0%A6%AE%2C%20%E0%A6%AA%E0%A7%9C%E0%A6%BE%E0%A6%B6%E0%A7%8B%E0%A6%A8%E0%A6%BE%20%E0%A6%A8%E0%A6%BF%E0%A7%9F%E0%A7%87%20%E0%A6%9C%E0%A6%BE%E0%A6%A8%E0%A6%A4%E0%A7%87%20%E0%A6%9A%E0%A6%BE%E0%A6%87%E0%A5%A4" '
         'target="_blank" rel="noopener">প্রশ্ন করুন</a></div>'
         '</main>' + footer_html())
     hub = chrome(head_for('ব্লগ | SSC ও ক্লাস ৬–১০ গণিত — ম্যাথ একাডেমি দর্শনা',
-                          'দর্শনা ও চুয়াডাঙ্গার শিক্ষার্থীদের জন্য গণিতের নোট — SSC প্রস্তুতি, অধ্যায়ের ক্রম, রুটিন আর কোচিং বাছাইয়ের পরামর্শ।',
+                          'দর্শনা ও চুয়াডাঙ্গার শিক্ষার্থীদের জন্য গণিতের নোট — SSC প্রস্তুতি, অধ্যায়ের ক্রম, রুটিন আর কোচিং বাছাইয়ের পরামর্শ।',
                           hub_url, hub_ld), hub_body)
     hub = hub.replace('</head>', '<style>' + blog_css + '</style>\n</head>')
 
@@ -1517,9 +1517,9 @@ __CSP__
              "description": pst['desc'], "inLanguage": "bn-BD", "url": url,
              "mainEntityOfPage": {"@id": url},
              "datePublished": pst['date'], "dateModified": pst['updated'],
-             "author": {"@type": "Person", "name": "প্রান্ত রায় (Pranto Rai)",
+             "author": {"@type": "Person", "name": "প্রান্ত রায় (Pranto Rai)",
                         "url": SITE_HOST + "/#teacher",
-                        "jobTitle": "গণিত শিক্ষক, দর্শনা আইডিয়াল স্কুল"},
+                        "jobTitle": "গণিত শিক্ষক, দর্শনা আইডিয়াল স্কুল"},
              "publisher": {"@id": SITE_HOST + "/#org"},
              "image": [SITE_HOST + "/og-1200x630.jpg"],
              "articleSection": pst['tag'], "keywords": pst['keyword'],
@@ -1539,10 +1539,10 @@ __CSP__
             '<header class="post-head">'
             '<span class="eyebrow">' + pst['tag'] + '</span>'
             '<h1>' + pst['h1'] + '</h1>'
-            '<div class="post-meta"><span>লিখেছেন <b>প্রান্ত রায়</b></span>'
+            '<div class="post-meta"><span>লিখেছেন <b>প্রান্ত রায়</b></span>'
             '<span>' + bn(pst['mins']) + ' মিনিট পড়া</span>'
             '<span>প্রকাশ <b><time datetime="' + pst['date'] + '">' + bn_date(pst['date']) + '</time></b></span>'
-            '<span>দর্শনা, চুয়াডাঙ্গা</span></div>'
+            '<span>দর্শনা, চুয়াডাঙ্গা</span></div>'
             '</header>'
             '<div class="prose">' + pst['body'] +
             '<h2>সাধারণ প্রশ্ন</h2><div class="faq">' + faq_html + '</div>'
@@ -1578,7 +1578,7 @@ __CSP__
         return (
             '<!doctype html><html lang="bn"><head><meta charset="utf-8">'
             '<meta name="viewport" content="width=device-width,initial-scale=1">'
-            '<title>লেখাটি সরানো হয়েছে — ম্যাথ একাডেমি</title>'
+            '<title>লেখাটি সরানো হয়েছে — ম্যাথ একাডেমি</title>'
             '<link rel="canonical" href="' + SITE_HOST + to + '">'
             '<meta name="robots" content="noindex,follow">'
             '<meta http-equiv="refresh" content="0;url=' + to + '">'
@@ -1587,7 +1587,7 @@ __CSP__
             'background:#FDFBF7;color:#0A0A0A;font-family:system-ui,"Hind Siliguri",sans-serif;'
             'text-align:center;padding:24px}a{color:#D42C24;font-weight:700}'
             'p{max-width:38ch;line-height:1.6}</style></head><body><div>'
-            '<p>এই লেখাটি নতুন ঠিকানায় সরানো হয়েছে। না সরালে '
+            '<p>এই লেখাটি নতুন ঠিকানায় সরানো হয়েছে। না সরালে '
             '<a href="' + to + '">এখানে ক্লিক করুন</a>।</p></div></body></html>')
 
     (D / 'guide').mkdir(exist_ok=True)
@@ -1606,7 +1606,7 @@ __CSP__
     # ---------- sitemap: generated, so it can never drift from the pages ----------
     def _u(loc, lastmod, freq, pri, img=True):
         im = ('\n    <image:image>\n      <image:loc>%s/og-1200x630.jpg</image:loc>\n'
-              '      <image:title>ম্যাথ একাডেমি — দর্শনা, চুয়াডাঙ্গা</image:title>\n'
+              '      <image:title>ম্যাথ একাডেমি — দর্শনা, চুয়াডাঙ্গা</image:title>\n'
               '    </image:image>' % SITE_HOST) if img else ''
         return ('  <url>\n    <loc>%s</loc>\n    <lastmod>%s</lastmod>\n'
                 '    <changefreq>%s</changefreq>\n    <priority>%s</priority>%s\n  </url>\n'
@@ -1657,8 +1657,8 @@ __CSP__
     # ---------- humans.txt ----------
     (D / 'humans.txt').write_text(
         '/* TEAM */\n'
-        '  Teacher / owner : প্রান্ত রায় — ম্যাথ একাডেমি, দর্শনা, চুয়াডাঙ্গা\n'
-        '  Design & code   : তানভীর ইসলাম তন্ময় (Tanver Islam Tonmoy)\n'
+        '  Teacher / owner : প্রান্ত রায় — ম্যাথ একাডেমি, দর্শনা, চুয়াডাঙ্গা\n'
+        '  Design & code   : তানভীর ইসলাম তন্ময় (Tanver Islam Tonmoy)\n'
         '                    https://www.facebook.com/tanverislamtonmoyofficial\n'
         '\n/* SITE */\n'
         '  Language   : বাংলা (bn-BD)\n'

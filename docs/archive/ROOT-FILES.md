@@ -83,4 +83,4 @@ Expected: eight `200`s and `real-404=404`.
 3. **`robots.txt` must not block what the sitemap advertises.** Contradiction = soft exclusion.
 4. **`llms.txt` must match the page.** It is a fact sheet; a stale fact sheet is worse than none.
 5. **`security.txt` shows correct contact endpoints** — a researcher must not have to guess. Keep `Expires:` in the future.
-6. **`humans.txt` is credit, not SEO.** It now carries the developer byline (তানভীর ইসলাম তন্ময়).
+6. **`humans.txt` is credit, not SEO.** It now carries the developer byline (তানভীর ইসলাম তন্ময়).

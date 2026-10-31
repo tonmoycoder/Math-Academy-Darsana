@@ -50,11 +50,13 @@ favicons = [
     'dist/favicon-96x96.png',
     'dist/favicon-192x192.png',
     'dist/apple-touch-icon.png',
-    'dist/site.webmanifest'
+    'dist/site.webmanifest',
+    'dist/og-1200x630.jpg',
+    'dist/logo.png'
 ]
 for fav in favicons:
     if not os.path.exists(fav):
-        errors.append(f"Missing favicon asset {fav}")
+        errors.append(f"Missing asset {fav}")
 
 # 4. Check all 13 canonical pages
 print(f"Checking {len(checked_files)} canonical pages for exact tags and scripts...")
@@ -87,14 +89,40 @@ with open('dist/index.html', 'r', encoding='utf-8') as f:
         errors.append("Homepage title mismatch or not updated")
     if 'সেরা গণিত শিক্ষক' in idx_content:
         errors.append("Found unsupported boastful claim 'সেরা গণিত শিক্ষক' in dist/index.html")
+    if 'best math teacher' in idx_content.lower():
+        errors.append("Found unsupported English boastful claim 'best math teacher' in dist/index.html")
+    if 'widely regarded' in idx_content.lower():
+        errors.append("Found unsupported claim 'widely regarded' in dist/index.html")
+    if 'recognized as the best' in idx_content.lower():
+        errors.append("Found unsupported claim 'recognized as the best' in dist/index.html")
     if '"name":"ম্যাথ একাডেমি দর্শনা"' not in idx_content and '"name": "ম্যাথ একাডেমি দর্শনা"' not in idx_content:
         errors.append("WebSite name in JSON-LD is missing or incorrect")
     if 'Math Academy Darshana' not in idx_content:
         errors.append("Math Academy Darshana missing in alternateName")
-    if 'প্রান্ত রায়' not in idx_content:
-        errors.append("Required spelling 'প্রান্ত রায়' not found in dist/index.html")
+
+    # Target spelling: U+09DF
+    target_spelling = '\u09aa\u09cd\u09b0\u09be\u09a8\u09cd\u09a4 \u09b0\u09be\u09df'
+    # Decomposed spelling: U+09AF U+09BC
+    decomposed_spelling = '\u09aa\u09cd\u09b0\u09be\u09a8\u09cd\u09a4 \u09b0\u09be\u09af\u09bc'
+
+    if target_spelling not in idx_content:
+        errors.append("Required spelling 'প্রান্ত রায়' (U+09DF) not found in dist/index.html")
+    if decomposed_spelling in idx_content:
+        errors.append("Found forbidden decomposed spelling 'প্রান্ত রায়' (U+09AF U+09BC) in dist/index.html")
     if 'প্রান্ত রাই' in idx_content:
         errors.append("Found forbidden spelling 'প্রান্ত রাই' in dist/index.html")
+
+    # OG / Twitter Image checks
+    if 'content="https://mathacademydarsana.vercel.app/og-1200x630.jpg"' not in idx_content:
+        errors.append("Homepage og:image must point to https://mathacademydarsana.vercel.app/og-1200x630.jpg")
+    if 'content="1200"' not in idx_content or 'content="630"' not in idx_content:
+        errors.append("Homepage og:image dimensions (1200x630) missing")
+
+# 6. Check robots.txt
+with open('dist/robots.txt', 'r', encoding='utf-8') as f:
+    robots_content = f.read()
+    if 'User-agent: Googlebot-Favicon' not in robots_content:
+        errors.append("Googlebot-Favicon not explicitly defined in dist/robots.txt")
 
 if errors:
     print(f"FAILED with {len(errors)} errors:")
@@ -102,4 +130,4 @@ if errors:
         print(f" - {e}")
     sys.exit(1)
 else:
-    print("ALL 5 VERIFICATION SUITES PASSED 100% PERFECTLY!")
+    print("ALL VERIFICATION SUITES PASSED 100% PERFECTLY!")

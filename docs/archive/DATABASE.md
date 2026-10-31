@@ -41,7 +41,7 @@ The "data model" of the product is therefore the **content model in the reposito
 
 Stored as `<tr>` rows in `_src/03-sections.html` (§`#batches`). Derived, never stored: `seats_left = seats_cap − seats_taken`, meter width `= seats_taken / seats_cap`.
 
-**Validation rule at build time (manual):** `seats_taken ≤ 12`; if `seats_taken = 12` then `status = waitlist` and the row CTA reads "ওয়েটিং লিস্ট".
+**Validation rule at build time (manual):** `seats_taken ≤ 12`; if `seats_taken = 12` then `status = waitlist` and the row CTA reads "ওয়েটিং লিস্ট".
 
 ### 2.2 `method_example` — 4 records (`_src/site.js`)
 
@@ -70,14 +70,14 @@ Stored as `<tr>` rows in `_src/03-sections.html` (§`#batches`). Derived, never 
 
 | Field | Value |
 |---|---|
-| name_bn / name_en | প্রান্ত রায় / Pranto Roy |
+| name_bn / name_en | প্রান্ত রায় / Pranto Roy |
 | role | প্রতিষ্ঠাতা ও শিক্ষক |
-| affiliation | দর্শনা আইডিয়াল স্কুল (https://www.darsanaidealschool.com/) |
+| affiliation | দর্শনা আইডিয়াল স্কুল (https://www.darsanaidealschool.com/) |
 | degrees | গণিতে অনার্স ও মাস্টার্স (no institution named) |
 | experience | ১০+ বছর |
 | phone | +8801641045469 |
 | facebook | https://www.facebook.com/pranto.rai.37 |
-| location | দর্শনা, চুয়াডাঙ্গা + maps link |
+| location | দর্শনা, চুয়াডাঙ্গা + maps link |
 
 **Invariant:** the teacher facts appear in exactly four places and must stay identical — hero card, teacher section, footer, JSON-LD (`build.py`). A change script should grep for the old value and replace all four.
 

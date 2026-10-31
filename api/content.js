@@ -263,11 +263,11 @@ async function handlePost(request) {
   if (body?.action === 'login') {
     const password = body.password;
     if (!password || typeof password !== 'string') {
-      return json({ error: 'password_required', message: 'পাসওয়ার্ড দিন' }, 400, NO_STORE);
+      return json({ error: 'password_required', message: 'পাসওয়ার্ড দিন' }, 400, NO_STORE);
     }
     const valid = await verifyPassword(password);
     if (!valid) {
-      return json({ error: 'invalid_credentials', message: 'ভুল পাসওয়ার্ড! সঠিক পাসওয়ার্ড দিন।' }, 401, NO_STORE);
+      return json({ error: 'invalid_credentials', message: 'ভুল পাসওয়ার্ড! সঠিক পাসওয়ার্ড দিন।' }, 401, NO_STORE);
     }
     const token = createSessionToken();
     return new Response(JSON.stringify({
@@ -299,14 +299,14 @@ async function handlePost(request) {
     const newPass = cp.new_password;
 
     if (!currentPass || typeof currentPass !== 'string') {
-      return json({ error: 'current_password_required', message: 'বর্তমান পাসওয়ার্ড প্রয়োজন' }, 400, NO_STORE);
+      return json({ error: 'current_password_required', message: 'বর্তমান পাসওয়ার্ড প্রয়োজন' }, 400, NO_STORE);
     }
     const currentValid = await verifyPassword(currentPass);
     if (!currentValid) {
-      return json({ error: 'current_password_incorrect', message: 'বর্তমান পাসওয়ার্ড সঠিক নয়' }, 401, NO_STORE);
+      return json({ error: 'current_password_incorrect', message: 'বর্তমান পাসওয়ার্ড সঠিক নয়' }, 401, NO_STORE);
     }
     if (!newPass || typeof newPass !== 'string' || newPass.trim().length < 8) {
-      return json({ error: 'new_password_invalid', message: 'নতুন পাসওয়ার্ড কমপক্ষে ৮ অক্ষরের হতে হবে' }, 400, NO_STORE);
+      return json({ error: 'new_password_invalid', message: 'নতুন পাসওয়ার্ড কমপক্ষে ৮ অক্ষরের হতে হবে' }, 400, NO_STORE);
     }
 
     const salt = crypto.randomBytes(16).toString('hex');
@@ -322,7 +322,7 @@ async function handlePost(request) {
     const freshToken = createSessionToken();
     return new Response(JSON.stringify({
       ok: true,
-      message: 'পাসওয়ার্ড সফলভাবে পরিবর্তন করা হয়েছে',
+      message: 'পাসওয়ার্ড সফলভাবে পরিবর্তন করা হয়েছে',
       token: freshToken
     }), {
       status: 200,

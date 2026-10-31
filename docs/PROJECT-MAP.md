@@ -118,8 +118,8 @@ survive a rebuild, it was made in the wrong place.
    open questions `[DECISION NEEDED]`.
 5. **Capacity is exactly 15 students per batch** in Neon, seed, UI, schema, generated data and docs. Legacy fills above 15 are reconciled; no impossible seat totals may be published.
 6. **No user auth or student accounts.** Neon Postgres powers the dynamic site data through exactly one Vercel Function (`api/content.js`); the "result lookup" remains a hard-coded demo.
-6. **Facts are fixed**: প্রান্ত রায় · দর্শনা আইডিয়াল স্কুল · FB `pranto.rai.37` ·
-   map `UyNxwUBw3sjnmGE29` · WhatsApp `+880 1641-045469` · ১০+ বছর · দর্শনা, চুয়াডাঙ্গা.
+6. **Facts are fixed**: প্রান্ত রায় · দর্শনা আইডিয়াল স্কুল · FB `pranto.rai.37` ·
+   map `UyNxwUBw3sjnmGE29` · WhatsApp `+880 1641-045469` · ১০+ বছর · দর্শনা, চুয়াডাঙ্গা.
 7. **Lighthouse:** target 100 in every category without changing the approved design or shortening the intro. Measure and report exact results; do not claim a score until a current run completes.
 
 ---
@@ -205,4 +205,4 @@ Expected: eight `200`s and `real-404=404`.
 3. **`robots.txt` must not block what the sitemap advertises.** Contradiction = soft exclusion.
 4. **`llms.txt` must match the page.** It is a fact sheet; a stale fact sheet is worse than none.
 5. **`security.txt` shows correct contact endpoints** — a researcher must not have to guess. Keep `Expires:` in the future.
-6. **`humans.txt` is credit, not SEO.** It now carries the developer byline (তানভীর ইসলাম তন্ময়).
+6. **`humans.txt` is credit, not SEO.** It now carries the developer byline (তানভীর ইসলাম তন্ময়).

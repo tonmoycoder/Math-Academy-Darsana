@@ -14,8 +14,8 @@
 
 ## 1 · Fixed facts and scope
 
-- Academy: ম্যাথ একাডেমি · দর্শনা, চুয়াডাঙ্গা.
-- Teacher: প্রান্ত রায় · দর্শনা আইডিয়াল স্কুল · ১০+ বছর. Academy founded: **2022** (owner-corrected).
+- Academy: ম্যাথ একাডেমি · দর্শনা, চুয়াডাঙ্গা.
+- Teacher: প্রান্ত রায় · দর্শনা আইডিয়াল স্কুল · ১০+ বছর. Academy founded: **2022** (owner-corrected).
 - Canonical domain: `https://mathacademydarsana.vercel.app`.
 - Phone/WhatsApp: `+8801641045469` · Facebook: `pranto.rai.37` · Map id: `UyNxwUBw3sjnmGE29`.
 - Offline batches for classes 6–10 and SSC; no HSC and no free-trial claim.

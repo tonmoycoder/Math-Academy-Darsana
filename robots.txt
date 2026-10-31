@@ -9,12 +9,11 @@ Allow: /*?fast=
 User-agent: Googlebot
 Allow: /
 
+User-agent: Googlebot-Favicon
+Allow: /
+
 User-agent: Googlebot-Image
-Allow: /logo.png
-Allow: /favicon*.png
-Allow: /icon-*.png
-Allow: /favicon.ico
-Allow: /apple-touch-icon.png
+Allow: /
 
 # AI answer engines (GEO / AEO)
 User-agent: GPTBot

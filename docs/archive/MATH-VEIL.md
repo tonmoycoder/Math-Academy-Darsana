@@ -33,7 +33,7 @@ That keeps three zones clear regardless of the photo:
 
 - the face in the middle,
 - the historical top HUD (`INSTRUCTOR FILE // 01`, `EST. 2020`; superseded by the owner-corrected 2022 founding year),
-- the bottom quote bar (`"কেউ পিছিয়ে থাকলে ক্লাস এগোয় না"`).
+- the bottom quote bar (`"কেউ পিছিয়ে থাকলে ক্লাস এগোয় না"`).
 
 An earlier attempt spread glyphs over the whole surface and landed on top of those labels — do not
 go back to a random spread.

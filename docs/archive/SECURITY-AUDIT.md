@@ -29,7 +29,7 @@
 | S-7 | Info | Public phone number, Facebook profile and map pin are published | by design | intended; the number is the business channel | Accepted |
 | S-8 | Info | No CSP until deployment | n/a locally | shipped in `vercel.json` guidance | **Action for you at deploy** |
 | S-9 | Info | Real student data must never be added to the demo results | `site.js` demo rolls are fictional | keep fictional, or delete the section | Watch |
-| S-10 | Info | Publishing the school affiliation is an employment/reputational decision, not a technical one | page + JSON-LD now name দর্শনা আইডিয়াল স্কুল | confirm with the school (`PRD.md` D-1) | **Needs approval** |
+| S-10 | Info | Publishing the school affiliation is an employment/reputational decision, not a technical one | page + JSON-LD now name দর্শনা আইডিয়াল স্কুল | confirm with the school (`PRD.md` D-1) | **Needs approval** |
 
 ## 3. Residual risk
 

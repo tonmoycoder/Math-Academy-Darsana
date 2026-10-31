@@ -14,13 +14,13 @@
 
 ## 1 · Product and fixed facts
 
-A single-page, offline-coaching website for **ম্যাথ একাডেমি (Math Academy), দর্শনা, চুয়াডাঙ্গা**, teaching classes 6–10 and SSC. Teacher: **প্রান্ত রায়**, of **দর্শনা আইডিয়াল স্কুল**. Deployment target: Vercel.
+A single-page, offline-coaching website for **ম্যাথ একাডেমি (Math Academy), দর্শনা, চুয়াডাঙ্গা**, teaching classes 6–10 and SSC. Teacher: **প্রান্ত রায়**, of **দর্শনা আইডিয়াল স্কুল**. Deployment target: Vercel.
 
 | Fact | Exact value / rule |
 |---|---|
 | Live/canonical domain | `https://mathacademydarsana.vercel.app` |
 | Language | Bengali (`bn-BD`); keep Bengali digits readable and unclipped |
-| Teacher | প্রান্ত রায় · দর্শনা আইডিয়াল স্কুল · ১০+ বছর অভিজ্ঞতা |
+| Teacher | প্রান্ত রায় · দর্শনা আইডিয়াল স্কুল · ১০+ বছর অভিজ্ঞতা |
 | Academy founded | **2022** (owner-corrected; supersedes historical 2020 claims) |
 | Phone / WhatsApp | `+8801641045469` · visible form `০১৬৪১-০৪৫৪৬৯` |
 | Facebook | `pranto.rai.37` |
@@ -28,7 +28,7 @@ A single-page, offline-coaching website for **ম্যাথ একাডেম
 | Class mode | অফলাইন ব্যাচ; no free-trial claims |
 | Capacity | **15 students per batch** everywhere; capacity and changing values are data-driven, never hard-coded in copy |
 | Database | Neon Postgres; exactly one Vercel Function (`api/content.js`); all other Neon services stay off |
-| Developer | তানভীর ইসলাম তন্ময় · `https://www.facebook.com/tanverislamtonmoyofficial` |
+| Developer | তানভীর ইসলাম তন্ময় · `https://www.facebook.com/tanverislamtonmoyofficial` |
 
 **Out of scope:** HSC, login/accounts, student authentication, payments, CDN resources, and unnecessary root-level files. Do not invent testimonials, outcome percentages, seat counts, fees, or school endorsements.
 

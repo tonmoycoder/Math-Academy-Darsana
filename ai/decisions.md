@@ -132,8 +132,8 @@ Entries are historical decisions, not all current behavior. Follow the latest en
   `@id`s, sitemap `<loc>` and robots `Sitemap:` all derive from it.
 - **Docs:** `docs/SEO.md Part C`.
 
-### D-021 · Developer credit (তানভীর ইসলাম তন্ময়) · 2026-10-25
-- **Why:** verified — the owner names তানভীর ইসলাম তন্ময় (Tanver Islam Tonmoy) as designer/developer and gives
+### D-021 · Developer credit (তানভীর ইসলাম তন্ময়) · 2026-10-25
+- **Why:** verified — the owner names তানভীর ইসলাম তন্ময় (Tanver Islam Tonmoy) as designer/developer and gives
   `https://www.facebook.com/tanverislamtonmoyofficial`.
 - **Implementation:** a dark byline band **directly above the footer** (`section.maker`) with name, English name,
   role line and a `rel="noopener me"` profile link; plus the same credit in the footer of every `/guide/` page and

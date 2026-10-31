@@ -66,8 +66,8 @@
 
 - Academy প্রতিষ্ঠিত: **২০২২**।
 - Batch capacity: **প্রতি batch-এ ঠিক ১৫ জন**।
-- শিক্ষক/ব্যক্তির নাম: **প্রান্ত রাই / Pranto Rai**।
-- School reference: **দর্শনা আইডিয়াল স্কুল / Darshana Ideal School**—এটি endorsement, employment বা address হিসেবে উপস্থাপনের আগে owner-এর অনুমতি/সঠিক সম্পর্ক নিশ্চিত করো।
+- শিক্ষক/ব্যক্তির নাম: **প্রান্ত রায় / Pranto Rai**।
+- School reference: **দর্শনা আইডিয়াল স্কুল / Darshana Ideal School**—এটি endorsement, employment বা address হিসেবে উপস্থাপনের আগে owner-এর অনুমতি/সঠিক সম্পর্ক নিশ্চিত করো।
 - Facebook: `pranto.rai.37`।
 - Map reference ID: `UyNxwUBw3sjnmGE29`।
 - WhatsApp: `+880 1641-045469`।
@@ -184,7 +184,7 @@ Phase 0-তে প্রতিটি tool-এর availability/version, permissio
 ### 10.1 Research data quality
 
 - Local/brand/exam intent-কে আলাদা cluster করো; প্রতিটি existing page-এর একটি primary intent/query এবং সহায়ক প্রশ্ন-map করো। একই intent-এর দুটি page competition হলে merge/redirect প্রস্তাবের আগে traffic/backlinks/old URL/history যাচাই ও owner approval নাও।
-- সম্ভাব্য hypothesis (volume/rank claim নয়): “দর্শনা গণিত কোচিং”, “দর্শনা এসএসসি গণিত”, “চুয়াডাঙ্গা গণিত শিক্ষক”, “দর্শনা ক্লাস ৬–১০ গণিত”, “SSC 2027 গণিত প্রস্তুতি”, “SSC 2028 গণিত পূর্ণাঙ্গ সিলেবাস”, “প্রান্ত রাই গণিত শিক্ষক”, “Math Academy Darshana”। বাস্তব location spelling, audience wording, syllabus ও offering যাচাই করে তবেই ব্যবহার করো।
+- সম্ভাব্য hypothesis (volume/rank claim নয়): “দর্শনা গণিত কোচিং”, “দর্শনা এসএসসি গণিত”, “চুয়াডাঙ্গা গণিত শিক্ষক”, “দর্শনা ক্লাস ৬–১০ গণিত”, “SSC 2027 গণিত প্রস্তুতি”, “SSC 2028 গণিত পূর্ণাঙ্গ সিলেবাস”, “প্রান্ত রায় গণিত শিক্ষক”, “Math Academy Darshana”। বাস্তব location spelling, audience wording, syllabus ও offering যাচাই করে তবেই ব্যবহার করো।
 - Source hierarchy: authorized Search Console/Bing query data; Google Trends/Keyword Planner (available/access-approved হলে); official query suggestions/manual SERP/PAA observation; owner/guardian/student language collected ethically. Search volume/difficulty tool access না থাকলে “unknown” লিখো, অনুমান করে সংখ্যা নয়।
 - Google result/PAA bulk scraping, bot challenge circumvention, purchased SEO database/tool বা automated account creation নয়। Search query screenshots/data-র date ও geography লিখো; Dhaka Division/Darshana intent local context অনুযায়ী ধরো।
 - Keyword map-এ query, Bengali/English variant, intent, target page, evidence/source, geography, volume/rank data status, last checked, next action রাখো। No fake “keyword volume” বা “top position” column value।

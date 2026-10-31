@@ -110,7 +110,7 @@ body{background:var(--paper);color:var(--ink);font-family:var(--sans);min-height
       <span class="dot" id="dbDot"></span>
       <span id="dbText">কানেকশন চেক হচ্ছে...</span>
     </div>
-    <a href="/" target="_blank" class="btn btn--outline btn--sm" title="নতুন ট্যাবে হোমপেজ দেখুন">ওয়েবসাইট দেখুন ↗</a>
+    <a href="/" target="_blank" class="btn btn--outline btn--sm" title="নতুন ট্যাবে হোমপেজ দেখুন">ওয়েবসাইট দেখুন ↗</a>
     <button class="btn btn--red btn--sm" id="logoutBtn" style="display:none" onclick="logout()">লগআউট</button>
   </div>
 </header>
@@ -123,13 +123,13 @@ body{background:var(--paper);color:var(--ink);font-family:var(--sans);min-height
       <span class="card__subtitle mono">// SECURE ACCESS</span>
     </div>
     <p style="font-size:14px;color:#444;margin-bottom:18px">
-      ওয়েবসাইটের সকল তথ্য, ব্যাচ ফি, ক্লাসের দিন, আসন সংখ্যা এবং নোটিশ পরিবর্তন করতে আপনার অ্যাডমিন পাসওয়ার্ড দিন:
+      ওয়েবসাইটের সকল তথ্য, ব্যাচ ফি, ক্লাসের দিন, আসন সংখ্যা এবং নোটিশ পরিবর্তন করতে আপনার অ্যাডমিন পাসওয়ার্ড দিন:
     </p>
     <form id="loginForm">
       <div class="field">
-        <label for="adminPassword">অ্যাডমিন পাসওয়ার্ড (Admin Password)</label>
-        <input type="password" id="adminPassword" placeholder="আপনার অ্যাডমিন পাসওয়ার্ড লিখুন" required autocomplete="current-password">
-        <small>ওয়েবসাইট পরিচালনার জন্য অনুমোদিত অ্যাডমিন পাসওয়ার্ড প্রদান করুন।</small>
+        <label for="adminPassword">অ্যাডমিন পাসওয়ার্ড (Admin Password)</label>
+        <input type="password" id="adminPassword" placeholder="আপনার অ্যাডমিন পাসওয়ার্ড লিখুন" required autocomplete="current-password">
+        <small>ওয়েবসাইট পরিচালনার জন্য অনুমোদিত অ্যাডমিন পাসওয়ার্ড প্রদান করুন।</small>
       </div>
       <button type="submit" class="btn btn--ink btn--block">লগইন করুন</button>
     </form>
@@ -142,11 +142,11 @@ body{background:var(--paper);color:var(--ink);font-family:var(--sans);min-height
     <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;margin-bottom:24px">
       <div>
         <h2 style="font-size:24px;font-weight:700">ব্যাচ ও আসন ব্যবস্থাপনা</h2>
-        <p style="font-size:14px;color:#555">এখানে যে তথ্যই সেভ করবেন, তা সরাসরি Neon Postgres ডাটাবেজে সংরক্ষিত হবে এবং ওয়েবসাইটে মুহূর্তেই লাইভ আপডেট হবে।</p>
+        <p style="font-size:14px;color:#555">এখানে যে তথ্যই সেভ করবেন, তা সরাসরি Neon Postgres ডাটাবেজে সংরক্ষিত হবে এবং ওয়েবসাইটে মুহূর্তেই লাইভ আপডেট হবে।</p>
       </div>
       <div style="display:flex;gap:10px">
         <button class="btn btn--outline btn--sm" onclick="loadContent()">🔄 ডাটা রিফ্রেশ</button>
-        <a href="/" target="_blank" class="btn btn--red btn--sm">লাইভ ওয়েবসাইট ↗</a>
+        <a href="/" target="_blank" class="btn btn--red btn--sm">লাইভ ওয়েবসাইট ↗</a>
       </div>
     </div>
 
@@ -158,21 +158,21 @@ body{background:var(--paper);color:var(--ink);font-family:var(--sans);min-height
     <!-- Live Notice Banner Card -->
     <div class="card">
       <div class="card__title">
-        <span>ওয়েবসাইট জরুরি নোটিশ ও ঘোষণা ব্যানার</span>
+        <span>ওয়েবসাইট জরুরি নোটিশ ও ঘোষণা ব্যানার</span>
         <span class="card__subtitle mono">// LIVE ANNOUNCEMENT</span>
       </div>
       <p style="font-size:13.5px;color:#555;margin-bottom:14px">
-        ওয়েবসাইটের একদম উপরে লাল-কালো হাইলাইট করা লাইভ নোটিশ বার দেখাতে এটি চালু করুন:
+        ওয়েবসাইটের একদম উপরে লাল-কালো হাইলাইট করা লাইভ নোটিশ বার দেখাতে এটি চালু করুন:
       </p>
       <form id="noticeForm">
         <div class="toggles" style="margin-bottom:14px">
           <label>
             <input type="checkbox" id="noticeActive">
-            <b>ওয়েবসাইটে নোটিশ ব্যানার প্রদর্শন চালু রাখুন (Show on Website)</b>
+            <b>ওয়েবসাইটে নোটিশ ব্যানার প্রদর্শন চালু রাখুন (Show on Website)</b>
           </label>
         </div>
         <div class="field">
-          <label for="noticeText">নোটিশ বার্তা (বাংলায়)</label>
+          <label for="noticeText">নোটিশ বার্তা (বাংলায়)</label>
           <input type="text" id="noticeText" placeholder="যেমন: নতুন ব্যাচে সীমিত আসনে ভর্তি চলছে! আগামী ১লা নভেম্বর থেকে ক্লাস শুরু।">
         </div>
         <div style="text-align:right">
@@ -199,7 +199,7 @@ body{background:var(--paper);color:var(--ink);font-family:var(--sans);min-height
           </div>
           <div class="field">
             <label for="nextBatchAfter">পরের ইনটেক মাস</label>
-            <input type="text" id="nextBatchAfter" placeholder="যেমন: ফেব্রুয়ারি">
+            <input type="text" id="nextBatchAfter" placeholder="যেমন: ফেব্রুয়ারি">
           </div>
           <div class="field">
             <label for="nextBatchStartAt">কাউন্টডাউন টার্গেট তারিখ (ISO/তারিখ)</label>
@@ -252,11 +252,11 @@ body{background:var(--paper);color:var(--ink);font-family:var(--sans);min-height
             <input type="text" id="phoneDisplay" placeholder="০১৬৪১-০৪৫৪৬৯">
           </div>
           <div class="field">
-            <label for="phoneRaw">ডায়াল ফরম্যাট (+880...)</label>
+            <label for="phoneRaw">ডায়াল ফরম্যাট (+880...)</label>
             <input type="text" id="phoneRaw" placeholder="+8801641045469">
           </div>
           <div class="field">
-            <label for="whatsappNum">হোয়াটসঅ্যাপ নম্বর (৮৮০...)</label>
+            <label for="whatsappNum">হোয়াটসঅ্যাপ নম্বর (৮৮০...)</label>
             <input type="text" id="whatsappNum" placeholder="8801641045469">
           </div>
         </div>
@@ -276,7 +276,7 @@ body{background:var(--paper);color:var(--ink);font-family:var(--sans);min-height
         <button type="button" class="btn btn--red btn--sm" onclick="openNewPdfModal()">+ নতুন PDF যুক্ত করুন</button>
       </div>
       <p style="font-size:13.5px;color:#555;margin-bottom:16px">
-        ওয়েবসাইটের ডাউনলোড লাইব্রেরিতে শিক্ষার্থীদের জন্য গণিত হ্যান্ডনোট, সাজেশন ও মডেল টেস্টের PDF আপলোড/লিঙ্ক যুক্ত করুন। যেকোনো Google Drive লিংক পেস্ট করলে স্বয়ংক্রিয়ভাবে ডিরেক্ট ডাউনলোড লিংক তৈরি হবে।
+        ওয়েবসাইটের ডাউনলোড লাইব্রেরিতে শিক্ষার্থীদের জন্য গণিত হ্যান্ডনোট, সাজেশন ও মডেল টেস্টের PDF আপলোড/লিঙ্ক যুক্ত করুন। যেকোনো Google Drive লিংক পেস্ট করলে স্বয়ংক্রিয়ভাবে ডিরেক্ট ডাউনলোড লিংক তৈরি হবে।
       </p>
 
       <div style="overflow-x:auto;margin-bottom:16px">
@@ -311,7 +311,7 @@ body{background:var(--paper);color:var(--ink);font-family:var(--sans);min-height
             </div>
             <div class="field">
               <label for="pdfTag">ট্যাগ (Tag) *</label>
-              <input type="text" id="pdfTag" placeholder="যেমন: সবচেয়ে জনপ্রিয় / SSC ২০২৭ / হ্যান্ডনোট" required>
+              <input type="text" id="pdfTag" placeholder="যেমন: সবচেয়ে জনপ্রিয় / SSC ২০২৭ / হ্যান্ডনোট" required>
             </div>
             <div class="field">
               <label for="pdfTagColor">ট্যাগ কালার (Badge Color)</label>
@@ -327,12 +327,12 @@ body{background:var(--paper);color:var(--ink);font-family:var(--sans);min-height
           </div>
           <div class="field" style="margin-top:12px">
             <label for="pdfDesc">সংক্ষিপ্ত বিবরণ (Description)</label>
-            <textarea id="pdfDesc" rows="2" placeholder="যেমন: অধ্যায়ভিত্তিক বীজগণিত, জ্যামিতি ও ত্রিকোণমিতির সকল প্রয়োজনীয় সূত্রের নির্ভুল সংকলন।"></textarea>
+            <textarea id="pdfDesc" rows="2" placeholder="যেমন: অধ্যায়ভিত্তিক বীজগণিত, জ্যামিতি ও ত্রিকোণমিতির সকল প্রয়োজনীয় সূত্রের নির্ভুল সংকলন।"></textarea>
           </div>
           <div class="field" style="margin-top:12px">
             <label for="pdfDriveUrl">Google Drive লিংক বা সরাসরি ডাউনলোড URL *</label>
             <input type="url" id="pdfDriveUrl" placeholder="https://drive.google.com/file/d/1A2B3C4D5E.../view?usp=sharing">
-            <small style="color:var(--teal)">💡 গুগল ড্রাইভের শেয়ার করা লিঙ্ক পেস্ট করলেই ওয়েবসাইটে বোতামে চাপ দিলে সরাসরি (Direct Download) শুরু হবে।</small>
+            <small style="color:var(--teal)">💡 গুগল ড্রাইভের শেয়ার করা লিঙ্ক পেস্ট করলেই ওয়েবসাইটে বোতামে চাপ দিলে সরাসরি (Direct Download) শুরু হবে।</small>
           </div>
           <div class="fields-grid" style="margin-top:12px">
             <div class="field">
@@ -356,13 +356,13 @@ body{background:var(--paper);color:var(--ink);font-family:var(--sans);min-height
     <div class="card" id="resultsCard">
       <div class="card__title" style="display:flex;justify-content:space-between;align-items:center">
         <div>
-          <span>মক টেস্ট ফলাফল ও শিক্ষার্থী মূল্যায়ন ব্যবস্থাপনা</span>
+          <span>মক টেস্ট ফলাফল ও শিক্ষার্থী মূল্যায়ন ব্যবস্থাপনা</span>
           <span class="card__subtitle mono">// MOCK TEST & STUDENT RESULTS CMS</span>
         </div>
         <button type="button" class="btn btn--red btn--sm" onclick="openNewResultModal()">+ নতুন ফলাফল যুক্ত করুন</button>
       </div>
       <p style="font-size:13.5px;color:#555;margin-bottom:16px">
-        ওয়েবসাইটের SEC 07 ফলাফল যাচাই পোর্টালে শিক্ষার্থীদের মক টেস্ট ও পরীক্ষার মূল্যায়ন ফলাফল (রোল নম্বর, বিষয়ভিত্তিক নম্বর, মেধাক্রম, পার্সেন্টাইল ও মন্তব্য) যুক্ত ও সম্পাদনা করুন।
+        ওয়েবসাইটের SEC 07 ফলাফল যাচাই পোর্টালে শিক্ষার্থীদের মক টেস্ট ও পরীক্ষার মূল্যায়ন ফলাফল (রোল নম্বর, বিষয়ভিত্তিক নম্বর, মেধাক্রম, পার্সেন্টাইল ও মন্তব্য) যুক্ত ও সম্পাদনা করুন।
       </p>
 
       <div style="overflow-x:auto;margin-bottom:16px">
@@ -373,7 +373,7 @@ body{background:var(--paper);color:var(--ink);font-family:var(--sans);min-height
               <th style="padding:10px;width:180px">নাম ও ব্যাচ</th>
               <th style="padding:10px;width:140px">পরীক্ষা ও নম্বর</th>
               <th style="padding:10px;width:130px">র‌্যাঙ্ক ও পার্সেন্টাইল</th>
-              <th style="padding:10px;width:180px">বিষয়ভিত্তিক স্কোর</th>
+              <th style="padding:10px;width:180px">বিষয়ভিত্তিক স্কোর</th>
               <th style="padding:10px">প্রশিক্ষকের মন্তব্য</th>
               <th style="padding:10px;text-align:right;width:150px">অ্যাকশন</th>
             </tr>
@@ -397,7 +397,7 @@ body{background:var(--paper);color:var(--ink);font-family:var(--sans);min-height
             <div class="field">
               <label for="resRoll">রোল নম্বর (যেমন: MA-2026-084) *</label>
               <input type="text" id="resRoll" placeholder="MA-2026-084" required pattern="[A-Za-z0-9\-_]+" style="text-transform:uppercase">
-              <small>শিক্ষার্থী এই রোল টাইপ করে ওয়েবসাইটে ফলাফল দেখতে পাবে</small>
+              <small>শিক্ষার্থী এই রোল টাইপ করে ওয়েবসাইটে ফলাফল দেখতে পাবে</small>
             </div>
             <div class="field">
               <label for="resStudentName">শিক্ষার্থীর পূর্ণ নাম *</label>
@@ -429,7 +429,7 @@ body{background:var(--paper);color:var(--ink);font-family:var(--sans);min-height
           </div>
 
           <div style="margin-top:14px;padding:12px;background:#fff;border:1px dashed #ccc">
-            <h4 style="font-size:13px;font-weight:700;margin-bottom:8px">বিষয়ভিত্তিক অগ্রগতি স্কোর (০ থেকে ১০০ এর মধ্যে)</h4>
+            <h4 style="font-size:13px;font-weight:700;margin-bottom:8px">বিষয়ভিত্তিক অগ্রগতি স্কোর (০ থেকে ১০০ এর মধ্যে)</h4>
             <div class="fields-grid">
               <div class="field">
                 <label for="resBarAlgebra">বীজগণিত স্কোর (০–১০০)</label>
@@ -447,7 +447,7 @@ body{background:var(--paper);color:var(--ink);font-family:var(--sans);min-height
           </div>
 
           <div class="field" style="margin-top:12px">
-            <label for="resTrainerNote">প্রশিক্ষকের মূল্যায়ন ও পরামর্শ (Trainer Note)</label>
+            <label for="resTrainerNote">প্রশিক্ষকের মূল্যায়ন ও পরামর্শ (Trainer Note)</label>
             <textarea id="resTrainerNote" rows="2" placeholder="যেমন: বীজগণিত ও ত্রিকোণমিতিতে দারুণ দক্ষতা। জ্যামিতির উপপাদ্য প্রমাণে চিত্র আরও নিখুঁত করার পরামর্শ।"></textarea>
           </div>
 
@@ -469,7 +469,7 @@ body{background:var(--paper);color:var(--ink);font-family:var(--sans);min-height
         <button type="button" class="btn btn--red btn--sm" onclick="openNewFameModal()">+ নতুন কৃতী শিক্ষার্থী যুক্ত করুন</button>
       </div>
       <p style="font-size:13.5px;color:#555;margin-bottom:16px">
-        ওয়েবসাইটের SEC 07 ফলাফল সেকশনের নিচে চলমান "HALL OF FAME // কৃতী শিক্ষার্থী" মারকিতে প্রদর্শিত শিক্ষার্থীদের নাম, অর্জন, ব্যাজ ও মেধা স্মারক সম্পাদনা, সংযোজন ও অপসারণ করুন।
+        ওয়েবসাইটের SEC 07 ফলাফল সেকশনের নিচে চলমান "HALL OF FAME // কৃতী শিক্ষার্থী" মারকিতে প্রদর্শিত শিক্ষার্থীদের নাম, অর্জন, ব্যাজ ও মেধা স্মারক সম্পাদনা, সংযোজন ও অপসারণ করুন।
       </p>
 
       <div style="overflow-x:auto;margin-bottom:16px">
@@ -517,8 +517,8 @@ body{background:var(--paper);color:var(--ink);font-family:var(--sans);min-height
               <label for="fameBadgeColor">ব্যাজের রঙ ও ধরন</label>
               <select id="fameBadgeColor" style="padding:8px 10px;border:var(--line);font-family:inherit">
                 <option value="teal">টিল / সবুজ (সাধারণ A+)</option>
-                <option value="red">ভার্মিলিয়ন লাল (বিশেষ অর্জন / TOP 10)</option>
-                <option value="brass">সোনালী / ব্রাস (মক সিরিজ চ্যাম্পিয়ন / ৯৯)</option>
+                <option value="red">ভার্মিলিয়ন লাল (বিশেষ অর্জন / TOP 10)</option>
+                <option value="brass">সোনালী / ব্রাস (মক সিরিজ চ্যাম্পিয়ন / ৯৯)</option>
               </select>
             </div>
           </div>
@@ -541,14 +541,14 @@ body{background:var(--paper);color:var(--ink);font-family:var(--sans);min-height
         <button type="button" class="btn btn--red btn--sm" onclick="openNewPostModal()">+ নতুন ব্লগ লিখুন</button>
       </div>
       <p style="font-size:13.5px;color:#555;margin-bottom:16px">
-        ওয়েবসাইটে প্রকাশিত ব্লগের তালিকা নিচে দেওয়া হলো। আপনি বিদ্যমান যেকোনো ব্লগ এডিট করতে পারবেন অথবা নতুন আর্টিকেল লিখে পাবলিশ করতে পারবেন।
+        ওয়েবসাইটে প্রকাশিত ব্লগের তালিকা নিচে দেওয়া হলো। আপনি বিদ্যমান যেকোনো ব্লগ এডিট করতে পারবেন অথবা নতুন আর্টিকেল লিখে পাবলিশ করতে পারবেন।
       </p>
 
       <div style="overflow-x:auto;margin-bottom:16px">
         <table class="blog-table" style="width:100%;border-collapse:collapse;font-size:13px;border:var(--line)">
           <thead>
             <tr style="background:var(--paper-2);border-bottom:var(--line);text-align:left">
-              <th style="padding:10px;font-family:var(--mono);font-size:11px;width:140px">ট্যাগ ও সময়</th>
+              <th style="padding:10px;font-family:var(--mono);font-size:11px;width:140px">ট্যাগ ও সময়</th>
               <th style="padding:10px">শিরোনাম ও বিবরণ</th>
               <th style="padding:10px;text-align:right;width:160px">অ্যাকশন</th>
             </tr>
@@ -578,7 +578,7 @@ body{background:var(--paper);color:var(--ink);font-family:var(--sans);min-height
               <input type="text" id="postTag" placeholder="যেমন: এসএসসি ২০২৭" required>
             </div>
             <div class="field">
-              <label for="postMins">পড়ার সময় (মিনিট) *</label>
+              <label for="postMins">পড়ার সময় (মিনিট) *</label>
               <input type="number" id="postMins" placeholder="6" min="1" max="60" required>
             </div>
             <div class="field">
@@ -603,7 +603,7 @@ body{background:var(--paper);color:var(--ink);font-family:var(--sans);min-height
           </div>
 
           <div class="field" style="margin-top:12px">
-            <label for="postKeyword">টার্গেট কি-ওয়ার্ড (কমা দিয়ে পৃথক করুন)</label>
+            <label for="postKeyword">টার্গেট কি-ওয়ার্ড (কমা দিয়ে পৃথক করুন)</label>
             <input type="text" id="postKeyword" placeholder="যেমন: এসএসসি গণিত ২০২৭, যশোর বোর্ড, গণিত প্রস্তুতি">
           </div>
 
@@ -657,30 +657,30 @@ body{background:var(--paper);color:var(--ink);font-family:var(--sans);min-height
     <!-- Admin Security & Password Change Card -->
     <div class="card" id="securityCard">
       <div class="card__title">
-        <span>অ্যাডমিন পাসওয়ার্ড পরিবর্তন ও নিরাপত্তা</span>
+        <span>অ্যাডমিন পাসওয়ার্ড পরিবর্তন ও নিরাপত্তা</span>
         <span class="card__subtitle mono">// ADMIN SECURITY & AUTH</span>
       </div>
       <p style="font-size:13.5px;color:#555;margin-bottom:14px">
-        অ্যাডমিন প্যানেলে প্রবেশের গোপন পাসওয়ার্ড এখান থেকে নিরাপদে পরিবর্তন করতে পারবেন। পাসওয়ার্ডটি ক্রিপ্টোগ্রাফিক সল্টসহ scrypt হ্যাশ আকারে ডাটাবেজে সংরক্ষিত হয়।
+        অ্যাডমিন প্যানেলে প্রবেশের গোপন পাসওয়ার্ড এখান থেকে নিরাপদে পরিবর্তন করতে পারবেন। পাসওয়ার্ডটি ক্রিপ্টোগ্রাফিক সল্টসহ scrypt হ্যাশ আকারে ডাটাবেজে সংরক্ষিত হয়।
       </p>
       <form id="changePasswordForm">
         <div class="fields-grid">
           <div class="field">
-            <label for="currentPassword">বর্তমান পাসওয়ার্ড *</label>
-            <input type="password" id="currentPassword" placeholder="বর্তমান পাসওয়ার্ড দিন" required autocomplete="current-password">
+            <label for="currentPassword">বর্তমান পাসওয়ার্ড *</label>
+            <input type="password" id="currentPassword" placeholder="বর্তমান পাসওয়ার্ড দিন" required autocomplete="current-password">
           </div>
           <div class="field">
-            <label for="newPassword">নতুন পাসওয়ার্ড (কমপক্ষে ৮ অক্ষর) *</label>
-            <input type="password" id="newPassword" placeholder="নতুন পাসওয়ার্ড" minlength="8" required autocomplete="new-password">
-            <small>কমপক্ষে ৮ অক্ষরের শক্তিশালী পাসওয়ার্ড দিন।</small>
+            <label for="newPassword">নতুন পাসওয়ার্ড (কমপক্ষে ৮ অক্ষর) *</label>
+            <input type="password" id="newPassword" placeholder="নতুন পাসওয়ার্ড" minlength="8" required autocomplete="new-password">
+            <small>কমপক্ষে ৮ অক্ষরের শক্তিশালী পাসওয়ার্ড দিন।</small>
           </div>
           <div class="field">
-            <label for="confirmNewPassword">নতুন পাসওয়ার্ড নিশ্চিতকরণ *</label>
-            <input type="password" id="confirmNewPassword" placeholder="নতুন পাসওয়ার্ড পুনরায় লিখুন" minlength="8" required autocomplete="new-password">
+            <label for="confirmNewPassword">নতুন পাসওয়ার্ড নিশ্চিতকরণ *</label>
+            <input type="password" id="confirmNewPassword" placeholder="নতুন পাসওয়ার্ড পুনরায় লিখুন" minlength="8" required autocomplete="new-password">
           </div>
         </div>
         <div style="margin-top:14px;text-align:right">
-          <button type="submit" class="btn btn--ink">পাসওয়ার্ড পরিবর্তন ও সংরক্ষণ করুন</button>
+          <button type="submit" class="btn btn--ink">পাসওয়ার্ড পরিবর্তন ও সংরক্ষণ করুন</button>
         </div>
       </form>
     </div>
@@ -732,13 +732,13 @@ async function loadContent(){
   try {
     // Include ?all=1 to get all batches (even inactive ones)
     const res = await fetch('/api/content?all=1&t=' + Date.now());
-    if(!res.ok) throw new Error('ডাটা লোড করা যায়নি (HTTP ' + res.status + ')');
+    if(!res.ok) throw new Error('ডাটা লোড করা যায়নি (HTTP ' + res.status + ')');
     currentData = await res.json();
     renderBatches(currentData.batches || []);
     renderSettings(currentData.settings || {});
     renderBlogPosts(currentData.posts || []);
   } catch(e) {
-    showToast('ডাটা লোড করা যায়নি: ' + e.message, true);
+    showToast('ডাটা লোড করা যায়নি: ' + e.message, true);
   }
 }
 
@@ -761,10 +761,10 @@ function renderBatches(batches){
         <div class="bcard__header">
           <div style="display:flex;justify-content:space-between;align-items:center">
             <span class="bcard__code mono">${b.code || b.id.toUpperCase()}</span>
-            ${b.hot ? '<span class="badge-hot">সবচেয়ে চাহিদা</span>' : ''}
+            ${b.hot ? '<span class="badge-hot">সবচেয়ে চাহিদা</span>' : ''}
           </div>
           <div class="field" style="margin:6px 0">
-            <label style="font-size:11px;color:#555">বাংলায় নাম</label>
+            <label style="font-size:11px;color:#555">বাংলায় নাম</label>
             <input type="text" id="name_${b.id}" value="${b.name_bn || ''}" style="font-weight:700;font-size:16px;padding:6px 10px">
           </div>
           <div class="field" style="margin:6px 0">
@@ -789,7 +789,7 @@ function renderBatches(batches){
         </div>
 
         <div class="field" style="margin-top:14px">
-          <label for="fee_${b.id}">মাসিক ফি (টাকায়)</label>
+          <label for="fee_${b.id}">মাসিক ফি (টাকায়)</label>
           <input type="number" id="fee_${b.id}" value="${b.fee}" min="100" step="50" style="font-weight:700;font-size:16px">
         </div>
 
@@ -799,7 +799,7 @@ function renderBatches(batches){
         </div>
 
         <div class="field">
-          <label for="time_${b.id}">ক্লাসের সময়সূচি</label>
+          <label for="time_${b.id}">ক্লাসের সময়সূচি</label>
           <input type="text" id="time_${b.id}" value="${b.time_bn || ''}" placeholder="যেমন: বিকাল ৪:৩০ – ৫:৩০">
         </div>
 
@@ -810,7 +810,7 @@ function renderBatches(batches){
 
         <div class="toggles">
           <label><input type="checkbox" id="hot_${b.id}" ${b.hot ? 'checked' : ''}> আসন সীমিত / হট ব্যাচ</label>
-          <label><input type="checkbox" id="act_${b.id}" ${isAct ? 'checked' : ''} onchange="toggleCardVisual('${b.id}')"> ওয়েবসাইটে সক্রিয় (Active)</label>
+          <label><input type="checkbox" id="act_${b.id}" ${isAct ? 'checked' : ''} onchange="toggleCardVisual('${b.id}')"> ওয়েবসাইটে সক্রিয় (Active)</label>
         </div>
       </div>
 
@@ -900,7 +900,7 @@ function renderSettings(settings){
 async function saveBatch(id){
   const token = getToken();
   if(!token){
-    showToast('পাসওয়ার্ড প্রয়োজন! আবার লগইন করুন।', true);
+    showToast('পাসওয়ার্ড প্রয়োজন! আবার লগইন করুন।', true);
     return;
   }
 
@@ -931,7 +931,7 @@ async function saveBatch(id){
 
     const result = await res.json();
     if(res.ok && result.ok){
-      showToast('✓ ' + (name_bn || id) + ' সফলভাবে সংরক্ষিত হয়েছে! ওয়েবসাইটে লাইভ দেখতে পারেন।');
+      showToast('✓ ' + (name_bn || id) + ' সফলভাবে সংরক্ষিত হয়েছে! ওয়েবসাইটে লাইভ দেখতে পারেন।');
       loadContent(); // Refresh local view
     } else {
       showToast('আপডেট ব্যর্থ: ' + (result.error || 'অননুমোদিত'), true);
@@ -945,7 +945,7 @@ async function saveBatch(id){
 document.getElementById('noticeForm').addEventListener('submit', async function(e){
   e.preventDefault();
   const token = getToken();
-  if(!token){ showToast('পাসওয়ার্ড প্রয়োজন!', true); return; }
+  if(!token){ showToast('পাসওয়ার্ড প্রয়োজন!', true); return; }
 
   const notice = {
     active: document.getElementById('noticeActive').checked,
@@ -959,7 +959,7 @@ document.getElementById('noticeForm').addEventListener('submit', async function(
       body: JSON.stringify({ setting: { key: 'notice', value: notice } })
     });
     if(res.ok){
-      showToast('✓ নোটিশ ব্যানার সফলভাবে সংরক্ষিত হয়েছে!');
+      showToast('✓ নোটিশ ব্যানার সফলভাবে সংরক্ষিত হয়েছে!');
     } else {
       showToast('নোটিশ সংরক্ষণ ব্যর্থ!', true);
     }
@@ -972,7 +972,7 @@ document.getElementById('noticeForm').addEventListener('submit', async function(
 document.getElementById('nextBatchForm').addEventListener('submit', async function(e){
   e.preventDefault();
   const token = getToken();
-  if(!token){ showToast('পাসওয়ার্ড প্রয়োজন!', true); return; }
+  if(!token){ showToast('পাসওয়ার্ড প্রয়োজন!', true); return; }
 
   const nextBatch = {
     label_bn: document.getElementById('nextBatchLabel').value.trim(),
@@ -988,7 +988,7 @@ document.getElementById('nextBatchForm').addEventListener('submit', async functi
       body: JSON.stringify({ setting: { key: 'next_batch', value: nextBatch } })
     });
     if(res.ok){
-      showToast('✓ ভর্তি ও ইনটেক তথ্য সংরক্ষিত হয়েছে!');
+      showToast('✓ ভর্তি ও ইনটেক তথ্য সংরক্ষিত হয়েছে!');
     } else {
       showToast('সেটিংস সংরক্ষণ ব্যর্থ!', true);
     }
@@ -1001,7 +1001,7 @@ document.getElementById('nextBatchForm').addEventListener('submit', async functi
 document.getElementById('programmeForm').addEventListener('submit', async function(e){
   e.preventDefault();
   const token = getToken();
-  if(!token){ showToast('পাসওয়ার্ড প্রয়োজন!', true); return; }
+  if(!token){ showToast('পাসওয়ার্ড প্রয়োজন!', true); return; }
 
   const programme = {
     classes_bn: currentData?.settings?.programme?.classes_bn || 'ক্লাস ৬–১০',
@@ -1018,7 +1018,7 @@ document.getElementById('programmeForm').addEventListener('submit', async functi
       body: JSON.stringify({ setting: { key: 'programme', value: programme } })
     });
     if(res.ok){
-      showToast('✓ অ্যাকাডেমিক কর্মসূচি তথ্য সংরক্ষিত হয়েছে!');
+      showToast('✓ অ্যাকাডেমিক কর্মসূচি তথ্য সংরক্ষিত হয়েছে!');
     } else {
       showToast('কর্মসূচি সংরক্ষণ ব্যর্থ!', true);
     }
@@ -1031,7 +1031,7 @@ document.getElementById('programmeForm').addEventListener('submit', async functi
 document.getElementById('contactForm').addEventListener('submit', async function(e){
   e.preventDefault();
   const token = getToken();
-  if(!token){ showToast('পাসওয়ার্ড প্রয়োজন!', true); return; }
+  if(!token){ showToast('পাসওয়ার্ড প্রয়োজন!', true); return; }
 
   const contact = {
     ...(currentData?.settings?.contact || {}),
@@ -1047,7 +1047,7 @@ document.getElementById('contactForm').addEventListener('submit', async function
       body: JSON.stringify({ setting: { key: 'contact', value: contact } })
     });
     if(res.ok){
-      showToast('✓ যোগাযোগ নম্বরসমূহ সংরক্ষিত হয়েছে!');
+      showToast('✓ যোগাযোগ নম্বরসমূহ সংরক্ষিত হয়েছে!');
     } else {
       showToast('যোগাযোগ তথ্য সংরক্ষণ ব্যর্থ!', true);
     }
@@ -1074,7 +1074,7 @@ function renderLibraryPdfs(library){
   if(!tbody) return;
   const items = (library && Array.isArray(library.items)) ? library.items : [];
   if(!items.length){
-    tbody.innerHTML = '<tr><td colspan="4" style="padding:16px;text-align:center;color:#777">কোনো PDF রিসোর্স যুক্ত করা হয়নি। উপরে "+ নতুন PDF যুক্ত করুন" বোতামে ক্লিক করুন।</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="4" style="padding:16px;text-align:center;color:#777">কোনো PDF রিসোর্স যুক্ত করা হয়নি। উপরে "+ নতুন PDF যুক্ত করুন" বোতামে ক্লিক করুন।</td></tr>';
     return;
   }
   tbody.innerHTML = items.map(it => {
@@ -1112,7 +1112,7 @@ function openNewPdfModal(){
   document.getElementById('pdfId').value = 'pdf-' + Date.now();
   document.getElementById('pdfEditorHeading').textContent = 'নতুন PDF রিসোর্স যুক্ত করুন';
   document.getElementById('pdfTitle').value = '';
-  document.getElementById('pdfTag').value = 'সবচেয়ে জনপ্রিয়';
+  document.getElementById('pdfTag').value = 'সবচেয়ে জনপ্রিয়';
   document.getElementById('pdfTagColor').value = 'red';
   document.getElementById('pdfCode').value = 'MATH-SSC · PDF';
   document.getElementById('pdfDesc').value = '';
@@ -1129,7 +1129,7 @@ function editPdfResource(id){
   const items = currentData?.settings?.library?.items || [];
   const item = items.find(it => it.id === id);
   if(!item){
-    showToast('PDF রিসোর্সটি খুঁজে পাওয়া যায়নি!', true);
+    showToast('PDF রিসোর্সটি খুঁজে পাওয়া যায়নি!', true);
     return;
   }
   document.getElementById('pdfIsNew').value = '0';
@@ -1155,12 +1155,12 @@ function closePdfEditor(){
 
 async function saveLibrarySetting(newItems){
   const token = getToken();
-  if(!token){ showToast('পাসওয়ার্ড প্রয়োজন! অনুগ্রহ করে আবার লগইন করুন।', true); return false; }
+  if(!token){ showToast('পাসওয়ার্ড প্রয়োজন! অনুগ্রহ করে আবার লগইন করুন।', true); return false; }
 
   const libraryData = {
     section_kicker: currentData?.settings?.library?.section_kicker || "SEC 06 // রিসোর্স ও ডাউনলোড লাইব্রেরি",
     section_title: currentData?.settings?.library?.section_title || "গণিত ও স্টাডি রিসোর্স লাইব্রেরি",
-    section_lead: currentData?.settings?.library?.section_lead || "SSC ও ক্লাস ৬–১০ গণিতের গুরুত্বপূর্ণ হ্যান্ডনোট, অধ্যায়ভিত্তিক সূত্র, সাজেশন ও অনুশীলনী শিট সরাসরি ডাউনলোড করুন।",
+    section_lead: currentData?.settings?.library?.section_lead || "SSC ও ক্লাস ৬–১০ গণিতের গুরুত্বপূর্ণ হ্যান্ডনোট, অধ্যায়ভিত্তিক সূত্র, সাজেশন ও অনুশীলনী শিট সরাসরি ডাউনলোড করুন।",
     items: newItems
   };
 
@@ -1183,7 +1183,7 @@ async function saveLibrarySetting(newItems){
       if(!currentData.settings) currentData.settings = {};
       currentData.settings.library = libraryData;
       renderLibraryPdfs(libraryData);
-      showToast('✓ PDF রিসোর্স সফলভাবে সংরক্ষিত হয়েছে!');
+      showToast('✓ PDF রিসোর্স সফলভাবে সংরক্ষিত হয়েছে!');
       return true;
     } else {
       showToast('রিসোর্স সংরক্ষণে ত্রুটি: ' + (result.error || 'অজানা সমস্যা'), true);
@@ -1258,7 +1258,7 @@ function renderMockResults(resultsObj){
   if(!tbody) return;
   const entries = Object.entries(resultsObj || {});
   if(!entries.length){
-    tbody.innerHTML = '<tr><td colspan="7" style="padding:16px;text-align:center;color:#777">কোনো শিক্ষার্থীর পরীক্ষার ফলাফল যুক্ত করা হয়নি। উপরে "+ নতুন ফলাফল যুক্ত করুন" বোতামে ক্লিক করুন।</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="7" style="padding:16px;text-align:center;color:#777">কোনো শিক্ষার্থীর পরীক্ষার ফলাফল যুক্ত করা হয়নি। উপরে "+ নতুন ফলাফল যুক্ত করুন" বোতামে ক্লিক করুন।</td></tr>';
     return;
   }
   tbody.innerHTML = entries.map(([roll, rec]) => {
@@ -1327,7 +1327,7 @@ function editResultRecord(roll){
   const dict = currentData?.settings?.mock_results || {};
   const rec = dict[roll];
   if(!rec){
-    showToast('ফলাফল রেকর্ডটি খুঁজে পাওয়া যায়নি!', true);
+    showToast('ফলাফল রেকর্ডটি খুঁজে পাওয়া যায়নি!', true);
     return;
   }
   document.getElementById('resIsNew').value = '0';
@@ -1358,7 +1358,7 @@ function closeResultEditor(){
 
 async function saveMockResultsSetting(newResultsObj){
   const token = getToken();
-  if(!token){ showToast('পাসওয়ার্ড প্রয়োজন! অনুগ্রহ করে আবার লগইন করুন।', true); return false; }
+  if(!token){ showToast('পাসওয়ার্ড প্রয়োজন! অনুগ্রহ করে আবার লগইন করুন।', true); return false; }
 
   try {
     const res = await fetch('/api/content', {
@@ -1379,7 +1379,7 @@ async function saveMockResultsSetting(newResultsObj){
       if(!currentData.settings) currentData.settings = {};
       currentData.settings.mock_results = newResultsObj;
       renderMockResults(newResultsObj);
-      showToast('✓ শিক্ষার্থীর মক টেস্ট ফলাফল সফলভাবে সংরক্ষিত হয়েছে!');
+      showToast('✓ শিক্ষার্থীর মক টেস্ট ফলাফল সফলভাবে সংরক্ষিত হয়েছে!');
       return true;
     } else {
       showToast('ফলাফল সংরক্ষণে ত্রুটি: ' + (result.error || 'অজানা সমস্যা'), true);
@@ -1439,7 +1439,7 @@ document.getElementById('studentResultForm').addEventListener('submit', async fu
     rank: rank || '—',
     pct: pct || '—',
     bars: [barAlg, barGeo, barTrig],
-    note: note || 'নিয়মিত অনুশীলনে দক্ষতা আরও বৃদ্ধি পাবে।'
+    note: note || 'নিয়মিত অনুশীলনে দক্ষতা আরও বৃদ্ধি পাবে।'
   };
 
   const ok = await saveMockResultsSetting(results);
@@ -1461,7 +1461,7 @@ function renderHallOfFameTable(list){
   tbody.innerHTML = list.map(it => {
     const col = (it.badge_color || 'teal').trim().toLowerCase();
     const colClass = (col === 'red' || col === 'brass') ? ' ' + col : '';
-    const colLabel = col === 'red' ? 'লাল (TOP 10)' : (col === 'brass' ? 'সোনালী (চ্যাম্পিয়ন)' : 'টিল (A+)');
+    const colLabel = col === 'red' ? 'লাল (TOP 10)' : (col === 'brass' ? 'সোনালী (চ্যাম্পিয়ন)' : 'টিল (A+)');
     const badgeHtml = escapeHtml(it.badge_text || 'A+\nSSC').replace(/\n/g, '<br>');
     return `
       <tr style="border-bottom:1px solid #e5e5e5">
@@ -1505,7 +1505,7 @@ function editFameItem(id){
   const list = currentData?.settings?.hall_of_fame || [];
   const it = list.find(item => item.id === id);
   if(!it){
-    showToast('রেকর্ডটি খুঁজে পাওয়া যায়নি!', true);
+    showToast('রেকর্ডটি খুঁজে পাওয়া যায়নি!', true);
     return;
   }
   document.getElementById('fameIsNew').value = '0';
@@ -1523,7 +1523,7 @@ function editFameItem(id){
 
 async function saveHallOfFameSetting(newList){
   const token = getToken();
-  if(!token){ showToast('পাসওয়ার্ড প্রয়োজন! অনুগ্রহ করে আবার লগইন করুন।', true); return false; }
+  if(!token){ showToast('পাসওয়ার্ড প্রয়োজন! অনুগ্রহ করে আবার লগইন করুন।', true); return false; }
 
   try {
     const res = await fetch('/api/content', {
@@ -1544,7 +1544,7 @@ async function saveHallOfFameSetting(newList){
       if(!currentData.settings) currentData.settings = {};
       currentData.settings.hall_of_fame = newList;
       renderHallOfFameTable(newList);
-      showToast('✓ কৃতী শিক্ষার্থী তালিকা সফলভাবে সংরক্ষিত হয়েছে!');
+      showToast('✓ কৃতী শিক্ষার্থী তালিকা সফলভাবে সংরক্ষিত হয়েছে!');
       return true;
     } else {
       showToast('সংরক্ষণে ত্রুটি: ' + (result.error || 'অজানা সমস্যা'), true);
@@ -1607,7 +1607,7 @@ function renderBlogPosts(posts){
   const tbody = document.getElementById('blogPostsTableBody');
   if(!tbody) return;
   if(!posts || !posts.length){
-    tbody.innerHTML = '<tr><td colspan="3" style="padding:16px;text-align:center;color:#777">কোনো ব্লগ পোস্ট পাওয়া যায়নি।</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="3" style="padding:16px;text-align:center;color:#777">কোনো ব্লগ পোস্ট পাওয়া যায়নি।</td></tr>';
     return;
   }
   tbody.innerHTML = posts.map(p => `
@@ -1663,7 +1663,7 @@ function editBlogPost(slug){
   const posts = currentData?.posts || [];
   const post = posts.find(p => p.slug === slug);
   if(!post){
-    showToast('ব্লগটি খুঁজে পাওয়া যায়নি!', true);
+    showToast('ব্লগটি খুঁজে পাওয়া যায়নি!', true);
     return;
   }
 
@@ -1701,7 +1701,7 @@ function closeBlogEditor(){
 document.getElementById('blogPostForm').addEventListener('submit', async function(e){
   e.preventDefault();
   const token = getToken();
-  if(!token){ showToast('পাসওয়ার্ড প্রয়োজন!', true); return; }
+  if(!token){ showToast('পাসওয়ার্ড প্রয়োজন!', true); return; }
 
   const faq = [];
   const q1 = document.getElementById('faqQ1').value.trim();
@@ -1741,7 +1741,7 @@ document.getElementById('blogPostForm').addEventListener('submit', async functio
 
     const result = await res.json();
     if(res.ok && result.ok){
-      showToast('✓ ব্লগ পোস্ট সফলভাবে সংরক্ষিত ও আপডেট হয়েছে!');
+      showToast('✓ ব্লগ পোস্ট সফলভাবে সংরক্ষিত ও আপডেট হয়েছে!');
       closeBlogEditor();
       await loadContent(); // Reload to refresh list
     } else {
@@ -1772,7 +1772,7 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
       initDashboard();
       showToast('✓ সফলভাবে অ্যাডমিন হিসেবে লগইন করেছেন!');
     } else {
-      showToast(data.error || 'ভুল পাসওয়ার্ড! সঠিক পাসওয়ার্ড দিন।', true);
+      showToast(data.error || 'ভুল পাসওয়ার্ড! সঠিক পাসওয়ার্ড দিন।', true);
     }
   } catch(err){
     showToast('কানেকশন এরর: ' + err.message, true);
@@ -1794,11 +1794,11 @@ document.getElementById('changePasswordForm').addEventListener('submit', async f
     return;
   }
   if(newPass.length < 8){
-    showToast('নতুন পাসওয়ার্ড কমপক্ষে ৮ অক্ষরের হতে হবে।', true);
+    showToast('নতুন পাসওয়ার্ড কমপক্ষে ৮ অক্ষরের হতে হবে।', true);
     return;
   }
   if(newPass !== confirmPass){
-    showToast('নতুন পাসওয়ার্ড এবং নিশ্চিতকরণ পাসওয়ার্ড মিলছে না!', true);
+    showToast('নতুন পাসওয়ার্ড এবং নিশ্চিতকরণ পাসওয়ার্ড মিলছে না!', true);
     return;
   }
 
@@ -1825,9 +1825,9 @@ document.getElementById('changePasswordForm').addEventListener('submit', async f
       document.getElementById('currentPassword').value = '';
       document.getElementById('newPassword').value = '';
       document.getElementById('confirmNewPassword').value = '';
-      showToast('✓ ' + (data.message || 'পাসওয়ার্ড সফলভাবে সংরক্ষিত হয়েছে!'));
+      showToast('✓ ' + (data.message || 'পাসওয়ার্ড সফলভাবে সংরক্ষিত হয়েছে!'));
     } else {
-      showToast('পাসওয়ার্ড পরিবর্তন ব্যর্থ: ' + (data.error || 'ভুল পাসওয়ার্ড'), true);
+      showToast('পাসওয়ার্ড পরিবর্তন ব্যর্থ: ' + (data.error || 'ভুল পাসওয়ার্ড'), true);
     }
   } catch(err){
     showToast('সার্ভার যোগাযোগে ত্রুটি: ' + err.message, true);
